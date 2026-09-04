@@ -7,7 +7,7 @@
       "name": "KRWA Create",
       "description": "Create Fly и совместимые аддоны на Fabric 26.2",
       "icon": "http://127.0.0.1:8088/servers/krwa-26.2/krwa.png",
-      "version": "0.1.3-local",
+      "version": "0.1.4-local",
       "address": "127.0.0.1:25567",
       "minecraftVersion": "26.2",
       "mainServer": true,
@@ -175,6 +175,16 @@
           }
         },
         {
+          "id": "generated.fabricmod:fabric-language-kotlin:1.13.13+kotlin.2.4.10@jar",
+          "name": "Fabric Language Kotlin",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 8076363,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/fabric-language-kotlin-1.13.13+kotlin.2.4.10.jar",
+            "MD5": "b70470268be8c74a10e10b24a2bf7df6"
+          }
+        },
+        {
           "id": "generated.fabricmod:ferritecore:9.0.0@jar",
           "name": "FerriteCore",
           "type": "FabricMod",
@@ -195,6 +205,16 @@
           }
         },
         {
+          "id": "org.anti_ad.mc.ipnext:inventoryprofilesnext:2.3.7@jar",
+          "name": "Inventory Profiles Next",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 1456192,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/InventoryProfilesNext-fabric-26.2-2.3.7.jar",
+            "MD5": "059e3c88fce3565cab4ec845c04431cf"
+          }
+        },
+        {
           "id": "generated.fabricmod:iris:1.11.2+mc26.2@jar",
           "name": "Iris",
           "type": "FabricMod",
@@ -202,6 +222,26 @@
             "size": 2820763,
             "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/iris-fabric-1.11.2+mc26.2.jar",
             "MD5": "11c0b0d99bf9d9cb55f9e35a2d6bb85f"
+          }
+        },
+        {
+          "id": "snownee.jade:jade:26.2.11+fabric@jar",
+          "name": "Jade",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 1043764,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/Jade-mc26.2-Fabric-26.2.11.jar",
+            "MD5": "63081e7c1cbf9a2a2f914a5aa32cc24a"
+          }
+        },
+        {
+          "id": "org.anti_ad.mc:libipn:6.8.3@jar",
+          "name": "LibIPN",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 637800,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/libIPN-fabric-26.2-6.8.3.jar",
+            "MD5": "07740fbfe46af77c8a68c564d591b686"
           }
         },
         {
@@ -252,6 +292,26 @@
             "size": 8934,
             "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/tuffenough-1.1.0.jar",
             "MD5": "1f914bfae4fe236b6b196a4c1836b42c"
+          }
+        },
+        {
+          "id": "xaero.minimap:xaerominimap:26.4.2@jar",
+          "name": "Xaero's Minimap",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 2221925,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/xaerominimap-fabric-26.2-26.4.2.jar",
+            "MD5": "ef7051b616d26eb3c355705fc7a8c1fd"
+          }
+        },
+        {
+          "id": "xaero.map:xaeroworldmap:1.45.0@jar",
+          "name": "Xaero's World Map",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 1477385,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/xaeroworldmap-fabric-26.2-1.45.0.jar",
+            "MD5": "71cb8a3b69158b8018615cdfa31541be"
           }
         },
         {
