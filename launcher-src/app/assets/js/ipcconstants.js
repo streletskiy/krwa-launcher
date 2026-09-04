@@ -6,7 +6,7 @@ exports.AZURE_CLIENT_ID = '1ce6e35a-126f-48fd-97fb-54d143ac6d45'
 
 // Local KRWA authentication service. Replace with the public HTTPS endpoint
 // before distributing the launcher outside the local network.
-exports.YGGDRASIL_API_ROOT = 'http://127.0.0.1:8089/api/yggdrasil/'
+exports.YGGDRASIL_API_ROOT = 'https://mc.krwa.ru/api/yggdrasil/'
 
 
 // Opcodes

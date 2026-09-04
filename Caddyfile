@@ -16,15 +16,29 @@
 }
 
 :8081 {
+	@legacySite {
+		host 127.0.0.1 127.0.0.1 localhost
+		method GET HEAD
+		path / /login /register /reset-password /admin /admin/* /account /account/* /tos /privacy
+	}
+	redir @legacySite https://mc.krwa.ru{uri} 308
 	@community path /download/windows /download/linux /community.json
 	handle @community {
 		reverse_proxy community:3001
 	}
-	handle /downloads/* {
+	@repository path /downloads/* /distribution.json /health.json /servers/* /repo/* /modpacks/* /pack/*
+	handle @repository {
 		root * /srv
+		@mutable path *.json *.toml *.xml *.yml *.yaml
+		header @mutable Cache-Control "no-cache, no-store, must-revalidate"
+		@artifacts path *.jar *.zip *.exe *.AppImage
+		header @artifacts Cache-Control "public, max-age=31536000, immutable"
 		file_server
 	}
 	handle {
-		reverse_proxy auth:3000
+		reverse_proxy auth:3000 {
+			# NPM overwrites X-Real-IP with its TCP peer; public clients cannot set it.
+			header_up X-Forwarded-For {http.request.header.X-Real-IP}
+		}
 	}
 }

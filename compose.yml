@@ -36,7 +36,7 @@ services:
     environment:
       ASTER__SERVER__HOST: 0.0.0.0
       ASTER__DATABASE__URL: sqlite:///data/asteryggdrasil.db?mode=rwc
-      ASTER__AUTH__BOOTSTRAP_INSECURE_COOKIES: "true"
+      ASTER__AUTH__BOOTSTRAP_INSECURE_COOKIES: "false"
     volumes:
       - ./auth-data:/data
     healthcheck:

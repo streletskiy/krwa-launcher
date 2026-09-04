@@ -4,7 +4,7 @@
     "name": "KRWA Create",
     "description": "Create Fly и совместимые аддоны на Fabric 26.2",
     "icon": "",
-    "address": "127.0.0.1:25567",
+    "address": "create.krwa.ru:25565",
     "mainServer": true,
     "autoconnect": true,
     "javaOptions": {

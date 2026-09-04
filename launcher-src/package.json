@@ -1,11 +1,11 @@
 {
   "name": "krwa-launcher",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "productName": "KRWA Launcher",
   "description": "Минималистичный лаунчер сервера KRWA",
   "author": "KRWA Server; based on Helios Launcher by Daniel Scalzi",
   "license": "MIT",
-  "homepage": "http://127.0.0.1:8088/",
+  "homepage": "https://mc.krwa.ru/",
   "private": true,
   "main": "index.js",
   "scripts": {
