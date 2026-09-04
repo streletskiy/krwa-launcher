@@ -12,6 +12,43 @@ const semver                            = require('semver')
 const { pathToFileURL }                 = require('url')
 const { AZURE_CLIENT_ID, MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR, SHELL_OPCODE } = require('./app/assets/js/ipcconstants')
 const LangLoader                        = require('./app/assets/js/langloader')
+const { portalURL, isPortalURL }        = require('./app/assets/js/accountportal')
+
+// Remote account pages have no Node APIs or access to the launcher's credentials.
+let accountWindow
+ipcMain.on('krwa:open-account', (event, route) => {
+    if (!win || event.sender !== win.webContents || event.senderFrame !== win.webContents.mainFrame) return
+    let target
+    try { target = portalURL(route) } catch { return }
+    if (!target) return
+    if (accountWindow && !accountWindow.isDestroyed()) {
+        accountWindow.loadURL(target).catch(() => {})
+        accountWindow.show()
+        return
+    }
+    accountWindow = new BrowserWindow({
+        title: 'KRWA · Кабинет игрока', width: 1080, height: 780, minWidth: 720, minHeight: 600,
+        icon: getPlatformIcon('SealCircle'), backgroundColor: '#f6f7f8',
+        webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true, partition: 'persist:krwa-account' }
+    })
+    const portal = accountWindow
+    portal.removeMenu()
+    portal.webContents.session.setPermissionRequestHandler((_contents, _permission, callback) => callback(false))
+    portal.webContents.session.setPermissionCheckHandler(() => false)
+    portal.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
+    for (const navigation of ['will-navigate', 'will-redirect']) {
+        portal.webContents.on(navigation, (navigationEvent, url) => {
+            if (!isPortalURL(url)) navigationEvent.preventDefault()
+        })
+    }
+    portal.webContents.on('did-fail-load', (_event, code, _description, _url, mainFrame) => {
+        if (mainFrame && code !== -3 && !portal.isDestroyed()) {
+            portal.loadFile(path.join(__dirname, 'app', 'account-offline.html')).catch(() => {})
+        }
+    })
+    portal.on('closed', () => { accountWindow = null })
+    portal.loadURL(target).catch(() => {})
+})
 
 // Setup Lang
 LangLoader.setupLanguage()

@@ -11,13 +11,27 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./repository:/srv:ro
     depends_on:
+      community:
+        condition: service_started
       auth:
         condition: service_healthy
+
+  community:
+    image: node@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf
+    restart: unless-stopped
+    user: node
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    command: [node, /app/server.mjs]
+    volumes:
+      - ./community:/app:ro
+      - ./repository:/repository:ro
 
   auth:
     build:
       context: ../aster
-    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.1
+    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.2
     restart: unless-stopped
     environment:
       ASTER__SERVER__HOST: 0.0.0.0

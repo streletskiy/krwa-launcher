@@ -1,4 +1,8 @@
 :8080 {
+	@latest path /download/windows /download/linux /community.json
+	handle @latest {
+		reverse_proxy community:3001
+	}
 	root * /srv
 	encode zstd gzip
 
@@ -12,6 +16,15 @@
 }
 
 :8081 {
-	reverse_proxy auth:3000
+	@community path /download/windows /download/linux /community.json
+	handle @community {
+		reverse_proxy community:3001
+	}
+	handle /downloads/* {
+		root * /srv
+		file_server
+	}
+	handle {
+		reverse_proxy auth:3000
+	}
 }
-

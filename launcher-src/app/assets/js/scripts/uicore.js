@@ -197,7 +197,17 @@ document.addEventListener('readystatechange', function () {
  */
 $(document).on('click', 'a[href^="http"]', function(event) {
     event.preventDefault()
-    shell.openExternal(this.href)
+    const portal = require('./assets/js/accountportal')
+    if (portal.isPortalURL(this.href)) {
+        const url = new URL(this.href)
+        ipcRenderer.send('krwa:open-account', url.pathname + url.hash)
+    } else {
+        shell.openExternal(this.href)
+    }
+})
+
+$(document).on('click', '[data-account-route]', function() {
+    ipcRenderer.send('krwa:open-account', this.dataset.accountRoute)
 })
 
 /**

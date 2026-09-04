@@ -1,4 +1,6 @@
 /* KRWA — forest lake concept. Layout is independent of the launch state. */
+.krwa-account-actions { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.krwa-account-actions button { min-height:40px; }
 :root {
     --surface: rgba(22, 26, 28, .94);
     --line: rgba(220, 230, 222, .14);
