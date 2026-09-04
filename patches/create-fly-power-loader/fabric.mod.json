@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "create_power_loader",
+  "version": "1.0.0",
+  "name": "Create Fly: Power Loader",
+  "description": "Mechanical chunk loaders for Create Fly. Ported by Ibatic.\n\nOriginal Mod Author: Lysine",
+  "authors": [],
+  "contributors": [
+    "Ibatic"
+  ],
+  "contact": {
+    "sources": "https://github.com/Ibatic/create_fly_power_loader"
+  },
+  "license": "MIT",
+  "icon": "assets/create_power_loader/icon.png",
+  "environment": "*",
+  "accessWidener": "create_power_loader.classtweaker",
+  "mixins": [
+    "create_power_loader.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.hlysine.create_power_loader.CreatePowerLoader"
+    ],
+    "client": [
+      "com.hlysine.create_power_loader.CreatePowerLoaderClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": ">=26.2- <26.3-",
+    "create": ">=6.0.9-1"
+  }
+}
+

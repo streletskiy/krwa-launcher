@@ -1,0 +1,62 @@
+appId: 'ru.krwa.launcher'
+productName: 'KRWA Launcher'
+artifactName: 'KRWA-Launcher-setup-${version}.${ext}'
+
+copyright: 'KRWA Server; based on Helios Launcher © Daniel Scalzi'
+
+publish:
+  provider: 'generic'
+  url: 'http://127.0.0.1:8088/downloads/'
+
+asar: true
+compression: 'maximum'
+
+files:
+  - '!{dist,.gitignore,.vscode,docs,dev-app-update.yml,.nvmrc,eslint.config.mjs}'
+
+extraResources:
+  - 'libraries'
+
+# Windows Configuration
+win: 
+  # Local unsigned build: avoids winCodeSign extraction requiring Windows symlink privileges.
+  # Remove this line when a code-signing certificate/build runner is configured.
+  signAndEditExecutable: false
+  target: 
+    - target: 'nsis'
+      arch: 'x64'
+
+# Windows Installer Configuration
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  installerIcon: 'build/icon.ico'
+  uninstallerIcon: 'build/icon.ico'
+  installerHeaderIcon: 'build/icon.ico'
+
+# macOS Configuration
+mac:
+  target:
+    - target: 'dmg'
+      arch:
+        - 'x64'
+        - 'arm64'
+  artifactName: '${productName}-setup-${version}-${arch}.${ext}'
+  category: 'public.app-category.games'
+
+# Linux Configuration
+linux: 
+  target: 'AppImage'
+  artifactName: 'KRWA-Launcher-${version}-${arch}.${ext}'
+  maintainer: 'KRWA Server'
+  vendor: 'KRWA Server'
+  synopsis: 'KRWA Minecraft Launcher'
+  description: 'Лаунчер KRWA: автоматически устанавливает игру, Fabric и моды.'
+  category: 'Game'
+
+
+directories:
+  buildResources: 'build'
+  output: 'dist'

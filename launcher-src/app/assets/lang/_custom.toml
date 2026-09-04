@@ -1,0 +1,140 @@
+[ejs.app]
+title = "KRWA Launcher"
+
+[ejs.welcome]
+welcomeHeader = "ДОБРО ПОЖАЛОВАТЬ НА KRWA"
+welcomeDescription = "Лаунчер сам установит Minecraft 26.2, Fabric, Create Fly и все нужные дополнения. Аккаунт, игровой ник, скин и плащ хранятся на нашем сервере."
+welcomeDescCTA = "Войдите один раз — дальше достаточно нажать «Играть»."
+continueButton = "ВОЙТИ"
+
+[ejs.loginOptions]
+loginOptionsTitle = "Аккаунт KRWA"
+loginWithMojang = "Войти в KRWA"
+cancelButton = "Назад"
+
+[ejs.login]
+loginCancelText = "Назад"
+loginSubheader = "ВХОД В KRWA"
+loginEmailError = "* Неверное значение"
+loginEmailPlaceholder = "ЛОГИН ИЛИ ПОЧТА"
+loginPasswordError = "* Обязательное поле"
+loginPasswordPlaceholder = "ПАРОЛЬ"
+loginForgotPasswordLink = "http://127.0.0.1:8089/"
+loginForgotPasswordText = "восстановить пароль"
+loginRememberMeText = "запомнить меня"
+loginButtonText = "ВОЙТИ"
+loginNeedAccountLink = "http://127.0.0.1:8089/"
+loginNeedAccountText = "Создать аккаунт"
+loginPasswordDisclaimer1 = "Пароль передаётся только нашему серверу авторизации и не сохраняется в лаунчере."
+loginPasswordDisclaimer2 = "Для локального теста используется HTTP; перед публичным запуском будет включён HTTPS."
+
+[ejs.landing]
+serverStatus = "СЕРВЕР"
+serverStatusPlaceholder = "НЕ В СЕТИ"
+mojangStatus = "СЕРВИСЫ"
+newsButton = "НОВОСТИ"
+launchButton = "ИГРАТЬ"
+launchButtonPlaceholder = "&#8226; Сервер не выбран"
+launchDetails = "Подождите..."
+mediaGitHubURL = "https://github.com/dscalzi/HeliosLauncher"
+mediaXURL = "#"
+mediaInstagramURL = "#"
+mediaYouTubeURL = "#"
+mediaDiscordURL = "#"
+
+[ejs.settings]
+navHeaderText = "Настройки"
+navAccount = "Аккаунт"
+navMinecraft = "Игра"
+navMods = "Моды"
+navJava = "Java"
+navLauncher = "Лаунчер"
+navAbout = "О программе"
+navUpdates = "Обновления"
+navDone = "Готово"
+tabAccountHeaderText = "Аккаунты KRWA"
+tabAccountHeaderDesc = "Добавление и управление аккаунтами нашего сервера."
+mojangAccount = "KRWA"
+addMojangAccount = "+ Добавить аккаунт"
+microsoftAccount = "Microsoft (отключено)"
+addMicrosoftAccount = "Недоступно"
+autoConnectTitle = "Сразу подключаться к серверу после запуска."
+sourceGithubLink = "https://github.com/dscalzi/HeliosLauncher"
+supportLink = "http://127.0.0.1:8089/"
+
+[js.login]
+login = "ВОЙТИ"
+loggingIn = "ВХОД..."
+success = "ГОТОВО"
+tryAgain = "Повторить"
+
+[js.login.error]
+invalidValue = "* Неверное значение"
+requiredValue = "* Обязательное поле"
+
+[js.auth.custom]
+invalidTitle = "Не удалось войти"
+invalidDesc = "Неверный логин или пароль. Проверьте данные аккаунта KRWA."
+unreachableTitle = "Сервис авторизации недоступен"
+unreachableDesc = "Не удалось связаться с сервером KRWA. Для локального теста устройство должно быть в той же сети."
+noProfileTitle = "Нет игрового профиля"
+noProfileDesc = "Откройте сайт аккаунтов KRWA, создайте игровой профиль и выберите ник, затем повторите вход."
+
+[js.landing.launch]
+pleaseWait = "Подождите..."
+failureTitle = "Ошибка запуска"
+failureText = "Подробности доступны в консоли (Ctrl+Shift+I)."
+okay = "ОК"
+
+[js.landing.dlAsync]
+loadingServerInfo = "Загружаем описание сборки..."
+fatalError = "Критическая ошибка"
+unableToLoadDistributionIndex = "Не удалось получить сборку с сервера KRWA. Проверьте сеть и доступность 127.0.0.1."
+pleaseWait = "Подождите..."
+errorDuringLaunchTitle = "Ошибка запуска"
+seeConsoleForDetails = "Подробности доступны в консоли (Ctrl+Shift+I)."
+validatingFileIntegrity = "Проверяем файлы..."
+errorDuringFileVerificationTitle = "Ошибка проверки файлов"
+downloadingFiles = "Скачиваем игру и моды..."
+errorDuringFileDownloadTitle = "Ошибка загрузки файлов"
+preparingToLaunch = "Подготавливаем запуск..."
+launchingGame = "Запускаем игру..."
+doneEnjoyServer = "Готово. Приятной игры!"
+checkConsoleForDetails = "Подробности доступны в консоли (Ctrl+Shift+I)."
+
+[js.landing.systemScan]
+checking = "Проверяем систему..."
+noCompatibleJava = "Java 25 не найдена"
+installJavaMessage = "Для Minecraft нужна 64-битная Java {major}. Установить её автоматически?"
+installJava = "Установить Java"
+installJavaManually = "Выбрать вручную"
+javaDownloadPrepare = "Готовим загрузку Java..."
+javaDownloadFailureTitle = "Не удалось скачать Java"
+javaDownloadFailureText = "Подробности доступны в консоли (Ctrl+Shift+I)."
+javaRequired = "Для запуска нужна Java"
+javaRequiredMessage = "Требуется 64-битная Java {major}."
+javaRequiredDismiss = "Понятно"
+javaRequiredCancel = "Назад"
+
+[js.settings.authAccountPopulate]
+username = "Логин"
+uuid = "UUID"
+selectAccount = "Выбрать"
+selectedAccount = "Выбран ✓"
+logout = "Выйти"
+
+[js.settings.authAccountSelect]
+selectButton = "Выбрать"
+selectedButton = "Выбран ✓"
+
+[js.uibinder.startup]
+fatalErrorTitle = "Не удалось загрузить сборку"
+fatalErrorMessage = "Лаунчер не получил manifest с сервера KRWA. Проверьте подключение к локальной сети и повторите запуск."
+closeButton = "Закрыть"
+
+[js.uibinder.validateAccount]
+failedMessageTitle = "Сессия истекла"
+failedMessage = "Не удалось обновить вход для <strong>{account}</strong>. Войдите снова."
+failedMessageSelectAnotherAccount = "Не удалось обновить вход для <strong>{account}</strong>. Войдите снова."
+loginButton = "Войти"
+selectAnotherAccountButton = "Другой аккаунт"

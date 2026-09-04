@@ -1,0 +1,33 @@
+name: krwa-launcher
+
+services:
+  files:
+    image: caddy@sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d
+    restart: unless-stopped
+    ports:
+      - "8088:8080"
+      - "8089:8081"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./repository:/srv:ro
+    depends_on:
+      auth:
+        condition: service_healthy
+
+  auth:
+    image: ghcr.io/astercommunity/asteryggdrasil@sha256:87fe832bf51b9d6dde53143c414b3d24f2df999c2794d0d799aebb1b0491ec6a
+    restart: unless-stopped
+    environment:
+      ASTER__SERVER__HOST: 0.0.0.0
+      ASTER__DATABASE__URL: sqlite:///data/asteryggdrasil.db?mode=rwc
+      ASTER__AUTH__BOOTSTRAP_INSECURE_COOKIES: "true"
+    volumes:
+      - ./auth-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    stop_grace_period: 45s
+

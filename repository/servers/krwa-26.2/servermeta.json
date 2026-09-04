@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "version": "0.1.0-local",
+    "name": "KRWA Create",
+    "description": "Create Fly и совместимые аддоны на Fabric 26.2",
+    "icon": "",
+    "address": "127.0.0.1:25567",
+    "mainServer": true,
+    "autoconnect": true,
+    "javaOptions": {
+      "distribution": "TEMURIN",
+      "supported": ">=25 <26",
+      "suggestedMajor": 25,
+      "ram": {
+        "recommended": 6144,
+        "minimum": 4096
+      }
+    }
+  },
+  "fabric": {
+    "version": "0.19.3"
+  },
+  "untrackedFiles": []
+}
