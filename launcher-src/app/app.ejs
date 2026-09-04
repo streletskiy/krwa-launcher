@@ -7,6 +7,7 @@
     <script src="./assets/js/scripts/uibinder.js"></script>
     <link type="text/css" rel="stylesheet" href="./assets/css/launcher.css">
     <link rel="stylesheet" href="./assets/css/krwa-theme.css">
+    <link rel="stylesheet" href="./assets/css/krwa-account.css">
     <style>
         body {
             transition: background-image 1s ease;
@@ -32,6 +33,7 @@
     <div id="main">
         <%- include('welcome') %>
         <%- include('login') %>
+        <%- include('account') %>
         <%- include('waiting') %>
         <%- include('loginOptions') %>
         <%- include('settings') %>
@@ -42,6 +44,11 @@
         <div id="loadingContent">
             <div id="loadSpinnerContainer">
                 <img id="loadCenterImage" src="assets/images/krwa-wordmark.png" alt="KRWA">
+            </div>
+            <div id="launcherUpdateStatus" hidden role="status" aria-live="polite">
+                <p id="launcherUpdateMessage">Проверяем обновления лаунчера…</p>
+                <progress id="launcherUpdateProgress" max="100" aria-label="Обновление лаунчера"></progress>
+                <p id="launcherUpdateDetail"></p>
             </div>
         </div>
     </div>

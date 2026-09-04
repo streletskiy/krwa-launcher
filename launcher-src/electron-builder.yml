@@ -12,7 +12,7 @@ asar: true
 compression: 'maximum'
 
 files:
-  - '!{dist,dist-linux,.gitignore,.vscode,docs,dev-app-update.yml,.nvmrc,eslint.config.mjs}'
+  - '!{dist,dist-linux,tests,.gitignore,.vscode,docs,dev-app-update.yml,.nvmrc,eslint.config.mjs}'
 
 extraResources:
   - 'libraries'

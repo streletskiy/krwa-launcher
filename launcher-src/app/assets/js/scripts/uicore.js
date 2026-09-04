@@ -37,9 +37,39 @@ webFrame.setVisualZoomLevelLimits(1, 1)
 
 // Initialize auto updates in production environments.
 let updateCheckListener
+let resolveStartupUpdate
+function runStartupUpdate(allowPrerelease) {
+    if (isDev) return Promise.resolve()
+    return new Promise(resolve => {
+        resolveStartupUpdate = resolve
+        document.getElementById('launcherUpdateStatus').hidden = false
+        ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', allowPrerelease)
+    })
+}
 if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
+            case 'startup-checking':
+                document.getElementById('launcherUpdateMessage').textContent = 'Проверяем обновления лаунчера…'
+                document.getElementById('launcherUpdateProgress').removeAttribute('value')
+                break
+            case 'startup-downloading': {
+                const percent = Math.max(0, Math.min(100, Number(info?.percent) || 0))
+                document.getElementById('launcherUpdateMessage').textContent = 'Обновляем лаунчер'
+                document.getElementById('launcherUpdateProgress').value = percent
+                document.getElementById('launcherUpdateDetail').textContent = `${Math.round(percent)}%` + (info?.total ? ` · ${Math.round(info.transferred / 1048576)} / ${Math.round(info.total / 1048576)} МБ` : '')
+                break
+            }
+            case 'startup-installing':
+                document.getElementById('launcherUpdateMessage').textContent = 'Готово. Перезапускаем лаунчер…'
+                document.getElementById('launcherUpdateProgress').value = 100
+                document.getElementById('launcherUpdateDetail').textContent = ''
+                break
+            case 'startup-complete':
+                document.getElementById('launcherUpdateStatus').hidden = true
+                resolveStartupUpdate?.()
+                resolveStartupUpdate = null
+                break
             case 'checking-for-update':
                 loggerAutoUpdater.info('Checking for update..')
                 settingsUpdateButtonStatus(Lang.queryJS('uicore.autoUpdate.checkingForUpdateButton'), true)
@@ -71,7 +101,6 @@ if(!isDev){
                 updateCheckListener = setInterval(() => {
                     ipcRenderer.send('autoUpdateAction', 'checkForUpdate')
                 }, 1800000)
-                ipcRenderer.send('autoUpdateAction', 'checkForUpdate')
                 break
             case 'realerror':
                 if(info != null && info.code != null){
@@ -197,17 +226,17 @@ document.addEventListener('readystatechange', function () {
  */
 $(document).on('click', 'a[href^="http"]', function(event) {
     event.preventDefault()
-    const portal = require('./assets/js/accountportal')
-    if (portal.isPortalURL(this.href)) {
-        const url = new URL(this.href)
-        ipcRenderer.send('krwa:open-account', url.pathname + url.hash)
+    const url = new URL(this.href)
+    const origin = new URL(require('./assets/js/ipcconstants').YGGDRASIL_API_ROOT).origin
+    if (url.origin === origin && ['/register', '/reset-password'].includes(url.pathname)) {
+        openNativeAccount(url.pathname === '/register' ? 'register' : 'reset')
     } else {
         shell.openExternal(this.href)
     }
 })
 
-$(document).on('click', '[data-account-route]', function() {
-    ipcRenderer.send('krwa:open-account', this.dataset.accountRoute)
+$(document).on('click', '[data-native-account]', function() {
+    openNativeAccount(this.dataset.nativeAccount)
 })
 
 /**

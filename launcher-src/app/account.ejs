@@ -1,0 +1,62 @@
+<div id="nativeAccountContainer" style="display:none;">
+    <aside class="native-account-aside">
+        <button type="button" id="nativeAccountBack" class="native-back"><span class="krwa-icon icon-back" aria-hidden="true"></span> Назад</button>
+        <img src="assets/images/krwa-wordmark.png" alt="KRWA" class="native-account-logo">
+        <h2 id="nativeAccountHeading">Твой аккаунт</h2>
+        <p id="nativeAccountIntro">Всё готово для твоей следующей игры.</p>
+        <nav aria-label="Настройки аккаунта" id="nativeAccountNav" hidden>
+            <button type="button" data-native-account="skin">Персонаж и скин</button>
+            <button type="button" data-native-account="password">Изменить пароль</button>
+        </nav>
+        <span class="native-account-note">Один аккаунт для всех серверов KRWA</span>
+    </aside>
+    <main class="native-account-main">
+        <form id="nativeAccountForm" novalidate>
+            <div id="nativeRegisterFields" class="native-panel" hidden>
+                <div class="native-tabs"><button type="button" id="nativeGoLogin">Вход</button><span class="active">Регистрация</span></div>
+                <div class="native-fields native-fields-two">
+                    <label>Minecraft-ник<input name="nickname" autocomplete="username" maxlength="16" placeholder="Твой ник в игре"><small>3–16 букв, цифр или _</small></label>
+                    <label>Почта<input name="email" type="email" autocomplete="email" placeholder="you@example.com"><small>Для восстановления доступа</small></label>
+                    <label>Пароль<span class="native-password"><input name="registerPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="От 8 символов"><button type="button" class="native-eye" aria-label="Показать пароль"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button></span></label>
+                    <label>Повтори пароль<input name="registerConfirm" type="password" autocomplete="new-password" maxlength="128" placeholder="Ещё раз"></label>
+                </div>
+                <label class="native-check"><input name="terms" type="checkbox"><span>Я принимаю <a href="http://127.0.0.1:8089/tos">правила</a> и <a href="http://127.0.0.1:8089/privacy">политику конфиденциальности</a> KRWA.</span></label>
+            </div>
+            <div id="nativePasswordFields" class="native-panel" hidden>
+                <p class="native-account-name" id="nativePasswordAccount"></p>
+                <div class="native-fields">
+                    <label>Текущий пароль<span class="native-password"><input name="currentPassword" type="password" autocomplete="current-password"><button type="button" class="native-eye" aria-label="Показать пароль"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button></span></label>
+                    <label>Новый пароль<input name="newPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="От 8 символов"></label>
+                    <label>Повтори новый пароль<input name="newConfirm" type="password" autocomplete="new-password" maxlength="128"></label>
+                </div>
+                <p class="native-hint">Другие сеансы завершатся. Этот лаунчер войдёт заново автоматически.</p>
+            </div>
+            <div id="nativeSkinFields" class="native-panel" hidden>
+                <p class="native-account-name" id="nativeSkinAccount"></p>
+                <div class="native-skin-layout">
+                    <div class="native-preview"><canvas id="nativeSkinPreview" width="160" height="240" aria-label="Предпросмотр персонажа"></canvas><span id="nativePreviewHint">Выбери скин для предпросмотра</span></div>
+                    <div class="native-fields">
+                        <label>Что загрузить<select name="textureType"><option value="skin">Скин</option><option value="cape">Плащ</option></select></label>
+                        <label id="nativeModelLabel">Модель персонажа<select name="skinModel"><option value="classic">Классическая · Steve</option><option value="slim">Тонкие руки · Alex</option></select></label>
+                        <label class="native-file">PNG-файл<input name="textureFile" type="file" accept="image/png,.png"><span id="nativeFileName">Выбрать файл</span></label>
+                        <p class="native-hint" id="nativeFileHint">Скин: 64 × 64 или 64 × 32. PNG до 2 МБ.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="nativeResetFields" class="native-panel" hidden>
+                <div class="native-fields"><label>Почта аккаунта<input name="resetEmail" type="email" autocomplete="email" placeholder="you@example.com"></label></div>
+                <p class="native-hint">Пришлём письмо для восстановления, если для аккаунта доступен сброс по почте.</p>
+                <button type="button" id="nativeHaveResetCode" class="native-text-button">У меня уже есть ссылка из письма</button>
+                <div id="nativeResetConfirmFields" class="native-fields" hidden>
+                    <label>Ссылка или код из письма<input name="resetToken" autocomplete="off" placeholder="Вставь ссылку целиком или код"></label>
+                    <label>Новый пароль<input name="resetPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="От 8 символов"></label>
+                    <label>Повтори пароль<input name="resetConfirm" type="password" autocomplete="new-password" maxlength="128"></label>
+                </div>
+            </div>
+            <div id="nativeCaptcha" hidden><div class="native-captcha-image"><img id="nativeCaptchaImage" alt="Код проверки"><button type="button" id="nativeCaptchaRefresh" aria-label="Обновить код"><span class="krwa-icon icon-refresh" aria-hidden="true"></span></button></div><label>Код с картинки<input name="captchaAnswer" autocomplete="off"></label></div>
+            <p id="nativeAccountStatus" role="status" aria-live="polite"></p>
+            <button type="submit" id="nativeAccountSubmit" class="native-primary">Создать аккаунт и войти</button>
+        </form>
+    </main>
+    <script src="./assets/js/scripts/account.js"></script>
+</div>

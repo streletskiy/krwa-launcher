@@ -1,0 +1,62 @@
+#nativeAccountContainer { width:100%; height:100%; display:flex; background:linear-gradient(115deg,#121b16ed,#17211df7); color:#eef4ef; }
+#nativeAccountContainer[style*="display: block"] { display:flex !important; }
+#nativeAccountContainer [hidden] { display:none !important; }
+#launcherUpdateStatus { width:340px; max-width:80vw; margin:28px auto 0; text-align:center; color:#e5eee7; }
+#launcherUpdateStatus[hidden] { display:none; }
+#launcherUpdateMessage { margin:0 0 16px; font-size:16px; }
+#launcherUpdateProgress { width:100%; height:10px; border:0; border-radius:6px; overflow:hidden; }
+#launcherUpdateProgress::-webkit-progress-bar { background:#2c3830; }
+#launcherUpdateProgress::-webkit-progress-value { background:linear-gradient(90deg,#329b62,#70d187); }
+#launcherUpdateDetail { min-height:20px; margin:12px 0 0; color:#adbaaf; font-size:13px; }
+.icon-refresh { --icon:url('../images/icons/lucide/rotate-cw.svg'); }
+.native-account-aside { width:32%; min-width:240px; max-width:350px; box-sizing:border-box; padding:28px 32px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:24px; background:#0f171466; }
+.native-back { display:flex; align-items:center; gap:8px; padding:0; border:0; background:none; color:var(--muted); cursor:pointer; font:inherit; }
+.native-account-logo { width:100%; max-width:230px; margin:22px 0 4px; }
+.native-account-aside h2 { margin:0; font-size:26px; line-height:1.2; }
+.native-account-aside p,.native-account-note { font-size:13px; color:var(--muted); line-height:1.65; margin:0; }
+.native-account-note { margin-top:auto; font-size:11px; }
+#nativeAccountNav { display:grid; gap:8px; }
+#nativeAccountNav button { padding:12px; text-align:left; background:transparent; color:#c6d1ca; border:1px solid transparent; border-radius:10px; cursor:pointer; font:inherit; font-size:13px; }
+#nativeAccountNav button.active { border-color:#79ba8955; background:#60896822; color:#a8e7b4; }
+.native-account-main { flex:1; min-width:0; overflow:auto; padding:32px; box-sizing:border-box; display:flex; align-items:safe center; }
+#nativeAccountForm { width:100%; max-width:620px; margin:auto; }
+.native-tabs { display:flex; gap:28px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+.native-tabs>* { padding:0 0 12px; font:inherit; font-weight:700; color:var(--muted); background:none; border:0; cursor:pointer; }
+.native-tabs>.active { color:#f3f7f3; border-bottom:3px solid var(--green); }
+.native-fields { display:grid; gap:16px; }
+.native-fields-two { grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:20px; }
+#nativeAccountForm label { display:flex; flex-direction:column; gap:8px; font-size:12px; font-weight:600; color:#d9e2dc; min-width:0; }
+#nativeAccountForm input:not([type=checkbox]):not([type=file]),#nativeAccountForm select { box-sizing:border-box; width:100%; min-width:0; height:44px; border:1px solid var(--line); border-radius:10px; background:#242e29; color:#f1f5f2; padding:0 12px; font:inherit; font-size:14px; outline:none; }
+#nativeAccountForm input:focus,#nativeAccountForm select:focus { border-color:#79cc8e; box-shadow:0 0 0 2px #79cc8e22; }
+#nativeAccountForm input::placeholder { color:#8d9d94; }
+#nativeAccountForm select { appearance:none; padding-right:36px; background:#242e29; }
+.native-fields label:has(select) { position:relative; }
+.native-fields label:has(select)::after { content:''; position:absolute; right:12px; bottom:14px; width:16px; height:16px; background:#b5c7bc; mask:url('../images/icons/lucide/chevron-down.svg') center / contain no-repeat; pointer-events:none; }
+#nativeAccountForm small,.native-hint { font-size:11px; font-weight:400; color:#a8b5ad; line-height:1.6; margin:0; }
+.native-hint { margin-top:16px; }
+.native-password { display:flex; position:relative; }
+#nativeAccountForm .native-password input { padding-right:44px; }
+.native-eye { position:absolute; right:0; top:0; height:44px; width:44px; border:0; background:none; color:#a8b5ad; cursor:pointer; display:grid; place-items:center; }
+#nativeAccountForm .native-check { flex-direction:row; align-items:center; gap:10px; margin-top:24px; font-size:11px; font-weight:400; line-height:1.7; }
+.native-check input { appearance:auto; width:17px; height:17px; flex-shrink:0; accent-color:#61c475; margin:0; }
+.native-check a,.native-text-button { color:#a1dcae; text-underline-offset:3px; }
+.native-text-button { font:inherit; font-size:12px; background:none; border:0; padding:16px 0; cursor:pointer; text-decoration:underline; }
+.native-primary { width:100%; height:48px; border:1px solid #95e69d80; border-radius:11px; background:linear-gradient(#62bf71,#27814d); color:white; font:inherit; font-size:15px; font-weight:700; cursor:pointer; }
+.native-primary:disabled { opacity:.5; cursor:default; }
+#nativeAccountStatus { min-height:20px; font-size:12px; line-height:1.6; margin:18px 0 12px; color:#adc9b6; }
+#nativeAccountStatus[data-error=true] { color:#ffb6ab; }
+.native-account-name { margin:0 0 24px; font-size:20px; font-weight:700; }
+.native-skin-layout { display:grid; grid-template-columns:minmax(140px,.8fr) minmax(180px,1.2fr); gap:24px; align-items:start; }
+.native-preview { display:flex; min-height:260px; flex-direction:column; align-items:center; justify-content:center; padding:16px; border:1px solid var(--line); border-radius:14px; background:repeating-conic-gradient(#27372e 0% 25%,#223128 0% 50%) 50% / 24px 24px; }
+.native-preview canvas { max-width:100%; image-rendering:pixelated; }
+.native-preview span { text-align:center; font-size:11px; color:#b9c7be; line-height:1.6; }
+.native-file { position:relative; }
+.native-file input { position:absolute; inset:0; width:100%; opacity:0; cursor:pointer; }
+.native-file span { padding:14px 12px; border:1px dashed #90ad9a; border-radius:10px; word-break:break-all; }
+.native-file:focus-within span { outline:2px solid #79cc8e; }
+#nativeCaptcha { margin-top:18px; }
+.native-captcha-image { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.native-captcha-image img { width:160px; height:56px; object-fit:contain; background:white; border-radius:8px; }
+.native-captcha-image button { width:36px; height:36px; border:1px solid var(--line); background:#29362e; border-radius:8px; color:white; cursor:pointer; }
+@media(max-width:950px) { .native-account-aside { padding:24px; width:28%; min-width:220px; gap:20px; } .native-account-main { padding:24px; } .native-account-logo { margin-top:10px; } .native-account-aside h2 { font-size:23px; } .native-tabs { margin-bottom:20px; } .native-fields { gap:12px; } .native-skin-layout { gap:16px; } }
+@media(prefers-reduced-motion:reduce) { #nativeAccountContainer * { scroll-behavior:auto; } }

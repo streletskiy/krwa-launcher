@@ -12,49 +12,18 @@ const semver                            = require('semver')
 const { pathToFileURL }                 = require('url')
 const { AZURE_CLIENT_ID, MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR, SHELL_OPCODE } = require('./app/assets/js/ipcconstants')
 const LangLoader                        = require('./app/assets/js/langloader')
-const { portalURL, isPortalURL }        = require('./app/assets/js/accountportal')
-
-// Remote account pages have no Node APIs or access to the launcher's credentials.
-let accountWindow
-ipcMain.on('krwa:open-account', (event, route) => {
-    if (!win || event.sender !== win.webContents || event.senderFrame !== win.webContents.mainFrame) return
-    let target
-    try { target = portalURL(route) } catch { return }
-    if (!target) return
-    if (accountWindow && !accountWindow.isDestroyed()) {
-        accountWindow.loadURL(target).catch(() => {})
-        accountWindow.show()
-        return
-    }
-    accountWindow = new BrowserWindow({
-        title: 'KRWA · Кабинет игрока', width: 1080, height: 780, minWidth: 720, minHeight: 600,
-        icon: getPlatformIcon('SealCircle'), backgroundColor: '#f6f7f8',
-        webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true, partition: 'persist:krwa-account' }
-    })
-    const portal = accountWindow
-    portal.removeMenu()
-    portal.webContents.session.setPermissionRequestHandler((_contents, _permission, callback) => callback(false))
-    portal.webContents.session.setPermissionCheckHandler(() => false)
-    portal.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
-    for (const navigation of ['will-navigate', 'will-redirect']) {
-        portal.webContents.on(navigation, (navigationEvent, url) => {
-            if (!isPortalURL(url)) navigationEvent.preventDefault()
-        })
-    }
-    portal.webContents.on('did-fail-load', (_event, code, _description, _url, mainFrame) => {
-        if (mainFrame && code !== -3 && !portal.isDestroyed()) {
-            portal.loadFile(path.join(__dirname, 'app', 'account-offline.html')).catch(() => {})
-        }
-    })
-    portal.on('closed', () => { accountWindow = null })
-    portal.loadURL(target).catch(() => {})
-})
+const StartupUpdate                     = require('./app/assets/js/startupupdate')
+let updaterInitialized = false
+let startupUpdate
 
 // Setup Lang
 LangLoader.setupLanguage()
 
 // Setup auto updater.
 function initAutoUpdater(event, data) {
+    if (updaterInitialized) return
+    updaterInitialized = true
+    autoUpdater.autoInstallOnAppQuit = false
 
     if(data){
         autoUpdater.allowPrerelease = true
@@ -89,11 +58,22 @@ function initAutoUpdater(event, data) {
 
 // Open channel to listen for update actions.
 ipcMain.on('autoUpdateAction', (event, arg, data) => {
+    if (!win || event.sender !== win.webContents || event.senderFrame !== win.webContents.mainFrame) return
     switch(arg){
         case 'initAutoUpdater':
             console.log('Initializing auto updater.')
             initAutoUpdater(event, data)
             event.sender.send('autoUpdateNotification', 'ready')
+            if (!startupUpdate && process.platform !== 'darwin') {
+                startupUpdate = new StartupUpdate(autoUpdater, (kind, info) => {
+                    if (!event.sender.isDestroyed()) event.sender.send('autoUpdateNotification', kind, info)
+                })
+                startupUpdate.start()
+            } else if (process.platform === 'darwin') {
+                event.sender.send('autoUpdateNotification', 'startup-complete')
+            } else if (!startupUpdate.active) {
+                event.sender.send('autoUpdateNotification', 'startup-complete')
+            }
             break
         case 'checkForUpdate':
             autoUpdater.checkForUpdates()
@@ -114,7 +94,7 @@ ipcMain.on('autoUpdateAction', (event, arg, data) => {
             }
             break
         case 'installUpdateNow':
-            autoUpdater.quitAndInstall()
+            autoUpdater.quitAndInstall(true, true)
             break
         default:
             console.log('Unknown argument', arg)
