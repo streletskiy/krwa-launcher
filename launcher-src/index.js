@@ -225,8 +225,10 @@ let win
 function createWindow() {
 
     win = new BrowserWindow({
-        width: 980,
-        height: 552,
+        width: 1100,
+        height: 700,
+        minWidth: 900,
+        minHeight: 600,
         icon: getPlatformIcon('SealCircle'),
         frame: false,
         webPreferences: {
@@ -239,6 +241,7 @@ function createWindow() {
     remoteMain.enable(win.webContents)
 
     const data = {
+        launcherVersion: app.getVersion(),
         bkid: Math.floor((Math.random() * fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'backgrounds')).length)),
         lang: (str, placeHolders) => LangLoader.queryEJS(str, placeHolders)
     }

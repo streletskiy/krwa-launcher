@@ -51,13 +51,11 @@ const loggerLanding = LoggerUtil.getLogger('Landing')
  * @param {boolean} loading True if the loading area should be shown, otherwise false.
  */
 function toggleLaunchArea(loading){
-    if(loading){
-        launch_details.style.display = 'flex'
-        launch_content.style.display = 'none'
-    } else {
-        launch_details.style.display = 'none'
-        launch_content.style.display = 'inline-flex'
-    }
+    document.getElementById('landingContainer').dataset.launching = String(loading)
+    launch_details.style.display = loading ? 'flex' : 'none'
+    launch_content.style.display = 'flex'
+    setLaunchEnabled(ConfigManager.getSelectedServer() != null)
+    server_selection_button.disabled = loading
 }
 
 /**
@@ -96,11 +94,17 @@ function setDownloadPercentage(percent){
  * @param {boolean} val True to enable, false to disable.
  */
 function setLaunchEnabled(val){
-    document.getElementById('launch_button').disabled = !val
+    document.getElementById('launch_button').disabled = !val || document.getElementById('landingContainer').dataset.launching === 'true'
 }
 
 // Bind launch button
 document.getElementById('launch_button').addEventListener('click', async e => {
+    if(document.getElementById('landingContainer').dataset.launching === 'true'){
+        return
+    }
+    toggleLaunchArea(true)
+    setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
+    setLaunchPercentage(0)
     loggerLanding.info('Launching game..')
     try {
         const server = (await DistroAPI.getDistribution()).getServerById(ConfigManager.getSelectedServer())
@@ -166,16 +170,16 @@ function updateSelectedServer(serv){
     }
     ConfigManager.setSelectedServer(serv != null ? serv.rawServer.id : null)
     ConfigManager.save()
-    server_selection_button.innerHTML = '&#8226; ' + (serv != null ? serv.rawServer.name : Lang.queryJS('landing.noSelection'))
+    server_selection_button.textContent = serv != null ? serv.rawServer.name : Lang.queryJS('landing.selectedServer.noSelection')
     if(getCurrentView() === VIEWS.settings){
         animateSettingsTabRefresh()
     }
     setLaunchEnabled(serv != null)
 }
 // Real text is set in uibinder.js on distributionIndexDone.
-server_selection_button.innerHTML = '&#8226; ' + Lang.queryJS('landing.selectedServer.loading')
+server_selection_button.textContent = Lang.queryJS('landing.selectedServer.loading')
 server_selection_button.onclick = async e => {
-    e.target.blur()
+    e.currentTarget.blur()
     await toggleServerSelection(true)
 }
 
@@ -244,11 +248,13 @@ const refreshServerStatus = async (fade = false) => {
 
     let pLabel = Lang.queryJS('landing.serverStatus.server')
     let pVal = Lang.queryJS('landing.serverStatus.offline')
+    let online = false
 
     try {
 
         const servStat = await getServerStatus(47, serv.hostname, serv.port)
         console.log(servStat)
+        online = true
         pLabel = Lang.queryJS('landing.serverStatus.players')
         pVal = servStat.players.online + '/' + servStat.players.max
 
@@ -256,6 +262,7 @@ const refreshServerStatus = async (fade = false) => {
         loggerLanding.warn('Unable to refresh server status, assuming offline.')
         loggerLanding.debug(err)
     }
+    document.getElementById('server_status_wrapper').dataset.online = String(online)
     if(fade){
         $('#server_status_wrapper').fadeOut(250, () => {
             document.getElementById('landingPlayerLabel').innerHTML = pLabel
@@ -727,6 +734,10 @@ function slide_(up){
 
 // Bind news button.
 document.getElementById('newsButton').onclick = () => {
+    // This launcher has no visible news panel; ignore its legacy shortcut.
+    if(document.getElementById('newsButton').offsetParent == null){
+        return
+    }
     // Toggle tabbing.
     if(newsActive){
         $('#landingContainer *').removeAttr('tabindex')

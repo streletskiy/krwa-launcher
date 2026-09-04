@@ -1,0 +1,250 @@
+/* KRWA — forest lake concept. Layout is independent of the launch state. */
+:root {
+    --surface: rgba(22, 26, 28, .94);
+    --line: rgba(220, 230, 222, .14);
+    --muted: #a5afac;
+    --green: #61c475;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --radius-control: 12px;
+    --radius-panel: 20px;
+    --control-height: 40px;
+    --field-height: 52px;
+    --text-body: 14px;
+    --text-caption: 12px;
+    --text-title: 24px;
+}
+html, body { height: 100%; overflow: hidden; }
+body { background: #121a18 url('../images/krwa-beaver-lake.png') center / cover no-repeat !important; }
+button, input, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #9be4a7 !important; outline-offset: 4px; }
+#frameBar { height: 46px; box-sizing: border-box; background: #1b1e20 !important; border-bottom: 1px solid var(--line); }
+#frameMain { height: 44px; }
+#frameTitleDock { display: flex; align-items: center; gap: 10px; padding: 0 20px; }
+#frameTitleDock img { width: 23px; height: 23px; object-fit: contain; }
+#frameTitleText { font-size: 14px; letter-spacing: 0; }
+#frameButtonDockWin { top: 0; height: 44px; display: flex; }
+.frameButton { height: 44px; width: 46px; }
+#frameButtonDockWin > .frameButton:not(:first-child) { margin-left: 0; }
+#main { top: 46px; height: calc(100% - 46px) !important; background: linear-gradient(90deg, rgba(8,15,15,.7), rgba(8,15,15,.12) 62%, transparent) !important; }
+#overlayContainer, #loadingContainer { top: 46px; height: calc(100% - 46px); }
+#loadingContainer { background: #141c19; }
+#loadCenterImage { width: 330px; }
+#landingContainer { height: 100%; position: relative; overflow: hidden; }
+#landingContainer > #upper { position: static; height: auto; }
+#landingContainer > #upper > #left { display: block; position: absolute; left: 5%; top: 8%; width: 46%; height: auto; }
+#image_seal_container { display: block; width: 100%; height: auto; margin: 0; border: 0; padding: 0; border-radius: 0; background: transparent; }
+#image_seal { display: block; width: 100%; height: auto; border: 0; border-radius: 0; filter: drop-shadow(0 10px 15px #0006); }
+#image_seal_container[update]:before, #image_seal_container[update]:after { display: none; }
+#image_seal_container[update] #updateAvailableTooltip { visibility: visible; opacity: 1; }
+#updateAvailableTooltip { top: 100%; left: 16px; width: auto; height: auto; padding: 6px 12px; border: 1px solid #61c47566; background: #183c25; border-radius: 8px; }
+.krwa-edition { color: #c9d4cc; font-size: 11px; letter-spacing: 3px; margin: 6px 0 0 16px; }
+#user_content { position: absolute; right: 26px; top: 22px; gap: 12px; padding: 7px 8px 7px 16px; background: #161c1bcc; border: 1px solid var(--line); border-radius: 12px; }
+#user_text { position: static; min-width: 0; max-width: 180px; overflow: hidden; text-overflow: ellipsis; font-size: 13px; letter-spacing: 0; }
+#avatarContainer { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 7px; box-shadow: none; }
+#avatarOverlay { border-radius: 6px; font-size: 8px; letter-spacing: 0; }
+#settingsMediaButton { position: absolute; right: 26px; bottom: 26px; width: 54px; height: 54px; border: 1px solid var(--line); border-radius: 13px; background: #1b2021ee; display: grid; place-items: center; cursor: pointer; }
+#settingsMediaButton:hover { background: #303a32; }
+#settingsSVG { width: 27px; height: 27px; fill: #e5e9e6; }
+#settingsTooltip { bottom: 65px; top: auto; right: 0; left: auto; }
+#landingContainer > #lower { position: absolute; left: 4%; bottom: 7%; width: 51%; height: auto; box-sizing: border-box; padding: 24px; background: linear-gradient(145deg, #1a1d1ef0, #111719ed); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 15px 40px #0003; backdrop-filter: blur(15px); }
+#landingContainer > #lower > #right { display: block; position: static; width: 100%; height: auto; }
+#landingContainer > #lower > [hidden] { display: none !important; }
+.krwa-server-label { font-size: 11px; color: var(--muted); letter-spacing: 1.8px; margin-bottom: 10px; }
+.krwa-server-row { display: flex; align-items: center; gap: 12px; padding: 0 16px; height: 58px; background: #24292ccc; border: 1px solid var(--line); border-radius: 12px; }
+.krwa-server-icon { width: 32px; height: 32px; object-fit: contain; }
+#server_selection_button { flex: 1; min-width: 0; text-align: left; font-size: 16px; letter-spacing: 0; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-shadow: none; }
+#server_selection_button { position: relative; padding-right: 32px; }
+#server_selection_button::after { content: ''; position: absolute; right: 0; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); background: #bac3be; mask: url('../images/icons/lucide/chevron-down.svg') center / contain no-repeat; pointer-events: none; }
+#server_status_wrapper { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+#server_status_wrapper::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #87918d; }
+#server_status_wrapper[data-online='true']::before { background: #39d574; box-shadow: 0 0 12px #39d57433; }
+#landingPlayerLabel { display: none; }
+#player_count { font-size: 13px; font-weight: 500; color: #b1b9b6; text-shadow: none; margin: 0; }
+#landingContainer > #lower > #right #launch_content { display: flex; top: auto; position: static; width: 100%; margin-top: 20px; }
+#launch_button, #loginButton, #welcomeButton, #settingsNavDone, #overlayAcknowledge, #serverSelectConfirm, #accountSelectConfirm { background: linear-gradient(#62bf71, #27814d); border: 1px solid #95e69d80; box-shadow: inset 0 1px #b4eebc66; color: #fff; border-radius: 13px; text-shadow: none; cursor: pointer; }
+#launch_button { width: 100%; height: 84px; font-size: 30px; letter-spacing: .7px; display: flex; align-items: center; justify-content: center; gap: 23px; }
+#launch_button::before { content: ''; flex: 0 0 32px; width: 32px; height: 32px; background: white; mask: url('../images/icons/lucide/play.svg') center / contain no-repeat; }
+#launch_button:hover, #loginButton:hover, #welcomeButton:hover { filter: brightness(1.1); text-shadow: none; }
+#launch_button:disabled, #loginButton:disabled { opacity: .55; cursor: default; filter: saturate(.65); }
+#landingContainer[data-launching='true'] #launch_button::before { flex-basis: 21px; width: 21px; height: 21px; background: none; mask: none; border: 3px solid #ffffff44; border-top-color: white; border-radius: 50%; animation: krwa-spin 1s linear infinite; }
+@keyframes krwa-spin { to { transform: rotate(360deg); } }
+.krwa-ready { font-size: 12px; color: var(--muted); margin-top: 17px; }
+#landingContainer[data-launching='true'] .krwa-ready { display: none; }
+#launch_details { position: relative; top: auto; margin-top: 22px; width: 100%; min-height: 58px; gap: 12px; align-items: flex-start; max-width: none !important; }
+#launch_details_left { order: 2; }
+#launch_progress_label { font-size: 14px; font-weight: 500; min-width: 42px; max-width: none; letter-spacing: 0; }
+#launch_details_right { flex: 1; min-width: 0; max-width: none !important; }
+#launch_details_text { order: -1; font-size: 13px; letter-spacing: 0; font-weight: 500; white-space: normal; margin-bottom: 12px; }
+#launch_progress[value] { width: 100%; height: 13px; border-radius: 8px; overflow: hidden; }
+#launch_progress[value]::-webkit-progress-bar { background: #292e32; border: 1px solid #48504f; border-radius: 8px; }
+#launch_progress[value]::-webkit-progress-value { background: linear-gradient(#76d880, #329858); border-radius: 8px; }
+#launch_details .bot_divider, #newsContainer { display: none; }
+.krwa-version { position: absolute; left: 5%; bottom: 18px; font-size: 10px; color: #b1bdb6; letter-spacing: .4px; }
+/* Account and first-run screens reuse the same artwork and wordmark. */
+#loginContainer, #welcomeContainer, #loginOptionsContainer { background: transparent; height: 100%; align-items: center; justify-content: flex-start; overflow-y: auto; }
+#loginContent { width: 390px; height: auto; margin-left: 6%; padding: 0; }
+#loginForm, #welcomeContent, #loginOptionsContent { box-sizing: border-box; padding: 28px 30px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 20px 60px #0005; backdrop-filter: blur(18px); }
+#loginForm { width: 100%; }
+#loginImageSeal, #welcomeImageSeal { width: 255px; height: auto; border: 0; border-radius: 0; background: none; box-shadow: none; margin: 0 0 15px; }
+#loginSubheader { color: var(--muted); font-size: 11px; letter-spacing: 2px; margin-bottom: 15px; }
+.krwa-auth-tabs { display: flex; width: 100%; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+.krwa-auth-tabs > span, #loginForm .krwa-auth-tabs a { width: 50%; padding: 10px 0 13px; text-align: center; font-size: 16px; font-weight: 700; }
+.krwa-auth-tabs > span { border-bottom: 3px solid #4bd577; }
+#loginForm .krwa-auth-tabs a { color: #a0a8a4; }
+#loginForm .krwa-auth-tabs a:hover { color: #fff; }
+.loginFieldContainer { width: 100%; margin-bottom: 18px; }
+.loginField { width: 100%; height: 52px; padding: 0 44px; margin: 0; border: 1px solid var(--line); border-radius: 11px; background: #252a2e; color: white; font-size: 14px; font-weight: 500; text-align: left; letter-spacing: 0; }
+.loginField::placeholder { text-align: left; font-size: 14px; font-weight: 500; letter-spacing: 0; color: #959d9f; }
+.loginField:focus { border-color: #63ba7a; }
+.loginSVG { position: absolute; left: 16px; width: 18px; height: 18px; fill: #adb6b3; pointer-events: none; }
+.loginErrorSpan { top: auto; bottom: -15px; color: #ffaaa0; font-size: 10px; }
+#loginPasswordToggle { position: absolute; right: 8px; width: 32px; height: 36px; background: none; border: none; color: #aeb9b4; cursor: pointer; }
+#loginPasswordToggle svg { width: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+#loginOptions { align-items: center; margin: 1px 0 22px; }
+#loginForm #loginOptions a, #loginRememberText { font-size: 10px; color: #aab3ad; }
+#loginButton { width: 100%; min-height: 57px; padding: 12px; font-size: 20px; letter-spacing: 0; margin: 0; right: auto; }
+#loginButtonContent { display: flex; align-items: center; justify-content: center; }
+#loginSVG { display: none !important; }
+#loginDisclaimer { margin: 15px 0 0; width: 100%; }
+#loginRegisterSpan { display: none; }
+.loginDisclaimerText { color: #929e98; font-size: 10px; line-height: 1.5; }
+#loginDisclaimer .loginDisclaimerText:last-child { display: none; }
+#loginCancelContainer { top: 14px; right: 22px; }
+#welcomeContent { position: static; top: auto; width: 440px; margin-left: 5%; }
+#welcomeHeader { font-size: 21px; text-align: center; }
+#welcomeDescription, #welcomeDescCTA { font-size: 14px; line-height: 1.65; color: #bbc6bf; text-align: center; }
+#welcomeButton { margin-top: 20px; padding: 13px 30px; width: 100%; font-size: 18px; }
+#loginOptionsContent { width: 390px; margin-left: 6%; }
+.loginOptionButton { border-radius: 10px; background: #2c5638; }
+/* Settings and dialogs keep readable opaque surfaces over the scenery. */
+#settingsContainer { background: #151c19f5 !important; }
+#settingsContainerLeft { background: #111713a8; border-right: 1px solid var(--line); }
+.settingsNavItem { border-radius: 8px; padding: 9px 14px; margin: 2px 0; }
+.settingsNavItem[selected] { color: #8fe1a0; background: #2a513544; }
+.settingsNavItem:hover { background: #ffffff08; }
+#settingsNavDone { padding: 10px 28px; }
+.settingsTabHeaderText { font-size: 24px; }
+.settingsFieldDesc, .settingsTabHeaderDesc { color: #a5b1a8; }
+.settingsAuthAccount, .settingsModContent, .settingsDropinMod, #settingsAboutCurrentContainer, #settingsUpdateStatusContainer { background: #232d26; border: 1px solid var(--line); border-radius: 12px; }
+#settingsContainer input[type=text], #settingsContainer input[type=number], #settingsJVMOptsVal { background: #0e1511; border: 1px solid #47554b; border-radius: 6px; padding: 7px; color: #eef4ef; }
+#settingsAboutLogo { width: 140px; height: auto; }
+#overlayContent, #serverSelectContent, #accountSelectContent { width: min(520px, 85vw); height: auto; max-height: 85%; padding: 30px; border: 1px solid var(--line); border-radius: 20px; background: #18201cf5; box-shadow: 0 25px 80px #0008; }
+#overlayDesc { font-size: 14px; line-height: 1.6; font-weight: 500; }
+#overlayAcknowledge, #serverSelectConfirm, #accountSelectConfirm { padding: 10px 24px; margin-top: 12px; font-size: 14px; }
+.serverListing, .accountListing { border-radius: 10px; }
+#overlayDismiss, #serverSelectCancel, #accountSelectCancel { font-size: 12px; margin-top: 12px; }
+/* Shared settings grid: fixed sidebar, one content inset, full-width sections. */
+#settingsContainerLeft { flex: 0 0 216px; width: 216px; padding: var(--space-6) var(--space-5) var(--space-5); }
+#settingsNavHeader { height: auto; justify-content: flex-start; margin: 0 0 var(--space-6); padding: 0 var(--space-3); }
+#settingsNavHeaderText { font-size: var(--text-title); font-weight: 700; }
+#settingsNavItemsContainer { flex: 1; min-height: 0; height: auto; display: block; }
+#settingsNavItemsContent { width: 100%; gap: var(--space-1); overflow-y: auto; }
+.settingsNavItem { flex-shrink: 0; min-height: var(--control-height); margin: 0; padding: var(--space-2) var(--space-3); font-size: var(--text-body); color: #b7c3bb; text-shadow: none !important; }
+.settingsNavSpacer { height: var(--space-4); flex-shrink: 0; }
+#settingsNavContentBottom { position: static; margin-top: auto; padding-top: var(--space-5); }
+.settingsNavDivider { width: 100%; margin: 0 0 var(--space-4); background: var(--line); }
+#settingsNavDone { width: 100%; height: 44px; margin: 0; padding: var(--space-2) var(--space-4); text-align: center; font-size: var(--text-body); text-shadow: none !important; }
+#settingsContainerRight { flex: 1; width: auto; min-width: 0; }
+.settingsTab { box-sizing: border-box; padding: var(--space-6); scrollbar-gutter: stable; }
+.settingsTab > *:first-child { margin-top: 0; }
+.settingsTab > *:last-child { margin-bottom: 0; }
+.settingsTabHeader { margin-bottom: var(--space-6); gap: var(--space-2); }
+.settingsTabHeaderText { font-size: var(--text-title); line-height: 1.25; font-weight: 700; }
+.settingsTabHeaderDesc, .settingsFieldDesc, .settingsFileSelDesc, #settingsMemoryDesc, #settingsJVMOptsDesc, #settingsShaderpackDesc { font-size: var(--text-caption); line-height: 1.6; font-weight: 500; color: var(--muted); }
+.settingsTab > .settingsFieldContainer, .settingsTab > .settingsFileSelContainer, .settingsTab > .settingsSelServContainer, .settingsTab > .settingsAuthAccountTypeContainer, #settingsGameResolutionContainer, #settingsMemoryContainer, #settingsJVMOptsContainer, #settingsModsContainer, #settingsAboutCurrentContainer, #settingsUpdateStatusContainer, .settingsChangelogContainer { width: 100%; box-sizing: border-box; }
+.settingsFieldContainer { gap: var(--space-5); padding: var(--space-4) 0; margin: 0; border-color: var(--line); }
+.settingsFieldLeft { flex: 1; min-width: 0; }
+.settingsFieldTitle, .settingsFileSelTitle, #settingsMemoryTitle, #settingsJVMOptsTitle, .settingsModsHeader { font-size: var(--text-body); font-weight: 700; line-height: 1.5; }
+.settingsFieldRight { flex-shrink: 0; }
+#settingsGameResolutionContainer { margin-bottom: var(--space-4); gap: var(--space-4); }
+#settingsGameWidth, #settingsGameHeight { width: 92px; height: var(--control-height); box-sizing: border-box; }
+.settingsSelServContainer { margin: 0 0 var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-control); padding: var(--space-2); gap: var(--space-3); }
+.settingsSelServContent { min-width: 0; flex: 1; }
+.settingsSwitchServerContainer { padding: 0; }
+.settingsSwitchServerButton, .settingsAddAuthAccount, .settingsFileSelButton, #settingsUpdateActionButton, #settingsDropinFileSystemButton, #settingsShaderpackButton { opacity: 1; min-height: var(--control-height); border: 1px solid var(--line); border-radius: var(--radius-control); background: #29382d; padding: var(--space-2) var(--space-4); font-size: var(--text-caption); font-weight: 700; color: #eef4ef; text-shadow: none; }
+.settingsSwitchServerButton:hover, .settingsAddAuthAccount:hover, .settingsFileSelButton:hover, #settingsUpdateActionButton:hover { background: #365440; box-shadow: none; text-shadow: none; }
+.settingsAuthAccountTypeHeader { margin-bottom: var(--space-4); padding-bottom: var(--space-4); border-color: var(--line); gap: var(--space-4); }
+.settingsAuthAccountTypeHeaderLeft { gap: var(--space-2); }
+.settingsAuthAccountTypeHeaderLeft > svg { display: none; }
+.settingsAuthAccountTypeHeaderLeft::before { content: ''; width: 24px; height: 24px; background: url('../images/SealCircle.png') center / contain no-repeat; }
+.settingsAuthAccount { box-sizing: border-box; padding: var(--space-4); min-height: 112px; gap: var(--space-4); }
+.settingsAuthAccountLeft { padding: 0; }
+.settingsAuthAccountRight { min-width: 0; flex: 1; padding: 0; }
+.settingsAuthAccountDetailValue { overflow-wrap: anywhere; font-size: var(--text-body); }
+.settingsAuthAccountActions { gap: var(--space-2); }
+.settingsAuthAccountLogOut { opacity: 1; font-size: var(--text-caption); }
+.settingsAuthAccountLogOut { min-height: 32px; padding: var(--space-1) var(--space-3); border-radius: 8px; color: #ffaaa0; border-color: #a65b53; }
+.settingsAuthAccountDetails { margin-left: 0; min-width: 0; }
+.settingsAuthAccountActions { padding: 0; }
+.settingsFileSelContainer { margin: var(--space-5) 0; border-color: var(--line); }
+.settingsFileSelActions, #settingsJVMOptsContent { width: 100%; align-items: stretch; gap: var(--space-2); }
+.settingsFileSelIcon { flex: 0 0 24px; justify-content: center; background: none; padding: 0; }
+#settingsContainer .settingsFileSelVal, #settingsJVMOptsVal { min-width: 0; flex: 1; width: 0; height: var(--control-height); box-sizing: border-box; border-radius: var(--radius-control) !important; padding: var(--space-2) var(--space-3); }
+.settingsFileSelButton { flex-shrink: 0; }
+.settingsFileSelDesc, #settingsJVMOptsDesc { width: 100%; margin: var(--space-4) 0; overflow-wrap: anywhere; }
+#settingsMemoryContainer { border-color: var(--line); }
+#settingsMemoryTitle { border-color: var(--line); padding-bottom: var(--space-3); }
+#settingsMemoryContent { gap: var(--space-5); }
+#settingsMemoryContentLeft { flex: 1; width: auto; min-width: 0; }
+#settingsMemoryContentRight { flex: 0 0 112px; margin: 0; justify-content: center; }
+#settingsMemoryStatus { gap: var(--space-5); }
+#settingsMemoryStatus > .settingsMemoryStatusContainer:not(:last-child) { margin-bottom: 0; }
+.settingsMemoryContentItem + .settingsMemoryContentItem { margin-top: var(--space-4); }
+.settingsMemoryActionContainer { gap: var(--space-4); min-height: var(--control-height); }
+.settingsMemoryLabel { flex-shrink: 0; min-width: 40px; margin: 0; }
+.settingsModContent { padding: var(--space-3); box-sizing: border-box; }
+.settingsModDetails { min-width: 0; overflow-wrap: anywhere; }
+.settingsModVersion { font-size: 11px; }
+.settingsMod, .settingsDropinMod { padding: 0; margin-bottom: var(--space-3); }
+#settingsReqModsContent, #settingsOptModsContent, #settingsDropinModsContent { background: none; }
+#settingsOptModsContainer:has(#settingsOptModsContent:empty) { display: none; }
+.settingsModsHeader { margin: var(--space-5) 0 var(--space-3); }
+#settingsDropinFileSystemButton { width: 100%; }
+#settingsShaderpackWrapper { gap: var(--space-2); }
+#settingsShaderpackButton { margin: 0; width: var(--control-height); padding: 0; }
+.settingsSelectContainer { flex: 1; min-width: 0; }
+.settingsSelectSelected { min-height: var(--control-height); box-sizing: border-box; border-radius: var(--radius-control); background: #29382d; padding: 10px 36px 10px 12px; font-size: var(--text-caption); }
+.settingsSelectOptions { top: auto; bottom: calc(100% + 8px); max-height: 180px; background: #233328; border: 1px solid var(--line); border-radius: var(--radius-control); }
+.settingsSelectSelected.select-arrow-active { border-radius: var(--radius-control); }
+.settingsSelectSelected::after { width: 20px; height: 20px; top: 50%; right: 12px; border: 0; transform: translateY(-50%); background: #bac3be; mask: url('../images/icons/lucide/chevron-down.svg') center / contain no-repeat; pointer-events: none; }
+.settingsSelectSelected.select-arrow-active::after { top: 50%; border: 0; transform: translateY(-50%) rotate(180deg); }
+.krwa-icon { display: inline-block; flex-shrink: 0; width: 20px; height: 20px; background: currentColor; mask: var(--icon) center / contain no-repeat; pointer-events: none; }
+.icon-settings { --icon: url('../images/icons/lucide/settings.svg'); width: 24px; height: 24px; }
+.icon-mail { --icon: url('../images/icons/lucide/mail.svg'); }
+.icon-lock { --icon: url('../images/icons/lucide/lock-keyhole.svg'); }
+.icon-eye { --icon: url('../images/icons/lucide/eye.svg'); }
+[aria-pressed='true'] .icon-eye { --icon: url('../images/icons/lucide/eye-off.svg'); }
+.icon-external { --icon: url('../images/icons/lucide/external-link.svg'); width: 16px; height: 16px; }
+.icon-back { --icon: url('../images/icons/lucide/arrow-left.svg'); }
+#loginForm .krwa-auth-tabs a { display: flex; align-items: center; justify-content: center; gap: var(--space-2); }
+.loginSVG.krwa-icon { width: 20px; height: 20px; top: 50%; transform: translateY(-50%); color: #adb6b3; }
+#loginPasswordToggle { display: grid; place-items: center; padding: 0; }
+#loginCancelIcon { border: 0; border-radius: 0; margin-right: 8px; }
+#settingsAboutCurrentContent, #settingsUpdateStatusContent, .settingsChangelogContent { padding: var(--space-5); }
+#settingsAboutCurrentHeadline { flex-wrap: wrap; gap: var(--space-4); padding-bottom: var(--space-4); border-color: var(--line); }
+#settingsAboutLogo { width: 140px; padding: 0; }
+#settingsAboutTitle { font-size: 20px; padding: 0; }
+#settingsAboutButtons { flex-wrap: wrap; gap: var(--space-3); padding: 0 var(--space-5) var(--space-5); margin: 0; }
+.settingsAboutButton { font-size: var(--text-caption); color: #b6c6ba; padding: 0; }
+.settingsChangelogContainer { border-radius: var(--radius-control); border-color: var(--line); }
+#settingsUpdateTitle { font-size: 20px; }
+#settingsAboutCurrentVersionLine, #settingsUpdateVersionLine { font-size: var(--text-caption); color: var(--muted); }
+#settingsAboutCurrentVersionTitle, #settingsUpdateVersionTitle { color: #8fe1a0; }
+.settingsChangelogActions { padding: 0 var(--space-5) var(--space-5); }
+.toggleSwitch input:checked + .toggleSwitchSlider { background: #3a9c5d; }
+.toggleSwitch input:focus-visible + .toggleSwitchSlider { outline: 2px solid #9be4a7; outline-offset: 4px; }
+#welcomeButton { right: auto; margin-bottom: 0; }
+#welcomeButtonContent { justify-content: center; }
+#loginOptionsContent .loginOptionsMainContent { width: 100%; }
+.loginOptionButton { width: 100%; min-height: 52px; justify-content: center; padding: var(--space-3) var(--space-4); }
+#loginOptionMojang svg { display: none; }
+#waitingContainer { background: #151c19ed; }
+@media (max-height: 620px) { #settingsContainerLeft { padding: var(--space-5) var(--space-4); } #settingsNavHeader { margin-bottom: var(--space-4); } #settingsNavContentBottom { padding-top: var(--space-3); } .settingsNavSpacer { height: var(--space-2); } .settingsTab { padding: var(--space-5); } }
+@media (max-width: 1000px) { #landingContainer > #lower { padding: 20px; width: 53%; } .krwa-server-row { padding: 0 10px; gap: 9px; } #server_selection_button { font-size: 14px; } #launch_button { height: 72px; font-size: 27px; } }
+@media (max-height: 620px) { #landingContainer > #upper > #left { top: 3%; width: 40%; } #landingContainer > #lower { bottom: 8%; padding: 17px; } #launch_button { height: 64px; } #loginForm { padding: 18px 26px; } #loginImageSeal { width: 215px; margin-bottom: 4px; } .krwa-auth-tabs { margin-bottom: 18px; } #loginSubheader { margin-bottom: 4px; } #loginDisclaimer { margin-top: 8px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

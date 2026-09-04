@@ -167,7 +167,7 @@ exports.scanForShaderpacks = function(instanceDir){
     const shaderDir = path.join(instanceDir, SHADER_DIR)
     const packsDiscovered = [{
         fullName: 'OFF',
-        name: Lang.queryJS('settings.shaderpackOff')
+        name: Lang.queryEJS('settings.shaderpackOff')
     }]
     if(fs.existsSync(shaderDir)){
         let modCandidates = fs.readdirSync(shaderDir)

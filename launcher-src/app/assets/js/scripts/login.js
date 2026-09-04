@@ -18,6 +18,14 @@ const loginRememberOption   = document.getElementById('loginRememberOption')
 const loginButton           = document.getElementById('loginButton')
 const loginForm             = document.getElementById('loginForm')
 
+const loginPasswordToggle = document.getElementById('loginPasswordToggle')
+loginPasswordToggle.addEventListener('click', () => {
+    const visible = loginPassword.type === 'password'
+    loginPassword.type = visible ? 'text' : 'password'
+    loginPasswordToggle.setAttribute('aria-pressed', String(visible))
+    loginPasswordToggle.setAttribute('aria-label', visible ? 'Скрыть пароль' : 'Показать пароль')
+})
+
 // Control variables.
 let lu = false, lp = false
 
@@ -144,6 +152,12 @@ function formDisabled(v){
     loginCancelButton.disabled = v
     loginUsername.disabled = v
     loginPassword.disabled = v
+    loginPasswordToggle.disabled = v
+    if(v) {
+        loginPassword.type = 'password'
+        loginPasswordToggle.setAttribute('aria-pressed', 'false')
+        loginPasswordToggle.setAttribute('aria-label', 'Показать пароль')
+    }
     if(v){
         checkmarkContainer.setAttribute('disabled', v)
     } else {
