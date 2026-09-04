@@ -21,6 +21,8 @@ if not defined KRWA_VERSION (
 )
 "%KRWA_NODE%" "%KRWA_BUILDER%" --win --dir
 if errorlevel 1 exit /b %errorlevel%
+copy /y ".\build\app-update.yml" ".\dist\win-unpacked\resources\app-update.yml" >nul
+if errorlevel 1 exit /b %errorlevel%
 "%KRWA_RCEDIT%" ".\dist\win-unpacked\KRWA Launcher.exe" --set-icon ".\build\icon.ico" --set-file-version "%KRWA_VERSION%" --set-product-version "%KRWA_VERSION%" --set-version-string ProductName "KRWA Launcher" --set-version-string FileDescription "KRWA Minecraft Launcher" --set-version-string CompanyName "KRWA Server"
 if errorlevel 1 exit /b %errorlevel%
 "%KRWA_NODE%" "%KRWA_BUILDER%" --win nsis --prepackaged ".\dist\win-unpacked"

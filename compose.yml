@@ -15,7 +15,9 @@ services:
         condition: service_healthy
 
   auth:
-    image: ghcr.io/astercommunity/asteryggdrasil@sha256:87fe832bf51b9d6dde53143c414b3d24f2df999c2794d0d799aebb1b0491ec6a
+    build:
+      context: ../aster
+    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.1
     restart: unless-stopped
     environment:
       ASTER__SERVER__HOST: 0.0.0.0
@@ -30,4 +32,3 @@ services:
       retries: 12
       start_period: 20s
     stop_grace_period: 45s
-
