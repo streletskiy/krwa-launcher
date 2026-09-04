@@ -7,7 +7,7 @@
       "name": "KRWA Create",
       "description": "Create Fly и совместимые аддоны на Fabric 26.2",
       "icon": "http://127.0.0.1:8088/servers/krwa-26.2/krwa.png",
-      "version": "0.1.2-local",
+      "version": "0.1.3-local",
       "address": "127.0.0.1:25567",
       "minecraftVersion": "26.2",
       "mainServer": true,
@@ -175,6 +175,46 @@
           }
         },
         {
+          "id": "generated.fabricmod:ferritecore:9.0.0@jar",
+          "name": "FerriteCore",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 72677,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/ferritecore-9.0.0-fabric.jar",
+            "MD5": "9d96f643cfd220b75f47c94ea56ebc2a"
+          }
+        },
+        {
+          "id": "generated.fabricmod:immediatelyfast:1.16.0+26.2@jar",
+          "name": "ImmediatelyFast",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 297362,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/ImmediatelyFast-Fabric-1.16.0+26.2.jar",
+            "MD5": "c534befc60ab68d808bdaf9f7cce9a9d"
+          }
+        },
+        {
+          "id": "generated.fabricmod:iris:1.11.2+mc26.2@jar",
+          "name": "Iris",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 2820763,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/iris-fabric-1.11.2+mc26.2.jar",
+            "MD5": "11c0b0d99bf9d9cb55f9e35a2d6bb85f"
+          }
+        },
+        {
+          "id": "net.caffeinemc.mods:lithium:0.25.3+mc26.2@jar",
+          "name": "Lithium",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 912850,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/lithium-fabric-0.25.3+mc26.2.jar",
+            "MD5": "ee8279ea831c40de6ab0a5a8c52370c9"
+          }
+        },
+        {
           "id": "cc.cassian:rrv:8.3.1+26.2-pre-5@jar",
           "name": "Reliable Recipe Viewer (RRV)",
           "type": "FabricMod",
@@ -192,6 +232,16 @@
             "size": 25128202,
             "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/SNR.FLY-STABLE-1.0.1.jar",
             "MD5": "5d244fd7dfeea407e001217c525a8ef5"
+          }
+        },
+        {
+          "id": "net.caffeinemc.mods:sodium:0.9.1+mc26.2@jar",
+          "name": "Sodium",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 1834384,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/fabricmods/required/sodium-fabric-0.9.1+mc26.2.jar",
+            "MD5": "12238397e6e067c00369e72999e8d163"
           }
         },
         {
@@ -213,6 +263,17 @@
             "url": "http://127.0.0.1:8088/servers/krwa-26.2/files/authlib-injector.jar",
             "MD5": "aa24306634e71df67b64959911bf566d",
             "path": "authlib-injector.jar"
+          }
+        },
+        {
+          "id": "MakeUp-UltraFast-9.5d.zip",
+          "name": "MakeUp-UltraFast-9.5d.zip",
+          "type": "File",
+          "artifact": {
+            "size": 400386,
+            "url": "http://127.0.0.1:8088/servers/krwa-26.2/files/shaderpacks/MakeUp-UltraFast-9.5d.zip",
+            "MD5": "6211132bbb77166900e5d0e7282d325b",
+            "path": "shaderpacks/MakeUp-UltraFast-9.5d.zip"
           }
         }
       ]

@@ -2,6 +2,7 @@ const fs        = require('fs-extra')
 const path      = require('path')
 const { ipcRenderer, shell } = require('electron')
 const { SHELL_OPCODE } = require('./ipcconstants')
+const Lang      = require('./langloader')
 
 // Group #1: File Name (without .disabled, if any)
 // Group #2: File Extension (jar, zip, or litemod)
@@ -10,9 +11,19 @@ const MOD_REGEX = /^(.+(jar|zip|litemod))(?:\.(disabled))?$/
 const DISABLED_EXT = '.disabled'
 
 const SHADER_REGEX = /^(.+)\.zip$/
-const SHADER_OPTION = /shaderPack=(.+)/
+const SHADER_OPTION = /^shaderPack=(.*)$/m
+const SHADERS_ENABLED_OPTION = /^enableShaders=(.*)$/m
 const SHADER_DIR = 'shaderpacks'
 const SHADER_CONFIG = 'optionsshaders.txt'
+const IRIS_SHADER_CONFIG = path.join('config', 'iris.properties')
+
+function setProperty(contents, pattern, key, value) {
+    const line = `${key}=${value}`
+    if(pattern.test(contents)) {
+        return contents.replace(pattern, line)
+    }
+    return `${contents}${contents.length > 0 && !contents.endsWith('\n') ? '\n' : ''}${line}\n`
+}
 
 /**
  * Validate that the given directory exists. If not, it is
@@ -156,7 +167,7 @@ exports.scanForShaderpacks = function(instanceDir){
     const shaderDir = path.join(instanceDir, SHADER_DIR)
     const packsDiscovered = [{
         fullName: 'OFF',
-        name: 'Off (Default)'
+        name: Lang.queryJS('settings.shaderpackOff')
     }]
     if(fs.existsSync(shaderDir)){
         let modCandidates = fs.readdirSync(shaderDir)
@@ -174,8 +185,8 @@ exports.scanForShaderpacks = function(instanceDir){
 }
 
 /**
- * Read the optionsshaders.txt file to locate the current
- * enabled pack. If the file does not exist, OFF is returned.
+ * Read the Iris configuration (or the legacy OptiFine file) to locate
+ * the currently enabled pack. If no pack is enabled, OFF is returned.
  * 
  * @param {string} instanceDir The path to the server instance directory.
  * 
@@ -184,12 +195,23 @@ exports.scanForShaderpacks = function(instanceDir){
 exports.getEnabledShaderpack = function(instanceDir){
     exports.validateDir(instanceDir)
 
+    const irisConfig = path.join(instanceDir, IRIS_SHADER_CONFIG)
+    if(fs.existsSync(irisConfig)) {
+        const buf = fs.readFileSync(irisConfig, {encoding: 'utf-8'})
+        const enabledMatch = SHADERS_ENABLED_OPTION.exec(buf)
+        const packMatch = SHADER_OPTION.exec(buf)
+        if(enabledMatch?.[1].trim().toLowerCase() === 'true' && packMatch?.[1].trim()) {
+            return packMatch[1].trim()
+        }
+        return 'OFF'
+    }
+
     const optionsShaders = path.join(instanceDir, SHADER_CONFIG)
     if(fs.existsSync(optionsShaders)){
         const buf = fs.readFileSync(optionsShaders, {encoding: 'utf-8'})
         const match = SHADER_OPTION.exec(buf)
-        if(match != null){
-            return match[1]
+        if(match?.[1].trim()){
+            return match[1].trim()
         } else {
             console.warn('WARNING: Shaderpack regex failed.')
         }
@@ -206,13 +228,23 @@ exports.getEnabledShaderpack = function(instanceDir){
 exports.setEnabledShaderpack = function(instanceDir, pack){
     exports.validateDir(instanceDir)
 
+    const irisConfig = path.join(instanceDir, IRIS_SHADER_CONFIG)
+    fs.ensureDirSync(path.dirname(irisConfig))
+    let irisBuf = fs.existsSync(irisConfig) ? fs.readFileSync(irisConfig, {encoding: 'utf-8'}) : ''
+    irisBuf = setProperty(irisBuf, SHADERS_ENABLED_OPTION, 'enableShaders', pack !== 'OFF')
+    if(pack !== 'OFF') {
+        irisBuf = setProperty(irisBuf, SHADER_OPTION, 'shaderPack', pack)
+    }
+    fs.writeFileSync(irisConfig, irisBuf, {encoding: 'utf-8'})
+
+    // Keep the legacy OptiFine setting synchronized for older packs.
     const optionsShaders = path.join(instanceDir, SHADER_CONFIG)
     let buf
     if(fs.existsSync(optionsShaders)){
         buf = fs.readFileSync(optionsShaders, {encoding: 'utf-8'})
-        buf = buf.replace(SHADER_OPTION, `shaderPack=${pack}`)
+        buf = setProperty(buf, SHADER_OPTION, 'shaderPack', pack)
     } else {
-        buf = `shaderPack=${pack}`
+        buf = `shaderPack=${pack}\n`
     }
     fs.writeFileSync(optionsShaders, buf, {encoding: 'utf-8'})
 }
