@@ -1,7 +1,8 @@
 export class MinecraftVersion {
 
-    private static readonly MINECRAFT_VERSION_REGEX = /(\d+).(\d+).?(\d+)?/
+    private static readonly MINECRAFT_VERSION_REGEX = /^(\d+)\.(\d+)(?:\.(\d+))?(?:-[0-9A-Za-z][0-9A-Za-z.-]*)?$/
 
+    private readonly version: string
     private readonly major: number
     private readonly minor: number
     private readonly revision: number | undefined
@@ -9,6 +10,7 @@ export class MinecraftVersion {
     constructor(version: string) {
         const res = MinecraftVersion.MINECRAFT_VERSION_REGEX.exec(version)
         if(res != null) {
+            this.version = version
             this.major = Number(res[1])
             this.minor = Number(res[2])
             this.revision = res[3] != null ? Number(res[3]) : undefined
@@ -25,7 +27,7 @@ export class MinecraftVersion {
     public getMinor(): number { return this.minor }
     public getRevision(): number | undefined { return this.revision }
 
-    public toString(): string { return `${this.major}.${this.minor}${this.revision != null ? '.' + this.revision : ''}`}
+    public toString(): string { return this.version }
 
     public compareTo(other: MinecraftVersion): number {
         // Compare major

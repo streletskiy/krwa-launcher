@@ -406,7 +406,17 @@ class ProcessBuilder {
         const argDiscovery = /\${*(.*)}/
 
         // JVM Arguments First
-        let args = this.vanillaManifest.arguments.jvm
+        // The manifest is reused between launches. Work on copies so resolving
+        // ${natives_directory} never leaves a deleted, launch-specific temp path
+        // in the cached manifest.
+        let args = JSON.parse(JSON.stringify(this.vanillaManifest.arguments.jvm))
+        let classPathEntries
+        const getClassPathEntries = () => {
+            if(classPathEntries == null){
+                classPathEntries = this.classpathArg(mods, tempNativePath)
+            }
+            return classPathEntries
+        }
 
         // Debug securejarhandler
         // args.push('-Dbsl.debug=true')
@@ -433,11 +443,18 @@ class ProcessBuilder {
         args = args.concat(ConfigManager.getJVMOptions(this.server.rawServer.id))
         args.push(`-javaagent:${path.join(this.gameDir, 'authlib-injector.jar')}=${YGGDRASIL_API_ROOT}`)
 
+        if(this.usingFabricLoader){
+            const systemLibraries = this._resolveFabricSystemLibraries(getClassPathEntries())
+            if(systemLibraries.length > 0){
+                args.push(`-Dfabric.systemLibraries=${systemLibraries.join(ProcessBuilder.getClasspathSeparator())}`)
+            }
+        }
+
         // Main Java Class
         args.push(this.modManifest.mainClass)
 
         // Vanilla Arguments
-        args = args.concat(this.vanillaManifest.arguments.game)
+        args = args.concat(JSON.parse(JSON.stringify(this.vanillaManifest.arguments.game)))
 
         for(let i=0; i<args.length; i++){
             if(typeof args[i] === 'object' && args[i].rules != null){
@@ -525,7 +542,11 @@ class ProcessBuilder {
                             val = ConfigManager.getGameHeight()
                             break
                         case 'natives_directory':
-                            val = args[i].replace(argDiscovery, tempNativePath)
+                            // Minecraft 26.2+ assigns separate extraction folders
+                            // (java, jna, lwjgl and netty). Helios extracts all
+                            // platform natives into one directory, so point every
+                            // native consumer at that shared directory.
+                            val = args[i].replace(/\$\{natives_directory}(?:\/(?:java|jna|lwjgl|netty))?/, tempNativePath)
                             break
                         case 'launcher_name':
                             val = args[i].replace(argDiscovery, 'KRWA-Launcher')
@@ -534,7 +555,7 @@ class ProcessBuilder {
                             val = args[i].replace(argDiscovery, this.launcherVersion)
                             break
                         case 'classpath':
-                            val = this.classpathArg(mods, tempNativePath).join(ProcessBuilder.getClasspathSeparator())
+                            val = getClassPathEntries().join(ProcessBuilder.getClasspathSeparator())
                             break
                     }
                     if(val != null){
@@ -557,6 +578,20 @@ class ProcessBuilder {
         })
 
         return args
+    }
+
+    /**
+     * Keep Fabric Loader and its bootstrap dependencies on the application
+     * class loader. Explicitly declaring them also handles Windows path
+     * virtualization, where a library can otherwise appear under two aliases
+     * and be loaded twice by different class loaders.
+     *
+     * @param {Array.<string>} classPathEntries Resolved launch classpath.
+     * @returns {Array.<string>} Fabric bootstrap library paths.
+     */
+    _resolveFabricSystemLibraries(classPathEntries){
+        const fabricSystemLibrary = /[\\/](?:net[\\/]fabricmc[\\/](?:fabric-loader|mapping-io|tiny-remapper|classtweaker|sponge-mixin)|org[\\/]ow2[\\/](?:asm|sat4j))[\\/]/i
+        return classPathEntries.filter(entry => fabricSystemLibrary.test(entry))
     }
 
     /**
@@ -753,11 +788,7 @@ class ProcessBuilder {
 
                         // Extract the file.
                         if(!shouldExclude){
-                            fs.writeFile(path.join(tempNativePath, fileName), zipEntries[i].getData(), (err) => {
-                                if(err){
-                                    logger.error('Error while extracting native library:', err)
-                                }
-                            })
+                            fs.writeFileSync(path.join(tempNativePath, fileName), zipEntries[i].getData())
                         }
 
                     }
@@ -767,9 +798,17 @@ class ProcessBuilder {
 
                     const regexTest = nativesRegex.exec(lib.name)
                     // const os = regexTest[1]
-                    const arch = regexTest[2] ?? 'x64'
+                    const arch = regexTest[2]
+                    const architectureAliases = {
+                        arm64: ['aarch64', 'arm64'],
+                        ia32: ['i386', 'i686', 'x86'],
+                        x64: ['amd64', 'x64', 'x86_64']
+                    }
+                    const compatibleArchitectures = architectureAliases[process.arch] ?? [process.arch]
 
-                    if(arch != process.arch) {
+                    // Classifiers without an explicit architecture are the x64
+                    // artifacts in Mojang's manifest.
+                    if((arch == null && process.arch !== 'x64') || (arch != null && !compatibleArchitectures.includes(arch))) {
                         continue
                     }
 
@@ -804,11 +843,7 @@ class ProcessBuilder {
 
                         // Extract the file.
                         if(!shouldExclude){
-                            fs.writeFile(path.join(tempNativePath, extractName), zipEntries[i].getData(), (err) => {
-                                if(err){
-                                    logger.error('Error while extracting native library:', err)
-                                }
-                            })
+                            fs.writeFileSync(path.join(tempNativePath, extractName), zipEntries[i].getData())
                         }
 
                     }

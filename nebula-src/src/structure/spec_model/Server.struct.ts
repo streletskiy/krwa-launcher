@@ -22,7 +22,7 @@ export interface CreateServerResult {
 
 export class ServerStructure extends BaseModelStructure<Server> {
 
-    private readonly ID_REGEX = /(.+-(.+)$)/
+    private readonly ID_REGEX = /^(.+-(\d+\.\d+(?:\.\d+)?(?:-[0-9A-Za-z][0-9A-Za-z.-]*)?))$/
     private readonly SERVER_META_FILE = 'servermeta.json'
 
     constructor(

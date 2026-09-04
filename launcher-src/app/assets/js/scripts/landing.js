@@ -30,6 +30,7 @@ const {
 // Internal Requirements
 const DiscordWrapper          = require('./assets/js/discordwrapper')
 const ProcessBuilder          = require('./assets/js/processbuilder')
+const SkinManagerLanding      = require('./assets/js/skinmanager')
 
 // Launch Elements
 const launch_content          = document.getElementById('launch_content')
@@ -144,12 +145,14 @@ document.getElementById('avatarOverlay').onclick = async e => {
 // Bind selected account
 function updateSelectedAccount(authUser){
     let username = Lang.queryJS('landing.selectedAccount.noAccountSelected')
+    const avatarContainer = document.getElementById('avatarContainer')
+    SkinManagerLanding.applyHead(avatarContainer, null)
     if(authUser != null){
         if(authUser.displayName != null){
             username = authUser.displayName
         }
         if(authUser.uuid != null){
-            document.getElementById('avatarContainer').style.backgroundImage = `url('https://mc-heads.net/body/${authUser.uuid}/right')`
+            SkinManagerLanding.applyHead(avatarContainer, authUser.uuid)
         }
     }
     user_text.innerHTML = username
@@ -560,7 +563,11 @@ async function dlAsync(login = true) {
         // const SERVER_JOINED_REGEX = /\[.+\]: \[CHAT\] [a-zA-Z0-9_]{1,16} joined the game/
         const SERVER_JOINED_REGEX = new RegExp(`\\[.+\\]: \\[CHAT\\] ${authUser.displayName} joined the game`)
 
+        let loadCompleteTimer
         const onLoadComplete = () => {
+            if(proc == null) {
+                return
+            }
             toggleLaunchArea(false)
             if(hasRPC){
                 DiscordWrapper.updateDetails(Lang.queryJS('landing.discord.loading'))
@@ -579,7 +586,7 @@ async function dlAsync(login = true) {
             if(GAME_LAUNCH_REGEX.test(data.trim())){
                 const diff = Date.now()-start
                 if(diff < MIN_LINGER) {
-                    setTimeout(onLoadComplete, MIN_LINGER-diff)
+                    loadCompleteTimer = setTimeout(onLoadComplete, MIN_LINGER-diff)
                 } else {
                     onLoadComplete()
                 }
@@ -612,18 +619,33 @@ async function dlAsync(login = true) {
             proc.stdout.on('data', tempListener)
             proc.stderr.on('data', gameErrorListener)
 
+            proc.once('close', (code, signal) => {
+                if(loadCompleteTimer) {
+                    clearTimeout(loadCompleteTimer)
+                }
+                loggerLaunchSuite.info(`Minecraft exited with code ${code} and signal ${signal}.`)
+                if(hasRPC){
+                    loggerLaunchSuite.info('Shutting down Discord Rich Presence..')
+                    DiscordWrapper.shutdownRPC()
+                    hasRPC = false
+                }
+                proc = null
+                if(code !== 0) {
+                    showLaunchFailure(
+                        Lang.queryJS('landing.dlAsync.errorDuringLaunchTitle'),
+                        Lang.queryJS('landing.dlAsync.unexpectedExit', { code: code ?? '?' })
+                    )
+                } else {
+                    toggleLaunchArea(false)
+                }
+            })
+
             setLaunchDetails(Lang.queryJS('landing.dlAsync.doneEnjoyServer'))
 
             // Init Discord Hook
             if(distro.rawDistribution.discord != null && serv.rawServer.discord != null){
                 DiscordWrapper.initRPC(distro.rawDistribution.discord, serv.rawServer.discord)
                 hasRPC = true
-                proc.on('close', (code, signal) => {
-                    loggerLaunchSuite.info('Shutting down Discord Rich Presence..')
-                    DiscordWrapper.shutdownRPC()
-                    hasRPC = false
-                    proc = null
-                })
             }
 
         } catch(err) {

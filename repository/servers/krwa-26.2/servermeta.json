@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.1.0-local",
+    "version": "0.1.2-local",
     "name": "KRWA Create",
     "description": "Create Fly и совместимые аддоны на Fabric 26.2",
     "icon": "",
@@ -18,7 +18,7 @@
     }
   },
   "fabric": {
-    "version": "0.19.3"
+    "version": "0.19.5"
   },
   "untrackedFiles": []
 }

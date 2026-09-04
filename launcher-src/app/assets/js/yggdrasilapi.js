@@ -65,4 +65,27 @@ exports.invalidate = async function(accessToken, clientToken) {
     await post('authserver/invalidate', { accessToken, clientToken }, [200, 204])
 }
 
+exports.getProfile = async function(uuid) {
+    const normalizedUuid = String(uuid).replace(/-/g, '')
+    const response = await client.get(`sessionserver/session/minecraft/profile/${normalizedUuid}`, {
+        searchParams: { unsigned: 'true' }
+    })
+    if(response.statusCode !== 200) {
+        const error = new Error(messageFromResponse(response))
+        error.statusCode = response.statusCode
+        throw error
+    }
+    return response.body
+}
+
+exports.getSkinUrl = async function(uuid) {
+    const profile = await exports.getProfile(uuid)
+    const texturesProperty = profile.properties?.find(property => property.name === 'textures')
+    if(!texturesProperty?.value) {
+        return null
+    }
+    const textures = JSON.parse(Buffer.from(texturesProperty.value, 'base64').toString('utf8'))
+    return textures.textures?.SKIN?.url || null
+}
+
 exports.API_ROOT = YGGDRASIL_API_ROOT

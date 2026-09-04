@@ -2,6 +2,8 @@
  * Script for overlay.ejs
  */
 
+const SkinManagerOverlay = require('./assets/js/skinmanager')
+
 /* Overlay Wrapper Functions */
 
 /**
@@ -305,11 +307,14 @@ function populateAccountListings(){
     let htmlString = ''
     for(let i=0; i<accounts.length; i++){
         htmlString += `<button class="accountListing" uuid="${accounts[i].uuid}" ${i===0 ? 'selected' : ''}>
-            <img src="https://mc-heads.net/head/${accounts[i].uuid}/40">
+            <div class="accountListingImage" role="img" aria-label="${accounts[i].displayName}" data-skin-uuid="${accounts[i].uuid}"></div>
             <div class="accountListingName">${accounts[i].displayName}</div>
         </button>`
     }
     document.getElementById('accountSelectListScrollable').innerHTML = htmlString
+    for(const image of document.getElementsByClassName('accountListingImage')) {
+        SkinManagerOverlay.applyHead(image, image.dataset.skinUuid)
+    }
 
 }
 

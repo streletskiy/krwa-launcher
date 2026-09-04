@@ -39,7 +39,15 @@ function onDistroLoad(data){
             ConfigManager.save()
         }
     }
-    ipcRenderer.send('distributionIndexDone', data != null)
+    // The cached distribution can resolve before uibinder registers its IPC
+    // listener. Wait until the renderer DOM (and its scripts) are ready so the
+    // loading screen cannot get stuck on a fast second launch.
+    const notifyRenderer = () => ipcRenderer.send('distributionIndexDone', data != null)
+    if(globalThis.document.readyState === 'loading') {
+        globalThis.window.addEventListener('DOMContentLoaded', notifyRenderer, { once: true })
+    } else {
+        notifyRenderer()
+    }
 }
 
 // Ensure Distribution is downloaded and cached.

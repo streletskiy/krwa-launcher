@@ -4,6 +4,7 @@ const semver = require('semver')
 
 const DropinModUtil  = require('./assets/js/dropinmodutil')
 const { MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR } = require('./assets/js/ipcconstants')
+const SkinManagerSettings = require('./assets/js/skinmanager')
 
 const settingsState = {
     invalid: new Set()
@@ -640,7 +641,7 @@ function populateAuthAccounts(){
 
         const accHtml = `<div class="settingsAuthAccount" uuid="${acc.uuid}">
             <div class="settingsAuthAccountLeft">
-                <img class="settingsAuthAccountImage" alt="${acc.displayName}" src="https://mc-heads.net/body/${acc.uuid}/60">
+                <div class="settingsAuthAccountImage" role="img" aria-label="${acc.displayName}" data-skin-uuid="${acc.uuid}"></div>
             </div>
             <div class="settingsAuthAccountRight">
                 <div class="settingsAuthAccountDetails">
@@ -672,6 +673,9 @@ function populateAuthAccounts(){
 
     settingsCurrentMicrosoftAccounts.innerHTML = microsoftAuthAccountStr
     settingsCurrentMojangAccounts.innerHTML = mojangAuthAccountStr
+    for(const image of document.getElementsByClassName('settingsAuthAccountImage')) {
+        SkinManagerSettings.applyHead(image, image.dataset.skinUuid)
+    }
 }
 
 /**

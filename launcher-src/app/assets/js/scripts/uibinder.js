@@ -133,7 +133,8 @@ function showFatalStartupError(){
  * @param {Object} data The distro index object.
  */
 function onDistroRefresh(data){
-    updateSelectedServer(data.getServerById(ConfigManager.getSelectedServer()))
+    const selectedServer = data.getServerById(ConfigManager.getSelectedServer()) || data.getMainServer()
+    updateSelectedServer(selectedServer)
     refreshServerStatus()
     initNews()
     syncModConfigurations(data)
