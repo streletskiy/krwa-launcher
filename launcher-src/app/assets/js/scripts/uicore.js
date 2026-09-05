@@ -50,18 +50,18 @@ if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
             case 'startup-checking':
-                document.getElementById('launcherUpdateMessage').textContent = 'Проверяем обновления лаунчера…'
+                document.getElementById('launcherUpdateMessage').textContent = Lang.native('Проверяем обновления лаунчера…')
                 document.getElementById('launcherUpdateProgress').removeAttribute('value')
                 break
             case 'startup-downloading': {
                 const percent = Math.max(0, Math.min(100, Number(info?.percent) || 0))
-                document.getElementById('launcherUpdateMessage').textContent = 'Обновляем лаунчер'
+                document.getElementById('launcherUpdateMessage').textContent = Lang.native('Обновляем лаунчер')
                 document.getElementById('launcherUpdateProgress').value = percent
-                document.getElementById('launcherUpdateDetail').textContent = `${Math.round(percent)}%` + (info?.total ? ` · ${Math.round(info.transferred / 1048576)} / ${Math.round(info.total / 1048576)} МБ` : '')
+                document.getElementById('launcherUpdateDetail').textContent = `${Math.round(percent)}%` + (info?.total ? ` · ${Math.round(info.transferred / 1048576)} / ${Math.round(info.total / 1048576)} MB` : '')
                 break
             }
             case 'startup-installing':
-                document.getElementById('launcherUpdateMessage').textContent = 'Готово. Перезапускаем лаунчер…'
+                document.getElementById('launcherUpdateMessage').textContent = Lang.native('Готово. Перезапускаем лаунчер…')
                 document.getElementById('launcherUpdateProgress').value = 100
                 document.getElementById('launcherUpdateDetail').textContent = ''
                 break

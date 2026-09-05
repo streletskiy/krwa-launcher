@@ -6,7 +6,7 @@ const nativeSubmit = document.getElementById('nativeAccountSubmit')
 let nativeMode = 'register', nativeBusy = false, nativeReturn = VIEWS.login, nativeCaptchaId = null, nativeResetConfirm = false, nativePreviewURL = null, nativeViewSerial = 0
 let nativeCompletion = false
 const nativeField = name => nativeForm.elements.namedItem(name)
-const nativeLabels = { register: ['Создай свой аккаунт', 'Выбери ник, зарегистрируйся и сразу переходи к игре.', 'Создать аккаунт и войти'], password: ['Новый пароль', 'Защити свой аккаунт. Пароль не сохраняется в лаунчере.', 'Сохранить пароль'], skin: ['Твой скин', 'Загрузи PNG — скин сразу применится. Ник персонажа изменить нельзя.', 'Загрузить скин'], reset: ['Вернёмся в игру', 'Восстанови доступ к своему аккаунту KRWA.', 'Отправить письмо'] }
+const nativeLabels = { register: [Lang.native('Создай свой аккаунт'), Lang.native('Выбери ник, зарегистрируйся и сразу переходи к игре.'), Lang.native('Создать аккаунт и войти')], password: [Lang.native('Новый пароль'), Lang.native('Защити свой аккаунт. Пароль не сохраняется в лаунчере.'), Lang.native('Сохранить пароль')], skin: [Lang.native('Твой скин'), Lang.native('Загрузи PNG — скин сразу применится. Ник персонажа изменить нельзя.'), Lang.native('Загрузить скин')], reset: [Lang.native('Вернёмся в игру'), Lang.native('Восстанови доступ к своему аккаунту KRWA.'), Lang.native('Отправить письмо')] }
 
 function nativeMessage(text, error = false) {
     nativeStatus.textContent = text
@@ -17,12 +17,12 @@ function nativeSetBusy(busy) {
     for (const control of nativeForm.querySelectorAll('input,select,button')) control.disabled = busy
     document.getElementById('nativeAccountBack').disabled = busy
     for (const control of document.querySelectorAll('#nativeAccountNav button')) control.disabled = busy
-    nativeSubmit.textContent = busy ? 'Подожди немного…' : nativeCompletion ? 'Перейти ко входу' : nativeResetConfirm ? 'Сохранить новый пароль' : nativeLabels[nativeMode][2]
+    nativeSubmit.textContent = busy ? Lang.native('Подожди немного…') : nativeCompletion ? Lang.native('Перейти ко входу') : nativeResetConfirm ? Lang.native('Сохранить новый пароль') : nativeLabels[nativeMode][2]
 }
 async function nativeRefreshCaptcha(serial = nativeViewSerial) {
     const result = await NativeAccountAPI.captcha()
     if (serial !== nativeViewSerial) return
-    if (!/^image\/(png|jpeg)$/.test(result.mime) || !/^[\w+/=]+$/.test(result.image_base64)) throw new Error('Не удалось загрузить код проверки.')
+    if (!/^image\/(png|jpeg)$/.test(result.mime) || !/^[\w+/=]+$/.test(result.image_base64)) throw new Error(Lang.native('Не удалось загрузить код проверки.'))
     nativeCaptchaId = result.challenge_id
     document.getElementById('nativeCaptchaImage').src = `data:${result.mime};base64,${result.image_base64}`
     nativeField('captchaAnswer').value = ''
@@ -32,7 +32,7 @@ async function openNativeAccount(mode = 'skin') {
     if (nativeBusy || !nativeLabels[mode]) return
     const selected = ConfigManager.getSelectedAccount()
     if (['skin', 'password'].includes(mode) && !selected) {
-        nativeMessage('Сначала войди в аккаунт.')
+        nativeMessage(Lang.native('Сначала войди в аккаунт.'))
         switchView(getCurrentView(), VIEWS.login, 150, 150)
         return
     }
@@ -44,12 +44,12 @@ async function openNativeAccount(mode = 'skin') {
     const serial = ++nativeViewSerial
     nativeForm.reset()
     for (const input of nativeForm.querySelectorAll('[autocomplete$="password"]')) input.type = 'password'
-    for (const eye of nativeForm.querySelectorAll('.native-eye')) eye.setAttribute('aria-label', 'Показать пароль')
+    for (const eye of nativeForm.querySelectorAll('.native-eye')) eye.setAttribute('aria-label', Lang.native('Показать пароль'))
     for (const panel of nativeForm.querySelectorAll('.native-panel')) panel.hidden = true
     document.getElementById(`native${{ register: 'Register', password: 'Password', skin: 'Skin', reset: 'Reset' }[mode]}Fields`).hidden = false
     document.getElementById('nativeResetConfirmFields').hidden = true
     nativeField('resetEmail').parentElement.hidden = false
-    document.getElementById('nativeHaveResetCode').textContent = 'У меня уже есть ссылка из письма'
+    document.getElementById('nativeHaveResetCode').textContent = Lang.native('У меня уже есть ссылка из письма')
     document.getElementById('nativeCaptcha').hidden = true
     document.getElementById('nativeAccountNav').hidden = !['skin', 'password'].includes(mode)
     for (const button of document.querySelectorAll('#nativeAccountNav button')) button.classList.toggle('active', button.dataset.nativeAccount === mode)
@@ -57,10 +57,10 @@ async function openNativeAccount(mode = 'skin') {
     document.getElementById('nativeAccountIntro').textContent = nativeLabels[mode][1]
     document.getElementById('nativePasswordAccount').textContent = selected?.displayName || ''
     document.getElementById('nativeSkinAccount').textContent = selected?.displayName || ''
-    document.getElementById('nativeFileName').textContent = 'Загрузить скин'
+    document.getElementById('nativeFileName').textContent = Lang.native('Загрузить скин')
     nativeSubmit.hidden = mode === 'skin'
     document.getElementById('nativeSkinPreview').getContext('2d').clearRect(0, 0, 160, 240)
-    document.getElementById('nativePreviewHint').textContent = 'Выбери скин для предпросмотра'
+    document.getElementById('nativePreviewHint').textContent = Lang.native('Выбери скин для предпросмотра')
     if (nativePreviewURL) { window.URL.revokeObjectURL(nativePreviewURL); nativePreviewURL = null }
     nativeMessage('')
     nativeSetBusy(false)
@@ -93,18 +93,18 @@ document.getElementById('nativeHaveResetCode').onclick = () => {
     nativeResetConfirm = !nativeResetConfirm
     document.getElementById('nativeResetConfirmFields').hidden = !nativeResetConfirm
     nativeField('resetEmail').parentElement.hidden = nativeResetConfirm
-    nativeSubmit.textContent = nativeResetConfirm ? 'Сохранить новый пароль' : nativeLabels.reset[2]
-    document.getElementById('nativeHaveResetCode').textContent = nativeResetConfirm ? 'Отправить новое письмо' : 'У меня уже есть ссылка из письма'
+    nativeSubmit.textContent = nativeResetConfirm ? Lang.native('Сохранить новый пароль') : nativeLabels.reset[2]
+    document.getElementById('nativeHaveResetCode').textContent = nativeResetConfirm ? Lang.native('Отправить новое письмо') : Lang.native('У меня уже есть ссылка из письма')
     nativeMessage('')
 }
 for (const eye of nativeForm.querySelectorAll('.native-eye')) eye.onclick = () => {
     const input = eye.previousElementSibling
     input.type = input.type === 'password' ? 'text' : 'password'
-    eye.setAttribute('aria-label', input.type === 'password' ? 'Показать пароль' : 'Скрыть пароль')
+    eye.setAttribute('aria-label', input.type === 'password' ? Lang.native('Показать пароль') : Lang.native('Скрыть пароль'))
 }
 function nativePassword(password, confirm) {
-    if ([...password].length < 8 || [...password].length > 128) throw new Error('Пароль должен содержать от 8 до 128 символов.')
-    if (password !== confirm) throw new Error('Пароли не совпадают.')
+    if ([...password].length < 8 || [...password].length > 128) throw new Error(Lang.native('Пароль должен содержать от 8 до 128 символов.'))
+    if (password !== confirm) throw new Error(Lang.native('Пароли не совпадают.'))
 }
 async function nativeEnterGame(identifier, password) {
     const account = await AuthManager.addMojangAccount(identifier, password)
@@ -122,18 +122,18 @@ nativeForm.onsubmit = async event => {
     let accountCreated = false, passwordChanged = false
     try {
         if (nativeMode === 'register') {
-            if (!/^[a-zA-Z0-9_]{4,16}$/.test(value('nickname'))) throw new Error('Ник: от 4 до 16 латинских букв, цифр или _.')
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value('email'))) throw new Error('Укажи корректную почту.')
+            if (!/^[a-zA-Z0-9_]{4,16}$/.test(value('nickname'))) throw new Error(Lang.native('Ник: от 4 до 16 латинских букв, цифр или _.'))
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value('email'))) throw new Error(Lang.native('Укажи корректную почту.'))
             nativePassword(value('registerPassword'), value('registerConfirm'))
-            if (!nativeField('terms').checked) throw new Error('Прими правила и политику конфиденциальности.')
+            if (!nativeField('terms').checked) throw new Error(Lang.native('Прими правила и политику конфиденциальности.'))
         }
         if (nativeMode === 'password') {
-            if (!selected || !value('currentPassword')) throw new Error('Введи текущий пароль аккаунта.')
+            if (!selected || !value('currentPassword')) throw new Error(Lang.native('Введи текущий пароль аккаунта.'))
             nativePassword(value('newPassword'), value('newConfirm'))
         }
         if (nativeMode === 'reset') {
             if (nativeResetConfirm) nativePassword(value('resetPassword'), value('resetConfirm'))
-            else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value('resetEmail'))) throw new Error('Укажи корректную почту.')
+            else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value('resetEmail'))) throw new Error(Lang.native('Укажи корректную почту.'))
         }
         nativeSetBusy(true)
         if (nativeMode === 'register') {
@@ -142,7 +142,7 @@ nativeForm.onsubmit = async event => {
             if (result.requires_activation) {
                 nativeForm.reset()
                 nativeCompletion = true
-                nativeMessage('Аккаунт создан. Подтверди почту по ссылке из письма, затем войди в лаунчер.')
+                nativeMessage(Lang.native('Аккаунт создан. Подтверди почту по ссылке из письма, затем войди в лаунчер.'))
             } else {
                 await nativeEnterGame(value('nickname'), value('registerPassword'))
                 nativeSetBusy(false)
@@ -153,40 +153,40 @@ nativeForm.onsubmit = async event => {
             passwordChanged = true
             await nativeEnterGame(selected.username, value('newPassword'))
             nativeForm.reset()
-            nativeMessage('Пароль изменён. Ты снова в аккаунте — можно играть.')
+            nativeMessage(Lang.native('Пароль изменён. Ты снова в аккаунте — можно играть.'))
         } else if (nativeMode === 'skin') {
             const file = nativeField('textureFile').files[0]
-            if (!file || !selected) throw new Error('Выбери PNG-файл и игровой аккаунт.')
-            if (file.size > 2 * 1024 * 1024) throw new Error('Нужен PNG-файл размером до 2 МБ.')
+            if (!file || !selected) throw new Error(Lang.native('Выбери PNG-файл и игровой аккаунт.'))
+            if (file.size > 2 * 1024 * 1024) throw new Error(Lang.native('Нужен PNG-файл размером до 2 МБ.'))
             const bytes = Buffer.from(await file.arrayBuffer())
             require('./assets/js/accountapi').validateSkinBytes(bytes)
-            const image = await createImageBitmap(file).catch(() => { throw new Error('Не удалось прочитать PNG-файл. Выбери другой скин.') })
+            const image = await createImageBitmap(file).catch(() => { throw new Error(Lang.native('Не удалось прочитать PNG-файл. Выбери другой скин.')) })
             let model
             try { model = NativeSkinPreview.prepareSkin(image, document.createElement('canvas')) }
             finally { image.close() }
             await NativeAccountAPI.upload({ uuid: selected.uuid, accessToken: selected.accessToken, type: 'skin', model, bytes })
             await nativePreviewFile(file)
             nativeField('textureFile').value = ''
-            nativeMessage('Скин обновлён. Перезайди на сервер, чтобы увидеть новый образ.')
+            nativeMessage(Lang.native('Скин обновлён. Перезайди на сервер, чтобы увидеть новый образ.'))
             updateSelectedAccount(selected)
         } else if (nativeResetConfirm) {
             let token = value('resetToken').trim()
             try { token = new URL(token).searchParams.get('token') || token } catch { /* A raw token is also supported. */ }
-            if (!token) throw new Error('Вставь ссылку или код из письма.')
+            if (!token) throw new Error(Lang.native('Вставь ссылку или код из письма.'))
             await NativeAccountAPI.resetConfirm(token, value('resetPassword'))
             nativeForm.reset()
             nativeCompletion = true
-            nativeMessage('Пароль изменён. Вернись ко входу и используй новый пароль.')
+            nativeMessage(Lang.native('Пароль изменён. Вернись ко входу и используй новый пароль.'))
         } else {
             await NativeAccountAPI.resetRequest(value('resetEmail').trim())
-            nativeMessage('Запрос принят. Если сброс доступен, письмо придёт на указанную почту.')
+            nativeMessage(Lang.native('Запрос принят. Если сброс доступен, письмо придёт на указанную почту.'))
         }
     } catch (error) {
         if (accountCreated || passwordChanged) {
             nativeForm.reset()
             nativeCompletion = true
-            nativeMessage(accountCreated ? 'Аккаунт создан. Автоматический вход не удался — открой «Вход» и используй свой пароль.' : 'Пароль изменён. Войди в лаунчер заново с новым паролем.', true)
-        } else nativeMessage(error.message || error.desc || 'Не удалось выполнить действие. Попробуй ещё раз.', true)
+            nativeMessage(accountCreated ? Lang.native('Аккаунт создан. Автоматический вход не удался — открой «Вход» и используй свой пароль.') : Lang.native('Пароль изменён. Войди в лаунчер заново с новым паролем.'), true)
+        } else nativeMessage(error.message || error.desc || Lang.native('Не удалось выполнить действие. Попробуй ещё раз.'), true)
         if (nativeCaptchaId && !accountCreated && !passwordChanged) await nativeRefreshCaptcha().catch(() => {})
     } finally {
         if (nativeMode === 'skin') nativeField('textureFile').value = ''
@@ -199,7 +199,7 @@ async function nativePreviewFile(file) {
         const skin = document.createElement('canvas')
         const model = NativeSkinPreview.prepareSkin(image, skin)
         NativeSkinPreview.drawSkin(document.getElementById('nativeSkinPreview').getContext('2d'), skin, model)
-        document.getElementById('nativePreviewHint').textContent = 'Твой текущий скин'
+        document.getElementById('nativePreviewHint').textContent = Lang.native('Твой текущий скин')
     } finally { image.close() }
 }
 async function nativePreview(source) {

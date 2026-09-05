@@ -19,6 +19,21 @@ let startupUpdate
 // Setup Lang
 LangLoader.setupLanguage()
 
+// NBT's compiler runs in the main process: eval is deliberately disabled in the UI.
+ipcMain.on('ensurePublicServer', (event, { gameDir, name, address }) => {
+    try {
+        require('./app/assets/js/serverlist').ensureServer(gameDir, name, address)
+        event.returnValue = { ok: true }
+    } catch {
+        event.returnValue = { ok: false }
+    }
+})
+
+ipcMain.handle('setLauncherLanguage', (_event, language) => {
+    LangLoader.setPreference(language)
+    LangLoader.setupLanguage()
+})
+
 // Setup auto updater.
 function initAutoUpdater(event, data) {
     if (updaterInitialized) return
@@ -240,6 +255,7 @@ ipcMain.on(MSFT_OPCODE.OPEN_LOGOUT, (ipcEvent, uuid, isLastAccount) => {
 let win
 
 function createWindow() {
+    LangLoader.setupLanguage()
 
     win = new BrowserWindow({
         width: 1100,
@@ -260,6 +276,8 @@ function createWindow() {
     const data = {
         launcherVersion: app.getVersion(),
         bkid: Math.floor((Math.random() * fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'backgrounds')).length)),
+        native: (str) => LangLoader.native(str),
+        language: () => LangLoader.getLanguage().replace('_', '-'),
         lang: (str, placeHolders) => LangLoader.queryEJS(str, placeHolders)
     }
     Object.entries(data).forEach(([key, val]) => ejse.data(key, val))

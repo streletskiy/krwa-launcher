@@ -3,7 +3,7 @@ title = "KRWA Launcher"
 
 [ejs.welcome]
 welcomeHeader = "ДОБРО ПОЖАЛОВАТЬ НА KRWA"
-welcomeDescription = "Лаунчер сам установит Minecraft 26.2, Fabric, Create Fly и все нужные дополнения. Аккаунт, игровой ник, скин и плащ хранятся на нашем сервере."
+welcomeDescription = "Minecraft, Create и твой аккаунт — в одном лаунчере."
 welcomeDescCTA = "Войдите один раз — дальше достаточно нажать «Играть»."
 continueButton = "ВОЙТИ"
 
@@ -27,7 +27,7 @@ loginButtonText = "ВОЙТИ"
 loginNeedAccountLink = "https://mc.krwa.ru/register"
 loginNeedAccountText = "Создать аккаунт"
 loginPasswordDisclaimer1 = "Пароль передаётся только нашему серверу авторизации и не сохраняется в лаунчере."
-loginPasswordDisclaimer2 = "Для локального теста используется HTTP; перед публичным запуском будет включён HTTPS."
+loginPasswordDisclaimer2 = "Один аккаунт для сайта и лаунчера."
 
 [ejs.landing]
 updateAvailableTooltip = "Доступно обновление"
@@ -161,7 +161,7 @@ desc = "Произошла неизвестная ошибка. Подробно
 invalidTitle = "Не удалось войти"
 invalidDesc = "Неверный логин или пароль. Проверьте данные аккаунта KRWA."
 unreachableTitle = "Сервис авторизации недоступен"
-unreachableDesc = "Не удалось связаться с сервером KRWA. Для локального теста устройство должно быть в той же сети."
+unreachableDesc = "Не удалось связаться с KRWA. Проверь подключение и повтори попытку."
 noProfileTitle = "Нет игрового профиля"
 noProfileDesc = "Откройте сайт аккаунтов KRWA, создайте игровой профиль и выберите ник, затем повторите вход."
 
@@ -308,7 +308,7 @@ okButton = "ОК"
 
 [js.uibinder.startup]
 fatalErrorTitle = "Не удалось загрузить сборку"
-fatalErrorMessage = "Лаунчер не получил manifest с сервера KRWA. Проверьте подключение к локальной сети и повторите запуск."
+fatalErrorMessage = "Не удалось загрузить сборку KRWA. Проверь подключение и повтори запуск."
 closeButton = "Закрыть"
 
 [js.uibinder.validateAccount]

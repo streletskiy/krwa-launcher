@@ -1,7 +1,7 @@
 <div id="landingContainer" style="display: none;">
     <div id="upper">
         <div id="left">
-            <button id="image_seal_container" aria-label="KRWA — обновления лаунчера">
+            <button id="image_seal_container" aria-label="<%= native('KRWA — обновления лаунчера') %>">
                 <img id="image_seal" src="assets/images/krwa-wordmark.png" alt="KRWA">
                 <span id="updateAvailableTooltip"><%- lang('landing.updateAvailableTooltip') %></span>
             </button>
@@ -9,28 +9,28 @@
         </div>
         <div id="user_content">
             <span id="user_text"><%- lang('landing.usernamePlaceholder') %></span>
-            <div id="avatarContainer"><button id="avatarOverlay" aria-label="Настройки аккаунта"><%- lang('landing.usernameEditButton') %></button></div>
+            <div id="avatarContainer"><button id="avatarOverlay" aria-label="<%= native('Настройки аккаунта') %>"><%- lang('landing.usernameEditButton') %></button></div>
         </div>
     </div>
     <div id="lower">
         <div id="left" hidden></div>
         <div id="center" hidden><div id="content"><button id="newsButton" tabindex="-1"><span id="newsButtonAlert"></span><span id="newsButtonText"></span><svg id="newsButtonSVG"></svg></button></div></div>
         <div id="right">
-            <div class="krwa-server-label">СЕРВЕР</div>
+            <div class="krwa-server-label"><%= native("СЕРВЕР") %></div>
             <div class="krwa-server-row">
                 <img class="krwa-server-icon" src="assets/images/SealCircle.png" alt="">
-                <button id="server_selection_button" aria-label="Выбрать сервер"><%- lang('landing.launchButtonPlaceholder') %></button>
-                <div id="server_status_wrapper" role="status"><span id="landingPlayerLabel"></span><span id="player_count">Проверяем…</span></div>
+                <button id="server_selection_button" aria-label="<%= native('Выбрать сервер') %>"><%- lang('landing.launchButtonPlaceholder') %></button>
+                <div id="server_status_wrapper" role="status"><span id="landingPlayerLabel"></span><span id="player_count"><%= native("Проверяем…") %></span></div>
             </div>
             <div id="launch_content"><button id="launch_button"><%- lang('landing.launchButton') %></button></div>
-            <div class="krwa-ready">Всё для приключения — в одном месте.</div>
+            <div class="krwa-ready"><%= native("Всё для приключения — в одном месте.") %></div>
             <div id="launch_details" role="status" aria-live="polite">
                 <div id="launch_details_left"><span id="launch_progress_label">0%</span></div>
-                <div id="launch_details_right"><progress id="launch_progress" value="0" max="100" aria-label="Подготовка игры"></progress><span id="launch_details_text"><%- lang('landing.launchDetails') %></span></div>
+                <div id="launch_details_right"><progress id="launch_progress" value="0" max="100" aria-label="<%= native('Подготовка игры') %>"></progress><span id="launch_details_text"><%- lang('landing.launchDetails') %></span></div>
             </div>
         </div>
     </div>
-    <button id="settingsMediaButton" aria-label="Настройки" title="Настройки"><span class="krwa-icon icon-settings" aria-hidden="true"></span></button>
+    <button id="settingsMediaButton" aria-label="<%= native('Настройки') %>" title="<%= native('Настройки') %>"><span class="krwa-icon icon-settings" aria-hidden="true"></span></button>
     <span class="krwa-version">KRWA Launcher <%= launcherVersion %></span>
     <div hidden><span id="mojang_status_icon"></span><div id="mojangStatusEssentialContainer"></div><div id="mojangStatusNonEssentialContainer"></div></div>
     <div id="newsContainer">

@@ -250,3 +250,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 @media (max-width: 1000px) { #landingContainer > #lower { padding: 20px; width: 53%; } .krwa-server-row { padding: 0 10px; gap: 9px; } #server_selection_button { font-size: 14px; } #launch_button { height: 72px; font-size: 27px; } }
 @media (max-height: 620px) { #landingContainer > #upper > #left { top: 3%; width: 40%; } #landingContainer > #lower { bottom: 8%; padding: 17px; } #launch_button { height: 64px; } #loginForm { padding: 18px 26px; } #loginImageSeal { width: 215px; margin-bottom: 4px; } .krwa-auth-tabs { margin-bottom: 18px; } #loginSubheader { margin-bottom: 4px; } #loginDisclaimer { margin-top: 8px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+#launcherLanguage { position: fixed; z-index: 100; top: 54px; right: 24px; width: auto; max-width: 175px; padding: 7px 28px 7px 12px; border: 1px solid #ffffff35; border-radius: 9px; color: #f5f1e5; background: #172c32; font: inherit; font-size: 12px; -webkit-app-region: no-drag; }
+#launcherLanguage:disabled { opacity: .55; }
+#launch_button:disabled { cursor: default; }

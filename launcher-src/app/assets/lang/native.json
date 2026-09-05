@@ -1,0 +1,402 @@
+{
+  "4–16 букв, цифр или _. Ник нельзя изменить.": {
+    "en_US": "4–16 letters, digits or _. The nickname is permanent.",
+    "pl_PL": "4–16 liter, cyfr lub _. Nick jest stały."
+  },
+  "KRWA — обновления лаунчера": {
+    "en_US": "KRWA launcher updates",
+    "pl_PL": "Aktualizacje launchera KRWA"
+  },
+  "Minecraft-ник": {
+    "en_US": "Minecraft nickname",
+    "pl_PL": "Nick w Minecraft"
+  },
+  "PNG до 2 МБ. Новый скин сразу заменит текущий. Модель рук определится автоматически.": {
+    "en_US": "PNG up to 2 MB. Replaces your current skin; arm model is detected automatically.",
+    "pl_PL": "PNG do 2 MB. Zastępuje obecny skin; model ramion jest wykrywany automatycznie."
+  },
+  "PNG-файл": {
+    "en_US": "PNG file",
+    "pl_PL": "Plik PNG"
+  },
+  "Аккаунт создан. Автоматический вход не удался — открой «Вход» и используй свой пароль.": {
+    "en_US": "Account created. Automatic sign-in failed; sign in with your password.",
+    "pl_PL": "Konto utworzone. Automatyczne logowanie nie powiodło się; zaloguj się hasłem."
+  },
+  "Аккаунт создан. Подтверди почту по ссылке из письма, затем войди в лаунчер.": {
+    "en_US": "Account created. Verify your email, then sign in to the launcher.",
+    "pl_PL": "Konto utworzone. Potwierdź adres e-mail, a potem zaloguj się w launcherze."
+  },
+  "Введи текущий пароль аккаунта.": {
+    "en_US": "Enter your current password.",
+    "pl_PL": "Wpisz obecne hasło."
+  },
+  "Вернёмся в игру": {
+    "en_US": "Back to the game",
+    "pl_PL": "Wracamy do gry"
+  },
+  "Восстанови доступ к своему аккаунту KRWA.": {
+    "en_US": "Recover access to your KRWA account.",
+    "pl_PL": "Odzyskaj dostęp do konta KRWA."
+  },
+  "Вставь ссылку или код из письма.": {
+    "en_US": "Paste the link or code from your email.",
+    "pl_PL": "Wklej link lub kod z wiadomości."
+  },
+  "Вставь ссылку целиком или код": {
+    "en_US": "Paste the full link or code",
+    "pl_PL": "Wklej cały link lub kod"
+  },
+  "Всё готово для твоей следующей игры.": {
+    "en_US": "Ready for your next adventure.",
+    "pl_PL": "Wszystko gotowe na kolejną przygodę."
+  },
+  "Всё для приключения — в одном месте.": {
+    "en_US": "Your next adventure starts here.",
+    "pl_PL": "Tutaj zaczyna się Twoja przygoda."
+  },
+  "Вход": {
+    "en_US": "Sign in",
+    "pl_PL": "Logowanie"
+  },
+  "Выбери PNG-файл и игровой аккаунт.": {
+    "en_US": "Choose a PNG file and game account.",
+    "pl_PL": "Wybierz plik PNG i konto gracza."
+  },
+  "Выбери игровой аккаунт.": {
+    "en_US": "Select a game account.",
+    "pl_PL": "Wybierz konto gracza."
+  },
+  "Выбери ник, зарегистрируйся и сразу переходи к игре.": {
+    "en_US": "Choose a nickname, create your account and play.",
+    "pl_PL": "Wybierz nick, utwórz konto i graj."
+  },
+  "Выбери скин для предпросмотра": {
+    "en_US": "Choose a skin to preview",
+    "pl_PL": "Wybierz skin do podglądu"
+  },
+  "Выбрать сервер": {
+    "en_US": "Select server",
+    "pl_PL": "Wybierz serwer"
+  },
+  "Готово. Перезапускаем лаунчер…": {
+    "en_US": "Ready. Restarting the launcher…",
+    "pl_PL": "Gotowe. Ponowne uruchamianie launchera…"
+  },
+  "Для восстановления доступа": {
+    "en_US": "For account recovery",
+    "pl_PL": "Do odzyskiwania konta"
+  },
+  "Другие сеансы завершатся. Этот лаунчер войдёт заново автоматически.": {
+    "en_US": "This launcher will sign in again automatically.",
+    "pl_PL": "Launcher zaloguje się ponownie automatycznie."
+  },
+  "Ещё раз": {
+    "en_US": "Repeat password",
+    "pl_PL": "Powtórz hasło"
+  },
+  "Загрузи PNG — скин сразу применится. Ник персонажа изменить нельзя.": {
+    "en_US": "Upload a PNG to apply your skin. Your nickname is permanent.",
+    "pl_PL": "Prześlij PNG, aby zmienić skin. Nick jest stały."
+  },
+  "Загрузить скин": {
+    "en_US": "Upload skin",
+    "pl_PL": "Prześlij skin"
+  },
+  "Запрос принят. Если сброс доступен, письмо придёт на указанную почту.": {
+    "en_US": "Request received. If recovery is available, check your inbox.",
+    "pl_PL": "Żądanie przyjęte. Jeśli odzyskiwanie jest dostępne, sprawdź pocztę."
+  },
+  "Защити свой аккаунт. Пароль не сохраняется в лаунчере.": {
+    "en_US": "Protect your account. The launcher does not store your password.",
+    "pl_PL": "Chroń swoje konto. Launcher nie zapisuje hasła."
+  },
+  "Изменить пароль": {
+    "en_US": "Change password",
+    "pl_PL": "Zmień hasło"
+  },
+  "Код проверки": {
+    "en_US": "Verification code",
+    "pl_PL": "Kod weryfikacyjny"
+  },
+  "Код с картинки": {
+    "en_US": "Code from the image",
+    "pl_PL": "Kod z obrazka"
+  },
+  "Логин или почта": {
+    "en_US": "Username or email",
+    "pl_PL": "Login lub e-mail"
+  },
+  "Назад": {
+    "en_US": "Back",
+    "pl_PL": "Wstecz"
+  },
+  "Настройки": {
+    "en_US": "Settings",
+    "pl_PL": "Ustawienia"
+  },
+  "Настройки аккаунта": {
+    "en_US": "Account settings",
+    "pl_PL": "Ustawienia konta"
+  },
+  "Не удалось выполнить действие. Попробуй ещё раз.": {
+    "en_US": "Could not complete the action. Please retry.",
+    "pl_PL": "Nie udało się wykonać działania. Spróbuj ponownie."
+  },
+  "Не удалось загрузить код проверки.": {
+    "en_US": "Could not load the verification code.",
+    "pl_PL": "Nie udało się załadować kodu weryfikacyjnego."
+  },
+  "Не удалось подтвердить аккаунт. Попробуй войти ещё раз.": {
+    "en_US": "Could not verify the account. Sign in again.",
+    "pl_PL": "Nie udało się zweryfikować konta. Zaloguj się ponownie."
+  },
+  "Не удалось прочитать PNG-файл. Выбери другой скин.": {
+    "en_US": "Could not read the PNG. Choose another skin.",
+    "pl_PL": "Nie udało się odczytać PNG. Wybierz inny skin."
+  },
+  "Не удалось связаться с KRWA. Проверь подключение и попробуй ещё раз.": {
+    "en_US": "Could not reach KRWA. Check your connection and retry.",
+    "pl_PL": "Brak połączenia z KRWA. Sprawdź połączenie i spróbuj ponownie."
+  },
+  "Неверный пароль или срок входа истёк. Войди в аккаунт ещё раз.": {
+    "en_US": "Wrong password or expired sign-in. Sign in again.",
+    "pl_PL": "Błędne hasło lub wygasłe logowanie. Zaloguj się ponownie."
+  },
+  "Ник: от 4 до 16 латинских букв, цифр или _.": {
+    "en_US": "Nickname: 4–16 Latin letters, digits or _.",
+    "pl_PL": "Nick: 4–16 liter łacińskich, cyfr lub _."
+  },
+  "Новый пароль": {
+    "en_US": "New password",
+    "pl_PL": "Nowe hasło"
+  },
+  "Нужен PNG-файл размером до 2 МБ.": {
+    "en_US": "Choose a PNG file up to 2 MB.",
+    "pl_PL": "Wybierz plik PNG do 2 MB."
+  },
+  "Нужен скин Minecraft: 64 × 64, 64 × 32 или их HD-вариант до 4096 × 4096.": {
+    "en_US": "Use a 64 × 64, 64 × 32 or scaled HD Minecraft skin up to 4096 × 4096.",
+    "pl_PL": "Użyj skina Minecraft 64 × 64, 64 × 32 lub wersji HD do 4096 × 4096."
+  },
+  "Нужен скин Minecraft: 64 × 64, 64 × 32 или их HD-вариант.": {
+    "en_US": "Use a 64 × 64, 64 × 32 or scaled HD Minecraft skin.",
+    "pl_PL": "Użyj skina Minecraft 64 × 64, 64 × 32 lub wersji HD."
+  },
+  "Обновить код": {
+    "en_US": "Refresh code",
+    "pl_PL": "Odśwież kod"
+  },
+  "Обновление лаунчера": {
+    "en_US": "Launcher update",
+    "pl_PL": "Aktualizacja launchera"
+  },
+  "Обновляем лаунчер": {
+    "en_US": "Updating launcher",
+    "pl_PL": "Aktualizowanie launchera"
+  },
+  "Один аккаунт для всех серверов KRWA": {
+    "en_US": "One account for every KRWA server",
+    "pl_PL": "Jedno konto na wszystkie serwery KRWA"
+  },
+  "От 8 символов": {
+    "en_US": "At least 8 characters",
+    "pl_PL": "Co najmniej 8 znaków"
+  },
+  "Отправить новое письмо": {
+    "en_US": "Send another email",
+    "pl_PL": "Wyślij nową wiadomość"
+  },
+  "Отправить письмо": {
+    "en_US": "Send email",
+    "pl_PL": "Wyślij wiadomość"
+  },
+  "Пароли не совпадают.": {
+    "en_US": "Passwords do not match.",
+    "pl_PL": "Hasła nie są takie same."
+  },
+  "Пароль": {
+    "en_US": "Password",
+    "pl_PL": "Hasło"
+  },
+  "Пароль должен содержать от 8 до 128 символов.": {
+    "en_US": "Password must contain 8–128 characters.",
+    "pl_PL": "Hasło musi zawierać 8–128 znaków."
+  },
+  "Пароль изменён. Вернись ко входу и используй новый пароль.": {
+    "en_US": "Password changed. Sign in with your new password.",
+    "pl_PL": "Hasło zmienione. Zaloguj się nowym hasłem."
+  },
+  "Пароль изменён. Войди в лаунчер заново с новым паролем.": {
+    "en_US": "Password changed. Sign in to the launcher with your new password.",
+    "pl_PL": "Hasło zmienione. Zaloguj się w launcherze nowym hasłem."
+  },
+  "Пароль изменён. Ты снова в аккаунте — можно играть.": {
+    "en_US": "Password changed. You are signed in and ready to play.",
+    "pl_PL": "Hasło zmienione. Jesteś zalogowany i możesz grać."
+  },
+  "Перейти ко входу": {
+    "en_US": "Go to sign in",
+    "pl_PL": "Przejdź do logowania"
+  },
+  "Персонаж и скин": {
+    "en_US": "Character and skin",
+    "pl_PL": "Postać i skin"
+  },
+  "Повтори новый пароль": {
+    "en_US": "Repeat new password",
+    "pl_PL": "Powtórz nowe hasło"
+  },
+  "Повтори пароль": {
+    "en_US": "Repeat password",
+    "pl_PL": "Powtórz hasło"
+  },
+  "Подготовка игры": {
+    "en_US": "Preparing game",
+    "pl_PL": "Przygotowywanie gry"
+  },
+  "Подожди немного…": {
+    "en_US": "Please wait…",
+    "pl_PL": "Poczekaj chwilę…"
+  },
+  "Показать пароль": {
+    "en_US": "Show password",
+    "pl_PL": "Pokaż hasło"
+  },
+  "Почта": {
+    "en_US": "Email",
+    "pl_PL": "E-mail"
+  },
+  "Почта аккаунта": {
+    "en_US": "Account email",
+    "pl_PL": "Adres e-mail konta"
+  },
+  "Предпросмотр персонажа": {
+    "en_US": "Character preview",
+    "pl_PL": "Podgląd postaci"
+  },
+  "Прими правила и политику конфиденциальности.": {
+    "en_US": "Accept the rules and privacy policy.",
+    "pl_PL": "Zaakceptuj regulamin i politykę prywatności."
+  },
+  "Пришлём письмо для восстановления, если для аккаунта доступен сброс по почте.": {
+    "en_US": "We will send a recovery email if email recovery is available.",
+    "pl_PL": "Wyślemy wiadomość, jeśli odzyskiwanie przez e-mail jest dostępne."
+  },
+  "Проверь код с картинки. Если он устарел, обнови картинку.": {
+    "en_US": "Check the image code. Refresh it if it has expired.",
+    "pl_PL": "Sprawdź kod z obrazka. Odśwież go, jeśli wygasł."
+  },
+  "Проверяем обновления лаунчера…": {
+    "en_US": "Checking launcher updates…",
+    "pl_PL": "Sprawdzanie aktualizacji launchera…"
+  },
+  "Проверяем…": {
+    "en_US": "Checking…",
+    "pl_PL": "Sprawdzanie…"
+  },
+  "Регистрация": {
+    "en_US": "Register",
+    "pl_PL": "Rejestracja"
+  },
+  "СЕРВЕР": {
+    "en_US": "SERVER",
+    "pl_PL": "SERWER"
+  },
+  "Сервис временно недоступен. Попробуй ещё раз.": {
+    "en_US": "Service temporarily unavailable. Please retry.",
+    "pl_PL": "Usługa chwilowo niedostępna. Spróbuj ponownie."
+  },
+  "Скин": {
+    "en_US": "Skin",
+    "pl_PL": "Skin"
+  },
+  "Скин обновлён. Перезайди на сервер, чтобы увидеть новый образ.": {
+    "en_US": "Skin updated. Rejoin the server to see your new look.",
+    "pl_PL": "Skin zmieniony. Połącz się ponownie z serwerem, aby go zobaczyć."
+  },
+  "Скрыть пароль": {
+    "en_US": "Hide password",
+    "pl_PL": "Ukryj hasło"
+  },
+  "Слишком много попыток. Подожди немного и повтори.": {
+    "en_US": "Too many attempts. Wait a moment and retry.",
+    "pl_PL": "Zbyt wiele prób. Poczekaj chwilę i spróbuj ponownie."
+  },
+  "Сначала войди в аккаунт.": {
+    "en_US": "Sign in first.",
+    "pl_PL": "Najpierw się zaloguj."
+  },
+  "Создай свой аккаунт": {
+    "en_US": "Create your account",
+    "pl_PL": "Utwórz swoje konto"
+  },
+  "Создать аккаунт и войти": {
+    "en_US": "Create account and sign in",
+    "pl_PL": "Utwórz konto i zaloguj się"
+  },
+  "Сохранить новый пароль": {
+    "en_US": "Save new password",
+    "pl_PL": "Zapisz nowe hasło"
+  },
+  "Сохранить пароль": {
+    "en_US": "Save password",
+    "pl_PL": "Zapisz hasło"
+  },
+  "Ссылка или код из письма": {
+    "en_US": "Link or code from email",
+    "pl_PL": "Link lub kod z wiadomości"
+  },
+  "Твой аккаунт": {
+    "en_US": "Your account",
+    "pl_PL": "Twoje konto"
+  },
+  "Твой ник в игре": {
+    "en_US": "Your game nickname",
+    "pl_PL": "Twój nick w grze"
+  },
+  "Твой скин": {
+    "en_US": "Your skin",
+    "pl_PL": "Twój skin"
+  },
+  "Твой текущий скин": {
+    "en_US": "Your current skin",
+    "pl_PL": "Twój obecny skin"
+  },
+  "Текущий пароль": {
+    "en_US": "Current password",
+    "pl_PL": "Obecne hasło"
+  },
+  "У меня уже есть ссылка из письма": {
+    "en_US": "I already have a recovery link",
+    "pl_PL": "Mam już link do odzyskiwania"
+  },
+  "Укажи корректную почту.": {
+    "en_US": "Enter a valid email address.",
+    "pl_PL": "Podaj prawidłowy adres e-mail."
+  },
+  "Эта почта уже зарегистрирована. Попробуй войти.": {
+    "en_US": "This email is already registered. Try signing in.",
+    "pl_PL": "Ten e-mail jest już zarejestrowany. Spróbuj się zalogować."
+  },
+  "Этот ник уже занят. Выбери другой.": {
+    "en_US": "This nickname is taken. Choose another.",
+    "pl_PL": "Ten nick jest zajęty. Wybierz inny."
+  },
+  "Я принимаю": {
+    "en_US": "I accept the",
+    "pl_PL": "Akceptuję"
+  },
+  "и": {
+    "en_US": "and",
+    "pl_PL": "i"
+  },
+  "политику конфиденциальности": {
+    "en_US": "privacy policy",
+    "pl_PL": "politykę prywatności"
+  },
+  "правила": {
+    "en_US": "rules",
+    "pl_PL": "regulamin"
+  }
+}

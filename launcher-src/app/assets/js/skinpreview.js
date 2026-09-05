@@ -1,8 +1,9 @@
+const Lang = require('./langloader')
 const { inferModelType, loadSkinToCanvas } = require('skinview-utils')
 
 // Normalize legacy skins before drawing, including their mirrored limbs and hat transparency.
 exports.prepareSkin = (image, canvas) => {
-    if (image.width < 64 || image.width % 64 || ![image.width, image.width / 2].includes(image.height)) throw new Error('Нужен скин Minecraft: 64 × 64, 64 × 32 или их HD-вариант.')
+    if (image.width < 64 || image.width % 64 || ![image.width, image.width / 2].includes(image.height)) throw new Error(Lang.native('Нужен скин Minecraft: 64 × 64, 64 × 32 или их HD-вариант.'))
     loadSkinToCanvas(canvas, image)
     return image.height * 2 === image.width ? 'default' : inferModelType(canvas)
 }

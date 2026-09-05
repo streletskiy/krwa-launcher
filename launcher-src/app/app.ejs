@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="<%= language() %>" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-In6B8teKZQll5heMl9bS7CESTbGvuAt3VVV86BUQBDk='"/>
     <title><%= lang('app.title') %></title>
@@ -30,6 +30,12 @@
 </head>
 <body bkid="0">
     <%- include('frame') %>
+    <select id="launcherLanguage" aria-label="Language / Язык / Język">
+        <option value="auto"><%= lang('app.autoLanguage') %></option>
+        <option value="ru_RU">Русский</option>
+        <option value="en_US">English</option>
+        <option value="pl_PL">Polski</option>
+    </select>
     <div id="main">
         <%- include('welcome') %>
         <%- include('login') %>
@@ -46,11 +52,12 @@
                 <img id="loadCenterImage" src="assets/images/krwa-wordmark.png" alt="KRWA">
             </div>
             <div id="launcherUpdateStatus" hidden role="status" aria-live="polite">
-                <p id="launcherUpdateMessage">Проверяем обновления лаунчера…</p>
-                <progress id="launcherUpdateProgress" max="100" aria-label="Обновление лаунчера"></progress>
+                <p id="launcherUpdateMessage"><%= native("Проверяем обновления лаунчера…") %></p>
+                <progress id="launcherUpdateProgress" max="100" aria-label="<%= native('Обновление лаунчера') %>"></progress>
                 <p id="launcherUpdateDetail"></p>
             </div>
         </div>
     </div>
+    <script src="./assets/js/scripts/language.js"></script>
 </body>
 </html>

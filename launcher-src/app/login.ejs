@@ -9,17 +9,17 @@
         <form id="loginForm">
             <img id="loginImageSeal" src="assets/images/krwa-wordmark.png" alt="KRWA"/>
             <span id="loginSubheader"><%- lang('login.loginSubheader') %></span>
-            <div class="krwa-auth-tabs"><span>Вход</span><a href="<%- lang('login.loginNeedAccountLink') %>">Регистрация</a></div>
+            <div class="krwa-auth-tabs"><span><%= native("Вход") %></span><a href="<%- lang('login.loginNeedAccountLink') %>"><%= native("Регистрация") %></a></div>
             <div class="loginFieldContainer">
                 <span class="loginSVG krwa-icon icon-mail" aria-hidden="true"></span>
                 <span class="loginErrorSpan" id="loginEmailError"><%- lang('login.loginEmailError') %></span>
-                <input id="loginUsername" aria-label="Логин или почта" autocomplete="username" class="loginField" type="text" placeholder="<%- lang('login.loginEmailPlaceholder') %>"/>
+                <input id="loginUsername" aria-label="<%= native('Логин или почта') %>" autocomplete="username" class="loginField" type="text" placeholder="<%- lang('login.loginEmailPlaceholder') %>"/>
             </div>
             <div class="loginFieldContainer">
                 <span class="loginSVG krwa-icon icon-lock" aria-hidden="true"></span>
                 <span class="loginErrorSpan" id="loginPasswordError"><%- lang('login.loginPasswordError') %></span>
-                <input id="loginPassword" aria-label="Пароль" autocomplete="current-password" class="loginField" type="password" placeholder="<%- lang('login.loginPasswordPlaceholder') %>"/>
-                <button id="loginPasswordToggle" type="button" aria-label="Показать пароль" aria-pressed="false"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button>
+                <input id="loginPassword" aria-label="<%= native('Пароль') %>" autocomplete="current-password" class="loginField" type="password" placeholder="<%- lang('login.loginPasswordPlaceholder') %>"/>
+                <button id="loginPasswordToggle" type="button" aria-label="<%= native('Показать пароль') %>" aria-pressed="false"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button>
             </div>
             <div id="loginOptions">
                 <span class="loginSpanDim">

@@ -7,7 +7,7 @@
       "name": "KRWA Create",
       "description": "Create Fly и совместимые аддоны на Fabric 26.2",
       "icon": "https://mc.krwa.ru/servers/krwa-26.2/krwa.png",
-      "version": "0.1.4-local",
+      "version": "0.1.5",
       "address": "create.krwa.ru:25565",
       "minecraftVersion": "26.2",
       "mainServer": true,
@@ -115,6 +115,20 @@
           }
         },
         {
+          "id": "dev.isxander:controlify:3.5.0+mc26.2@jar",
+          "name": "Controlify",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 6418760,
+            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/optionaloff/controlify-3.5.0+mc26.2-universal.jar",
+            "MD5": "45946f60cf12b79120971b75348ceb37"
+          },
+          "required": {
+            "value": false,
+            "def": false
+          }
+        },
+        {
           "id": "com.copycatsplus:copycats:3.0.7-createfly+mc.26.2@jar",
           "name": "Create: Copycats+ (CreateFly Port)",
           "type": "FabricMod",
@@ -210,8 +224,11 @@
           "type": "FabricMod",
           "artifact": {
             "size": 1456192,
-            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/required/InventoryProfilesNext-fabric-26.2-2.3.7.jar",
+            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/optionalon/InventoryProfilesNext-fabric-26.2-2.3.7.jar",
             "MD5": "059e3c88fce3565cab4ec845c04431cf"
+          },
+          "required": {
+            "value": false
           }
         },
         {
@@ -220,8 +237,11 @@
           "type": "FabricMod",
           "artifact": {
             "size": 2820763,
-            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/required/iris-fabric-1.11.2+mc26.2.jar",
+            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/optionalon/iris-fabric-1.11.2+mc26.2.jar",
             "MD5": "11c0b0d99bf9d9cb55f9e35a2d6bb85f"
+          },
+          "required": {
+            "value": false
           }
         },
         {
@@ -230,8 +250,11 @@
           "type": "FabricMod",
           "artifact": {
             "size": 1043764,
-            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/required/Jade-mc26.2-Fabric-26.2.11.jar",
+            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/optionalon/Jade-mc26.2-Fabric-26.2.11.jar",
             "MD5": "63081e7c1cbf9a2a2f914a5aa32cc24a"
+          },
+          "required": {
+            "value": false
           }
         },
         {
@@ -300,8 +323,11 @@
           "type": "FabricMod",
           "artifact": {
             "size": 2221925,
-            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/required/xaerominimap-fabric-26.2-26.4.2.jar",
+            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/optionalon/xaerominimap-fabric-26.2-26.4.2.jar",
             "MD5": "ef7051b616d26eb3c355705fc7a8c1fd"
+          },
+          "required": {
+            "value": false
           }
         },
         {
@@ -310,8 +336,21 @@
           "type": "FabricMod",
           "artifact": {
             "size": 1477385,
-            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/required/xaeroworldmap-fabric-26.2-1.45.0.jar",
+            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/optionalon/xaeroworldmap-fabric-26.2-1.45.0.jar",
             "MD5": "71cb8a3b69158b8018615cdfa31541be"
+          },
+          "required": {
+            "value": false
+          }
+        },
+        {
+          "id": "dev.isxander.yacl3.platform:yet_another_config_lib_v3:3.9.6+26.2-fabric@jar",
+          "name": "YetAnotherConfigLib",
+          "type": "FabricMod",
+          "artifact": {
+            "size": 1121529,
+            "url": "https://mc.krwa.ru/servers/krwa-26.2/fabricmods/required/yet_another_config_lib_v3-3.9.6+26.2-fabric.jar",
+            "MD5": "aa3702995f44bd6de2f46e912c0f424d"
           }
         },
         {

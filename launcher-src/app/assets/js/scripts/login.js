@@ -23,7 +23,7 @@ loginPasswordToggle.addEventListener('click', () => {
     const visible = loginPassword.type === 'password'
     loginPassword.type = visible ? 'text' : 'password'
     loginPasswordToggle.setAttribute('aria-pressed', String(visible))
-    loginPasswordToggle.setAttribute('aria-label', visible ? 'Скрыть пароль' : 'Показать пароль')
+    loginPasswordToggle.setAttribute('aria-label', visible ? Lang.native('Скрыть пароль') : Lang.native('Показать пароль'))
 })
 
 // Control variables.
@@ -156,7 +156,7 @@ function formDisabled(v){
     if(v) {
         loginPassword.type = 'password'
         loginPasswordToggle.setAttribute('aria-pressed', 'false')
-        loginPasswordToggle.setAttribute('aria-label', 'Показать пароль')
+        loginPasswordToggle.setAttribute('aria-label', Lang.native('Показать пароль'))
     }
     if(v){
         checkmarkContainer.setAttribute('disabled', v)

@@ -1,0 +1,389 @@
+{
+  "en_US": {
+    "ejs": {
+      "app": {
+        "title": "KRWA Launcher",
+        "autoLanguage": "System language"
+      },
+      "welcome": {
+        "welcomeHeader": "WELCOME TO KRWA",
+        "welcomeDescription": "Minecraft, Create and your account in one launcher.",
+        "welcomeDescCTA": "Sign in, then press Play."
+      },
+      "login": {
+        "loginSubheader": "KRWA ACCOUNT",
+        "loginForgotPasswordLink": "https://mc.krwa.ru/reset-password",
+        "loginNeedAccountLink": "https://mc.krwa.ru/register",
+        "loginPasswordDisclaimer1": "Your password is sent securely to KRWA and never stored in the launcher.",
+        "loginPasswordDisclaimer2": "One account for the website and launcher."
+      },
+      "loginOptions": {
+        "loginOptionsTitle": "KRWA account",
+        "loginWithMojang": "Sign in to KRWA"
+      },
+      "settings": {
+        "mojangAccount": "KRWA",
+        "addMojangAccount": "+ Add KRWA account",
+        "memoryDesc": "6 GB recommended for this pack.",
+        "supportLink": "https://mc.krwa.ru/",
+        "sourceGithubLink": "https://github.com/dscalzi/HeliosLauncher"
+      },
+      "landing": {
+        "mediaGitHubURL": "https://github.com/dscalzi/HeliosLauncher",
+        "mediaXURL": "#",
+        "mediaInstagramURL": "#",
+        "mediaYouTubeURL": "#",
+        "mediaDiscordURL": "#"
+      }
+    },
+    "js": {
+      "auth": {
+        "custom": {
+          "invalidTitle": "Could not sign in",
+          "invalidDesc": "Check your KRWA username and password.",
+          "unreachableTitle": "KRWA unavailable",
+          "unreachableDesc": "Check your connection and try again.",
+          "noProfileTitle": "Character unavailable",
+          "noProfileDesc": "Contact the server administrator to restore your character."
+        }
+      },
+      "landing": {
+        "dlAsync": {
+          "unexpectedExit": "Minecraft exited with code {code}. Details: logs/latest.log in your instance."
+        },
+        "launch": {
+          "play": "PLAY",
+          "starting": "STARTING…",
+          "running": "GAME RUNNING",
+          "waitingWindow": "Minecraft is starting. The game window will appear shortly…",
+          "runningHint": "Minecraft is open. You can switch to the game window.",
+          "mods": "Loading mods…",
+          "resources": "Preparing textures and resources…",
+          "audio": "Starting audio…",
+          "connecting": "Connecting to the server…"
+        }
+      }
+    }
+  },
+  "ru_RU": {
+    "ejs": {
+      "app": {
+        "autoLanguage": "Язык системы",
+        "title": "KRWA Launcher"
+      }
+    },
+    "js": {
+      "landing": {
+        "launch": {
+          "play": "ИГРАТЬ",
+          "starting": "ЗАПУСКАЕМ…",
+          "running": "ИГРА ЗАПУЩЕНА",
+          "waitingWindow": "Minecraft запускается. Скоро появится окно игры…",
+          "runningHint": "Minecraft открыт. Можно перейти в окно игры.",
+          "mods": "Загружаем моды…",
+          "resources": "Подготавливаем текстуры и ресурсы…",
+          "audio": "Запускаем звук…",
+          "connecting": "Подключаемся к серверу…"
+        }
+      }
+    }
+  },
+  "pl_PL": {
+    "ejs": {
+      "app": {
+        "title": "KRWA Launcher",
+        "autoLanguage": "Język systemu"
+      },
+      "welcome": {
+        "welcomeHeader": "WITAJ W KRWA",
+        "welcomeDescription": "Minecraft, Create i Twoje konto w jednym launcherze.",
+        "welcomeDescCTA": "Zaloguj się i naciśnij Graj.",
+        "continueButton": "DALEJ"
+      },
+      "login": {
+        "loginSubheader": "KONTO KRWA",
+        "loginForgotPasswordLink": "https://mc.krwa.ru/reset-password",
+        "loginNeedAccountLink": "https://mc.krwa.ru/register",
+        "loginPasswordDisclaimer1": "Hasło jest bezpiecznie wysyłane do KRWA i nie jest zapisywane w launcherze.",
+        "loginPasswordDisclaimer2": "Jedno konto na stronie i w launcherze.",
+        "loginCancelText": "Wstecz",
+        "loginEmailError": "Nieprawidłowa wartość",
+        "loginEmailPlaceholder": "Login lub e-mail",
+        "loginPasswordError": "Pole wymagane",
+        "loginPasswordPlaceholder": "Hasło",
+        "loginForgotPasswordText": "Nie pamiętasz hasła?",
+        "loginRememberMeText": "Zapamiętaj mnie",
+        "loginButtonText": "ZALOGUJ SIĘ",
+        "loginNeedAccountText": "Utwórz konto"
+      },
+      "loginOptions": {
+        "loginOptionsTitle": "Konto KRWA",
+        "loginWithMojang": "Zaloguj się do KRWA",
+        "cancelButton": "Wstecz"
+      },
+      "settings": {
+        "mojangAccount": "KRWA",
+        "addMojangAccount": "+ Dodaj konto KRWA",
+        "memoryDesc": "Zalecane 6 GB dla tej paczki.",
+        "supportLink": "https://mc.krwa.ru/",
+        "sourceGithubLink": "https://github.com/dscalzi/HeliosLauncher",
+        "navHeaderText": "Ustawienia",
+        "navAccount": "Konto",
+        "navMinecraft": "Gra",
+        "navMods": "Mody",
+        "navJava": "Java",
+        "navLauncher": "Launcher",
+        "navAbout": "O programie",
+        "navUpdates": "Aktualizacje",
+        "navDone": "Gotowe",
+        "tabAccountHeaderText": "Konta KRWA",
+        "tabAccountHeaderDesc": "Dodawaj konta i zarządzaj nimi.",
+        "minecraftTabHeaderText": "Ustawienia gry",
+        "minecraftTabHeaderDesc": "Opcje uruchamiania Minecraft.",
+        "gameResolutionTitle": "Rozdzielczość gry",
+        "launchFullscreenTitle": "Uruchamiaj na pełnym ekranie.",
+        "autoConnectTitle": "Automatycznie łącz z serwerem po uruchomieniu.",
+        "launchDetachedTitle": "Uruchamiaj grę niezależnie od launchera.",
+        "launchDetachedDesc": "W przeciwnym razie zamknięcie launchera zamknie też grę.",
+        "tabModsHeaderText": "Ustawienia modów",
+        "tabModsHeaderDesc": "Włączaj i wyłączaj dodatkowe mody.",
+        "switchServerButton": "Zmień",
+        "requiredMods": "Wymagane mody",
+        "optionalMods": "Dodatkowe mody",
+        "dropinMods": "Własne mody",
+        "addMods": "Dodaj mody",
+        "dropinRefreshNote": "(F5 — odśwież)",
+        "shaderpacks": "Shadery",
+        "shaderpackDesc": "Wybierz efekty graficzne. Shadery mogą wymagać wydajniejszego komputera. Możesz też dodać własne.",
+        "selectShaderpack": "Wybierz shadery",
+        "shaderpackOff": "Wyłączone (domyślnie)",
+        "tabJavaHeaderText": "Ustawienia Java",
+        "tabJavaHeaderDesc": "Zaawansowane opcje Java.",
+        "memoryTitle": "Pamięć",
+        "maxRAM": "Maksymalna pamięć",
+        "minRAM": "Minimalna pamięć",
+        "memoryTotalTitle": "Łącznie",
+        "memoryAvailableTitle": "Dostępne",
+        "javaExecutableTitle": "Plik wykonywalny Java",
+        "javaExecSelDialogTitle": "Wybierz plik Java",
+        "javaExecSelButtonText": "Wybierz plik",
+        "javaExecDesc": "Wersja Java jest sprawdzana przed uruchomieniem gry.",
+        "javaPathDesc": "Ścieżka powinna kończyć się na <strong>{pathSuffix}</strong>.",
+        "jvmOptsTitle": "Dodatkowe opcje JVM",
+        "jvmOptsDesc": "Dodatkowe argumenty Java. Nie dodawaj tutaj -Xms ani -Xmx.",
+        "launcherTabHeaderText": "Ustawienia launchera",
+        "launcherTabHeaderDesc": "Dostosuj działanie launchera.",
+        "allowPrereleaseTitle": "Zezwalaj na wersje testowe.",
+        "allowPrereleaseDesc": "Wersje testowe mogą zawierać nieprzetestowane funkcje. Opcja jest zawsze aktywna w wersji testowej.",
+        "dataDirectoryTitle": "Folder danych",
+        "selectDataDirectory": "Wybierz folder danych",
+        "chooseFolder": "Wybierz folder",
+        "dataDirectoryDesc": "Tutaj są pliki gry i Java. Zrzuty ekranu oraz światy znajdują się w folderze instancji.",
+        "aboutTabHeaderText": "O programie",
+        "aboutTabHeaderDesc": "Informacje o bieżącej wersji.",
+        "stableRelease": "Wersja stabilna",
+        "versionText": "Wersja ",
+        "sourceGithub": "Kod źródłowy (GitHub)",
+        "support": "Pomoc",
+        "devToolsConsole": "Konsola programisty",
+        "releaseNotes": "Informacje o wydaniu",
+        "changelog": "Lista zmian",
+        "noReleaseNotes": "Brak informacji o wydaniu",
+        "viewReleaseNotes": "Zobacz zmiany na GitHub",
+        "launcherUpdatesHeaderText": "Aktualizacje launchera",
+        "launcherUpdatesHeaderDesc": "Sprawdzaj i instaluj nowe wersje.",
+        "checkForUpdates": "Sprawdź aktualizacje",
+        "whatsNew": "Co nowego",
+        "updateReleaseNotes": "Zmiany w aktualizacji"
+      },
+      "landing": {
+        "updateAvailableTooltip": "Dostępna aktualizacja",
+        "usernamePlaceholder": "Nick",
+        "usernameEditButton": "Zmień",
+        "settingsTooltip": "Ustawienia",
+        "serverStatus": "SERWER",
+        "serverStatusPlaceholder": "OFFLINE",
+        "mojangStatus": "USŁUGI",
+        "launchButton": "GRAJ",
+        "launchButtonPlaceholder": "Nie wybrano serwera",
+        "launchDetails": "Poczekaj chwilę…",
+        "newsButton": "AKTUALNOŚCI",
+        "newsNavigationStatus": "{currentPage} z {totalPages}",
+        "newsErrorLoadSpan": "Sprawdzanie aktualności…",
+        "newsErrorFailedSpan": "Nie udało się pobrać aktualności",
+        "newsErrorRetryButton": "Spróbuj ponownie",
+        "newsErrorNoneSpan": "Brak aktualności"
+      },
+      "overlay": {
+        "serverSelectHeader": "Dostępne serwery",
+        "serverSelectConfirm": "Wybierz",
+        "serverSelectCancel": "Anuluj",
+        "accountSelectHeader": "Wybierz konto",
+        "accountSelectConfirm": "Wybierz",
+        "accountSelectCancel": "Anuluj"
+      }
+    },
+    "js": {
+      "auth": {
+        "custom": {
+          "invalidTitle": "Nie udało się zalogować",
+          "invalidDesc": "Sprawdź login i hasło KRWA.",
+          "unreachableTitle": "KRWA niedostępne",
+          "unreachableDesc": "Sprawdź połączenie i spróbuj ponownie.",
+          "noProfileTitle": "Postać niedostępna",
+          "noProfileDesc": "Skontaktuj się z administratorem, aby przywrócić postać."
+        }
+      },
+      "landing": {
+        "dlAsync": {
+          "unexpectedExit": "Minecraft zakończył pracę z kodem {code}. Szczegóły: logs/latest.log w folderze gry.",
+          "loadingServerInfo": "Pobieranie informacji o paczce…",
+          "fatalError": "Błąd",
+          "unableToLoadDistributionIndex": "Nie udało się pobrać paczki. Sprawdź połączenie z mc.krwa.ru.",
+          "pleaseWait": "Poczekaj chwilę…",
+          "errorDuringLaunchTitle": "Błąd uruchamiania",
+          "seeConsoleForDetails": "Szczegóły znajdziesz w konsoli (Ctrl+Shift+I).",
+          "validatingFileIntegrity": "Sprawdzanie plików…",
+          "errorDuringFileVerificationTitle": "Błąd sprawdzania plików",
+          "downloadingFiles": "Pobieranie gry i modów…",
+          "errorDuringFileDownloadTitle": "Błąd pobierania plików",
+          "preparingToLaunch": "Przygotowywanie gry…",
+          "launchingGame": "Uruchamianie gry…",
+          "doneEnjoyServer": "Gotowe. Miłej gry!",
+          "checkConsoleForDetails": "Szczegóły znajdziesz w konsoli (Ctrl+Shift+I).",
+          "launchWrapperNotDownloaded": "Brakuje pliku uruchamiającego. Spróbuj pobrać pliki ponownie."
+        },
+        "launch": {
+          "play": "GRAJ",
+          "starting": "URUCHAMIANIE…",
+          "running": "GRA URUCHOMIONA",
+          "waitingWindow": "Minecraft się uruchamia. Okno gry wkrótce się pojawi…",
+          "runningHint": "Minecraft jest otwarty. Przejdź do okna gry.",
+          "mods": "Ładowanie modów…",
+          "resources": "Przygotowywanie tekstur i zasobów…",
+          "audio": "Uruchamianie dźwięku…",
+          "connecting": "Łączenie z serwerem…",
+          "pleaseWait": "Poczekaj chwilę…",
+          "failureTitle": "Błąd uruchamiania",
+          "failureText": "Szczegóły znajdziesz w konsoli (Ctrl+Shift+I).",
+          "okay": "OK"
+        },
+        "selectedAccount": {
+          "noAccountSelected": "Nie wybrano konta"
+        },
+        "selectedServer": {
+          "noSelection": "Nie wybrano serwera",
+          "loading": "Ładowanie…"
+        },
+        "serverStatus": {
+          "server": "SERWER",
+          "offline": "OFFLINE",
+          "players": "GRACZE"
+        },
+        "systemScan": {
+          "checking": "Sprawdzanie systemu…",
+          "noCompatibleJava": "Nie znaleziono zgodnej wersji Java",
+          "installJavaMessage": "Minecraft wymaga 64-bitowej Java {major}. Zainstalować automatycznie?",
+          "installJava": "Zainstaluj Java",
+          "installJavaManually": "Wybierz ręcznie",
+          "javaDownloadPrepare": "Przygotowywanie pobierania Java…",
+          "javaDownloadFailureTitle": "Nie udało się pobrać Java",
+          "javaDownloadFailureText": "Sprawdź połączenie i spróbuj ponownie.",
+          "javaRequired": "Wymagana Java",
+          "javaRequiredMessage": "Wymagana 64-bitowa Java {major}.",
+          "javaRequiredDismiss": "Rozumiem",
+          "javaRequiredCancel": "Wstecz"
+        },
+        "downloadJava": {
+          "findJdkFailure": "Nie znaleziono plików OpenJDK.",
+          "javaDownloadCorruptedError": "Suma kontrolna Java jest nieprawidłowa. Pobierz ponownie.",
+          "extractingJava": "Rozpakowywanie Java",
+          "javaInstalled": "Java zainstalowana!"
+        }
+      },
+      "login": {
+        "login": "ZALOGUJ SIĘ",
+        "loggingIn": "LOGOWANIE…",
+        "success": "GOTOWE",
+        "tryAgain": "Spróbuj ponownie",
+        "error": {
+          "invalidValue": "Nieprawidłowa wartość",
+          "requiredValue": "Pole wymagane",
+          "unknown": {
+            "title": "Błąd logowania",
+            "desc": "Nie udało się zalogować. Spróbuj ponownie."
+          }
+        }
+      },
+      "overlay": {
+        "dismiss": "Zamknij"
+      },
+      "settings": {
+        "authAccountPopulate": {
+          "username": "Login",
+          "uuid": "UUID",
+          "selectedAccount": "Wybrane konto",
+          "selectAccount": "Wybierz konto",
+          "logout": "Wyloguj się"
+        },
+        "authAccountLogout": {
+          "lastAccountWarningTitle": "To Twoje ostatnie konto",
+          "lastAccountWarningMessage": "Aby grać, musisz być zalogowany. Wylogować się?",
+          "confirmButton": "Wyloguj się",
+          "cancelButton": "Anuluj"
+        },
+        "dropinMods": {
+          "removeButton": "Usuń",
+          "deleteFailedTitle": "Nie udało się usunąć moda {fullName}",
+          "deleteFailedMessage": "Sprawdź, czy plik nie jest używany, i spróbuj ponownie.",
+          "failedToggleTitle": "Nie udało się przełączyć modów",
+          "okButton": "OK"
+        },
+        "serverListing": {
+          "mainServer": "Główny serwer"
+        },
+        "java": {
+          "selectedJava": "Wybrano: Java {version} ({vendor})",
+          "invalidSelection": "Nieprawidłowy wybór",
+          "requiresJava": "Wymagana 64-bitowa Java {major}.",
+          "availableOptions": "Dostępne wersje Java {major} (HotSpot VM)"
+        },
+        "about": {
+          "preReleaseTitle": "Wersja testowa",
+          "stableReleaseTitle": "Wersja stabilna",
+          "releaseNotesFailed": "Nie udało się pobrać informacji o wydaniu."
+        },
+        "updates": {
+          "newReleaseTitle": "Dostępna nowa wersja",
+          "newPreReleaseTitle": "Dostępna nowa wersja testowa",
+          "downloadingButton": "Pobieranie…",
+          "downloadButton": "Pobierz aktualizację",
+          "latestVersionTitle": "Masz najnowszą wersję",
+          "checkForUpdatesButton": "Sprawdź aktualizacje",
+          "checkingForUpdatesButton": "Sprawdzanie aktualizacji…"
+        }
+      },
+      "uibinder": {
+        "startup": {
+          "fatalErrorTitle": "Nie udało się pobrać paczki",
+          "fatalErrorMessage": "Sprawdź połączenie i uruchom launcher ponownie.",
+          "closeButton": "Zamknij"
+        },
+        "validateAccount": {
+          "failedMessageTitle": "Logowanie wygasło",
+          "failedMessage": "Zaloguj się ponownie jako <strong>{account}</strong>.",
+          "failedMessageSelectAnotherAccount": "Zaloguj się ponownie jako <strong>{account}</strong>.",
+          "loginButton": "Zaloguj się",
+          "selectAnotherAccountButton": "Inne konto"
+        }
+      },
+      "uicore": {
+        "autoUpdate": {
+          "checkingForUpdateButton": "Sprawdzanie aktualizacji…",
+          "installNowButton": "Zainstaluj teraz",
+          "checkForUpdatesButton": "Sprawdź aktualizacje"
+        }
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@ test('password change uses an ephemeral web token and revokes both temporary ses
 })
 test('texture upload rejects malformed profile IDs and non-PNG content before requesting', async () => {
     const api = createAccountAPI('http://127.0.0.1:1/api/yggdrasil/')
-    await assert.rejects(api.upload({ uuid: '../admin', type: 'skin', bytes: Buffer.alloc(24) }), /аккаунт/)
+    await assert.rejects(api.upload({ uuid: '../admin', type: 'skin', bytes: Buffer.alloc(24) }), /account/)
     await assert.rejects(api.upload({ uuid: 'a'.repeat(32), type: 'skin', bytes: Buffer.alloc(24) }), /PNG/)
-    await assert.rejects(api.upload({ uuid: 'a'.repeat(32), type: 'cape', bytes: Buffer.alloc(24) }), /аккаунт/)
+    await assert.rejects(api.upload({ uuid: 'a'.repeat(32), type: 'cape', bytes: Buffer.alloc(24) }), /account/)
 })

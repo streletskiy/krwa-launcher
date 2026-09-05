@@ -1,59 +1,59 @@
 <div id="nativeAccountContainer" style="display:none;">
     <aside class="native-account-aside">
-        <button type="button" id="nativeAccountBack" class="native-back"><span class="krwa-icon icon-back" aria-hidden="true"></span> Назад</button>
+        <button type="button" id="nativeAccountBack" class="native-back"><span class="krwa-icon icon-back" aria-hidden="true"></span> <%= native("Назад") %></button>
         <img src="assets/images/krwa-wordmark.png" alt="KRWA" class="native-account-logo">
-        <h2 id="nativeAccountHeading">Твой аккаунт</h2>
-        <p id="nativeAccountIntro">Всё готово для твоей следующей игры.</p>
-        <nav aria-label="Настройки аккаунта" id="nativeAccountNav" hidden>
-            <button type="button" data-native-account="skin">Скин</button>
-            <button type="button" data-native-account="password">Изменить пароль</button>
+        <h2 id="nativeAccountHeading"><%= native("Твой аккаунт") %></h2>
+        <p id="nativeAccountIntro"><%= native("Всё готово для твоей следующей игры.") %></p>
+        <nav aria-label="<%= native('Настройки аккаунта') %>" id="nativeAccountNav" hidden>
+            <button type="button" data-native-account="skin"><%= native("Скин") %></button>
+            <button type="button" data-native-account="password"><%= native("Изменить пароль") %></button>
         </nav>
-        <span class="native-account-note">Один аккаунт для всех серверов KRWA</span>
+        <span class="native-account-note"><%= native("Один аккаунт для всех серверов KRWA") %></span>
     </aside>
     <main class="native-account-main">
         <form id="nativeAccountForm" novalidate>
             <div id="nativeRegisterFields" class="native-panel" hidden>
-                <div class="native-tabs"><button type="button" id="nativeGoLogin">Вход</button><span class="active">Регистрация</span></div>
+                <div class="native-tabs"><button type="button" id="nativeGoLogin"><%= native("Вход") %></button><span class="active"><%= native("Регистрация") %></span></div>
                 <div class="native-fields native-fields-two">
-                    <label>Minecraft-ник<input name="nickname" autocomplete="username" maxlength="16" placeholder="Твой ник в игре"><small>4–16 букв, цифр или _. Ник нельзя изменить.</small></label>
-                    <label>Почта<input name="email" type="email" autocomplete="email" placeholder="you@example.com"><small>Для восстановления доступа</small></label>
-                    <label>Пароль<span class="native-password"><input name="registerPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="От 8 символов"><button type="button" class="native-eye" aria-label="Показать пароль"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button></span></label>
-                    <label>Повтори пароль<input name="registerConfirm" type="password" autocomplete="new-password" maxlength="128" placeholder="Ещё раз"></label>
+                    <label><%= native("Minecraft-ник") %><input name="nickname" autocomplete="username" maxlength="16" placeholder="<%= native('Твой ник в игре') %>"><small><%= native("4–16 букв, цифр или _. Ник нельзя изменить.") %></small></label>
+                    <label><%= native("Почта") %><input name="email" type="email" autocomplete="email" placeholder="you@example.com"><small><%= native("Для восстановления доступа") %></small></label>
+                    <label><%= native("Пароль") %><span class="native-password"><input name="registerPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="<%= native('От 8 символов') %>"><button type="button" class="native-eye" aria-label="<%= native('Показать пароль') %>"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button></span></label>
+                    <label><%= native("Повтори пароль") %><input name="registerConfirm" type="password" autocomplete="new-password" maxlength="128" placeholder="<%= native('Ещё раз') %>"></label>
                 </div>
-                <label class="native-check"><input name="terms" type="checkbox"><span>Я принимаю <a href="https://mc.krwa.ru/tos">правила</a> и <a href="https://mc.krwa.ru/privacy">политику конфиденциальности</a> KRWA.</span></label>
+                <label class="native-check"><input name="terms" type="checkbox"><span><%= native("Я принимаю") %> <a href="https://mc.krwa.ru/tos"><%= native("правила") %></a> <%= native("и") %> <a href="https://mc.krwa.ru/privacy"><%= native("политику конфиденциальности") %></a> KRWA.</span></label>
             </div>
             <div id="nativePasswordFields" class="native-panel" hidden>
                 <p class="native-account-name" id="nativePasswordAccount"></p>
                 <div class="native-fields">
-                    <label>Текущий пароль<span class="native-password"><input name="currentPassword" type="password" autocomplete="current-password"><button type="button" class="native-eye" aria-label="Показать пароль"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button></span></label>
-                    <label>Новый пароль<input name="newPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="От 8 символов"></label>
-                    <label>Повтори новый пароль<input name="newConfirm" type="password" autocomplete="new-password" maxlength="128"></label>
+                    <label><%= native("Текущий пароль") %><span class="native-password"><input name="currentPassword" type="password" autocomplete="current-password"><button type="button" class="native-eye" aria-label="<%= native('Показать пароль') %>"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button></span></label>
+                    <label><%= native("Новый пароль") %><input name="newPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="<%= native('От 8 символов') %>"></label>
+                    <label><%= native("Повтори новый пароль") %><input name="newConfirm" type="password" autocomplete="new-password" maxlength="128"></label>
                 </div>
-                <p class="native-hint">Другие сеансы завершатся. Этот лаунчер войдёт заново автоматически.</p>
+                <p class="native-hint"><%= native("Другие сеансы завершатся. Этот лаунчер войдёт заново автоматически.") %></p>
             </div>
             <div id="nativeSkinFields" class="native-panel" hidden>
                 <p class="native-account-name" id="nativeSkinAccount"></p>
                 <div class="native-skin-layout">
-                    <div class="native-preview"><canvas id="nativeSkinPreview" width="160" height="240" aria-label="Предпросмотр персонажа"></canvas><span id="nativePreviewHint">Выбери скин для предпросмотра</span></div>
+                    <div class="native-preview"><canvas id="nativeSkinPreview" width="160" height="240" aria-label="<%= native('Предпросмотр персонажа') %>"></canvas><span id="nativePreviewHint"><%= native("Выбери скин для предпросмотра") %></span></div>
                     <div class="native-fields">
-                        <label class="native-file">PNG-файл<input name="textureFile" type="file" accept="image/png,.png"><span id="nativeFileName">Загрузить скин</span></label>
-                        <p class="native-hint" id="nativeFileHint">PNG до 2 МБ. Новый скин сразу заменит текущий. Модель рук определится автоматически.</p>
+                        <label class="native-file"><%= native("PNG-файл") %><input name="textureFile" type="file" accept="image/png,.png"><span id="nativeFileName"><%= native("Загрузить скин") %></span></label>
+                        <p class="native-hint" id="nativeFileHint"><%= native("PNG до 2 МБ. Новый скин сразу заменит текущий. Модель рук определится автоматически.") %></p>
                     </div>
                 </div>
             </div>
             <div id="nativeResetFields" class="native-panel" hidden>
-                <div class="native-fields"><label>Почта аккаунта<input name="resetEmail" type="email" autocomplete="email" placeholder="you@example.com"></label></div>
-                <p class="native-hint">Пришлём письмо для восстановления, если для аккаунта доступен сброс по почте.</p>
-                <button type="button" id="nativeHaveResetCode" class="native-text-button">У меня уже есть ссылка из письма</button>
+                <div class="native-fields"><label><%= native("Почта аккаунта") %><input name="resetEmail" type="email" autocomplete="email" placeholder="you@example.com"></label></div>
+                <p class="native-hint"><%= native("Пришлём письмо для восстановления, если для аккаунта доступен сброс по почте.") %></p>
+                <button type="button" id="nativeHaveResetCode" class="native-text-button"><%= native("У меня уже есть ссылка из письма") %></button>
                 <div id="nativeResetConfirmFields" class="native-fields" hidden>
-                    <label>Ссылка или код из письма<input name="resetToken" autocomplete="off" placeholder="Вставь ссылку целиком или код"></label>
-                    <label>Новый пароль<input name="resetPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="От 8 символов"></label>
-                    <label>Повтори пароль<input name="resetConfirm" type="password" autocomplete="new-password" maxlength="128"></label>
+                    <label><%= native("Ссылка или код из письма") %><input name="resetToken" autocomplete="off" placeholder="<%= native('Вставь ссылку целиком или код') %>"></label>
+                    <label><%= native("Новый пароль") %><input name="resetPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="<%= native('От 8 символов') %>"></label>
+                    <label><%= native("Повтори пароль") %><input name="resetConfirm" type="password" autocomplete="new-password" maxlength="128"></label>
                 </div>
             </div>
-            <div id="nativeCaptcha" hidden><div class="native-captcha-image"><img id="nativeCaptchaImage" alt="Код проверки"><button type="button" id="nativeCaptchaRefresh" aria-label="Обновить код"><span class="krwa-icon icon-refresh" aria-hidden="true"></span></button></div><label>Код с картинки<input name="captchaAnswer" autocomplete="off"></label></div>
+            <div id="nativeCaptcha" hidden><div class="native-captcha-image"><img id="nativeCaptchaImage" alt="<%= native('Код проверки') %>"><button type="button" id="nativeCaptchaRefresh" aria-label="<%= native('Обновить код') %>"><span class="krwa-icon icon-refresh" aria-hidden="true"></span></button></div><label><%= native("Код с картинки") %><input name="captchaAnswer" autocomplete="off"></label></div>
             <p id="nativeAccountStatus" role="status" aria-live="polite"></p>
-            <button type="submit" id="nativeAccountSubmit" class="native-primary">Создать аккаунт и войти</button>
+            <button type="submit" id="nativeAccountSubmit" class="native-primary"><%= native("Создать аккаунт и войти") %></button>
         </form>
     </main>
     <script src="./assets/js/scripts/account.js"></script>

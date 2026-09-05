@@ -47,6 +47,10 @@ class ProcessBuilder {
      */
     build(){
         fs.ensureDirSync(this.gameDir)
+        const serverAdded = require('electron').ipcRenderer.sendSync('ensurePublicServer', {
+            gameDir: this.gameDir, name: this.server.rawServer.name, address: this.server.rawServer.address
+        })
+        if (!serverAdded.ok) logger.warn('Could not add the public server; the existing server list was preserved.')
         const tempNativePath = path.join(os.tmpdir(), ConfigManager.getTempNativeFolder(), crypto.pseudoRandomBytes(16).toString('hex'))
         process.throwDeprecation = true
         this.setupLiteLoader()

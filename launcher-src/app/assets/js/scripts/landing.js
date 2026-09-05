@@ -51,11 +51,13 @@ const loggerLanding = LoggerUtil.getLogger('Landing')
  * @param {boolean} loading True if the loading area should be shown, otherwise false.
  */
 function toggleLaunchArea(loading){
-    document.getElementById('landingContainer').dataset.launching = String(loading)
-    launch_details.style.display = loading ? 'flex' : 'none'
+    document.getElementById('landingContainer').dataset.launching = String(loading || proc != null)
+    launch_details.style.display = loading || proc != null ? 'flex' : 'none'
     launch_content.style.display = 'flex'
     setLaunchEnabled(ConfigManager.getSelectedServer() != null)
-    server_selection_button.disabled = loading
+    server_selection_button.disabled = loading || proc != null
+    document.getElementById('launcherLanguage').disabled = loading || proc != null
+    document.getElementById('launch_button').textContent = Lang.queryJS(proc != null ? 'landing.launch.running' : loading ? 'landing.launch.starting' : 'landing.launch.play')
 }
 
 /**
@@ -64,7 +66,7 @@ function toggleLaunchArea(loading){
  * @param {string} details The new text for the loading details.
  */
 function setLaunchDetails(details){
-    launch_details_text.innerHTML = details
+    launch_details_text.textContent = details
 }
 
 /**
@@ -452,7 +454,7 @@ let hasRPC = false
 // Joined server regex
 // Change this if your server uses something different.
 const GAME_JOINED_REGEX = /\[.+\]: Sound engine started/
-const GAME_LAUNCH_REGEX = /^\[.+\]: (?:MinecraftForge .+ Initialized|ModLauncher .+ starting: .+|Loading Minecraft .+ with Fabric Loader .+)$/
+const GAME_LAUNCH_REGEX = /(?:Sound engine started|Created:.*(?:atlas|textures)|Connecting to|Connecting with)/
 const MIN_LINGER = 5000
 
 async function dlAsync(login = true) {
@@ -575,7 +577,8 @@ async function dlAsync(login = true) {
             if(proc == null) {
                 return
             }
-            toggleLaunchArea(false)
+            setLaunchDetails(Lang.queryJS('landing.launch.runningHint'))
+            document.getElementById('launch_button').textContent = Lang.queryJS('landing.launch.running')
             if(hasRPC){
                 DiscordWrapper.updateDetails(Lang.queryJS('landing.discord.loading'))
                 proc.stdout.on('data', gameStateChange)
@@ -590,6 +593,11 @@ async function dlAsync(login = true) {
         // the client application has started, and we can hide
         // the progress bar stuff.
         const tempListener = function(data){
+            const stage = /Connecting to|Connecting with/.test(data) ? 'connecting'
+                : /OpenAL|Sound engine/.test(data) ? 'audio'
+                    : /Reloading ResourceManager|Reloading resources/.test(data) ? 'resources'
+                        : /Loading [0-9]+ mods|Fabric Loader/.test(data) ? 'mods' : null
+            if(stage) setLaunchDetails(Lang.queryJS(`landing.launch.${stage}`))
             if(GAME_LAUNCH_REGEX.test(data.trim())){
                 const diff = Date.now()-start
                 if(diff < MIN_LINGER) {
@@ -621,6 +629,12 @@ async function dlAsync(login = true) {
         try {
             // Build Minecraft process.
             proc = pb.build()
+            toggleLaunchArea(true)
+            proc.once('error', () => {
+                proc = null
+                clearTimeout(loadCompleteTimer)
+                showLaunchFailure(Lang.queryJS('landing.dlAsync.errorDuringLaunchTitle'), Lang.queryJS('landing.dlAsync.checkConsoleForDetails'))
+            })
 
             // Bind listeners to stdout.
             proc.stdout.on('data', tempListener)
@@ -647,7 +661,9 @@ async function dlAsync(login = true) {
                 }
             })
 
-            setLaunchDetails(Lang.queryJS('landing.dlAsync.doneEnjoyServer'))
+            setLaunchDetails(Lang.queryJS('landing.launch.waitingWindow'))
+            launch_progress.removeAttribute('value')
+            launch_progress_label.textContent = '…'
 
             // Init Discord Hook
             if(distro.rawDistribution.discord != null && serv.rawServer.discord != null){
