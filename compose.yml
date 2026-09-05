@@ -31,7 +31,7 @@ services:
   auth:
     build:
       context: ../aster
-    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.3
+    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.4
     restart: unless-stopped
     environment:
       ASTER__SERVER__HOST: 0.0.0.0
