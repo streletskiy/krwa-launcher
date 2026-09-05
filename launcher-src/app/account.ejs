@@ -5,7 +5,7 @@
         <h2 id="nativeAccountHeading">Твой аккаунт</h2>
         <p id="nativeAccountIntro">Всё готово для твоей следующей игры.</p>
         <nav aria-label="Настройки аккаунта" id="nativeAccountNav" hidden>
-            <button type="button" data-native-account="skin">Персонаж и скин</button>
+            <button type="button" data-native-account="skin">Скин</button>
             <button type="button" data-native-account="password">Изменить пароль</button>
         </nav>
         <span class="native-account-note">Один аккаунт для всех серверов KRWA</span>
@@ -15,7 +15,7 @@
             <div id="nativeRegisterFields" class="native-panel" hidden>
                 <div class="native-tabs"><button type="button" id="nativeGoLogin">Вход</button><span class="active">Регистрация</span></div>
                 <div class="native-fields native-fields-two">
-                    <label>Minecraft-ник<input name="nickname" autocomplete="username" maxlength="16" placeholder="Твой ник в игре"><small>3–16 букв, цифр или _</small></label>
+                    <label>Minecraft-ник<input name="nickname" autocomplete="username" maxlength="16" placeholder="Твой ник в игре"><small>4–16 букв, цифр или _. Ник нельзя изменить.</small></label>
                     <label>Почта<input name="email" type="email" autocomplete="email" placeholder="you@example.com"><small>Для восстановления доступа</small></label>
                     <label>Пароль<span class="native-password"><input name="registerPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="От 8 символов"><button type="button" class="native-eye" aria-label="Показать пароль"><span class="krwa-icon icon-eye" aria-hidden="true"></span></button></span></label>
                     <label>Повтори пароль<input name="registerConfirm" type="password" autocomplete="new-password" maxlength="128" placeholder="Ещё раз"></label>
@@ -36,10 +36,8 @@
                 <div class="native-skin-layout">
                     <div class="native-preview"><canvas id="nativeSkinPreview" width="160" height="240" aria-label="Предпросмотр персонажа"></canvas><span id="nativePreviewHint">Выбери скин для предпросмотра</span></div>
                     <div class="native-fields">
-                        <label>Что загрузить<select name="textureType"><option value="skin">Скин</option><option value="cape">Плащ</option></select></label>
-                        <label id="nativeModelLabel">Модель персонажа<select name="skinModel"><option value="classic">Классическая · Steve</option><option value="slim">Тонкие руки · Alex</option></select></label>
-                        <label class="native-file">PNG-файл<input name="textureFile" type="file" accept="image/png,.png"><span id="nativeFileName">Выбрать файл</span></label>
-                        <p class="native-hint" id="nativeFileHint">Скин: 64 × 64 или 64 × 32. PNG до 2 МБ.</p>
+                        <label class="native-file">PNG-файл<input name="textureFile" type="file" accept="image/png,.png"><span id="nativeFileName">Загрузить скин</span></label>
+                        <p class="native-hint" id="nativeFileHint">PNG до 2 МБ. Новый скин сразу заменит текущий. Модель рук определится автоматически.</p>
                     </div>
                 </div>
             </div>

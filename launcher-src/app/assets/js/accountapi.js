@@ -2,6 +2,12 @@ const got = require('got')
 const FormData = require('form-data')
 const { YGGDRASIL_API_ROOT } = require('./ipcconstants')
 
+function validateSkinBytes(bytes) {
+    if (!Buffer.isBuffer(bytes) || bytes.length > 2 * 1024 * 1024 || bytes.length < 24 || bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error('Нужен PNG-файл размером до 2 МБ.')
+    const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20)
+    if (width < 64 || width % 64 || width * height > 4096 * 4096 || ![width, width / 2].includes(height)) throw new Error('Нужен скин Minecraft: 64 × 64, 64 × 32 или их HD-вариант до 4096 × 4096.')
+}
+
 // Native client: short-lived web credentials stay in this module and are never saved.
 function createAccountAPI(root = YGGDRASIL_API_ROOT) {
     const origin = new URL(root).origin
@@ -52,10 +58,10 @@ function createAccountAPI(root = YGGDRASIL_API_ROOT) {
                 await revoke(changed)
             } finally { await revoke(login) }
         },
-        upload: async ({ uuid, accessToken, type, model, bytes }) => {
+        upload: async ({ uuid, accessToken, type = 'skin', model, bytes }) => {
             const id = String(uuid).replace(/-/g, '')
-            if (!/^[a-f0-9]{32}$/i.test(id) || !['skin', 'cape'].includes(type)) throw new Error('Выбери игровой аккаунт.')
-            if (!Buffer.isBuffer(bytes) || bytes.length > 2 * 1024 * 1024 || bytes.length < 24 || bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error('Нужен PNG-файл размером до 2 МБ.')
+            if (!/^[a-f0-9]{32}$/i.test(id) || type !== 'skin') throw new Error('Выбери игровой аккаунт.')
+            validateSkinBytes(bytes)
             const form = new FormData()
             if (type === 'skin') form.append('model', model === 'slim' ? 'slim' : '')
             form.append('file', bytes, { filename: `${type}.png`, contentType: 'image/png' })
@@ -65,3 +71,4 @@ function createAccountAPI(root = YGGDRASIL_API_ROOT) {
     }
 }
 exports.createAccountAPI = createAccountAPI
+exports.validateSkinBytes = validateSkinBytes

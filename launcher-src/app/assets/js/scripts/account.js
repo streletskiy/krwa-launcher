@@ -1,11 +1,12 @@
 const NativeAccountAPI = require('./assets/js/accountapi').createAccountAPI()
+const NativeSkinPreview = require('./assets/js/skinpreview')
 const nativeForm = document.getElementById('nativeAccountForm')
 const nativeStatus = document.getElementById('nativeAccountStatus')
 const nativeSubmit = document.getElementById('nativeAccountSubmit')
 let nativeMode = 'register', nativeBusy = false, nativeReturn = VIEWS.login, nativeCaptchaId = null, nativeResetConfirm = false, nativePreviewURL = null, nativeViewSerial = 0
 let nativeCompletion = false
 const nativeField = name => nativeForm.elements.namedItem(name)
-const nativeLabels = { register: ['Создай свой аккаунт', 'Выбери ник, зарегистрируйся и сразу переходи к игре.', 'Создать аккаунт и войти'], password: ['Новый пароль', 'Защити свой аккаунт. Пароль не сохраняется в лаунчере.', 'Сохранить пароль'], skin: ['Твой персонаж', 'Выбери образ, который увидят другие игроки.', 'Загрузить и надеть'], reset: ['Вернёмся в игру', 'Восстанови доступ к своему аккаунту KRWA.', 'Отправить письмо'] }
+const nativeLabels = { register: ['Создай свой аккаунт', 'Выбери ник, зарегистрируйся и сразу переходи к игре.', 'Создать аккаунт и войти'], password: ['Новый пароль', 'Защити свой аккаунт. Пароль не сохраняется в лаунчере.', 'Сохранить пароль'], skin: ['Твой скин', 'Загрузи PNG — скин сразу применится. Ник персонажа изменить нельзя.', 'Загрузить скин'], reset: ['Вернёмся в игру', 'Восстанови доступ к своему аккаунту KRWA.', 'Отправить письмо'] }
 
 function nativeMessage(text, error = false) {
     nativeStatus.textContent = text
@@ -56,9 +57,8 @@ async function openNativeAccount(mode = 'skin') {
     document.getElementById('nativeAccountIntro').textContent = nativeLabels[mode][1]
     document.getElementById('nativePasswordAccount').textContent = selected?.displayName || ''
     document.getElementById('nativeSkinAccount').textContent = selected?.displayName || ''
-    document.getElementById('nativeFileName').textContent = 'Выбрать файл'
-    document.getElementById('nativeModelLabel').hidden = false
-    document.getElementById('nativeFileHint').textContent = 'Скин: 64 × 64 или 64 × 32. PNG до 2 МБ.'
+    document.getElementById('nativeFileName').textContent = 'Загрузить скин'
+    nativeSubmit.hidden = mode === 'skin'
     document.getElementById('nativeSkinPreview').getContext('2d').clearRect(0, 0, 160, 240)
     document.getElementById('nativePreviewHint').textContent = 'Выбери скин для предпросмотра'
     if (nativePreviewURL) { window.URL.revokeObjectURL(nativePreviewURL); nativePreviewURL = null }
@@ -122,7 +122,7 @@ nativeForm.onsubmit = async event => {
     let accountCreated = false, passwordChanged = false
     try {
         if (nativeMode === 'register') {
-            if (!/^[a-zA-Z0-9_]{3,16}$/.test(value('nickname'))) throw new Error('Ник: от 3 до 16 латинских букв, цифр или _.')
+            if (!/^[a-zA-Z0-9_]{4,16}$/.test(value('nickname'))) throw new Error('Ник: от 4 до 16 латинских букв, цифр или _.')
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value('email'))) throw new Error('Укажи корректную почту.')
             nativePassword(value('registerPassword'), value('registerConfirm'))
             if (!nativeField('terms').checked) throw new Error('Прими правила и политику конфиденциальности.')
@@ -157,9 +157,17 @@ nativeForm.onsubmit = async event => {
         } else if (nativeMode === 'skin') {
             const file = nativeField('textureFile').files[0]
             if (!file || !selected) throw new Error('Выбери PNG-файл и игровой аккаунт.')
+            if (file.size > 2 * 1024 * 1024) throw new Error('Нужен PNG-файл размером до 2 МБ.')
             const bytes = Buffer.from(await file.arrayBuffer())
-            await NativeAccountAPI.upload({ uuid: selected.uuid, accessToken: selected.accessToken, type: value('textureType'), model: value('skinModel'), bytes })
-            nativeMessage(value('textureType') === 'skin' ? 'Скин надет. Перезайди на сервер, чтобы увидеть новый образ.' : 'Плащ надет. Перезайди на сервер, чтобы увидеть его.')
+            require('./assets/js/accountapi').validateSkinBytes(bytes)
+            const image = await createImageBitmap(file).catch(() => { throw new Error('Не удалось прочитать PNG-файл. Выбери другой скин.') })
+            let model
+            try { model = NativeSkinPreview.prepareSkin(image, document.createElement('canvas')) }
+            finally { image.close() }
+            await NativeAccountAPI.upload({ uuid: selected.uuid, accessToken: selected.accessToken, type: 'skin', model, bytes })
+            await nativePreviewFile(file)
+            nativeField('textureFile').value = ''
+            nativeMessage('Скин обновлён. Перезайди на сервер, чтобы увидеть новый образ.')
             updateSelectedAccount(selected)
         } else if (nativeResetConfirm) {
             let token = value('resetToken').trim()
@@ -180,46 +188,30 @@ nativeForm.onsubmit = async event => {
             nativeMessage(accountCreated ? 'Аккаунт создан. Автоматический вход не удался — открой «Вход» и используй свой пароль.' : 'Пароль изменён. Войди в лаунчер заново с новым паролем.', true)
         } else nativeMessage(error.message || error.desc || 'Не удалось выполнить действие. Попробуй ещё раз.', true)
         if (nativeCaptchaId && !accountCreated && !passwordChanged) await nativeRefreshCaptcha().catch(() => {})
-    } finally { nativeSetBusy(false) }
+    } finally {
+        if (nativeMode === 'skin') nativeField('textureFile').value = ''
+        nativeSetBusy(false)
+    }
+}
+async function nativePreviewFile(file) {
+    const image = await createImageBitmap(file)
+    try {
+        const skin = document.createElement('canvas')
+        const model = NativeSkinPreview.prepareSkin(image, skin)
+        NativeSkinPreview.drawSkin(document.getElementById('nativeSkinPreview').getContext('2d'), skin, model)
+        document.getElementById('nativePreviewHint').textContent = 'Твой текущий скин'
+    } finally { image.close() }
 }
 async function nativePreview(source) {
-    const file = nativeField('textureFile').files[0]
-    const currentSkin = typeof source === 'string' && /^https?:\/\//.test(source) ? source : null
-    const canvas = document.getElementById('nativeSkinPreview'), ctx = canvas.getContext('2d')
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    if (nativePreviewURL) window.URL.revokeObjectURL(nativePreviewURL)
-    nativePreviewURL = null
-    if (!file && !currentSkin) return
-    if (file) document.getElementById('nativeFileName').textContent = file.name
-    if (file && (file.size > 2 * 1024 * 1024 || !/\.png$/i.test(file.name))) { nativeMessage('Выбери PNG-файл размером до 2 МБ.', true); return }
-    const type = nativeField('textureType').value
-    const img = new Image(), url = currentSkin || window.URL.createObjectURL(file)
-    nativePreviewURL = url
-    img.onload = () => {
-        if (url !== nativePreviewURL) return
-        ctx.imageSmoothingEnabled = false
-        if (type === 'skin' && img.width === 64 && [32, 64].includes(img.height)) {
-            const scale = 6, x = 56, y = 24, slim = nativeField('skinModel').value === 'slim', arm = slim ? 3 : 4
-            const draw = (sx, sy, w, h, dx, dy) => ctx.drawImage(img, sx, sy, w, h, dx, dy, w * scale, h * scale)
-            draw(8, 8, 8, 8, x, y); draw(40, 8, 8, 8, x, y)
-            draw(20, 20, 8, 12, x, y + 48)
-            draw(44, 20, arm, 12, x - arm * scale, y + 48)
-            draw(img.height === 64 ? 36 : 44, img.height === 64 ? 52 : 20, arm, 12, x + 48, y + 48)
-            draw(4, 20, 4, 12, x, y + 120)
-            draw(img.height === 64 ? 20 : 4, img.height === 64 ? 52 : 20, 4, 12, x + 24, y + 120)
-        } else if (type === 'cape' && img.width === 64 && img.height === 32) ctx.drawImage(img, 1, 1, 10, 16, 40, 32, 80, 128)
-        else { nativeMessage(type === 'skin' ? 'Размер скина: 64 × 64 или 64 × 32.' : 'Размер плаща: 64 × 32.', true); return }
-        document.getElementById('nativePreviewHint').textContent = type === 'skin' ? 'Так будет выглядеть твой персонаж' : 'Предпросмотр плаща'
-        nativeMessage('')
-    }
-    img.onerror = () => { if (url === nativePreviewURL) nativeMessage('Не удалось прочитать PNG-файл.', true) }
-    img.src = url
+    if (typeof source !== 'string' || !/^https?:\/\//.test(source)) return
+    const serial = nativeViewSerial
+    try {
+        const response = await fetch(source)
+        if (!response.ok) return
+        const file = await response.blob()
+        if (serial === nativeViewSerial && !nativeBusy && !nativeField('textureFile').files[0]) await nativePreviewFile(file)
+    } catch { /* Keep the upload control available when the current skin cannot be fetched. */ }
 }
-nativeField('textureFile').onchange = nativePreview
-nativeField('skinModel').onchange = nativePreview
-nativeField('textureType').onchange = () => {
-    const skin = nativeField('textureType').value === 'skin'
-    document.getElementById('nativeModelLabel').hidden = !skin
-    document.getElementById('nativeFileHint').textContent = skin ? 'Скин: 64 × 64 или 64 × 32. PNG до 2 МБ.' : 'Плащ: 64 × 32. PNG до 2 МБ.'
-    nativePreview()
+nativeField('textureFile').onchange = () => {
+    if (nativeField('textureFile').files[0] && !nativeBusy) nativeForm.requestSubmit()
 }

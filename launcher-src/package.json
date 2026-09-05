@@ -1,6 +1,6 @@
 {
   "name": "krwa-launcher",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "productName": "KRWA Launcher",
   "description": "Минималистичный лаунчер сервера KRWA",
   "author": "KRWA Server; based on Helios Launcher by Daniel Scalzi",
@@ -36,6 +36,7 @@
     "jquery": "^3.7.1",
     "lodash.merge": "^4.6.2",
     "semver": "^7.7.3",
+    "skinview-utils": "0.7.1",
     "toml": "^3.0.0"
   },
   "devDependencies": {
