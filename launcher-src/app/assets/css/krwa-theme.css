@@ -50,7 +50,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 #avatarContainer { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 7px; box-shadow: none; }
 #avatarOverlay { border-radius: 6px; font-size: 8px; letter-spacing: 0; }
 #settingsMediaButton { position: absolute; right: 26px; bottom: 26px; width: 54px; height: 54px; border: 1px solid var(--line); border-radius: 13px; background: #1b2021ee; display: grid; place-items: center; cursor: pointer; }
-#settingsMediaButton:hover { background: #303a32; }
+#settingsMediaButton:hover, #launcherLanguageButton:hover, #launcherLanguageButton[aria-expanded='true'] { background: #303a32; }
 #settingsSVG { width: 27px; height: 27px; fill: #e5e9e6; }
 #settingsTooltip { bottom: 65px; top: auto; right: 0; left: auto; }
 #landingContainer > #lower { position: absolute; left: 4%; bottom: 7%; width: 51%; height: auto; box-sizing: border-box; padding: 24px; background: linear-gradient(145deg, #1a1d1ef0, #111719ed); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 15px 40px #0003; backdrop-filter: blur(15px); }
@@ -251,6 +251,17 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 @media (max-height: 620px) { #landingContainer > #upper > #left { top: 3%; width: 40%; } #landingContainer > #lower { bottom: 8%; padding: 17px; } #launch_button { height: 64px; } #loginForm { padding: 18px 26px; } #loginImageSeal { width: 215px; margin-bottom: 4px; } .krwa-auth-tabs { margin-bottom: 18px; } #loginSubheader { margin-bottom: 4px; } #loginDisclaimer { margin-top: 8px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 
-#launcherLanguage { position: fixed; z-index: 100; top: 54px; right: 24px; width: auto; max-width: 175px; padding: 7px 28px 7px 12px; border: 1px solid #ffffff35; border-radius: 9px; color: #f5f1e5; background: #172c32; font: inherit; font-size: 12px; -webkit-app-region: no-drag; }
-#launcherLanguage:disabled { opacity: .55; }
+#launcherLanguageControl { position: fixed; z-index: 100; right: 92px; bottom: 26px; width: 54px; height: 54px; -webkit-app-region: no-drag; }
+#launcherLanguageButton { width: 54px; height: 54px; padding: 0; border: 1px solid var(--line); border-radius: 13px; color: #f5f1e5; background: #1b2021ee; display: grid; place-items: center; cursor: pointer; }
+.launcherLanguageFlag { width: 28px; height: 21px; border-radius: 3px; background: center / contain no-repeat; box-shadow: 0 0 0 1px #ffffff24; }
+.launcherLanguageFlag[data-language='auto'] { background-image: url('../images/flags/auto.svg'); box-shadow: none; }
+.launcherLanguageFlag[data-language='ru_RU'] { background-image: url('../images/flags/ru.svg'); }
+.launcherLanguageFlag[data-language='en_US'] { background-image: url('../images/flags/gb.svg'); }
+.launcherLanguageFlag[data-language='pl_PL'] { background-image: url('../images/flags/pl.svg'); }
+#launcherLanguageMenu { position: absolute; right: 0; bottom: 64px; width: 190px; box-sizing: border-box; padding: 6px; border: 1px solid var(--line); border-radius: 13px; background: #161c1bf5; box-shadow: 0 12px 30px #0007; backdrop-filter: blur(15px); }
+#launcherLanguageMenu[hidden] { display: none; }
+.launcherLanguageOption { width: 100%; min-height: 42px; box-sizing: border-box; padding: 8px 12px; border: 0; border-radius: 9px; color: #edf3ef; background: transparent; display: flex; align-items: center; gap: 12px; font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.launcherLanguageOption .launcherLanguageFlag { flex: 0 0 24px; width: 24px; height: 18px; }
+.launcherLanguageOption:hover, .launcherLanguageOption:focus-visible { background: #ffffff12; }
+.launcherLanguageOption[aria-checked='true'] { color: #9be4a7; background: #2a513566; }
 #launch_button:disabled { cursor: default; }

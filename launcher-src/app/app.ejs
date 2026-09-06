@@ -30,12 +30,25 @@
 </head>
 <body bkid="0">
     <%- include('frame') %>
-    <select id="launcherLanguage" aria-label="Language / Язык / Język">
-        <option value="auto"><%= lang('app.autoLanguage') %></option>
-        <option value="ru_RU">Русский</option>
-        <option value="en_US">English</option>
-        <option value="pl_PL">Polski</option>
-    </select>
+    <div id="launcherLanguageControl">
+        <button id="launcherLanguageButton" type="button" aria-label="Language / Язык / Język" aria-haspopup="menu" aria-expanded="false">
+            <span id="launcherLanguageFlag" class="launcherLanguageFlag" data-language="auto" aria-hidden="true"></span>
+        </button>
+        <div id="launcherLanguageMenu" role="menu" aria-label="Language / Язык / Język" hidden>
+            <button type="button" class="launcherLanguageOption" data-language="auto" role="menuitemradio" aria-checked="false">
+                <span class="launcherLanguageFlag" data-language="auto" aria-hidden="true"></span><span><%= lang('app.autoLanguage') %></span>
+            </button>
+            <button type="button" class="launcherLanguageOption" data-language="ru_RU" role="menuitemradio" aria-checked="false">
+                <span class="launcherLanguageFlag" data-language="ru_RU" aria-hidden="true"></span><span>Русский</span>
+            </button>
+            <button type="button" class="launcherLanguageOption" data-language="en_US" role="menuitemradio" aria-checked="false">
+                <span class="launcherLanguageFlag" data-language="en_US" aria-hidden="true"></span><span>English</span>
+            </button>
+            <button type="button" class="launcherLanguageOption" data-language="pl_PL" role="menuitemradio" aria-checked="false">
+                <span class="launcherLanguageFlag" data-language="pl_PL" aria-hidden="true"></span><span>Polski</span>
+            </button>
+        </div>
+    </div>
     <div id="main">
         <%- include('welcome') %>
         <%- include('login') %>
