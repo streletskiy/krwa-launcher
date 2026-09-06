@@ -1,7 +1,7 @@
 import { mkdirs, pathExists } from 'fs-extra/esm'
 import { lstat, readdir, readFile, writeFile } from 'fs/promises'
 import { Server, Module } from 'helios-distribution-types'
-import { dirname, join, resolve as resolvePath } from 'path'
+import { dirname, isAbsolute, join, relative, resolve as resolvePath } from 'path'
 import { URL } from 'url'
 import { VersionSegmentedRegistry } from '../../util/VersionSegmentedRegistry.js'
 import { ServerMeta, getDefaultServerMeta, ServerMetaOptions, UntrackedFilesOption } from '../../model/nebula/ServerMeta.js'
@@ -18,6 +18,13 @@ export interface CreateServerResult {
     modContainer?: string
     libraryContainer: string
     miscFileContainer: string
+}
+
+interface NeoForgeModuleLock {
+    formatVersion: number
+    minecraftVersion: string
+    neoforgeVersion: string
+    modules: Module[]
 }
 
 export class ServerStructure extends BaseModelStructure<Server> {
@@ -171,6 +178,28 @@ export class ServerStructure extends BaseModelStructure<Server> {
                 }
 
                 const modules: Module[] = []
+
+                if(serverMeta.neoforge) {
+                    if(serverMeta.forge || serverMeta.fabric) {
+                        throw new Error(`Server ${file} cannot combine NeoForge with another top-level mod loader.`)
+                    }
+
+                    const lockFile = serverMeta.neoforge.lockFile ?? 'neoforge-lock.json'
+                    const lockPath = resolvePath(absoluteServerRoot, lockFile)
+                    const relativeLockPath = relative(absoluteServerRoot, lockPath)
+                    if(relativeLockPath.startsWith('..') || isAbsolute(relativeLockPath)) {
+                        throw new Error(`NeoForge lock for ${file} must be inside its server directory.`)
+                    }
+
+                    const lock = JSON.parse(await readFile(lockPath, 'utf-8')) as NeoForgeModuleLock
+                    if(lock.formatVersion !== 1 || !Array.isArray(lock.modules)) {
+                        throw new Error(`Unsupported or malformed NeoForge lock: ${lockFile}`)
+                    }
+                    if(lock.minecraftVersion !== minecraftVersion.toString() || lock.neoforgeVersion !== serverMeta.neoforge.version) {
+                        throw new Error(`NeoForge lock metadata does not match server ${file}.`)
+                    }
+                    modules.push(...lock.modules)
+                }
 
                 if(serverMeta.forge) {
                     const forgeResolver = VersionSegmentedRegistry.getForgeResolver(

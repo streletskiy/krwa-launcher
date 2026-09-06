@@ -10,6 +10,7 @@ const path                  = require('path')
 
 const ConfigManager            = require('./configmanager')
 const { YGGDRASIL_API_ROOT }   = require('./ipcconstants')
+const { isNeoForgeProfile, syncNeoForgeMods } = require('./neoforgemods')
 
 const logger = LoggerUtil.getLogger('ProcessBuilder')
 
@@ -39,7 +40,12 @@ class ProcessBuilder {
 
         this.usingLiteLoader = false
         this.usingFabricLoader = false
+        this.usingNeoForge = false
         this.llPath = null
+    }
+
+    static isNeoForgeProfile(server, modManifest){
+        return isNeoForgeProfile(server, modManifest)
     }
     
     /**
@@ -57,7 +63,12 @@ class ProcessBuilder {
         logger.info('Using liteloader:', this.usingLiteLoader)
         this.usingFabricLoader = this.server.modules.some(mdl => mdl.rawModule.type === Type.Fabric)
         logger.info('Using fabric loader:', this.usingFabricLoader)
+        this.usingNeoForge = ProcessBuilder.isNeoForgeProfile(this.server, this.modManifest)
+        logger.info('Using NeoForge loader:', this.usingNeoForge)
         const modObj = this.resolveModConfiguration(ConfigManager.getModConfiguration(this.server.rawServer.id).mods, this.server.modules)
+        if(this.usingNeoForge){
+            this.syncNeoForgeMods(modObj.fMods)
+        }
         
         // Mod list below 1.13
         // Fabric only supports 1.14+
@@ -71,7 +82,7 @@ class ProcessBuilder {
         const uberModArr = modObj.fMods.concat(modObj.lMods)
         let args = this.constructJVMArguments(uberModArr, tempNativePath)
 
-        if(mcVersionAtLeast('1.13', this.server.rawServer.minecraftVersion)){
+        if(mcVersionAtLeast('1.13', this.server.rawServer.minecraftVersion) && !this.usingNeoForge){
             //args = args.concat(this.constructModArguments(modObj.fMods))
             args = args.concat(this.constructModList(modObj.fMods))
         }
@@ -330,6 +341,15 @@ class ProcessBuilder {
 
     }
 
+    /**
+     * NeoForge discovers mods from the instance's mods directory. Distribution
+     * artifacts remain deduplicated in common/modstore, so copy only this
+     * profile's enabled set and remove only files managed by an earlier sync.
+     */
+    syncNeoForgeMods(mods) {
+        syncNeoForgeMods(this.gameDir, mods, logger)
+    }
+
     _processAutoConnectArg(args){
         if(ConfigManager.getAutoConnect() && this.server.rawServer.autoconnect){
             if(mcVersionAtLeast('1.20', this.server.rawServer.minecraftVersion)){
@@ -431,6 +451,7 @@ class ProcessBuilder {
                     .replaceAll('${library_directory}', this.libPath)
                     .replaceAll('${classpath_separator}', ProcessBuilder.getClasspathSeparator())
                     .replaceAll('${version_name}', this.modManifest.id)
+                    .replaceAll('${minecraft_jar}', path.join(this.commonDir, 'versions', this.vanillaManifest.id, `${this.vanillaManifest.id}.jar`))
                 )
             }
         }
@@ -717,7 +738,7 @@ class ProcessBuilder {
     classpathArg(mods, tempNativePath){
         let cpArgs = []
 
-        if(!mcVersionAtLeast('1.17', this.server.rawServer.minecraftVersion) || this.usingFabricLoader) {
+        if(!mcVersionAtLeast('1.17', this.server.rawServer.minecraftVersion) || this.usingFabricLoader || this.usingNeoForge) {
             // Add the version.jar to the classpath.
             // Must not be added to the classpath for Forge 1.17+.
             const version = this.vanillaManifest.id

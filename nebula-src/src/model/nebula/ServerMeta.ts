@@ -97,6 +97,25 @@ export interface ServerMeta {
     }
 
     /**
+     * Properties related to NeoForge profiles imported from a checked module lock.
+     * NeoForge 1.20.3+ no longer supports Forge's legacy mod-list arguments, so
+     * these profiles are described explicitly instead of going through the old
+     * Forge resolver.
+     */
+    neoforge?: {
+        /**
+         * The NeoForge version. This does NOT include the Minecraft version.
+         * Ex. 21.1.248
+         */
+        version: string
+        /**
+         * Module lock relative to the server directory.
+         * Defaults to neoforge-lock.json.
+         */
+        lockFile?: string
+    }
+
+    /**
      * A list of option objects defining patterns for untracked files.
      */
     untrackedFiles?: UntrackedFilesOption[]

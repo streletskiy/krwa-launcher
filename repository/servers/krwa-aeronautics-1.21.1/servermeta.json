@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "name": "KRWA Aeronautics",
+    "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
+    "icon": "",
+    "address": "127.0.0.1:25568",
+    "mainServer": false,
+    "autoconnect": false,
+    "javaOptions": {
+      "distribution": "TEMURIN",
+      "supported": ">=21 <22",
+      "suggestedMajor": 21,
+      "ram": {
+        "recommended": 8192,
+        "minimum": 6144
+      }
+    }
+  },
+  "neoforge": {
+    "version": "21.1.248",
+    "lockFile": "neoforge-lock.json"
+  },
+  "untrackedFiles": [
+    {
+      "appliesTo": ["files"],
+      "patterns": [
+        "config/euphoria_patcher/.data.json",
+        "config/fabric/indigo-renderer.properties",
+        "config/fml.toml",
+        "config/iris.properties",
+        "config/packetfixer.properties",
+        "config/sodium-fingerprint.json",
+        "config/sodium-options.json",
+        "shaderpacks/*EuphoriaPatches_1.9.3/shaders/lang/*.lang",
+        "shaderpacks/*EuphoriaPatches_1.9.3/shaders/pack.json",
+        "shaderpacks/*EuphoriaPatches_1.9.3/shaders/shaders.properties"
+      ]
+    }
+  ]
+}
