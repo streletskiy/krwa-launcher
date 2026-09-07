@@ -41,7 +41,7 @@
     "toml": "^5.0.0"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^5.6.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "electron": "^44.2.0",
     "electron-builder": "^26.15.3",
     "eslint": "^9.39.2"
