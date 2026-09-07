@@ -58,3 +58,36 @@ test('stable download alias follows the published manifest and rejects arbitrary
         await rm(directory, { recursive: true })
     }
 })
+
+test('macOS download alias selects the universal DMG from the update manifest', async () => {
+    const directory = await mkdtemp(join(tmpdir(), 'krwa-catalog-'))
+    await mkdir(join(directory, 'downloads'))
+    const manifest = join(directory, 'downloads/latest-mac.yml')
+    const server = createCommunityServer(directory)
+    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
+    const url = `http://127.0.0.1:${server.address().port}/download/macos`
+    try {
+        await writeFile(manifest, [
+            'version: 0.1.13',
+            'files:',
+            '  - url: KRWA-Launcher-0.1.13-mac-universal.zip',
+            '    sha512: zip-hash',
+            '  - url: KRWA-Launcher-0.1.13-mac-universal.dmg',
+            '    sha512: dmg-hash',
+            'path: KRWA-Launcher-0.1.13-mac-universal.zip',
+            '',
+        ].join('\n'))
+        const response = await fetch(url, { redirect: 'manual' })
+        assert.equal(response.status, 302)
+        assert.equal(response.headers.get('location'), '/downloads/KRWA-Launcher-0.1.13-mac-universal.dmg')
+        assert.equal(response.headers.get('cache-control'), 'no-store')
+
+        await writeFile(manifest, 'version: 1\nfiles:\n  - url: https://untrusted.example/file.dmg\n')
+        assert.equal((await fetch(url, { redirect: 'manual' })).status, 404)
+    } finally {
+        server.close()
+        assert.equal(dirname(resolve(directory)), resolve(tmpdir()))
+        assert(basename(directory).startsWith('krwa-catalog-'))
+        await rm(directory, { recursive: true })
+    }
+})

@@ -1,6 +1,6 @@
 {
   "name": "krwa-launcher",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "productName": "KRWA Launcher",
   "description": "Минималистичный лаунчер сервера KRWA",
   "author": "streletskiy; based on Helios Launcher by Daniel Scalzi",

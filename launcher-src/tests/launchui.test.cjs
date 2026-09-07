@@ -7,6 +7,7 @@ const Lang = require('../app/assets/js/langloader')
 
 const appPath = path.resolve(__dirname, '../app/app.ejs')
 const landingPath = path.resolve(__dirname, '../app/assets/js/scripts/landing.js')
+const uiCorePath = path.resolve(__dirname, '../app/assets/js/scripts/uicore.js')
 const themePath = path.resolve(__dirname, '../app/assets/css/krwa-theme.css')
 
 test('landing script only references controls that exist in the rendered launcher', async () => {
@@ -44,4 +45,10 @@ test('download stage reports the file count in every language', () => {
         assert.ok(Lang.queryJS('landing.dlAsync.distributionTimeout').length > 20)
         assert.ok(Lang.queryJS('landing.systemScan.checkTimeout').length > 10)
     }
+})
+
+test('macOS update action uses the stable KRWA download alias', () => {
+    const source = fs.readFileSync(uiCorePath, 'utf8')
+    assert.ok(source.includes("info.darwindownload = 'https://mc.krwa.ru/download/macos'"))
+    assert.ok(!source.includes('github.com/dscalzi/HeliosLauncher/releases'))
 })

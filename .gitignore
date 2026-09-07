@@ -12,6 +12,7 @@ server-tools/
 launcher-src/node_modules/
 launcher-src/dist/
 launcher-src/dist-linux/
+launcher-src/dist-mac/
 nebula-src/node_modules/
 nebula-src/dist/
 repository/downloads/*

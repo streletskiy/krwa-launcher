@@ -81,12 +81,20 @@ export async function snapshot(repository) {
 
 export async function downloadLinks(repository) {
     const downloads = []
-    for (const [platform, manifest, pattern] of [['Windows', 'latest.yml', /^KRWA-Launcher-setup-[\w.-]+\.exe$/], ['Linux', 'latest-linux.yml', /^KRWA-Launcher-[\w.-]+\.AppImage$/]]) {
+    const platforms = [
+        { platform: 'Windows', slug: 'windows', manifest: 'latest.yml', pattern: /^KRWA-Launcher-setup-[\w.-]+\.exe$/ },
+        { platform: 'Linux', slug: 'linux', manifest: 'latest-linux.yml', pattern: /^KRWA-Launcher-[\w.-]+\.AppImage$/ },
+        { platform: 'macOS', slug: 'macos', manifest: 'latest-mac.yml', pattern: /^KRWA-Launcher-[\w.-]+-mac-universal\.dmg$/, fromFiles: true },
+    ]
+    for (const { platform, slug, manifest, pattern, fromFiles } of platforms) {
         try {
             const content = await readFile(join(repository, 'downloads', manifest), 'utf8')
-            const file = /^path: (.+)$/m.exec(content)?.[1]?.trim()
+            const candidates = fromFiles
+                ? [...content.matchAll(/^\s*-\s+url:\s+(.+)$/gm)].map(match => match[1].trim())
+                : [/^path: (.+)$/m.exec(content)?.[1]?.trim()]
+            const file = candidates.find(candidate => candidate && pattern.test(candidate))
             const version = /^version: ([\w.-]+)$/m.exec(content)?.[1]
-            if (file && pattern.test(file) && version) downloads.push({ platform, version, url: `/download/${platform.toLowerCase()}`, target: `/downloads/${file}` })
+            if (file && version) downloads.push({ platform, version, url: `/download/${slug}`, target: `/downloads/${file}` })
         } catch { /* An unpublished platform has no download action. */ }
     }
     return downloads
@@ -95,7 +103,7 @@ export async function downloadLinks(repository) {
 export function createCommunityServer(repository) {
     let cached, expires = 0, pending
     return createServer(async (req, res) => {
-        if (['/download/windows', '/download/linux'].includes(req.url) && ['GET', 'HEAD'].includes(req.method)) {
+        if (['/download/windows', '/download/linux', '/download/macos'].includes(req.url) && ['GET', 'HEAD'].includes(req.method)) {
             const download = (await downloadLinks(repository)).find(d => d.url === req.url)
             res.writeHead(download ? 302 : 404, { 'Cache-Control': 'no-store', ...(download ? { Location: download.target } : {}) })
             res.end(); return

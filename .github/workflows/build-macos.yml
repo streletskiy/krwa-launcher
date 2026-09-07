@@ -1,0 +1,76 @@
+name: Build macOS launcher
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: launcher-src/package-lock.json
+
+      - name: Install dependencies
+        working-directory: launcher-src
+        run: npm ci
+
+      - name: Read release version
+        id: package
+        working-directory: launcher-src
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Test and lint
+        working-directory: launcher-src
+        run: |
+          node --test tests/*.test.cjs
+          npm run lint
+
+      - name: Build universal macOS package
+        working-directory: launcher-src
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: npm run dist:mac
+
+      - name: Verify universal package
+        working-directory: launcher-src
+        env:
+          RELEASE_VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          test -f "dist/KRWA-Launcher-${RELEASE_VERSION}-mac-universal.dmg"
+          test -f "dist/KRWA-Launcher-${RELEASE_VERSION}-mac-universal.zip"
+          test -f dist/latest-mac.yml
+          app_binary="dist/mac-universal/KRWA Launcher.app/Contents/MacOS/KRWA Launcher"
+          app_arches=" $(lipo -archs "$app_binary") "
+          [[ "$app_arches" == *" x86_64 "* ]]
+          [[ "$app_arches" == *" arm64 "* ]]
+          test "$(plutil -extract CFBundleIdentifier raw 'dist/mac-universal/KRWA Launcher.app/Contents/Info.plist')" = "ru.krwa.launcher"
+          test "$(plutil -extract CFBundleShortVersionString raw 'dist/mac-universal/KRWA Launcher.app/Contents/Info.plist')" = "$RELEASE_VERSION"
+          grep -F "KRWA-Launcher-${RELEASE_VERSION}-mac-universal.dmg" dist/latest-mac.yml
+          grep -F "KRWA-Launcher-${RELEASE_VERSION}-mac-universal.zip" dist/latest-mac.yml
+
+      - name: Upload macOS release files
+        uses: actions/upload-artifact@v4
+        with:
+          name: KRWA-Launcher-macOS-${{ steps.package.outputs.version }}
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            launcher-src/dist/KRWA-Launcher-*-mac-universal.dmg
+            launcher-src/dist/KRWA-Launcher-*-mac-universal.dmg.blockmap
+            launcher-src/dist/KRWA-Launcher-*-mac-universal.zip
+            launcher-src/dist/KRWA-Launcher-*-mac-universal.zip.blockmap
+            launcher-src/dist/latest-mac.yml
