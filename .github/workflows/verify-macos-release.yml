@@ -45,7 +45,15 @@ jobs:
           [[ "$app_arches" == *" arm64 "* ]]
           test "$(plutil -extract CFBundleIdentifier raw "$app_path/Contents/Info.plist")" = "ru.krwa.launcher"
           test "$(plutil -extract CFBundleShortVersionString raw "$app_path/Contents/Info.plist")" = "$RELEASE_VERSION"
-          "$app_binary" --version
+          "$app_binary" --smoke-test >launcher-smoke.log 2>&1 &
+          app_pid=$!
+          sleep 10
+          if kill -0 "$app_pid" 2>/dev/null; then
+            kill -TERM "$app_pid"
+            wait "$app_pid" || true
+          else
+            wait "$app_pid"
+          fi
 
       - name: Check managed-download endpoints
         run: |
