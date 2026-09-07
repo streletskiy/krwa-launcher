@@ -4,6 +4,14 @@
 
 Текущая версия лаунчера — **0.1.13**. Основной профиль — **KRWA Aeronautics 1.0.2** на Minecraft 1.21.1 и NeoForge 21.1.248.
 
+## Скачать
+
+- [Windows 10/11 x64](https://mc.krwa.ru/download/windows)
+- [Linux x64 AppImage](https://mc.krwa.ru/download/linux)
+- [macOS Universal — Intel и Apple Silicon](https://mc.krwa.ru/download/macos)
+
+Это постоянные ссылки: при следующем релизе они автоматически будут вести на актуальную стабильную версию.
+
 ## Возможности
 
 - автоматическая установка и проверка Java, Minecraft, NeoForge, библиотек и модов;
