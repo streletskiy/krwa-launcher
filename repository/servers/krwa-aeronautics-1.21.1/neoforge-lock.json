@@ -3542,6 +3542,36 @@
         "url": "https://www.curseforge.com/api/v1/mods/1236537/files/7575506/download",
         "path": "curseforge/1236537/7575506/creategarnished-0.1.7.4+1.21.1-neoforged.jar"
       }
+    },
+    {
+      "id": "curseforge.project-835847:file:8406701@jar",
+      "name": "Controlify 3.0.1 LTS (Steam Deck / controllers)",
+      "type": "ForgeMod",
+      "required": {
+        "value": false,
+        "def": false
+      },
+      "artifact": {
+        "size": 7981721,
+        "MD5": "b2c7fee15e07017c3802c01a78a23ca8",
+        "url": "https://www.curseforge.com/api/v1/mods/835847/files/8406701/download",
+        "path": "curseforge/835847/8406701/controlify-3.0.1+lts+1.21.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-335493:file:7546938@jar",
+      "name": "Dynamic FPS 3.11.4 (Steam Deck battery helper)",
+      "type": "ForgeMod",
+      "required": {
+        "value": false,
+        "def": false
+      },
+      "artifact": {
+        "size": 220193,
+        "MD5": "e5ef3e5d37eedad79cf44897229fd8f2",
+        "url": "https://www.curseforge.com/api/v1/mods/335493/files/7546938/download",
+        "path": "curseforge/335493/7546938/dynamic-fps-3.11.4+minecraft-1.21.0-neoforge.jar"
+      }
     }
   ]
 }
