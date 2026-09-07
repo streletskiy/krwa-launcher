@@ -36,7 +36,7 @@
     "jquery": "^3.7.1",
     "lodash.merge": "^4.6.2",
     "prismarine-nbt": "2.8.0",
-    "semver": "^7.7.3",
+    "semver": "^7.8.5",
     "skinview-utils": "0.7.1",
     "toml": "^5.0.0"
   },
