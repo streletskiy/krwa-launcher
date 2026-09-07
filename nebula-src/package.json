@@ -50,7 +50,7 @@
     "node-stream-zip": "^1.15.0",
     "toml": "^5.0.0",
     "triple-beam": "^1.4.1",
-    "ts-json-schema-generator": "^2.4.0",
+    "ts-json-schema-generator": "^2.9.0",
     "winston": "^3.19.0",
     "yargs": "^18.0.0"
   }
