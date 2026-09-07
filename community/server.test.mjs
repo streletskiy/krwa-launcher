@@ -6,9 +6,9 @@ import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve, dirname, basename } from 'node:path'
 
-test('public catalog excludes internal addresses, artifacts and player identities', () => {
-    const result = publicServer({ id: 'create', name: 'Create', address: 'private:25565', javaOptions: {}, modules: [{ type: 'FabricMod', name: 'Create', id: 'x:create:1', artifact: { url: 'secret' } }, { type: 'Library' }] }, { state: 'unavailable' })
-    assert.deepEqual(result.mods, [{ name: 'Create', version: '1' }])
+test('public catalog includes Fabric and NeoForge mods but excludes internal data', () => {
+    const result = publicServer({ id: 'create', name: 'Create', address: 'private:25565', javaOptions: {}, modules: [{ type: 'FabricMod', name: 'Create', id: 'x:create:1', artifact: { url: 'secret' } }, { type: 'ForgeMod', name: 'Aeronautics', id: 'x:aeronautics:2' }, { type: 'Library' }] }, { state: 'unavailable' })
+    assert.deepEqual(result.mods, [{ name: 'Create', version: '1' }, { name: 'Aeronautics', version: '2' }])
     assert.equal(JSON.stringify(result).includes('private'), false)
     assert.equal(JSON.stringify(result).includes('secret'), false)
 })

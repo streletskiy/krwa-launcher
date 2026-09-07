@@ -67,7 +67,7 @@ export function publicServer(server, status) {
     return {
         id: server.id, name: server.name, description: server.description,
         minecraftVersion: server.minecraftVersion, packVersion: server.version,
-        mods: (server.modules ?? []).filter(m => m.type === 'FabricMod').map(m => ({ name: m.name, version: m.id.split(':').at(-1) })),
+        mods: (server.modules ?? []).filter(m => ['FabricMod', 'ForgeMod'].includes(m.type)).map(m => ({ name: m.name, version: m.id.split(':').at(-1) })),
         status,
     }
 }

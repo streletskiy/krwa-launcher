@@ -1,12 +1,12 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "KRWA Aeronautics",
     "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
     "icon": "",
-    "address": "127.0.0.1:25568",
-    "mainServer": false,
-    "autoconnect": false,
+    "address": "create.krwa.ru:25565",
+    "mainServer": true,
+    "autoconnect": true,
     "javaOptions": {
       "distribution": "TEMURIN",
       "supported": ">=21 <22",
