@@ -4,12 +4,14 @@ import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 import stylistic from '@stylistic/eslint-plugin';
+import security from 'eslint-plugin-security';
 
 export default defineConfig(
   {
-    ignores: ['**/dist/**', 'node_modules', 'eslint.config.mjs'],
+    ignores: ['**/dist/**', 'node_modules', 'eslint.config.mjs', 'tests/**'],
   },
   eslint.configs.recommended,
+  security.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
   tseslint.configs.stylisticTypeChecked,
   {
@@ -41,6 +43,8 @@ export default defineConfig(
           requireLast: false
         }
       }],
+      'security/detect-non-literal-fs-filename': 'off',
+      'security/detect-object-injection': 'off',
       '@typescript-eslint/consistent-indexed-object-style': 'off',  // Don't need to enforce types be Record
       '@typescript-eslint/explicit-function-return-type': ['warn'], // Warn if no return type is set
       '@typescript-eslint/no-unsafe-call': 'off',                   // There are instances where internal types are ambigious but it doesnt matter                  

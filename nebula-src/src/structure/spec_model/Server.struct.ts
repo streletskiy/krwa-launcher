@@ -29,8 +29,20 @@ interface NeoForgeModuleLock {
 
 export class ServerStructure extends BaseModelStructure<Server> {
 
-    private readonly ID_REGEX = /^(.+-(\d+\.\d+(?:\.\d+)?(?:-[0-9A-Za-z][0-9A-Za-z.-]*)?))$/
     private readonly SERVER_META_FILE = 'servermeta.json'
+
+    private parseServerDirectory(file: string): { id: string, minecraftVersion: string } | null {
+        if(file.length === 0 || file.length > 256) {
+            return null
+        }
+        for(let separator = file.lastIndexOf('-'); separator > 0; separator = file.lastIndexOf('-', separator - 1)) {
+            const candidate = file.slice(separator + 1)
+            if(MinecraftVersion.isMinecraftVersion(candidate)) {
+                return { id: file, minecraftVersion: candidate }
+            }
+        }
+        return null
+    }
 
     constructor(
         absoluteRoot: string,
@@ -140,8 +152,8 @@ export class ServerStructure extends BaseModelStructure<Server> {
 
                 this.logger.info(`Beginning processing of ${file}.`)
 
-                const match = this.ID_REGEX.exec(file)
-                if (match == null) {
+                const serverDirectory = this.parseServerDirectory(file)
+                if (serverDirectory == null) {
                     this.logger.warn(`Server directory ${file} does not match the defined standard.`)
                     this.logger.warn('All server ids must end with -<minecraft version> (ex. -1.12.2)')
                     continue
@@ -149,7 +161,7 @@ export class ServerStructure extends BaseModelStructure<Server> {
 
                 // Read server meta
                 const serverMeta = JSON.parse(await readFile(resolvePath(absoluteServerRoot, this.SERVER_META_FILE), 'utf-8')) as ServerMeta
-                const minecraftVersion = new MinecraftVersion(match[2])
+                const minecraftVersion = new MinecraftVersion(serverDirectory.minecraftVersion)
                 const untrackedFiles: UntrackedFilesOption[] = serverMeta.untrackedFiles || []
 
                 let iconUrl: string = null!
@@ -259,13 +271,13 @@ export class ServerStructure extends BaseModelStructure<Server> {
                 modules.push(...fileModules)
 
                 accumulator.push({
-                    id: match[1],
+                    id: serverDirectory.id,
                     name: serverMeta.meta.name,
                     description: serverMeta.meta.description,
                     icon: iconUrl,
                     version: serverMeta.meta.version,
                     address: serverMeta.meta.address,
-                    minecraftVersion: match[2],
+                    minecraftVersion: serverDirectory.minecraftVersion,
                     ...(serverMeta.meta.discord ? {discord: serverMeta.meta.discord} : {}),
                     mainServer: serverMeta.meta.mainServer,
                     autoconnect: serverMeta.meta.autoconnect,

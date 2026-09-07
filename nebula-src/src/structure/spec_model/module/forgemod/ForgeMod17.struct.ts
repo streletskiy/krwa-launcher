@@ -57,7 +57,7 @@ export class ForgeModStructure17 extends BaseForgeModStructure<McModInfo> {
             try {
                 changelogBuf = zip.entryDataSync('changelog.txt')
             } catch(err) {
-                throw new Error('Failed to read OptiFine changelog.')
+                throw new Error('Failed to read OptiFine changelog.', { cause: err })
             }
 
             const info = changelogBuf.toString().split('\n')[0].trim()

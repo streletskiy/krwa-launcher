@@ -11,7 +11,35 @@ export interface MavenComponents {
 
 export class MavenUtil {
 
-    public static readonly ID_REGEX = /([^@:]+):([^@:]+):?([^@:]+)?:?(?:([^@:]+))?:?(?:@{1}([^@:]+))?/
+    private static parseIdentifier(id: string, defaultExtension: string): MavenComponents | null {
+        if(typeof id !== 'string' || id.length === 0 || id.length > 1024) {
+            return null
+        }
+        const atParts = id.split('@')
+        if(atParts.length > 2) {
+            return null
+        }
+        const coordinates = atParts[0].split(':')
+        if(coordinates.length < 3 || coordinates.length > 4) {
+            return null
+        }
+        const allowed = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz._+-'
+        const isSafeComponent = (component: string): boolean => component.length > 0 && component.length <= 256
+            && component !== '.' && component !== '..'
+            && [...component].every(char => allowed.includes(char))
+        const isSafeGroup = (group: string): boolean => group.split('.').every(segment => segment.length > 0)
+        if(!coordinates.every(isSafeComponent) || !isSafeGroup(coordinates[0])
+            || (atParts[1] != null && !isSafeComponent(atParts[1]))) {
+            return null
+        }
+        return {
+            group: coordinates[0],
+            artifact: coordinates[1],
+            version: coordinates[2],
+            classifier: coordinates[3],
+            extension: atParts[1] ?? defaultExtension
+        }
+    }
 
     public static mavenComponentsToIdentifier(
         group: string,
@@ -40,7 +68,7 @@ export class MavenUtil {
     }
 
     public static isMavenIdentifier(id: string): boolean {
-        return MavenUtil.ID_REGEX.test(id)
+        return MavenUtil.parseIdentifier(id, 'jar') != null
     }
 
     public static getMavenComponents(id: string, extension = 'jar'): MavenComponents {
@@ -48,16 +76,9 @@ export class MavenUtil {
             throw new Error('Id is not a maven identifier.')
         }
 
-        const result = MavenUtil.ID_REGEX.exec(id)
-
-        if (result != null) {
-            return {
-                group: result[1],
-                artifact: result[2],
-                version: result[3],
-                classifier: result[4],
-                extension: result[5] || extension
-            }
+        const result = MavenUtil.parseIdentifier(id, extension)
+        if(result != null) {
+            return result
         }
 
         throw new Error('Failed to process maven data.')

@@ -1432,13 +1432,13 @@ function isPrerelease(version){
  * @param {Element} checkElement The check mark element.
  */
 function populateVersionInformation(version, valueElement, titleElement, checkElement){
-    valueElement.innerHTML = version
+    valueElement.textContent = version
     if(isPrerelease(version)){
-        titleElement.innerHTML = Lang.queryJS('settings.about.preReleaseTitle')
+        titleElement.textContent = Lang.queryJS('settings.about.preReleaseTitle')
         titleElement.style.color = '#ff886d'
         checkElement.style.background = '#ff886d'
     } else {
-        titleElement.innerHTML = Lang.queryJS('settings.about.stableReleaseTitle')
+        titleElement.textContent = Lang.queryJS('settings.about.stableReleaseTitle')
         titleElement.style.color = null
         checkElement.style.background = null
     }
@@ -1457,7 +1457,8 @@ function populateAboutVersionInformation(){
  */
 function populateReleaseNotes(){
     $.ajax({
-        url: 'https://github.com/dscalzi/HeliosLauncher/releases.atom',
+        url: 'https://github.com/streletskiy/krwa-launcher/releases.atom',
+        dataType: 'xml',
         success: (data) => {
             const version = 'v' + remote.app.getVersion()
             const entries = $(data).find('entry')
@@ -1468,16 +1469,21 @@ function populateReleaseNotes(){
                 id = id.substring(id.lastIndexOf('/')+1)
 
                 if(id === version){
-                    settingsAboutChangelogTitle.innerHTML = entry.find('title').text()
-                    settingsAboutChangelogText.innerHTML = entry.find('content').text()
-                    settingsAboutChangelogButton.href = entry.find('link').attr('href')
+                    const releaseUrl = new URL(entry.find('link').attr('href'))
+                    if(releaseUrl.protocol !== 'https:' || releaseUrl.hostname !== 'github.com'
+                        || !releaseUrl.pathname.startsWith('/streletskiy/krwa-launcher/releases/tag/')) {
+                        throw new Error('Release feed returned an unexpected link.')
+                    }
+                    settingsAboutChangelogTitle.textContent = entry.find('title').text()
+                    settingsAboutChangelogText.textContent = entry.find('content').text()
+                    settingsAboutChangelogButton.href = releaseUrl.toString()
                 }
             }
 
         },
         timeout: 2500
-    }).catch(err => {
-        settingsAboutChangelogText.innerHTML = Lang.queryJS('settings.about.releaseNotesFailed')
+    }).catch(_err => {
+        settingsAboutChangelogText.textContent = Lang.queryJS('settings.about.releaseNotesFailed')
     })
 }
 

@@ -3,6 +3,7 @@ const path      = require('path')
 const { ipcRenderer, shell } = require('electron')
 const { SHELL_OPCODE } = require('./ipcconstants')
 const Lang      = require('./langloader')
+const { atomicWriteFileSync, readFileIfExistsSync } = require('./filesystemutil')
 
 // Group #1: File Name (without .disabled, if any)
 // Group #2: File Extension (jar, zip, or litemod)
@@ -226,27 +227,27 @@ exports.getEnabledShaderpack = function(instanceDir){
  * @param {string} pack the file name of the shaderpack.
  */
 exports.setEnabledShaderpack = function(instanceDir, pack){
+    if(pack !== 'OFF' && (path.basename(pack) !== pack || !SHADER_REGEX.test(pack))) {
+        throw new Error('Invalid shaderpack file name.')
+    }
     exports.validateDir(instanceDir)
 
     const irisConfig = path.join(instanceDir, IRIS_SHADER_CONFIG)
     fs.ensureDirSync(path.dirname(irisConfig))
-    let irisBuf = fs.existsSync(irisConfig) ? fs.readFileSync(irisConfig, {encoding: 'utf-8'}) : ''
+    let irisBuf = readFileIfExistsSync(irisConfig, {encoding: 'utf-8'}) ?? ''
     irisBuf = setProperty(irisBuf, SHADERS_ENABLED_OPTION, 'enableShaders', pack !== 'OFF')
     if(pack !== 'OFF') {
         irisBuf = setProperty(irisBuf, SHADER_OPTION, 'shaderPack', pack)
     }
-    fs.writeFileSync(irisConfig, irisBuf, {encoding: 'utf-8'})
+    atomicWriteFileSync(irisConfig, irisBuf, {encoding: 'utf-8'})
 
     // Keep the legacy OptiFine setting synchronized for older packs.
     const optionsShaders = path.join(instanceDir, SHADER_CONFIG)
-    let buf
-    if(fs.existsSync(optionsShaders)){
-        buf = fs.readFileSync(optionsShaders, {encoding: 'utf-8'})
-        buf = setProperty(buf, SHADER_OPTION, 'shaderPack', pack)
-    } else {
-        buf = `shaderPack=${pack}\n`
-    }
-    fs.writeFileSync(optionsShaders, buf, {encoding: 'utf-8'})
+    const currentOptions = readFileIfExistsSync(optionsShaders, {encoding: 'utf-8'})
+    const buf = currentOptions == null
+        ? `shaderPack=${pack}\n`
+        : setProperty(currentOptions, SHADER_OPTION, 'shaderPack', pack)
+    atomicWriteFileSync(optionsShaders, buf, {encoding: 'utf-8'})
 }
 
 /**

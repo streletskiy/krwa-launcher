@@ -1,5 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
+const { atomicWriteFileSync, readFileIfExistsSync } = require('./filesystemutil')
 
 function isNeoForgeProfile(server, modManifest){
     return modManifest?.id?.startsWith('neoforge-') === true
@@ -13,9 +14,10 @@ function syncNeoForgeMods(gameDir, mods, logger = console) {
     fs.ensureDirSync(modsDir)
 
     let previous = []
-    if(fs.existsSync(stateFile)){
+    const previousState = readFileIfExistsSync(stateFile, 'utf8')
+    if(previousState != null){
         try {
-            const parsed = JSON.parse(fs.readFileSync(stateFile, 'utf8'))
+            const parsed = JSON.parse(previousState)
             previous = Array.isArray(parsed.files) ? parsed.files : []
         } catch(err) {
             logger.warn('Could not read the previous NeoForge mod state; preserving existing files.', err)
@@ -32,7 +34,7 @@ function syncNeoForgeMods(gameDir, mods, logger = console) {
     for(let i = 0; i < mods.length; i++){
         fs.copyFileSync(mods[i].getPath(), path.join(modsDir, next[i]))
     }
-    fs.writeFileSync(stateFile, JSON.stringify({ files: next.sort() }, null, 2), 'utf8')
+    atomicWriteFileSync(stateFile, JSON.stringify({ files: next.sort() }, null, 2), 'utf8')
 }
 
 module.exports = { isNeoForgeProfile, syncNeoForgeMods }

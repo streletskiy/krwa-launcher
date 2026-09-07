@@ -635,7 +635,7 @@ async function dlAsync(login = true) {
     loggerLaunchSuite.info('Validating files.')
     setLaunchDetails(Lang.queryJS('landing.dlAsync.validatingFileIntegrity'))
     setLaunchPercentage(0)
-    let invalidFileCount = 0
+    let invalidFileCount
     let repairStage = 'validation'
     try {
         invalidFileCount = await runRepairOperation(
@@ -699,8 +699,7 @@ async function dlAsync(login = true) {
         let pb = new ProcessBuilder(serv, versionData, modLoaderData, authUser, remote.app.getVersion())
         setLaunchDetails(Lang.queryJS('landing.dlAsync.launchingGame'))
 
-        // const SERVER_JOINED_REGEX = /\[.+\]: \[CHAT\] [a-zA-Z0-9_]{1,16} joined the game/
-        const SERVER_JOINED_REGEX = new RegExp(`\\[.+\\]: \\[CHAT\\] ${authUser.displayName} joined the game`)
+        const SERVER_JOINED_TEXT = `[CHAT] ${authUser.displayName} joined the game`
 
         let loadCompleteTimer
         const onLoadComplete = () => {
@@ -741,7 +740,7 @@ async function dlAsync(login = true) {
         // Listener for Discord RPC.
         const gameStateChange = function(data){
             data = data.trim()
-            if(SERVER_JOINED_REGEX.test(data)){
+            if(data.includes(SERVER_JOINED_TEXT)){
                 DiscordWrapper.updateDetails(Lang.queryJS('landing.discord.joined'))
             } else if(GAME_JOINED_REGEX.test(data)){
                 DiscordWrapper.updateDetails(Lang.queryJS('landing.discord.joining'))

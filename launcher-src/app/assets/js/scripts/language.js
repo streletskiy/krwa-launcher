@@ -38,7 +38,7 @@ launcherLanguageButton.onclick = event => {
 
 launcherLanguageMenu.onkeydown = event => {
     const current = launcherLanguageOptions.indexOf(document.activeElement)
-    let next = current
+    let next
     if(event.key === 'ArrowDown') next = (current + 1) % launcherLanguageOptions.length
     else if(event.key === 'ArrowUp') next = (current - 1 + launcherLanguageOptions.length) % launcherLanguageOptions.length
     else if(event.key === 'Home') next = 0

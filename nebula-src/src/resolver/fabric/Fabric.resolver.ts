@@ -1,5 +1,5 @@
 import { mkdirs, pathExists } from 'fs-extra/esm'
-import { lstat, readFile, writeFile } from 'fs/promises'
+import { chmod, lstat, readFile, rename, rm, writeFile } from 'fs/promises'
 import { Module, Type } from 'helios-distribution-types'
 import { dirname } from 'path'
 import { FabricProfileJson } from '../../model/fabric/FabricMeta.js'
@@ -50,7 +50,14 @@ export class FabricResolver extends BaseResolver {
             FabricResolver.log.debug('Fabric profile not found locally, initializing download..')
             await mkdirs(dirname(versionManifest))
             const manifest = await VersionUtil.getFabricProfileJson(this.minecraftVersion.toString(), this.loaderVersion)
-            await writeFile(versionManifest, JSON.stringify(manifest))
+            const temporaryManifest = `${versionManifest}.${process.pid}.${Date.now()}.tmp`
+            try {
+                await writeFile(temporaryManifest, JSON.stringify(manifest), { encoding: 'utf8', flag: 'wx', mode: 0o600 })
+                await rename(temporaryManifest, versionManifest)
+                await chmod(versionManifest, 0o600)
+            } finally {
+                await rm(temporaryManifest, { force: true })
+            }
         }
         const profileJsonBuf = await readFile(versionManifest)
         const profileJson = JSON.parse(profileJsonBuf.toString()) as FabricProfileJson

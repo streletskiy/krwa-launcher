@@ -5,9 +5,9 @@ const loginOptionsCancelButton = document.getElementById('loginOptionCancelButto
 
 let loginOptionsCancellable = false
 
-let loginOptionsViewOnLoginSuccess
-let loginOptionsViewOnLoginCancel
-let loginOptionsViewOnCancel
+let loginOptionsViewOnLoginSuccess = null
+let loginOptionsViewOnLoginCancel = null
+let loginOptionsViewOnCancel = null
 let loginOptionsViewCancelHandler
 
 function loginOptionsCancelEnabled(val){

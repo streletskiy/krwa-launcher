@@ -2,6 +2,7 @@ const fs   = require('fs-extra')
 const { LoggerUtil } = require('helios-core')
 const os   = require('os')
 const path = require('path')
+const { atomicWriteFileSync } = require('./filesystemutil')
 
 const logger = LoggerUtil.getLogger('ConfigManager')
 
@@ -110,7 +111,7 @@ let config = null
  * Save the current configuration to a file.
  */
 exports.save = function(){
-    fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'UTF-8')
+    atomicWriteFileSync(configPath, JSON.stringify(config, null, 4), 'UTF-8')
 }
 
 /**

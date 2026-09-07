@@ -13,6 +13,7 @@ launcher-src/node_modules/
 launcher-src/dist/
 launcher-src/dist-linux/
 launcher-src/dist-mac/
+launcher-src/dist-mac-download-*/
 nebula-src/node_modules/
 nebula-src/dist/
 repository/downloads/*

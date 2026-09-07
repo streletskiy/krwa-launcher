@@ -122,12 +122,68 @@ export class VersionUtil {
     }
 
     public static async getFabricProfileJson(gameVersion: string, loaderVersion: string): Promise<FabricProfileJson> {
-        const response = await got.get<FabricProfileJson>({
+        if(!MinecraftVersion.isMinecraftVersion(gameVersion)
+            || !VersionUtil.isSafeFabricVersion(loaderVersion)) {
+            throw new Error('Invalid Fabric or Minecraft version.')
+        }
+
+        const response = await got.get({
             method: 'get',
-            url: `https://meta.fabricmc.net/v2/versions/loader/${gameVersion}/${loaderVersion}/profile/json`,
-            responseType: 'json'
+            url: `https://meta.fabricmc.net/v2/versions/loader/${encodeURIComponent(gameVersion)}/${encodeURIComponent(loaderVersion)}/profile/json`,
+            responseType: 'buffer'
         })
-        return response.body
+        if(response.body.length > 1024 * 1024) {
+            throw new Error('Fabric metadata service response is too large.')
+        }
+        const body = JSON.parse(response.body.toString('utf8')) as unknown
+        return VersionUtil.validateFabricProfile(body, gameVersion)
+    }
+
+    private static validateFabricProfile(body: unknown, gameVersion: string): FabricProfileJson {
+        if(body == null || typeof body !== 'object') {
+            throw new Error('Fabric metadata service returned an invalid profile.')
+        }
+
+        const profile = body as Partial<FabricProfileJson>
+        const allowedMainClasses = new Set([
+            'net.fabricmc.loader.impl.launch.knot.KnotClient',
+            'net.fabricmc.loader.launch.knot.KnotClient'
+        ])
+        if(profile.inheritsFrom !== gameVersion
+            || typeof profile.id !== 'string' || profile.id.length > 256
+            || typeof profile.mainClass !== 'string' || !allowedMainClasses.has(profile.mainClass)
+            || !Array.isArray(profile.libraries) || profile.libraries.length > 256
+            || profile.arguments == null || !Array.isArray(profile.arguments.game) || !Array.isArray(profile.arguments.jvm)) {
+            throw new Error('Fabric metadata service returned an invalid profile.')
+        }
+
+        for(const library of profile.libraries) {
+            if(library == null || typeof library !== 'object'
+                || typeof library.name !== 'string'
+                || !VersionUtil.isSafeFabricLibrary(library.name)
+                || typeof library.url !== 'string') {
+                throw new Error('Fabric metadata service returned an invalid library.')
+            }
+            const libraryUrl = new URL(library.url)
+            if(libraryUrl.protocol !== 'https:' || libraryUrl.hostname !== 'maven.fabricmc.net') {
+                throw new Error('Fabric metadata service returned an untrusted library URL.')
+            }
+        }
+
+        return profile as FabricProfileJson
+    }
+
+    private static isSafeFabricVersion(version: string): boolean {
+        const allowed = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz._+~-'
+        return typeof version === 'string' && version.length > 0 && version.length <= 128
+            && /[0-9A-Za-z]/.test(version[0])
+            && [...version].every(char => allowed.includes(char))
+    }
+
+    private static isSafeFabricLibrary(identifier: string): boolean {
+        const parts = identifier.split(':')
+        return parts.length >= 3 && parts.length <= 4
+            && parts.every(part => VersionUtil.isSafeFabricVersion(part))
     }
 
     public static async getPromotedFabricVersion(promotion: string): Promise<string> {

@@ -627,7 +627,7 @@ export class ForgeGradle3Adapter extends ForgeResolver {
         try {
             versionManifestBuf = await this.getVersionManifestFromJar(installerPath)
         } catch(err) {
-            throw new Error('Failed to find version.json in forge installer jar.')
+            throw new Error('Failed to find version.json in forge installer jar.', { cause: err })
         }
         
         const versionManifest = JSON.parse(versionManifestBuf.toString()) as VersionManifestFG3

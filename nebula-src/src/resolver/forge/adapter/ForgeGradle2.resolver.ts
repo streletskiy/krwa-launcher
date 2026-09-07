@@ -65,7 +65,7 @@ export class ForgeGradle2Adapter extends ForgeResolver {
         try {
             versionManifestBuf = await this.getVersionManifestFromJar(targetLocalPath)
         } catch(err) {
-            throw new Error('Failed to find version.json in forge universal jar.')
+            throw new Error('Failed to find version.json in forge universal jar.', { cause: err })
         }
 
         const versionManifest = JSON.parse(versionManifestBuf.toString()) as VersionManifestFG2

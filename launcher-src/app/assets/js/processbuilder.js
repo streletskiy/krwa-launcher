@@ -1,18 +1,32 @@
 const AdmZip                = require('adm-zip')
 const child_process         = require('child_process')
-const crypto                = require('crypto')
 const fs                    = require('fs-extra')
 const { LoggerUtil }        = require('helios-core')
 const { getMojangOS, isLibraryCompatible, mcVersionAtLeast }  = require('helios-core/common')
 const { Type }              = require('helios-distribution-types')
 const os                    = require('os')
 const path                  = require('path')
+const safeRegex             = require('safe-regex2')
 
 const ConfigManager            = require('./configmanager')
 const { YGGDRASIL_API_ROOT }   = require('./ipcconstants')
 const { isNeoForgeProfile, syncNeoForgeMods } = require('./neoforgemods')
+const { createPrivateTempDirectory, resolveArchiveEntry } = require('./filesystemutil')
 
 const logger = LoggerUtil.getLogger('ProcessBuilder')
+
+function matchesOperatingSystemVersion(pattern) {
+    if(pattern == null) {
+        return true
+    }
+    if(typeof pattern !== 'string' || pattern.length > 256 || !safeRegex(pattern)) {
+        logger.warn('Ignoring an unsafe operating-system version rule.')
+        return false
+    }
+    // The pattern is length-bounded and checked by safe-regex2 immediately above.
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    return new RegExp(pattern).test(os.release())
+}
 
 
 /**
@@ -57,7 +71,7 @@ class ProcessBuilder {
             gameDir: this.gameDir, name: this.server.rawServer.name, address: this.server.rawServer.address
         })
         if (!serverAdded.ok) logger.warn('Could not add the public server; the existing server list was preserved.')
-        const tempNativePath = path.join(os.tmpdir(), ConfigManager.getTempNativeFolder(), crypto.pseudoRandomBytes(16).toString('hex'))
+        const tempNativePath = createPrivateTempDirectory(path.join(os.tmpdir(), ConfigManager.getTempNativeFolder()))
         process.throwDeprecation = true
         this.setupLiteLoader()
         logger.info('Using liteloader:', this.usingLiteLoader)
@@ -488,7 +502,7 @@ class ProcessBuilder {
                 for(let rule of args[i].rules){
                     if(rule.os != null){
                         if(rule.os.name === getMojangOS()
-                            && (rule.os.version == null || new RegExp(rule.os.version).test(os.release))){
+                            && matchesOperatingSystemVersion(rule.os.version)){
                             if(rule.action === 'allow'){
                                 checksum++
                             }
@@ -777,7 +791,6 @@ class ProcessBuilder {
      * @returns {{[id: string]: string}} An object containing the paths of each library mojang declares.
      */
     _resolveMojangLibraries(tempNativePath){
-        const nativesRegex = /.+:natives-([^-]+)(?:-(.+))?/
         const libs = {}
 
         const libArr = this.vanillaManifest.libraries
@@ -800,6 +813,9 @@ class ProcessBuilder {
 
                     // Unzip the native zip.
                     for(let i=0; i<zipEntries.length; i++){
+                        if(zipEntries[i].isDirectory) {
+                            continue
+                        }
                         const fileName = zipEntries[i].entryName
 
                         let shouldExclude = false
@@ -813,7 +829,9 @@ class ProcessBuilder {
 
                         // Extract the file.
                         if(!shouldExclude){
-                            fs.writeFileSync(path.join(tempNativePath, fileName), zipEntries[i].getData())
+                            const destination = resolveArchiveEntry(tempNativePath, fileName)
+                            fs.ensureDirSync(path.dirname(destination), { mode: 0o700 })
+                            fs.writeFileSync(destination, zipEntries[i].getData(), { flag: 'wx', mode: 0o600 })
                         }
 
                     }
@@ -821,9 +839,9 @@ class ProcessBuilder {
                 // 1.19+ logic
                 else if(lib.name.includes('natives-')) {
 
-                    const regexTest = nativesRegex.exec(lib.name)
-                    // const os = regexTest[1]
-                    const arch = regexTest[2]
+                    const nativeClassifier = lib.name.split(':').find(part => part.startsWith('natives-'))
+                    const classifierParts = nativeClassifier?.split('-') ?? []
+                    const arch = classifierParts.length > 2 ? classifierParts.slice(2).join('-') : undefined
                     const architectureAliases = {
                         arm64: ['aarch64', 'arm64'],
                         ia32: ['i386', 'i686', 'x86'],
@@ -864,11 +882,10 @@ class ProcessBuilder {
                             }
                         })
 
-                        const extractName = fileName.includes('/') ? fileName.substring(fileName.lastIndexOf('/')) : fileName
-
                         // Extract the file.
                         if(!shouldExclude){
-                            fs.writeFileSync(path.join(tempNativePath, extractName), zipEntries[i].getData())
+                            const destination = resolveArchiveEntry(tempNativePath, fileName, true)
+                            fs.writeFileSync(destination, zipEntries[i].getData(), { flag: 'wx', mode: 0o600 })
                         }
 
                     }

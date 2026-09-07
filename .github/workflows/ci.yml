@@ -29,7 +29,7 @@ jobs:
         run: npm audit --audit-level=moderate
       - name: Run tests
         working-directory: launcher-src
-        run: node --test tests/*.test.cjs
+        run: npm test
       - name: Lint
         working-directory: launcher-src
         run: npm run lint
@@ -53,6 +53,9 @@ jobs:
       - name: Build
         working-directory: nebula-src
         run: npm run build
+      - name: Run tests
+        working-directory: nebula-src
+        run: npm test
       - name: Lint
         working-directory: nebula-src
         run: npm run lint
