@@ -28,7 +28,7 @@
     "ejs-electron": "^3.0.0",
     "electron-updater": "^6.8.9",
     "form-data": "4.0.6",
-    "fs-extra": "^11.3.3",
+    "fs-extra": "^11.4.0",
     "github-syntax-dark": "^0.5.0",
     "got": "^11.8.5",
     "helios-core": "~2.3.0",
