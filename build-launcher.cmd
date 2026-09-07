@@ -25,8 +25,13 @@ copy /y ".\build\app-update.yml" ".\dist\win-unpacked\resources\app-update.yml" 
 if errorlevel 1 exit /b %errorlevel%
 "%KRWA_RCEDIT%" ".\dist\win-unpacked\KRWA Launcher.exe" --set-icon ".\build\icon.ico" --set-file-version "%KRWA_VERSION%" --set-product-version "%KRWA_VERSION%" --set-version-string ProductName "KRWA Launcher" --set-version-string FileDescription "KRWA Minecraft Launcher" --set-version-string CompanyName "KRWA Server"
 if errorlevel 1 exit /b %errorlevel%
+"%KRWA_NODE%" ".\tests\verify-package.cjs" ".\dist\win-unpacked\resources\app.asar" "%KRWA_VERSION%"
+if errorlevel 1 exit /b %errorlevel%
 "%KRWA_NODE%" "%KRWA_BUILDER%" --win nsis --prepackaged ".\dist\win-unpacked"
 if errorlevel 1 exit /b %errorlevel%
 cd /d "%~dp0"
 docker run --rm -v "%~dp0launcher-src:/project" -v krwa_launcher_node_modules:/project/node_modules -w /project electronuserland/builder:22 bash -lc "npm ci --no-audit --no-fund --prefer-offline && npx electron-builder --linux AppImage --config.directories.output=dist-linux"
+if errorlevel 1 exit /b %errorlevel%
+cd /d "%~dp0launcher-src"
+"%KRWA_NODE%" ".\tests\verify-package.cjs" ".\dist-linux\linux-unpacked\resources\app.asar" "%KRWA_VERSION%"
 exit /b %errorlevel%

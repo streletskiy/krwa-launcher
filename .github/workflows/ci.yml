@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  launcher:
+    name: Launcher tests, lint and audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: launcher-src/package-lock.json
+      - name: Install dependencies
+        working-directory: launcher-src
+        run: npm ci
+      - name: Audit dependencies
+        working-directory: launcher-src
+        run: npm audit --audit-level=moderate
+      - name: Run tests
+        working-directory: launcher-src
+        run: node --test tests/*.test.cjs
+      - name: Lint
+        working-directory: launcher-src
+        run: npm run lint
+
+  nebula:
+    name: Nebula build, lint and audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: nebula-src/package-lock.json
+      - name: Install dependencies
+        working-directory: nebula-src
+        run: npm ci
+      - name: Audit dependencies
+        working-directory: nebula-src
+        run: npm audit --audit-level=moderate
+      - name: Build
+        working-directory: nebula-src
+        run: npm run build
+      - name: Lint
+        working-directory: nebula-src
+        run: npm run lint
+
+  community:
+    name: Community service tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Run tests
+        working-directory: community
+        run: node --test server.test.mjs

@@ -59,6 +59,7 @@ jobs:
           [[ "$app_arches" == *" arm64 "* ]]
           test "$(plutil -extract CFBundleIdentifier raw 'dist/mac-universal/KRWA Launcher.app/Contents/Info.plist')" = "ru.krwa.launcher"
           test "$(plutil -extract CFBundleShortVersionString raw 'dist/mac-universal/KRWA Launcher.app/Contents/Info.plist')" = "$RELEASE_VERSION"
+          node tests/verify-package.cjs "dist/mac-universal/KRWA Launcher.app/Contents/Resources/app.asar" "$RELEASE_VERSION"
           grep -F "KRWA-Launcher-${RELEASE_VERSION}-mac-universal.dmg" dist/latest-mac.yml
           grep -F "KRWA-Launcher-${RELEASE_VERSION}-mac-universal.zip" dist/latest-mac.yml
 
