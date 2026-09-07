@@ -4,7 +4,9 @@ auth-data/*
 backups/
 
 # Local machine configuration
+.env
 nebula-src/.env
+server-tools/
 
 # Dependencies and build output
 launcher-src/node_modules/

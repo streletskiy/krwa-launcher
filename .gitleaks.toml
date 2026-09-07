@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Known non-secret identifiers in vendored sample and disabled client encryption config"
+paths = [
+  '''^launcher-src/docs/sample_distribution\.json$''',
+  '''^repository/servers/krwa-aeronautics-1\.21\.1/files/config/NoChatReports/NCR-Encryption\.json$'''
+]

@@ -17,7 +17,7 @@
 
 :8081 {
 	@legacySite {
-		host 127.0.0.1 127.0.0.1 localhost
+		host {$LEGACY_SITE_HOSTS}
 		method GET HEAD
 		path / /login /register /reset-password /admin /admin/* /account /account/* /tos /privacy
 	}

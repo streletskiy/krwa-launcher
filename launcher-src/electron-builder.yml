@@ -2,7 +2,7 @@ appId: 'ru.krwa.launcher'
 productName: 'KRWA Launcher'
 artifactName: 'KRWA-Launcher-setup-${version}.${ext}'
 
-copyright: 'KRWA Server; based on Helios Launcher © Daniel Scalzi'
+copyright: 'streletskiy; based on Helios Launcher © Daniel Scalzi'
 
 publish:
   provider: 'generic'
@@ -50,10 +50,10 @@ mac:
 linux: 
   target: 'AppImage'
   artifactName: 'KRWA-Launcher-${version}-${arch}.${ext}'
-  maintainer: 'KRWA Server'
-  vendor: 'KRWA Server'
+  maintainer: 'streletskiy'
+  vendor: 'streletskiy'
   synopsis: 'KRWA Minecraft Launcher'
-  description: 'Лаунчер KRWA: автоматически устанавливает игру, Fabric и моды.'
+  description: 'Лаунчер KRWA: автоматически устанавливает игру, NeoForge и моды.'
   category: 'Game'
 
 
