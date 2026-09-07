@@ -49,7 +49,17 @@
       },
       "landing": {
         "dlAsync": {
-          "unexpectedExit": "Minecraft exited with code {code}. Details: logs/latest.log in your instance."
+          "unexpectedExit": "Minecraft exited with code {code}. Details: logs/latest.log in your instance.",
+          "distributionTimeout": "The KRWA server did not respond within 30 seconds. Check your connection and try again.",
+          "startingRepair": "Starting the file check…",
+          "validationTimeout": "The file check stopped responding. Restart the launcher and try again.",
+          "downloadingFiles": "Downloading the game and mods — {count} files…",
+          "downloadTimeout": "No download data was received for more than four minutes. Check your connection and try again.",
+          "repairProcessStopped": "The file preparation process stopped unexpectedly (code {code}, signal {signal})."
+        },
+        "systemScan": {
+          "checkTimeout": "The Java check took too long.",
+          "noCompatibleJava": "No compatible Java installation was found"
         },
         "launch": {
           "play": "PLAY",
@@ -240,12 +250,17 @@
           "loadingServerInfo": "Pobieranie informacji o paczce…",
           "fatalError": "Błąd",
           "unableToLoadDistributionIndex": "Nie udało się pobrać paczki. Sprawdź połączenie z mc.krwa.ru.",
+          "distributionTimeout": "Serwer KRWA nie odpowiedział w ciągu 30 sekund. Sprawdź połączenie i spróbuj ponownie.",
           "pleaseWait": "Poczekaj chwilę…",
+          "startingRepair": "Uruchamianie sprawdzania plików…",
           "errorDuringLaunchTitle": "Błąd uruchamiania",
           "seeConsoleForDetails": "Szczegóły znajdziesz w konsoli (Ctrl+Shift+I).",
           "validatingFileIntegrity": "Sprawdzanie plików…",
+          "validationTimeout": "Sprawdzanie plików przestało odpowiadać. Uruchom launcher ponownie i spróbuj jeszcze raz.",
           "errorDuringFileVerificationTitle": "Błąd sprawdzania plików",
-          "downloadingFiles": "Pobieranie gry i modów…",
+          "downloadingFiles": "Pobieranie gry i modów — {count} plików…",
+          "downloadTimeout": "Przez ponad cztery minuty nie odebrano danych. Sprawdź połączenie i spróbuj ponownie.",
+          "repairProcessStopped": "Proces przygotowania plików nieoczekiwanie się zakończył (kod {code}, sygnał {signal}).",
           "errorDuringFileDownloadTitle": "Błąd pobierania plików",
           "preparingToLaunch": "Przygotowywanie gry…",
           "launchingGame": "Uruchamianie gry…",
@@ -282,6 +297,7 @@
         },
         "systemScan": {
           "checking": "Sprawdzanie systemu…",
+          "checkTimeout": "Sprawdzanie Java trwało zbyt długo.",
           "noCompatibleJava": "Nie znaleziono zgodnej wersji Java",
           "installJavaMessage": "Minecraft wymaga 64-bitowej Java {major}. Zainstalować automatycznie?",
           "installJava": "Zainstaluj Java",

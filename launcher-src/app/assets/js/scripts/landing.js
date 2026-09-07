@@ -43,6 +43,11 @@ const user_text               = document.getElementById('user_text')
 
 const loggerLanding = LoggerUtil.getLogger('Landing')
 
+const DISTRIBUTION_TIMEOUT_MS = 30000
+const JVM_CHECK_TIMEOUT_MS = 30000
+const REPAIR_VALIDATION_IDLE_TIMEOUT_MS = 90000
+const REPAIR_DOWNLOAD_IDLE_TIMEOUT_MS = 240000
+
 /* Launch Progress Wrapper Functions */
 
 /**
@@ -51,12 +56,21 @@ const loggerLanding = LoggerUtil.getLogger('Landing')
  * @param {boolean} loading True if the loading area should be shown, otherwise false.
  */
 function toggleLaunchArea(loading){
-    document.getElementById('landingContainer').dataset.launching = String(loading || proc != null)
-    launch_details.style.display = loading || proc != null ? 'flex' : 'none'
+    const blocked = loading || proc != null
+    document.getElementById('landingContainer').dataset.launching = String(blocked)
+    launch_details.style.display = blocked ? 'grid' : 'none'
     launch_content.style.display = 'flex'
     setLaunchEnabled(ConfigManager.getSelectedServer() != null)
-    server_selection_button.disabled = loading || proc != null
-    document.getElementById('launcherLanguage').disabled = loading || proc != null
+    server_selection_button.disabled = blocked
+    document.getElementById('settingsMediaButton').disabled = blocked
+    const languageButton = document.getElementById('launcherLanguageButton')
+    const languageMenu = document.getElementById('launcherLanguageMenu')
+    if(languageButton != null) {
+        languageButton.disabled = blocked
+        languageButton.setAttribute('aria-expanded', 'false')
+    }
+    if(languageMenu != null) languageMenu.hidden = true
+    document.querySelectorAll('.launcherLanguageOption').forEach(option => option.disabled = blocked)
     document.getElementById('launch_button').textContent = Lang.queryJS(proc != null ? 'landing.launch.running' : loading ? 'landing.launch.starting' : 'landing.launch.play')
 }
 
@@ -75,9 +89,23 @@ function setLaunchDetails(details){
  * @param {number} percent Percentage (0-100)
  */
 function setLaunchPercentage(percent){
+    const normalized = Math.max(0, Math.min(100, Math.round(Number(percent) || 0)))
     launch_progress.setAttribute('max', 100)
-    launch_progress.setAttribute('value', percent)
-    launch_progress_label.innerHTML = percent + '%'
+    launch_progress.setAttribute('value', normalized)
+    launch_progress_label.textContent = normalized + '%'
+}
+
+/**
+ * Display a stage whose duration cannot be measured honestly.
+ *
+ * @param {string} details The new text for the loading details.
+ */
+function setLaunchIndeterminate(details){
+    setLaunchDetails(details)
+    launch_progress.setAttribute('max', 100)
+    launch_progress.removeAttribute('value')
+    launch_progress_label.textContent = '…'
+    remote.getCurrentWindow().setProgressBar(2)
 }
 
 /**
@@ -86,8 +114,88 @@ function setLaunchPercentage(percent){
  * @param {number} percent Percentage (0-100)
  */
 function setDownloadPercentage(percent){
-    remote.getCurrentWindow().setProgressBar(percent/100)
-    setLaunchPercentage(percent)
+    const normalized = Math.max(0, Math.min(100, Math.round(Number(percent) || 0)))
+    remote.getCurrentWindow().setProgressBar(normalized/100)
+    setLaunchPercentage(normalized)
+}
+
+function timeoutError(displayable){
+    const error = new Error(displayable)
+    error.displayable = displayable
+    return error
+}
+
+async function withTimeout(promise, timeoutMs, displayable){
+    let timer
+    try {
+        return await Promise.race([
+            promise,
+            new Promise((_, reject) => {
+                timer = setTimeout(() => reject(timeoutError(displayable)), timeoutMs)
+            })
+        ])
+    } finally {
+        clearTimeout(timer)
+    }
+}
+
+function runRepairOperation(fullRepairModule, operation, onProgress, idleTimeoutMs, timeoutMessage){
+    const child = fullRepairModule.childProcess
+    if(child == null) return Promise.reject(timeoutError(timeoutMessage))
+
+    return new Promise((resolve, reject) => {
+        let settled = false
+        let idleTimer
+        const cleanup = () => {
+            clearTimeout(idleTimer)
+            child.removeListener('error', fail)
+            child.removeListener('close', onClose)
+        }
+        const succeed = value => {
+            if(settled) return
+            settled = true
+            cleanup()
+            resolve(value)
+        }
+        const fail = error => {
+            if(settled) return
+            settled = true
+            cleanup()
+            reject(error)
+        }
+        const armIdleTimer = () => {
+            clearTimeout(idleTimer)
+            idleTimer = setTimeout(() => {
+                if(!child.killed) child.kill()
+                fail(timeoutError(timeoutMessage))
+            }, idleTimeoutMs)
+        }
+        const onClose = (code, signal) => {
+            fail(timeoutError(Lang.queryJS('landing.dlAsync.repairProcessStopped', {
+                code: code ?? '?',
+                signal: signal ?? '-'
+            })))
+        }
+
+        child.once('error', fail)
+        child.once('close', onClose)
+        armIdleTimer()
+        fullRepairModule[operation](percent => {
+            armIdleTimer()
+            onProgress(percent)
+        }).then(succeed, fail)
+    })
+}
+
+function destroyRepairModule(fullRepairModule){
+    const child = fullRepairModule.childProcess
+    if(child == null) return
+    try {
+        if(child.connected) fullRepairModule.destroyReceiver()
+        else if(!child.killed) child.kill()
+    } catch(err) {
+        loggerLanding.warn('Unable to stop the repair helper cleanly.', err)
+    }
 }
 
 /**
@@ -105,21 +213,32 @@ document.getElementById('launch_button').addEventListener('click', async e => {
         return
     }
     toggleLaunchArea(true)
-    setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
-    setLaunchPercentage(0)
+    setLaunchIndeterminate(Lang.queryJS('landing.dlAsync.loadingServerInfo'))
     loggerLanding.info('Launching game..')
     try {
-        const server = (await DistroAPI.getDistribution()).getServerById(ConfigManager.getSelectedServer())
+        const distro = await withTimeout(
+            DistroAPI.getDistribution(),
+            DISTRIBUTION_TIMEOUT_MS,
+            Lang.queryJS('landing.dlAsync.distributionTimeout')
+        )
+        const server = distro.getServerById(ConfigManager.getSelectedServer())
         const jExe = ConfigManager.getJavaExecutable(ConfigManager.getSelectedServer())
         if(jExe == null){
             await asyncSystemScan(server.effectiveJavaOptions)
         } else {
-
-            setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
             toggleLaunchArea(true)
-            setLaunchPercentage(0, 100)
+            setLaunchIndeterminate(Lang.queryJS('landing.systemScan.checking'))
 
-            const details = await validateSelectedJvm(ensureJavaDirIsRoot(jExe), server.effectiveJavaOptions.supported)
+            let details = null
+            try {
+                details = await withTimeout(
+                    validateSelectedJvm(ensureJavaDirIsRoot(jExe), server.effectiveJavaOptions.supported),
+                    JVM_CHECK_TIMEOUT_MS,
+                    Lang.queryJS('landing.systemScan.checkTimeout')
+                )
+            } catch(err) {
+                loggerLanding.warn('Configured Java validation failed, scanning for another runtime.', err)
+            }
             if(details != null){
                 loggerLanding.info('Jvm Details', details)
                 await dlAsync()
@@ -130,7 +249,7 @@ document.getElementById('launch_button').addEventListener('click', async e => {
         }
     } catch(err) {
         loggerLanding.error('Unhandled error in during launch process.', err)
-        showLaunchFailure(Lang.queryJS('landing.launch.failureTitle'), Lang.queryJS('landing.launch.failureText'))
+        showLaunchFailure(Lang.queryJS('landing.launch.failureTitle'), err.displayable || Lang.queryJS('landing.launch.failureText'))
     }
 })
 
@@ -293,6 +412,7 @@ let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
  * @param {string} desc The overlay description.
  */
 function showLaunchFailure(title, desc){
+    remote.getCurrentWindow().setProgressBar(-1)
     setOverlayContent(
         title,
         desc,
@@ -312,14 +432,22 @@ function showLaunchFailure(title, desc){
  */
 async function asyncSystemScan(effectiveJavaOptions, launchAfter = true){
 
-    setLaunchDetails(Lang.queryJS('landing.systemScan.checking'))
     toggleLaunchArea(true)
-    setLaunchPercentage(0, 100)
+    setLaunchIndeterminate(Lang.queryJS('landing.systemScan.checking'))
 
-    const jvmDetails = await discoverBestJvmInstallation(
-        ConfigManager.getDataDirectory(),
-        effectiveJavaOptions.supported
-    )
+    let jvmDetails = null
+    try {
+        jvmDetails = await withTimeout(
+            discoverBestJvmInstallation(
+                ConfigManager.getDataDirectory(),
+                effectiveJavaOptions.supported
+            ),
+            JVM_CHECK_TIMEOUT_MS,
+            Lang.queryJS('landing.systemScan.checkTimeout')
+        )
+    } catch(err) {
+        loggerLanding.warn('Java discovery failed or timed out; offering managed Java installation.', err)
+    }
 
     if(jvmDetails == null) {
         // If the result is null, no valid Java installation was found.
@@ -464,16 +592,20 @@ async function dlAsync(login = true) {
 
     const loggerLaunchSuite = LoggerUtil.getLogger('LaunchSuite')
 
-    setLaunchDetails(Lang.queryJS('landing.dlAsync.loadingServerInfo'))
+    setLaunchIndeterminate(Lang.queryJS('landing.dlAsync.loadingServerInfo'))
 
     let distro
 
     try {
-        distro = await DistroAPI.refreshDistributionOrFallback()
+        distro = await withTimeout(
+            DistroAPI.refreshDistributionOrFallback(),
+            DISTRIBUTION_TIMEOUT_MS,
+            Lang.queryJS('landing.dlAsync.distributionTimeout')
+        )
         onDistroRefresh(distro)
     } catch(err) {
         loggerLaunchSuite.error('Unable to refresh distribution index.', err)
-        showLaunchFailure(Lang.queryJS('landing.dlAsync.fatalError'), Lang.queryJS('landing.dlAsync.unableToLoadDistributionIndex'))
+        showLaunchFailure(Lang.queryJS('landing.dlAsync.fatalError'), err.displayable || Lang.queryJS('landing.dlAsync.unableToLoadDistributionIndex'))
         return
     }
 
@@ -482,13 +614,13 @@ async function dlAsync(login = true) {
     if(login) {
         if(ConfigManager.getSelectedAccount() == null){
             loggerLanding.error('You must be logged into an account.')
+            showLaunchFailure(Lang.queryJS('landing.launch.failureTitle'), Lang.queryJS('landing.selectedAccount.noAccountSelected'))
             return
         }
     }
 
-    setLaunchDetails(Lang.queryJS('landing.dlAsync.pleaseWait'))
     toggleLaunchArea(true)
-    setLaunchPercentage(0, 100)
+    setLaunchIndeterminate(Lang.queryJS('landing.dlAsync.startingRepair'))
 
     const fullRepairModule = new FullRepair(
         ConfigManager.getCommonDirectory(),
@@ -500,56 +632,54 @@ async function dlAsync(login = true) {
 
     fullRepairModule.spawnReceiver()
 
-    fullRepairModule.childProcess.on('error', (err) => {
-        loggerLaunchSuite.error('Error during launch', err)
-        showLaunchFailure(Lang.queryJS('landing.dlAsync.errorDuringLaunchTitle'), err.message || Lang.queryJS('landing.dlAsync.errorDuringLaunchText'))
-    })
-    fullRepairModule.childProcess.on('close', (code, _signal) => {
-        if(code !== 0){
-            loggerLaunchSuite.error(`Full Repair Module exited with code ${code}, assuming error.`)
-            showLaunchFailure(Lang.queryJS('landing.dlAsync.errorDuringLaunchTitle'), Lang.queryJS('landing.dlAsync.seeConsoleForDetails'))
-        }
-    })
-
     loggerLaunchSuite.info('Validating files.')
     setLaunchDetails(Lang.queryJS('landing.dlAsync.validatingFileIntegrity'))
+    setLaunchPercentage(0)
     let invalidFileCount = 0
+    let repairStage = 'validation'
     try {
-        invalidFileCount = await fullRepairModule.verifyFiles(percent => {
-            setLaunchPercentage(percent)
-        })
+        invalidFileCount = await runRepairOperation(
+            fullRepairModule,
+            'verifyFiles',
+            setLaunchPercentage,
+            REPAIR_VALIDATION_IDLE_TIMEOUT_MS,
+            Lang.queryJS('landing.dlAsync.validationTimeout')
+        )
         setLaunchPercentage(100)
-    } catch (err) {
-        loggerLaunchSuite.error('Error during file validation.')
-        showLaunchFailure(Lang.queryJS('landing.dlAsync.errorDuringFileVerificationTitle'), err.displayable || Lang.queryJS('landing.dlAsync.seeConsoleForDetails'))
-        return
-    }
-    
 
-    if(invalidFileCount > 0) {
-        loggerLaunchSuite.info('Downloading files.')
-        setLaunchDetails(Lang.queryJS('landing.dlAsync.downloadingFiles'))
-        setLaunchPercentage(0)
-        try {
-            await fullRepairModule.download(percent => {
-                setDownloadPercentage(percent)
-            })
+        if(invalidFileCount > 0) {
+            repairStage = 'download'
+            loggerLaunchSuite.info(`Downloading ${invalidFileCount} files.`)
+            setLaunchDetails(Lang.queryJS('landing.dlAsync.downloadingFiles', { count: invalidFileCount }))
+            setDownloadPercentage(0)
+            await runRepairOperation(
+                fullRepairModule,
+                'download',
+                setDownloadPercentage,
+                REPAIR_DOWNLOAD_IDLE_TIMEOUT_MS,
+                Lang.queryJS('landing.dlAsync.downloadTimeout')
+            )
             setDownloadPercentage(100)
-        } catch(err) {
+        } else {
+            loggerLaunchSuite.info('No invalid files, skipping download.')
+        }
+    } catch (err) {
+        if(repairStage === 'download') {
             loggerLaunchSuite.error('Error during file download.')
             showLaunchFailure(Lang.queryJS('landing.dlAsync.errorDuringFileDownloadTitle'), err.displayable || Lang.queryJS('landing.dlAsync.seeConsoleForDetails'))
-            return
+        } else {
+            loggerLaunchSuite.error('Error during file validation.')
+            showLaunchFailure(Lang.queryJS('landing.dlAsync.errorDuringFileVerificationTitle'), err.displayable || Lang.queryJS('landing.dlAsync.seeConsoleForDetails'))
         }
-    } else {
-        loggerLaunchSuite.info('No invalid files, skipping download.')
+        return
+    } finally {
+        destroyRepairModule(fullRepairModule)
     }
 
     // Remove download bar.
     remote.getCurrentWindow().setProgressBar(-1)
 
-    fullRepairModule.destroyReceiver()
-
-    setLaunchDetails(Lang.queryJS('landing.dlAsync.preparingToLaunch'))
+    setLaunchIndeterminate(Lang.queryJS('landing.dlAsync.preparingToLaunch'))
 
     const mojangIndexProcessor = new MojangIndexProcessor(
         ConfigManager.getCommonDirectory(),

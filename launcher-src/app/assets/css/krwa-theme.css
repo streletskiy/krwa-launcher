@@ -77,14 +77,18 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 @keyframes krwa-spin { to { transform: rotate(360deg); } }
 .krwa-ready { font-size: 12px; color: var(--muted); margin-top: 17px; }
 #landingContainer[data-launching='true'] .krwa-ready { display: none; }
-#launch_details { position: relative; top: auto; margin-top: 22px; width: 100%; min-height: 58px; gap: 12px; align-items: flex-start; max-width: none !important; }
-#launch_details_left { order: 2; }
+#launch_details { position: relative; top: auto; margin-top: 22px; width: 100%; min-height: 58px; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 12px; row-gap: 12px; align-items: center; max-width: none !important; }
+#launch_details_left { grid-column: 2; grid-row: 1; display: flex; justify-content: flex-end; }
 #launch_progress_label { font-size: 14px; font-weight: 500; min-width: 42px; max-width: none; letter-spacing: 0; }
-#launch_details_right { flex: 1; min-width: 0; max-width: none !important; }
-#launch_details_text { order: -1; font-size: 13px; letter-spacing: 0; font-weight: 500; white-space: normal; margin-bottom: 12px; }
-#launch_progress[value] { width: 100%; height: 13px; border-radius: 8px; overflow: hidden; }
-#launch_progress[value]::-webkit-progress-bar { background: #292e32; border: 1px solid #48504f; border-radius: 8px; }
-#launch_progress[value]::-webkit-progress-value { background: linear-gradient(#76d880, #329858); border-radius: 8px; }
+#launch_details_right { display: contents; max-width: none !important; }
+#launch_details_text { grid-column: 1; grid-row: 1; min-width: 0; font-size: 13px; letter-spacing: 0; font-weight: 500; white-space: normal; margin: 0; }
+#launch_progress { grid-column: 1 / -1; grid-row: 2; box-sizing: border-box; width: 100% !important; height: 13px !important; border: 1px solid #48504f; border-radius: 8px; overflow: hidden; -webkit-appearance: none; appearance: none; background: #292e32; }
+#launch_progress::-webkit-progress-bar { background: #292e32; border-radius: 8px; }
+#launch_progress::-webkit-progress-value { background: linear-gradient(#76d880, #329858); border-radius: 8px; }
+#launch_progress:indeterminate { background: linear-gradient(90deg, #292e32 0%, #292e32 30%, #4eb76a 50%, #292e32 70%, #292e32 100%); background-size: 220% 100%; animation: krwa-progress-indeterminate 1.4s linear infinite; }
+#launch_progress:indeterminate::-webkit-progress-bar { background: transparent; }
+@keyframes krwa-progress-indeterminate { to { background-position: -220% 0; } }
+#settingsMediaButton:disabled, #launcherLanguageButton:disabled { opacity: .55; cursor: default; }
 #launch_details .bot_divider, #newsContainer { display: none; }
 .krwa-version { position: absolute; left: 5%; bottom: 18px; font-size: 10px; color: #b1bdb6; letter-spacing: .4px; }
 /* Account and first-run screens reuse the same artwork and wordmark. */
