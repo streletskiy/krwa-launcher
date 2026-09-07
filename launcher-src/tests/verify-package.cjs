@@ -11,9 +11,10 @@ assert.ok(expectedVersion, 'Expected launcher version is required')
 assert.ok(fs.statSync(archivePath).isFile(), `Package archive not found: ${archivePath}`)
 
 const entries = asar.listPackage(archivePath).map(entry => entry.replaceAll('\\', '/'))
-const forbiddenRoots = ['/dist/', '/dist-linux/', '/dist-mac/', '/tests/']
+const forbiddenRoots = ['/tests/']
 const leakedEntries = entries.filter(entry =>
-    forbiddenRoots.some(root => entry === root.slice(0, -1) || entry.startsWith(root)))
+    forbiddenRoots.some(root => entry === root.slice(0, -1) || entry.startsWith(root))
+    || /^\/dist(?:[-/]|$)/.test(entry))
 
 assert.deepEqual(leakedEntries, [], `Build-only files leaked into app.asar: ${leakedEntries.slice(0, 10).join(', ')}`)
 

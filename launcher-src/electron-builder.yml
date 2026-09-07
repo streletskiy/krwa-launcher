@@ -13,6 +13,7 @@ compression: 'maximum'
 
 files:
   - '!{dist,dist-linux,dist-mac,tests,.gitignore,.vscode,docs,dev-app-update.yml,.nvmrc,eslint.config.mjs}'
+  - '!dist*/**/*'
 
 extraResources:
   - 'libraries'
