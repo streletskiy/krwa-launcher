@@ -16,5 +16,7 @@ if errorlevel 1 exit /b %errorlevel%
 cd /d "%~dp0"
 call build-launcher.cmd
 if errorlevel 1 exit /b %errorlevel%
-call publish-launcher.cmd
-exit /b %errorlevel%
+echo Windows and Linux %~1 are ready.
+echo Commit and push the version, run the macOS workflow, download its artifact to launcher-src\dist-mac,
+echo then publish all three platforms together with publish-launcher.cmd.
+exit /b 0

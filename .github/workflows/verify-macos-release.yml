@@ -1,0 +1,56 @@
+name: Verify published macOS launcher
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Launcher version to verify
+        required: true
+        default: 0.1.13
+      sha256:
+        description: Expected SHA-256 of the DMG
+        required: true
+        default: e833f4dfdf3609c532d1718352c23ded70f50d9fc1c9048f701b169bcf8fc763
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: macos-15
+    timeout-minutes: 15
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      EXPECTED_SHA256: ${{ inputs.sha256 }}
+
+    steps:
+      - name: Download the public DMG
+        run: |
+          curl --fail --location --retry 3 --output launcher.dmg \
+            "https://mc.krwa.ru/downloads/KRWA-Launcher-${RELEASE_VERSION}-mac-universal.dmg"
+          actual_sha256="$(shasum -a 256 launcher.dmg | awk '{ print $1 }')"
+          test "$actual_sha256" = "$EXPECTED_SHA256"
+
+      - name: Mount and smoke-test the application
+        run: |
+          mount_output="$(hdiutil attach -nobrowse -readonly launcher.dmg)"
+          mount_point="$(printf '%s\n' "$mount_output" | awk '/\/Volumes\// { sub(/^.*\t/, ""); print; exit }')"
+          test -n "$mount_point"
+          trap 'hdiutil detach "$mount_point"' EXIT
+          app_path="$mount_point/KRWA Launcher.app"
+          app_binary="$app_path/Contents/MacOS/KRWA Launcher"
+          test -x "$app_binary"
+          app_arches=" $(lipo -archs "$app_binary") "
+          [[ "$app_arches" == *" x86_64 "* ]]
+          [[ "$app_arches" == *" arm64 "* ]]
+          test "$(plutil -extract CFBundleIdentifier raw "$app_path/Contents/Info.plist")" = "ru.krwa.launcher"
+          test "$(plutil -extract CFBundleShortVersionString raw "$app_path/Contents/Info.plist")" = "$RELEASE_VERSION"
+          "$app_binary" --version
+
+      - name: Check managed-download endpoints
+        run: |
+          curl --fail --silent --show-error --location --output /dev/null https://mc.krwa.ru/distribution.json
+          curl --fail --silent --show-error --location --head --output /dev/null \
+            https://corretto.aws/downloads/latest/amazon-corretto-21-aarch64-macos-jdk.tar.gz
+          curl --fail --silent --show-error --location --head --output /dev/null \
+            https://corretto.aws/downloads/latest/amazon-corretto-21-x64-macos-jdk.tar.gz

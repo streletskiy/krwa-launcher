@@ -66,8 +66,8 @@ npm run dist
 
 - `build-launcher.cmd` — Windows x64 NSIS и Linux x64 AppImage;
 - workflow `Build macOS launcher` — универсальные macOS DMG и ZIP на GitHub Actions;
-- `publish-launcher.cmd` — копирование готовых артефактов в `repository/downloads`;
-- `release-launcher.cmd <version>` — обновление версии, сборка и подготовка файлов канала обновлений;
+- `publish-launcher.cmd` — проверка одной версии и совместная публикация готовых артефактов трёх платформ в `repository/downloads`;
+- `release-launcher.cmd <version>` — обновление версии и локальная сборка Windows/Linux перед запуском macOS workflow;
 - `rebuild-distribution.cmd` — пересборка `repository/distribution.json` через Nebula.
 
 Windows-сборка пока не подписана сертификатом издателя, поэтому SmartScreen может показать предупреждение. macOS-сборка также не подписана Apple Developer ID: при первом запуске может понадобиться открыть приложение через контекстное меню Finder. Из-за отсутствия подписи macOS не устанавливает обновление автоматически — лаунчер показывает новую версию и открывает постоянную ссылку на актуальный DMG. Перед выпуском от другого издателя следует настроить code signing и убрать `signAndEditExecutable: false` из `electron-builder.yml`.
