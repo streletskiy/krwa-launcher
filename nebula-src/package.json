@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/dscalzi/Nebula#readme",
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^5.6.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/fs-extra": "^11.0.4",
     "@types/luxon": "^3.7.1",
     "@types/node": "^20.19.27",
