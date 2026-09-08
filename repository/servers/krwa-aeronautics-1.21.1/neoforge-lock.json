@@ -3148,17 +3148,6 @@
       }
     },
     {
-      "id": "curseforge.project-825617:file:6928401@jar",
-      "name": "serverbrowser-neoforge-1.4.2-1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 64763,
-        "MD5": "f6c94ced3fbcab33ad666b6ebfb60128",
-        "url": "https://www.curseforge.com/api/v1/mods/825617/files/6928401/download",
-        "path": "curseforge/825617/6928401/serverbrowser-neoforge-1.4.2-1.21.1.jar"
-      }
-    },
-    {
       "id": "curseforge.project-634062:file:5885735@jar",
       "name": "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
       "type": "ForgeMod",

@@ -7,7 +7,7 @@
       "name": "KRWA Aeronautics",
       "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
       "icon": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/krwa.png",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "address": "create.krwa.ru:25565",
       "minecraftVersion": "1.21.1",
       "mainServer": true,
@@ -3162,17 +3162,6 @@
           }
         },
         {
-          "id": "curseforge.project-825617:file:6928401@jar",
-          "name": "serverbrowser-neoforge-1.4.2-1.21.1.jar",
-          "type": "ForgeMod",
-          "artifact": {
-            "size": 64763,
-            "MD5": "f6c94ced3fbcab33ad666b6ebfb60128",
-            "url": "https://www.curseforge.com/api/v1/mods/825617/files/6928401/download",
-            "path": "curseforge/825617/6928401/serverbrowser-neoforge-1.4.2-1.21.1.jar"
-          }
-        },
-        {
           "id": "curseforge.project-634062:file:5885735@jar",
           "name": "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
           "type": "ForgeMod",
@@ -6292,6 +6281,17 @@
           }
         },
         {
+          "id": "bg-krwa.png",
+          "name": "bg-krwa.png",
+          "type": "File",
+          "artifact": {
+            "size": 2376355,
+            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/fancymenu/assets/bg-krwa.png",
+            "MD5": "2d69ba8eb76fcdbd21bf0dbffb4d2dd3",
+            "path": "config/fancymenu/assets/bg-krwa.png"
+          }
+        },
+        {
           "id": "bg.png",
           "name": "bg.png",
           "type": "File",
@@ -6457,28 +6457,6 @@
           }
         },
         {
-          "id": "r.png",
-          "name": "r.png",
-          "type": "File",
-          "artifact": {
-            "size": 9031,
-            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/fancymenu/assets/r.png",
-            "MD5": "9975f259c56681d91224682c88bb15be",
-            "path": "config/fancymenu/assets/r.png"
-          }
-        },
-        {
-          "id": "rh.png",
-          "name": "rh.png",
-          "type": "File",
-          "artifact": {
-            "size": 9764,
-            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/fancymenu/assets/rh.png",
-            "MD5": "592455ae98bb4d0ef0f4ad510f3b49e7",
-            "path": "config/fancymenu/assets/rh.png"
-          }
-        },
-        {
           "id": "s.png",
           "name": "s.png",
           "type": "File",
@@ -6516,9 +6494,9 @@
           "name": "all_of_create.txt",
           "type": "File",
           "artifact": {
-            "size": 59165,
+            "size": 56059,
             "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/fancymenu/customization/all_of_create.txt",
-            "MD5": "f05830350d10f88c8335aee950180cd9",
+            "MD5": "7a018f1ae7f71a0c109a46aa18e15a21",
             "path": "config/fancymenu/customization/all_of_create.txt"
           }
         },
@@ -8816,17 +8794,6 @@
             "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/satisfying_buttons-client.toml",
             "MD5": "235445b2856d29ffa4fc187fe7cbe5ce",
             "path": "config/satisfying_buttons-client.toml"
-          }
-        },
-        {
-          "id": "serverbrowser.conf",
-          "name": "serverbrowser.conf",
-          "type": "File",
-          "artifact": {
-            "size": 967,
-            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/serverbrowser.conf",
-            "MD5": "e927b6f8e418e659f17b1740c449feae",
-            "path": "config/serverbrowser.conf"
           }
         },
         {
