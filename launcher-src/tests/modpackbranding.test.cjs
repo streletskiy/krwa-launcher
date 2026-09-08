@@ -47,3 +47,13 @@ test('KRWA main-menu background has the expected branding and dimensions', () =>
     assert.equal(png.readUInt32BE(20), 1080)
     assert.equal(crypto.createHash('sha256').update(png).digest('hex'), 'ae2f4fb0afd08c4ad75c5fe441996daf0d623f0e9dc0a8d664df89aa729b7df8')
 })
+
+test('KRWA main menu opens Multiplayer once per game session', () => {
+    const layout = fs.readFileSync(layoutPath, 'utf8')
+    const multiplayer = (layout.match(/^vanilla_button \{[\s\S]*?^\}/gm) || [])
+        .find(block => block.includes('instance_identifier = mc_titlescreen_multiplayer_button'))
+
+    assert(multiplayer)
+    assert.match(multiplayer, /automated_button_clicks = 1/)
+    assert.match(multiplayer, /load_once_per_session = true/)
+})

@@ -7,7 +7,7 @@
       "name": "KRWA Aeronautics",
       "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
       "icon": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/krwa.png",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "address": "create.krwa.ru:25565",
       "minecraftVersion": "1.21.1",
       "mainServer": true,
@@ -6461,9 +6461,9 @@
           "name": "all_of_create.txt",
           "type": "File",
           "artifact": {
-            "size": 56059,
+            "size": 56058,
             "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/fancymenu/customization/all_of_create.txt",
-            "MD5": "7a018f1ae7f71a0c109a46aa18e15a21",
+            "MD5": "f76b4fbaa3996bb9b8f2c2bb9f1ba2fd",
             "path": "config/fancymenu/customization/all_of_create.txt"
           }
         },

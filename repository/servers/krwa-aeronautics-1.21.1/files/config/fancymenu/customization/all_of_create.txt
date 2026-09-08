@@ -809,7 +809,7 @@ vanilla_button {
   invert_parallax = false
   animated_offset_x = 0
   animated_offset_y = 0
-  load_once_per_session = false
+  load_once_per_session = true
   layer_hidden_in_editor = false
   advanced_rotation_mode = false
   advanced_vertical_tilt_mode = false
@@ -841,7 +841,7 @@ vanilla_button {
   nine_slice_border_y = 5
   nine_slice_slider_handle_border_x = 5
   nine_slice_slider_handle_border_y = 5
-  automated_button_clicks = 0
+  automated_button_clicks = 1
   is_hidden = false
 }
 

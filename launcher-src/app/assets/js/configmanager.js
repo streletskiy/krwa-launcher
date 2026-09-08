@@ -3,6 +3,7 @@ const { LoggerUtil } = require('helios-core')
 const os   = require('os')
 const path = require('path')
 const { atomicWriteFileSync } = require('./filesystemutil')
+const { CURRENT_CONFIG_VERSION, migrateConfig } = require('./configmigration')
 
 const logger = LoggerUtil.getLogger('ConfigManager')
 
@@ -77,12 +78,13 @@ function resolveSelectedRAM(ram) {
  * Resolved = Resolved externally, defaults to null.
  */
 const DEFAULT_CONFIG = {
+    configVersion: CURRENT_CONFIG_VERSION,
     settings: {
         game: {
             resWidth: 1280,
             resHeight: 720,
             fullscreen: false,
-            autoConnect: true,
+            autoConnect: false,
             launchDetached: true
         },
         launcher: {
@@ -148,6 +150,7 @@ exports.load = function(){
             exports.save()
         }
         if(doValidate){
+            config = migrateConfig(config)
             config = validateKeySet(DEFAULT_CONFIG, config)
             exports.save()
         }
