@@ -1729,17 +1729,6 @@
       }
     },
     {
-      "id": "curseforge.project-1084468:file:7205496@jar",
-      "name": "BH Menu 1.21.1 V2.4.4",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 163914,
-        "MD5": "aae0fe20df1831b6c0e019d69a3345d9",
-        "url": "https://www.curseforge.com/api/v1/mods/1084468/files/7205496/download",
-        "path": "curseforge/1084468/7205496/BHMenu-NeoForge-1.21-2.4.4.jar"
-      }
-    },
-    {
       "id": "curseforge.project-1352204:file:7666279@jar",
       "name": "CFC_v1.4.1_neoforge",
       "type": "ForgeMod",

@@ -7,7 +7,7 @@
       "name": "KRWA Aeronautics",
       "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
       "icon": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/krwa.png",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "address": "create.krwa.ru:25565",
       "minecraftVersion": "1.21.1",
       "mainServer": true,
@@ -1740,17 +1740,6 @@
             "MD5": "c55d1fc991daec7f0fdcfd759503999c",
             "url": "https://www.curseforge.com/api/v1/mods/867099/files/8117841/download",
             "path": "curseforge/867099/8117841/CraterLib-Neoforge-1.21-3.1.2.jar"
-          }
-        },
-        {
-          "id": "curseforge.project-1084468:file:7205496@jar",
-          "name": "BH Menu 1.21.1 V2.4.4",
-          "type": "ForgeMod",
-          "artifact": {
-            "size": 163914,
-            "MD5": "aae0fe20df1831b6c0e019d69a3345d9",
-            "url": "https://www.curseforge.com/api/v1/mods/1084468/files/7205496/download",
-            "path": "curseforge/1084468/7205496/BHMenu-NeoForge-1.21-2.4.4.jar"
           }
         },
         {
@@ -3973,28 +3962,6 @@
           }
         },
         {
-          "id": "bhmenu-client-1.toml.bak",
-          "name": "bhmenu-client-1.toml.bak",
-          "type": "File",
-          "artifact": {
-            "size": 2044,
-            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/bhmenu-client-1.toml.bak",
-            "MD5": "6e2ed347ce133e165e23ea20a7bdfe10",
-            "path": "config/bhmenu-client-1.toml.bak"
-          }
-        },
-        {
-          "id": "bhmenu-client.toml",
-          "name": "bhmenu-client.toml",
-          "type": "File",
-          "artifact": {
-            "size": 2083,
-            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/bhmenu-client.toml",
-            "MD5": "42c80afcc695a18797c66ee2988ae0f3",
-            "path": "config/bhmenu-client.toml"
-          }
-        },
-        {
           "id": "biomemusic.json",
           "name": "biomemusic.json",
           "type": "File",
@@ -4384,9 +4351,9 @@
           "name": "modlist.json",
           "type": "File",
           "artifact": {
-            "size": 61407,
+            "size": 61151,
             "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/crash_assistant/modlist.json",
-            "MD5": "523788c817ca297ee86dd90cd582cc65",
+            "MD5": "83569e211fb48909997cf986b7591789",
             "path": "config/crash_assistant/modlist.json"
           }
         },
@@ -6285,9 +6252,9 @@
           "name": "bg-krwa.png",
           "type": "File",
           "artifact": {
-            "size": 2376355,
+            "size": 2652416,
             "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/files/config/fancymenu/assets/bg-krwa.png",
-            "MD5": "2d69ba8eb76fcdbd21bf0dbffb4d2dd3",
+            "MD5": "da11792f5eb585d11cfbfd91685dfbf8",
             "path": "config/fancymenu/assets/bg-krwa.png"
           }
         },
