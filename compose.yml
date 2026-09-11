@@ -15,8 +15,36 @@ services:
     depends_on:
       community:
         condition: service_started
+      mod-cache:
+        condition: service_healthy
       auth:
         condition: service_healthy
+
+  mod-cache:
+    image: node@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf
+    restart: always
+    user: node
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    command: [node, /app/server.mjs]
+    environment:
+      MOD_CACHE_LOCK_PATH: /repository/servers/krwa-aeronautics-1.21.1/neoforge-lock.json
+      MOD_CACHE_ROOT: /cache
+      MOD_CACHE_PROXY_URL: "${MOD_CACHE_PROXY_URL:-http://host.docker.internal:2080}"
+      MOD_CACHE_WARM: "${MOD_CACHE_WARM:-true}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./mod-cache:/cache
+      - ./mod-cache-service:/app:ro
+      - ./repository:/repository:ro
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3002/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
 
   community:
     image: node@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf

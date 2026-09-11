@@ -13,7 +13,6 @@ const {
     validateLocalFile
 }                             = require('helios-core/common')
 const {
-    FullRepair,
     DistributionIndexProcessor,
     MojangIndexProcessor,
     downloadFile
@@ -31,6 +30,7 @@ const {
 const DiscordWrapper          = require('./assets/js/discordwrapper')
 const ProcessBuilder          = require('./assets/js/processbuilder')
 const SkinManagerLanding      = require('./assets/js/skinmanager')
+const { FullRepair }          = require('./assets/js/repair')
 
 // Launch Elements
 const launch_content          = document.getElementById('launch_content')

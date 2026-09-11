@@ -2,6 +2,7 @@
 auth-data/*
 !auth-data/.gitkeep
 backups/
+mod-cache/
 
 # Local machine configuration
 .env

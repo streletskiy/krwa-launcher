@@ -811,7 +811,7 @@
       "artifact": {
         "size": 7144,
         "MD5": "09e8c9e83844ea5a9b1a569b8c14f515",
-        "url": "https://www.curseforge.com/api/v1/mods/888790/files/7920161/download",
+        "url": "https://mediafilez.forgecdn.net/files/7920/161/clientcrafting-1.21-2.1.jar",
         "path": "curseforge/888790/7920161/clientcrafting-1.21-2.1.jar"
       }
     },
@@ -822,7 +822,7 @@
       "artifact": {
         "size": 560814,
         "MD5": "e26773d4e8967c7d9f3f0c4f3d88db1c",
-        "url": "https://www.curseforge.com/api/v1/mods/1166576/files/7449378/download",
+        "url": "https://mediafilez.forgecdn.net/files/7449/378/GnKinetics-1.21.1-1.0m.jar",
         "path": "curseforge/1166576/7449378/GnKinetics-1.21.1-1.0m.jar"
       }
     },
@@ -833,7 +833,7 @@
       "artifact": {
         "size": 1283517,
         "MD5": "4bf7e32d49403b73f0782f6f2d80f000",
-        "url": "https://www.curseforge.com/api/v1/mods/688768/files/8241347/download",
+        "url": "https://mediafilez.forgecdn.net/files/8241/347/create-enchantment-industry-2.4.2.jar",
         "path": "curseforge/688768/8241347/create-enchantment-industry-2.4.2.jar"
       }
     },
@@ -844,7 +844,7 @@
       "artifact": {
         "size": 74419,
         "MD5": "81f8035bc735c75463add09f923ad372",
-        "url": "https://www.curseforge.com/api/v1/mods/583345/files/6315149/download",
+        "url": "https://mediafilez.forgecdn.net/files/6315/149/JadeAddons-1.21.1-NeoForge-6.1.0.jar",
         "path": "curseforge/583345/6315149/JadeAddons-1.21.1-NeoForge-6.1.0.jar"
       }
     },
@@ -855,7 +855,7 @@
       "artifact": {
         "size": 24879,
         "MD5": "68ae6dbb6b7a88cd74c85025dd68cf12",
-        "url": "https://www.curseforge.com/api/v1/mods/417645/files/7966681/download",
+        "url": "https://mediafilez.forgecdn.net/files/7966/681/JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
         "path": "curseforge/417645/7966681/JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar"
       }
     },
@@ -866,7 +866,7 @@
       "artifact": {
         "size": 398004,
         "MD5": "5fb6fde45515060b695c245ecbf5f1ae",
-        "url": "https://www.curseforge.com/api/v1/mods/1254143/files/8206645/download",
+        "url": "https://mediafilez.forgecdn.net/files/8206/645/colorwheel-neoforge-1.2.9%2Bmc1.21.1.jar",
         "path": "curseforge/1254143/8206645/colorwheel-neoforge-1.2.9+mc1.21.1.jar"
       }
     },
@@ -877,7 +877,7 @@
       "artifact": {
         "size": 7279276,
         "MD5": "93db4ba2044a6667d7d1e3f592d63dbd",
-        "url": "https://www.curseforge.com/api/v1/mods/351264/files/8335665/download",
+        "url": "https://mediafilez.forgecdn.net/files/8335/665/kotlinforforge-5.12.0-all.jar",
         "path": "curseforge/351264/8335665/kotlinforforge-5.12.0-all.jar"
       }
     },
@@ -888,7 +888,7 @@
       "artifact": {
         "size": 36096,
         "MD5": "875f4a68f2cd7ee2cc135904653c93d4",
-        "url": "https://www.curseforge.com/api/v1/mods/938643/files/5453382/download",
+        "url": "https://mediafilez.forgecdn.net/files/5453/382/melody_neoforge_1.0.10_MC_1.21.jar",
         "path": "curseforge/938643/5453382/melody_neoforge_1.0.10_MC_1.21.jar"
       }
     },
@@ -899,7 +899,7 @@
       "artifact": {
         "size": 1211,
         "MD5": "3e60d0fec6e4dfdd940a4550b3fdfd41",
-        "url": "https://www.curseforge.com/api/v1/mods/1457757/files/7596632/download",
+        "url": "https://mediafilez.forgecdn.net/files/7596/632/sliceanddice_zh_hk.zip",
         "path": "resourcepacks/sliceanddice_zh_hk.zip"
       }
     },
@@ -910,7 +910,7 @@
       "artifact": {
         "size": 1282359,
         "MD5": "cbd462b8e9f4afde42f3b822fde50b94",
-        "url": "https://www.curseforge.com/api/v1/mods/352835/files/7866688/download",
+        "url": "https://mediafilez.forgecdn.net/files/7866/688/backpacked-neoforge-1.21.1-3.0.5.jar",
         "path": "curseforge/352835/7866688/backpacked-neoforge-1.21.1-3.0.5.jar"
       }
     },
@@ -921,7 +921,7 @@
       "artifact": {
         "size": 190790,
         "MD5": "26214813d60836a101c5fd4813280020",
-        "url": "https://www.curseforge.com/api/v1/mods/821020/files/7568054/download",
+        "url": "https://mediafilez.forgecdn.net/files/7568/54/Create%20Immersive%20Aircrafts%20Resource%20Pack%201.21.1%20-%203.0.zip",
         "path": "resourcepacks/Create Immersive Aircrafts Resource Pack 1.21.1 - 3.0.zip"
       }
     },
@@ -932,7 +932,7 @@
       "artifact": {
         "size": 5613421,
         "MD5": "52c80dfbeee55cbb7ecd244710088dd8",
-        "url": "https://www.curseforge.com/api/v1/mods/889079/files/8726480/download",
+        "url": "https://mediafilez.forgecdn.net/files/8726/480/forgified-fabric-api-0.116.15%2B2.3.5%2B1.21.1.jar",
         "path": "curseforge/889079/8726480/forgified-fabric-api-0.116.15+2.3.5+1.21.1.jar"
       }
     },
@@ -943,7 +943,7 @@
       "artifact": {
         "size": 3481341,
         "MD5": "9f9ad561ad8ad08d5bb492675a0456b9",
-        "url": "https://www.curseforge.com/api/v1/mods/1154099/files/8636685/download",
+        "url": "https://mediafilez.forgecdn.net/files/8636/685/CrashAssistant-neoforge-1.20.6-1.21.4-1.11.12.jar",
         "path": "curseforge/1154099/8636685/CrashAssistant-neoforge-1.20.6-1.21.4-1.11.12.jar"
       }
     },
@@ -954,7 +954,7 @@
       "artifact": {
         "size": 255619,
         "MD5": "4a10ffddd79c41b13caee65d8b0310ce",
-        "url": "https://www.curseforge.com/api/v1/mods/1175578/files/8439680/download",
+        "url": "https://mediafilez.forgecdn.net/files/8439/680/create_mob_spawners-1.1.0.jar",
         "path": "curseforge/1175578/8439680/create_mob_spawners-1.1.0.jar"
       }
     },
@@ -965,7 +965,7 @@
       "artifact": {
         "size": 284825,
         "MD5": "a4b5174a930f06394f80e5603243f680",
-        "url": "https://www.curseforge.com/api/v1/mods/1319223/files/8127223/download",
+        "url": "https://mediafilez.forgecdn.net/files/8127/223/cmpackagecouriers-neoforge-2.3.0.jar",
         "path": "curseforge/1319223/8127223/cmpackagecouriers-neoforge-2.3.0.jar"
       }
     },
@@ -976,7 +976,7 @@
       "artifact": {
         "size": 6593821,
         "MD5": "24e848aae3b21b47386dbd790a115a12",
-        "url": "https://www.curseforge.com/api/v1/mods/1196142/files/7315860/download",
+        "url": "https://mediafilez.forgecdn.net/files/7315/860/pipeorgans-0.8.2%2B1.21.1.jar",
         "path": "curseforge/1196142/7315860/pipeorgans-0.8.2+1.21.1.jar"
       }
     },
@@ -987,7 +987,7 @@
       "artifact": {
         "size": 39777,
         "MD5": "60b9623ecd72851ac952ad62a06cf37d",
-        "url": "https://www.curseforge.com/api/v1/mods/856906/files/8755808/download",
+        "url": "https://mediafilez.forgecdn.net/files/8755/808/leaky-1.21-3.3.jar",
         "path": "curseforge/856906/8755808/leaky-1.21-3.3.jar"
       }
     },
@@ -998,7 +998,7 @@
       "artifact": {
         "size": 250901,
         "MD5": "38ee78af4d8941533ce1bc2f2ffbcd77",
-        "url": "https://www.curseforge.com/api/v1/mods/1354280/files/8646664/download",
+        "url": "https://mediafilez.forgecdn.net/files/8646/664/createtransmission-1.2.2%2Bneoforge-create6-1.21.1.jar",
         "path": "curseforge/1354280/8646664/createtransmission-1.2.2+neoforge-create6-1.21.1.jar"
       }
     },
@@ -1009,7 +1009,7 @@
       "artifact": {
         "size": 259446,
         "MD5": "bf284d7d8c171d8119fa73843f51d5bb",
-        "url": "https://www.curseforge.com/api/v1/mods/1425758/files/8572299/download",
+        "url": "https://mediafilez.forgecdn.net/files/8572/299/rubberworks-neoforge-1.21.1-1.1.4.jar",
         "path": "curseforge/1425758/8572299/rubberworks-neoforge-1.21.1-1.1.4.jar"
       }
     },
@@ -1020,7 +1020,7 @@
       "artifact": {
         "size": 488390,
         "MD5": "935bba621404132b9f50a3597bcd5fd6",
-        "url": "https://www.curseforge.com/api/v1/mods/820977/files/8616574/download",
+        "url": "https://mediafilez.forgecdn.net/files/8616/574/create-central-kitchen-2.6.0.jar",
         "path": "curseforge/820977/8616574/create-central-kitchen-2.6.0.jar"
       }
     },
@@ -1031,7 +1031,7 @@
       "artifact": {
         "size": 2447578,
         "MD5": "30b69d207825cc0a811427fe9141062a",
-        "url": "https://www.curseforge.com/api/v1/mods/666014/files/8158291/download",
+        "url": "https://mediafilez.forgecdn.net/files/8158/291/immersive_aircraft-1.4.6%2B1.21.1-neoforge.jar",
         "path": "curseforge/666014/8158291/immersive_aircraft-1.4.6+1.21.1-neoforge.jar"
       }
     },
@@ -1042,7 +1042,7 @@
       "artifact": {
         "size": 1821784,
         "MD5": "bb25621c80190d79269ad70e3f1ea021",
-        "url": "https://www.curseforge.com/api/v1/mods/636608/files/8690620/download",
+        "url": "https://mediafilez.forgecdn.net/files/8690/620/open-parties-and-claims-neoforge-1.21.1-0.30.3.jar",
         "path": "curseforge/636608/8690620/open-parties-and-claims-neoforge-1.21.1-0.30.3.jar"
       }
     },
@@ -1053,7 +1053,7 @@
       "artifact": {
         "size": 593705,
         "MD5": "fd4ae8a317acf52a140f891d9dd98abc",
-        "url": "https://www.curseforge.com/api/v1/mods/899386/files/8539619/download",
+        "url": "https://mediafilez.forgecdn.net/files/8539/619/justenoughbreeding-neoforge-1.21.1-3.2.1.jar",
         "path": "curseforge/899386/8539619/justenoughbreeding-neoforge-1.21.1-3.2.1.jar"
       }
     },
@@ -1064,7 +1064,7 @@
       "artifact": {
         "size": 546925,
         "MD5": "8dbb914ed233d6e8183ce34eb26beaab",
-        "url": "https://www.curseforge.com/api/v1/mods/627557/files/8123287/download",
+        "url": "https://mediafilez.forgecdn.net/files/8123/287/ComplementaryReimagined_r5.8.1.zip",
         "path": "shaderpacks/ComplementaryReimagined_r5.8.1.zip"
       }
     },
@@ -1075,7 +1075,7 @@
       "artifact": {
         "size": 43983,
         "MD5": "4903471f5b2e51e8d414a2295030d2de",
-        "url": "https://www.curseforge.com/api/v1/mods/907856/files/8463998/download",
+        "url": "https://mediafilez.forgecdn.net/files/8463/998/recipeessentials-1.21.1-4.7.jar",
         "path": "curseforge/907856/8463998/recipeessentials-1.21.1-4.7.jar"
       }
     },
@@ -1086,7 +1086,7 @@
       "artifact": {
         "size": 1699520,
         "MD5": "229c8ee654715c58e14e411cb1ed5df1",
-        "url": "https://www.curseforge.com/api/v1/mods/238222/files/8732390/download",
+        "url": "https://mediafilez.forgecdn.net/files/8732/390/jei-1.21.1-neoforge-19.44.0.405.jar",
         "path": "curseforge/238222/8732390/jei-1.21.1-neoforge-19.44.0.405.jar"
       }
     },
@@ -1097,7 +1097,7 @@
       "artifact": {
         "size": 752334,
         "MD5": "07c98cc3e76f514eee3adee43d05dae9",
-        "url": "https://www.curseforge.com/api/v1/mods/568563/files/7930620/download",
+        "url": "https://mediafilez.forgecdn.net/files/7930/620/entity_texture_features_1.21-neoforge-7.1.jar",
         "path": "curseforge/568563/7930620/entity_texture_features_1.21-neoforge-7.1.jar"
       }
     },
@@ -1108,7 +1108,7 @@
       "artifact": {
         "size": 213853,
         "MD5": "68473a4ca9a827669c13d3855c8dc0e2",
-        "url": "https://www.curseforge.com/api/v1/mods/520110/files/6423863/download",
+        "url": "https://mediafilez.forgecdn.net/files/6423/863/Iceberg-1.21.1-neoforge-1.3.2.jar",
         "path": "curseforge/520110/6423863/Iceberg-1.21.1-neoforge-1.3.2.jar"
       }
     },
@@ -1119,7 +1119,7 @@
       "artifact": {
         "size": 633064,
         "MD5": "d1386b1aa9882976b0910722f14d81ea",
-        "url": "https://www.curseforge.com/api/v1/mods/1279337/files/8585611/download",
+        "url": "https://mediafilez.forgecdn.net/files/8585/611/create_fantasizing-1.21.1-1.2.0-b3.jar",
         "path": "curseforge/1279337/8585611/create_fantasizing-1.21.1-1.2.0-b3.jar"
       }
     },
@@ -1130,7 +1130,7 @@
       "artifact": {
         "size": 646777,
         "MD5": "8178d65cd07dd7a646446729058ae2bf",
-        "url": "https://www.curseforge.com/api/v1/mods/306770/files/7730942/download",
+        "url": "https://mediafilez.forgecdn.net/files/7730/942/Patchouli-1.21.1-93-NEOFORGE.jar",
         "path": "curseforge/306770/7730942/Patchouli-1.21.1-93-NEOFORGE.jar"
       }
     },
@@ -1141,7 +1141,7 @@
       "artifact": {
         "size": 3154746,
         "MD5": "6608b13819952971bf0ebff17d8ea472",
-        "url": "https://www.curseforge.com/api/v1/mods/869316/files/8542167/download",
+        "url": "https://mediafilez.forgecdn.net/files/8542/167/createdieselgenerators-1.21.1-1.3.15.jar",
         "path": "curseforge/869316/8542167/createdieselgenerators-1.21.1-1.3.15.jar"
       }
     },
@@ -1152,7 +1152,7 @@
       "artifact": {
         "size": 1707765,
         "MD5": "054843664d3bef2d61e6e492503fd824",
-        "url": "https://www.curseforge.com/api/v1/mods/1522736/files/8496246/download",
+        "url": "https://mediafilez.forgecdn.net/files/8496/246/createpropulsion-1.1.5.jar",
         "path": "curseforge/1522736/8496246/createpropulsion-1.1.5.jar"
       }
     },
@@ -1163,7 +1163,7 @@
       "artifact": {
         "size": 77326,
         "MD5": "0a0a8665bb4d77e3f8139750cb98d9e4",
-        "url": "https://www.curseforge.com/api/v1/mods/858542/files/5831692/download",
+        "url": "https://mediafilez.forgecdn.net/files/5831/692/Searchables-neoforge-1.21.1-1.0.2.jar",
         "path": "curseforge/858542/5831692/Searchables-neoforge-1.21.1-1.0.2.jar"
       }
     },
@@ -1174,7 +1174,7 @@
       "artifact": {
         "size": 2107270,
         "MD5": "4c631268718d6cdb34714de2936d7a79",
-        "url": "https://www.curseforge.com/api/v1/mods/946163/files/8176502/download",
+        "url": "https://mediafilez.forgecdn.net/files/8176/502/dragonlib-neoforge-1.21.1-beta-3.0.28.jar",
         "path": "curseforge/946163/8176502/dragonlib-neoforge-1.21.1-beta-3.0.28.jar"
       }
     },
@@ -1185,7 +1185,7 @@
       "artifact": {
         "size": 4210708,
         "MD5": "a9345aa0e7ef271ce23c8bbc56fc8972",
-        "url": "https://www.curseforge.com/api/v1/mods/915902/files/8177588/download",
+        "url": "https://mediafilez.forgecdn.net/files/8177/588/EuphoriaPatcher-1.9.3-r5.8.1-neoforge.jar",
         "path": "curseforge/915902/8177588/EuphoriaPatcher-1.9.3-r5.8.1-neoforge.jar"
       }
     },
@@ -1196,7 +1196,7 @@
       "artifact": {
         "size": 942,
         "MD5": "1f2c9c50f1996a50f925304600c268f2",
-        "url": "https://www.curseforge.com/api/v1/mods/971920/files/5136820/download",
+        "url": "https://mediafilez.forgecdn.net/files/5136/820/createquestingzhhk.zip",
         "path": "resourcepacks/createquestingzhhk.zip"
       }
     },
@@ -1207,7 +1207,7 @@
       "artifact": {
         "size": 1014626,
         "MD5": "06a2323e992834efcac3505e3ee57b15",
-        "url": "https://www.curseforge.com/api/v1/mods/531351/files/5981335/download",
+        "url": "https://mediafilez.forgecdn.net/files/5981/335/continuity-3.0.0%2B1.21.neoforge.jar",
         "path": "curseforge/531351/5981335/continuity-3.0.0+1.21.neoforge.jar"
       }
     },
@@ -1218,7 +1218,7 @@
       "artifact": {
         "size": 402546,
         "MD5": "41762fcc5ab64b4de7e7b5f34988d847",
-        "url": "https://www.curseforge.com/api/v1/mods/1260229/files/6519954/download",
+        "url": "https://mediafilez.forgecdn.net/files/6519/954/createmechanicalconfection-0.3.0.jar",
         "path": "curseforge/1260229/6519954/createmechanicalconfection-0.3.0.jar"
       }
     },
@@ -1229,7 +1229,7 @@
       "artifact": {
         "size": 97094,
         "MD5": "703cd8ad4dc4d99e11532122812915f9",
-        "url": "https://www.curseforge.com/api/v1/mods/351441/files/6409785/download",
+        "url": "https://mediafilez.forgecdn.net/files/6409/785/PickUpNotifier-v21.1.1-1.21.1-NeoForge.jar",
         "path": "curseforge/351441/6409785/PickUpNotifier-v21.1.1-1.21.1-NeoForge.jar"
       }
     },
@@ -1240,7 +1240,7 @@
       "artifact": {
         "size": 214343,
         "MD5": "2f15922ce52580ed466b48ade0ef2d38",
-        "url": "https://www.curseforge.com/api/v1/mods/1102591/files/7625579/download",
+        "url": "https://mediafilez.forgecdn.net/files/7625/579/trading_floor-3.0.16.jar",
         "path": "curseforge/1102591/7625579/trading_floor-3.0.16.jar"
       }
     },
@@ -1251,7 +1251,7 @@
       "artifact": {
         "size": 6779410,
         "MD5": "5ec87500b99fc02cc83f74d995d00044",
-        "url": "https://www.curseforge.com/api/v1/mods/947914/files/8299240/download",
+        "url": "https://mediafilez.forgecdn.net/files/8299/240/create_connected-1.3.2-mc1.21.1.jar",
         "path": "curseforge/947914/8299240/create_connected-1.3.2-mc1.21.1.jar"
       }
     },
@@ -1262,7 +1262,7 @@
       "artifact": {
         "size": 254417,
         "MD5": "c3e7c668402ef85825c13203ba3ad8cb",
-        "url": "https://www.curseforge.com/api/v1/mods/1020173/files/7624342/download",
+        "url": "https://mediafilez.forgecdn.net/files/7624/342/create_deep_dark-3.0.2-neoforge-1.21.1.jar",
         "path": "curseforge/1020173/7624342/create_deep_dark-3.0.2-neoforge-1.21.1.jar"
       }
     },
@@ -1273,7 +1273,7 @@
       "artifact": {
         "size": 1251,
         "MD5": "249bf0aa95ab2c6dfb73c9dbf92b4012",
-        "url": "https://www.curseforge.com/api/v1/mods/1457750/files/7596612/download",
+        "url": "https://mediafilez.forgecdn.net/files/7596/612/create_chocolate_fountain_zh_hk.zip",
         "path": "resourcepacks/create_chocolate_fountain_zh_hk.zip"
       }
     },
@@ -1284,7 +1284,7 @@
       "artifact": {
         "size": 2540723,
         "MD5": "6b68276a6718656ec476cfac69dfe013",
-        "url": "https://www.curseforge.com/api/v1/mods/455508/files/8242804/download",
+        "url": "https://mediafilez.forgecdn.net/files/8242/804/iris-neoforge-1.8.14-beta.1%2Bmc1.21.1.jar",
         "path": "curseforge/455508/8242804/iris-neoforge-1.8.14-beta.1+mc1.21.1.jar"
       }
     },
@@ -1295,7 +1295,7 @@
       "artifact": {
         "size": 84812,
         "MD5": "533c154fb306cd8043564ee1533873ce",
-        "url": "https://www.curseforge.com/api/v1/mods/1023259/files/6961457/download",
+        "url": "https://mediafilez.forgecdn.net/files/6961/457/prickle-neoforge-1.21.1-21.1.11.jar",
         "path": "curseforge/1023259/6961457/prickle-neoforge-1.21.1-21.1.11.jar"
       }
     },
@@ -1306,7 +1306,7 @@
       "artifact": {
         "size": 2152322,
         "MD5": "1743567759c02d1b7486f2109aad9860",
-        "url": "https://www.curseforge.com/api/v1/mods/353554/files/5493450/download",
+        "url": "https://mediafilez.forgecdn.net/files/5493/450/Stay_True_1.21.zip",
         "path": "resourcepacks/Stay_True_1.21.zip"
       }
     },
@@ -1317,7 +1317,7 @@
       "artifact": {
         "size": 673423,
         "MD5": "33ac08e422e2086080756dd5f5cd5d10",
-        "url": "https://www.curseforge.com/api/v1/mods/412189/files/5287023/download",
+        "url": "https://mediafilez.forgecdn.net/files/5287/23/guiretextures-1.11.zip",
         "path": "resourcepacks/guiretextures-1.11.zip"
       }
     },
@@ -1328,7 +1328,7 @@
       "artifact": {
         "size": 43521,
         "MD5": "512d6e79b39e980c320d197668a142cf",
-        "url": "https://www.curseforge.com/api/v1/mods/930131/files/6060028/download",
+        "url": "https://mediafilez.forgecdn.net/files/6060/28/ConfiguredDefaults-v21.1.3-1.21.1-NeoForge.jar",
         "path": "curseforge/930131/6060028/ConfiguredDefaults-v21.1.3-1.21.1-NeoForge.jar"
       }
     },
@@ -1339,7 +1339,7 @@
       "artifact": {
         "size": 3160883,
         "MD5": "f6194ef306c3991de220ee2cdffdac98",
-        "url": "https://www.curseforge.com/api/v1/mods/398521/files/8672744/download",
+        "url": "https://mediafilez.forgecdn.net/files/8672/744/FarmersDelight-1.21.1-1.3.3.jar",
         "path": "curseforge/398521/8672744/FarmersDelight-1.21.1-1.3.3.jar"
       }
     },
@@ -1350,7 +1350,7 @@
       "artifact": {
         "size": 83035,
         "MD5": "9757d99dce58ebb447cc75a1940d4d5a",
-        "url": "https://www.curseforge.com/api/v1/mods/832644/files/5733968/download",
+        "url": "https://mediafilez.forgecdn.net/files/5733/968/ResourcePackOverrides-v21.1.0-1.21.1-NeoForge.jar",
         "path": "curseforge/832644/5733968/ResourcePackOverrides-v21.1.0-1.21.1-NeoForge.jar"
       }
     },
@@ -1361,7 +1361,7 @@
       "artifact": {
         "size": 2527,
         "MD5": "9998acfaa16deb6deeb88cd2c9df2c0b",
-        "url": "https://www.curseforge.com/api/v1/mods/1266786/files/7370449/download",
+        "url": "https://mediafilez.forgecdn.net/files/7370/449/extra_create_recipes_1.21.1_v1.jar",
         "path": "curseforge/1266786/7370449/extra_create_recipes_1.21.1_v1.jar"
       }
     },
@@ -1372,7 +1372,7 @@
       "artifact": {
         "size": 114165,
         "MD5": "f2d38f850688eefa338b807801df2b4b",
-        "url": "https://www.curseforge.com/api/v1/mods/470193/files/7367221/download",
+        "url": "https://mediafilez.forgecdn.net/files/7367/221/connectivity-1.21.1-7.6.jar",
         "path": "curseforge/470193/7367221/connectivity-1.21.1-7.6.jar"
       }
     },
@@ -1383,7 +1383,7 @@
       "artifact": {
         "size": 46623,
         "MD5": "8f22fb065079340a72ae5ce0da12efcb",
-        "url": "https://www.curseforge.com/api/v1/mods/689467/files/7221528/download",
+        "url": "https://mediafilez.forgecdn.net/files/7221/528/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar",
         "path": "curseforge/689467/7221528/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar"
       }
     },
@@ -1394,7 +1394,7 @@
       "artifact": {
         "size": 1661802,
         "MD5": "f401e28d795486a83db6dd714486d3e2",
-        "url": "https://www.curseforge.com/api/v1/mods/439890/files/8188476/download",
+        "url": "https://mediafilez.forgecdn.net/files/8188/476/createaddition-1.6.0.jar",
         "path": "curseforge/439890/8188476/createaddition-1.6.0.jar"
       }
     },
@@ -1405,7 +1405,7 @@
       "artifact": {
         "size": 7965088,
         "MD5": "6129121e5eb78eb9ec1e23cd2ef9f181",
-        "url": "https://www.curseforge.com/api/v1/mods/1321420/files/8738576/download",
+        "url": "https://mediafilez.forgecdn.net/files/8738/576/powergrid-mc1.21.1-0.6.1.jar",
         "path": "curseforge/1321420/8738576/powergrid-mc1.21.1-0.6.1.jar"
       }
     },
@@ -1416,7 +1416,7 @@
       "artifact": {
         "size": 362740,
         "MD5": "c00a4e7f37026af024016a238aed5d10",
-        "url": "https://www.curseforge.com/api/v1/mods/686911/files/8749421/download",
+        "url": "https://mediafilez.forgecdn.net/files/8749/421/ImmediatelyFast-NeoForge-1.6.13%2B1.21.1.jar",
         "path": "curseforge/686911/8749421/ImmediatelyFast-NeoForge-1.6.13+1.21.1.jar"
       }
     },
@@ -1427,7 +1427,7 @@
       "artifact": {
         "size": 150044,
         "MD5": "e63f233d61a9c46e6dfd2bd52c95ee29",
-        "url": "https://www.curseforge.com/api/v1/mods/656900/files/6292148/download",
+        "url": "https://mediafilez.forgecdn.net/files/6292/148/Create%20Touch-Ups%20v1.0.zip",
         "path": "resourcepacks/Create Touch-Ups v1.0.zip"
       }
     },
@@ -1438,7 +1438,7 @@
       "artifact": {
         "size": 52795,
         "MD5": "5e03cad291f55d453883274f4b072bda",
-        "url": "https://www.curseforge.com/api/v1/mods/482444/files/6059206/download",
+        "url": "https://mediafilez.forgecdn.net/files/6059/206/boatiview-neoforge-0.0.6-1.21.1.jar",
         "path": "curseforge/482444/6059206/boatiview-neoforge-0.0.6-1.21.1.jar"
       }
     },
@@ -1449,7 +1449,7 @@
       "artifact": {
         "size": 211972,
         "MD5": "a71d460c1d941bad8d7ae2a4dcc2b2fa",
-        "url": "https://www.curseforge.com/api/v1/mods/241160/files/5623547/download",
+        "url": "https://mediafilez.forgecdn.net/files/5623/547/netherportalfix-neoforge-1.21.1-21.1.1.jar",
         "path": "curseforge/241160/5623547/netherportalfix-neoforge-1.21.1-21.1.1.jar"
       }
     },
@@ -1460,7 +1460,7 @@
       "artifact": {
         "size": 4573244,
         "MD5": "b3e451facbf76338a06d765e7d1c7e9c",
-        "url": "https://www.curseforge.com/api/v1/mods/890127/files/8654089/download",
+        "url": "https://mediafilez.forgecdn.net/files/8654/89/connector-2.0.0-beta.17%2B1.21.1-full.jar",
         "path": "curseforge/890127/8654089/connector-2.0.0-beta.17+1.21.1-full.jar"
       }
     },
@@ -1471,7 +1471,7 @@
       "artifact": {
         "size": 790152,
         "MD5": "36993d161110144b01336f1a271d3799",
-        "url": "https://www.curseforge.com/api/v1/mods/1522473/files/8743051/download",
+        "url": "https://mediafilez.forgecdn.net/files/8743/51/aeroworks-1.5.0.jar",
         "path": "curseforge/1522473/8743051/aeroworks-1.5.0.jar"
       }
     },
@@ -1482,7 +1482,7 @@
       "artifact": {
         "size": 807129,
         "MD5": "c33dbb51043d8992a0b1d7bd0c39336e",
-        "url": "https://www.curseforge.com/api/v1/mods/1276978/files/8106211/download",
+        "url": "https://mediafilez.forgecdn.net/files/8106/211/mechanical_botany-1.1.3%2B1.21.1-neoforged.jar",
         "path": "curseforge/1276978/8106211/mechanical_botany-1.1.3+1.21.1-neoforged.jar"
       }
     },
@@ -1493,7 +1493,7 @@
       "artifact": {
         "size": 33121810,
         "MD5": "f4579b0eb8243b70e0bd2fd9f7469ea0",
-        "url": "https://www.curseforge.com/api/v1/mods/676721/files/8666959/download",
+        "url": "https://mediafilez.forgecdn.net/files/8666/959/create-aeronautics-bundled-1.21.1-1.3.1.jar",
         "path": "curseforge/676721/8666959/create-aeronautics-bundled-1.21.1-1.3.1.jar"
       }
     },
@@ -1504,7 +1504,7 @@
       "artifact": {
         "size": 28573,
         "MD5": "74333232bca9d411d0f1f8a416933361",
-        "url": "https://www.curseforge.com/api/v1/mods/261251/files/8135209/download",
+        "url": "https://mediafilez.forgecdn.net/files/8135/209/bwncr-neoforge-1.21.1-3.20.4.jar",
         "path": "curseforge/261251/8135209/bwncr-neoforge-1.21.1-3.20.4.jar"
       }
     },
@@ -1515,7 +1515,7 @@
       "artifact": {
         "size": 1292934,
         "MD5": "c2bc7287841c29e25ce553baae1700a0",
-        "url": "https://www.curseforge.com/api/v1/mods/394468/files/8756580/download",
+        "url": "https://mediafilez.forgecdn.net/files/8756/580/sodium-neoforge-0.8.13%2Bmc1.21.1.jar",
         "path": "curseforge/394468/8756580/sodium-neoforge-0.8.13+mc1.21.1.jar"
       }
     },
@@ -1526,7 +1526,7 @@
       "artifact": {
         "size": 308236,
         "MD5": "ee780bb9fe724f6d1af97547bdab8bff",
-        "url": "https://www.curseforge.com/api/v1/mods/404468/files/8724782/download",
+        "url": "https://mediafilez.forgecdn.net/files/8724/782/ftb-teams-neoforge-2101.1.11.jar",
         "path": "curseforge/404468/8724782/ftb-teams-neoforge-2101.1.11.jar"
       }
     },
@@ -1537,7 +1537,7 @@
       "artifact": {
         "size": 783793,
         "MD5": "ffd35f57254160816b17db7e66f196a8",
-        "url": "https://www.curseforge.com/api/v1/mods/531761/files/8645517/download",
+        "url": "https://mediafilez.forgecdn.net/files/8645/517/balm-neoforge-1.21.1-21.0.65.jar",
         "path": "curseforge/531761/8645517/balm-neoforge-1.21.1-21.0.65.jar"
       }
     },
@@ -1548,7 +1548,7 @@
       "artifact": {
         "size": 32887560,
         "MD5": "d02d87256f44699ebfdb2f542de37411",
-        "url": "https://www.curseforge.com/api/v1/mods/1537945/files/8523257/download",
+        "url": "https://mediafilez.forgecdn.net/files/8523/257/createthrusters-bundled-V1.1.3.jar",
         "path": "curseforge/1537945/8523257/createthrusters-bundled-V1.1.3.jar"
       }
     },
@@ -1559,7 +1559,7 @@
       "artifact": {
         "size": 30206,
         "MD5": "1b871a5f53cec9fd1c6b0402ac5517d2",
-        "url": "https://www.curseforge.com/api/v1/mods/326652/files/8749806/download",
+        "url": "https://mediafilez.forgecdn.net/files/8749/806/cupboard-1.21.1-4.1.jar",
         "path": "curseforge/326652/8749806/cupboard-1.21.1-4.1.jar"
       }
     },
@@ -1570,7 +1570,7 @@
       "artifact": {
         "size": 200176,
         "MD5": "6940bf883527790c717de302762f8f2d",
-        "url": "https://www.curseforge.com/api/v1/mods/1583035/files/8729982/download",
+        "url": "https://mediafilez.forgecdn.net/files/8729/982/IrisSearch-1.6.1-neoforge.jar",
         "path": "curseforge/1583035/8729982/IrisSearch-1.6.1-neoforge.jar"
       }
     },
@@ -1581,7 +1581,7 @@
       "artifact": {
         "size": 1990,
         "MD5": "d544738f85c590c0604930b804bc287f",
-        "url": "https://www.curseforge.com/api/v1/mods/1455778/files/7586038/download",
+        "url": "https://mediafilez.forgecdn.net/files/7586/38/no_dnd_diamond_1.21.zip",
         "path": "config/paxi/datapacks/no_dnd_diamond_1.21.zip"
       }
     },
@@ -1592,7 +1592,7 @@
       "artifact": {
         "size": 207202,
         "MD5": "83f06cdbe86f795c7d487be3addd2f69",
-        "url": "https://www.curseforge.com/api/v1/mods/1514529/files/8493955/download",
+        "url": "https://mediafilez.forgecdn.net/files/8493/955/aeroclaims-0.9.3.jar",
         "path": "curseforge/1514529/8493955/aeroclaims-0.9.3.jar"
       }
     },
@@ -1603,7 +1603,7 @@
       "artifact": {
         "size": 44697,
         "MD5": "5f8facf32dcd368b6819b30c7fa63ab1",
-        "url": "https://www.curseforge.com/api/v1/mods/1532334/files/8547039/download",
+        "url": "https://mediafilez.forgecdn.net/files/8547/39/createaeronauticscurios-neoforge-1.21.1-2.2.jar",
         "path": "curseforge/1532334/8547039/createaeronauticscurios-neoforge-1.21.1-2.2.jar"
       }
     },
@@ -1614,7 +1614,7 @@
       "artifact": {
         "size": 1644485,
         "MD5": "5bcea3a1df072447c0d71d3e40e3ff11",
-        "url": "https://www.curseforge.com/api/v1/mods/905861/files/8215216/download",
+        "url": "https://mediafilez.forgecdn.net/files/8215/216/create-new-age-1.2.0%2Bneoforge-mc1.21.1.jar",
         "path": "curseforge/905861/8215216/create-new-age-1.2.0+neoforge-mc1.21.1.jar"
       }
     },
@@ -1625,7 +1625,7 @@
       "artifact": {
         "size": 1158,
         "MD5": "88bd7fb2f283963520c2a6240d0879ef",
-        "url": "https://www.curseforge.com/api/v1/mods/1446673/files/7537707/download",
+        "url": "https://mediafilez.forgecdn.net/files/7537/707/Create_Easy_Stone_Generators_%20No_Obsidian_Gen.zip",
         "path": "config/paxi/datapacks/Create_Easy_Stone_Generators_ No_Obsidian_Gen.zip"
       }
     },
@@ -1636,7 +1636,7 @@
       "artifact": {
         "size": 120235,
         "MD5": "5d5175cf9af385f2e155b7ff4adb71f7",
-        "url": "https://www.curseforge.com/api/v1/mods/1626954/files/8754093/download",
+        "url": "https://mediafilez.forgecdn.net/files/8754/93/rolling-tones-0.2.2.jar",
         "path": "curseforge/1626954/8754093/rolling-tones-0.2.2.jar"
       }
     },
@@ -1647,7 +1647,7 @@
       "artifact": {
         "size": 14997,
         "MD5": "ed621e8e0d6527f307a5f4dfe76ec367",
-        "url": "https://www.curseforge.com/api/v1/mods/840329/files/5380486/download",
+        "url": "https://mediafilez.forgecdn.net/files/5380/486/Create_Style_Hopper_24_5_29.zip",
         "path": "resourcepacks/Create_Style_Hopper_24_5_29.zip"
       }
     },
@@ -1658,7 +1658,7 @@
       "artifact": {
         "size": 1680,
         "MD5": "55f18b3b1062664f739d4c25052ac804",
-        "url": "https://www.curseforge.com/api/v1/mods/1093675/files/5677450/download",
+        "url": "https://mediafilez.forgecdn.net/files/5677/450/create_pattern_schematics_zh_hk_translation.zip",
         "path": "resourcepacks/create_pattern_schematics_zh_hk_translation.zip"
       }
     },
@@ -1669,7 +1669,7 @@
       "artifact": {
         "size": 1202822,
         "MD5": "6a19153e234b067459acb6f698aaf2f2",
-        "url": "https://www.curseforge.com/api/v1/mods/382216/files/8397829/download",
+        "url": "https://mediafilez.forgecdn.net/files/8397/829/blueprint-1.21.1-8.1.1.jar",
         "path": "curseforge/382216/8397829/blueprint-1.21.1-8.1.1.jar"
       }
     },
@@ -1680,7 +1680,7 @@
       "artifact": {
         "size": 303343,
         "MD5": "b7cfe34fa390acad58e8a42ce90718f8",
-        "url": "https://www.curseforge.com/api/v1/mods/898849/files/7958165/download",
+        "url": "https://mediafilez.forgecdn.net/files/7958/165/create_tweaked_controllers-1.21.1-1.2.7.jar",
         "path": "curseforge/898849/7958165/create_tweaked_controllers-1.21.1-1.2.7.jar"
       }
     },
@@ -1691,7 +1691,7 @@
       "artifact": {
         "size": 629469,
         "MD5": "70232faa3ae34ccef80d7e51d85311a9",
-        "url": "https://www.curseforge.com/api/v1/mods/1249131/files/8744189/download",
+        "url": "https://mediafilez.forgecdn.net/files/8744/189/create-integrated-farming-1.3.3b.jar",
         "path": "curseforge/1249131/8744189/create-integrated-farming-1.3.3b.jar"
       }
     },
@@ -1702,7 +1702,7 @@
       "artifact": {
         "size": 4592084,
         "MD5": "702bb71855f689e139f040941ca9883d",
-        "url": "https://www.curseforge.com/api/v1/mods/661376/files/8161672/download",
+        "url": "https://mediafilez.forgecdn.net/files/8161/672/integrated_villages-1.3.3%2B1.21.1-neoforge.jar",
         "path": "curseforge/661376/8161672/integrated_villages-1.3.3+1.21.1-neoforge.jar"
       }
     },
@@ -1713,7 +1713,7 @@
       "artifact": {
         "size": 10508,
         "MD5": "7b0c884c2999832d8c0269b08b961a8f",
-        "url": "https://www.curseforge.com/api/v1/mods/1442925/files/8707235/download",
+        "url": "https://mediafilez.forgecdn.net/files/8707/235/NoChatRestrictions-NeoForge-MC1.21.11-v1.0.2.jar",
         "path": "curseforge/1442925/8707235/NoChatRestrictions-NeoForge-MC1.21.11-v1.0.2.jar"
       }
     },
@@ -1724,7 +1724,7 @@
       "artifact": {
         "size": 1483241,
         "MD5": "c55d1fc991daec7f0fdcfd759503999c",
-        "url": "https://www.curseforge.com/api/v1/mods/867099/files/8117841/download",
+        "url": "https://mediafilez.forgecdn.net/files/8117/841/CraterLib-Neoforge-1.21-3.1.2.jar",
         "path": "curseforge/867099/8117841/CraterLib-Neoforge-1.21-3.1.2.jar"
       }
     },
@@ -1735,7 +1735,7 @@
       "artifact": {
         "size": 74294,
         "MD5": "29d403bf1114a346ce18dbdb3f179a66",
-        "url": "https://www.curseforge.com/api/v1/mods/1352204/files/7666279/download",
+        "url": "https://mediafilez.forgecdn.net/files/7666/279/CreateFastSchematicCannon-1.4.1-neoforge-1.21.1.jar",
         "path": "curseforge/1352204/7666279/CreateFastSchematicCannon-1.4.1-neoforge-1.21.1.jar"
       }
     },
@@ -1746,7 +1746,7 @@
       "artifact": {
         "size": 1609252,
         "MD5": "9495f99e3d67a1a396140c4dac901d04",
-        "url": "https://www.curseforge.com/api/v1/mods/289412/files/8730556/download",
+        "url": "https://mediafilez.forgecdn.net/files/8730/556/ftb-quests-neoforge-2101.1.34.jar",
         "path": "curseforge/289412/8730556/ftb-quests-neoforge-2101.1.34.jar"
       }
     },
@@ -1757,7 +1757,7 @@
       "artifact": {
         "size": 215204,
         "MD5": "80c22e1d34d82440c5f778c80ea893fa",
-        "url": "https://www.curseforge.com/api/v1/mods/1206505/files/7088011/download",
+        "url": "https://mediafilez.forgecdn.net/files/7088/11/create_generators-1.2.5-neoforge-1.21.1.jar",
         "path": "curseforge/1206505/7088011/create_generators-1.2.5-neoforge-1.21.1.jar"
       }
     },
@@ -1768,7 +1768,7 @@
       "artifact": {
         "size": 13018,
         "MD5": "486e9e3e872bdd4339e80220f797b899",
-        "url": "https://www.curseforge.com/api/v1/mods/1540335/files/8597672/download",
+        "url": "https://mediafilez.forgecdn.net/files/8597/672/CreateRubberworks_Compat_v6.zip",
         "path": "config/paxi/datapacks/CreateRubberworks_Compat_v6.zip"
       }
     },
@@ -1779,7 +1779,7 @@
       "artifact": {
         "size": 82648,
         "MD5": "0314f02f2f7ec9af0b589b66388d0d91",
-        "url": "https://www.curseforge.com/api/v1/mods/250419/files/8693034/download",
+        "url": "https://mediafilez.forgecdn.net/files/8693/34/enchdesc-neoforge-1.21.1-21.1.11.jar",
         "path": "curseforge/250419/8693034/enchdesc-neoforge-1.21.1-21.1.11.jar"
       }
     },
@@ -1790,7 +1790,7 @@
       "artifact": {
         "size": 1021,
         "MD5": "219ce0a5865ea4c583f2cf3a964a0335",
-        "url": "https://www.curseforge.com/api/v1/mods/979667/files/5136836/download",
+        "url": "https://mediafilez.forgecdn.net/files/5136/836/trading%20post%20ZH%20HK.zip",
         "path": "resourcepacks/trading post ZH HK.zip"
       }
     },
@@ -1801,7 +1801,7 @@
       "artifact": {
         "size": 50235,
         "MD5": "d8f9e005af3644cee127d7da1fe2ed79",
-        "url": "https://www.curseforge.com/api/v1/mods/308989/files/5694215/download",
+        "url": "https://mediafilez.forgecdn.net/files/5694/215/caelus-neoforge-7.0.1%2B1.21.1.jar",
         "path": "curseforge/308989/5694215/caelus-neoforge-7.0.1+1.21.1.jar"
       }
     },
@@ -1812,7 +1812,7 @@
       "artifact": {
         "size": 30417,
         "MD5": "9db706e822bdfd83a36c5aeb1c21fd74",
-        "url": "https://www.curseforge.com/api/v1/mods/521590/files/5591015/download",
+        "url": "https://mediafilez.forgecdn.net/files/5591/15/Highlighter-1.21-neoforge-1.1.11.jar",
         "path": "curseforge/521590/5591015/Highlighter-1.21-neoforge-1.1.11.jar"
       }
     },
@@ -1823,7 +1823,7 @@
       "artifact": {
         "size": 211671,
         "MD5": "3ffbb42f64dd6f7d850acb032b6eb90c",
-        "url": "https://www.curseforge.com/api/v1/mods/943925/files/7429011/download",
+        "url": "https://mediafilez.forgecdn.net/files/7429/11/ftb-filter-system-neoforge-21.1.4.jar",
         "path": "curseforge/943925/7429011/ftb-filter-system-neoforge-21.1.4.jar"
       }
     },
@@ -1834,7 +1834,7 @@
       "artifact": {
         "size": 432269,
         "MD5": "31cfc24b7997dbf6ed84cd844de37d7d",
-        "url": "https://www.curseforge.com/api/v1/mods/945479/files/6418577/download",
+        "url": "https://mediafilez.forgecdn.net/files/6418/577/watut-neoforge-1.21.0-1.2.7.jar",
         "path": "curseforge/945479/6418577/watut-neoforge-1.21.0-1.2.7.jar"
       }
     },
@@ -1845,7 +1845,7 @@
       "artifact": {
         "size": 121559,
         "MD5": "e0374dac41d6c641903f9e241911e1d3",
-        "url": "https://www.curseforge.com/api/v1/mods/429235/files/7524151/download",
+        "url": "https://mediafilez.forgecdn.net/files/7524/151/ferritecore-7.0.3-neoforge.jar",
         "path": "curseforge/429235/7524151/ferritecore-7.0.3-neoforge.jar"
       }
     },
@@ -1856,7 +1856,7 @@
       "artifact": {
         "size": 2110,
         "MD5": "a7174b6f993562abdb908da41bef02ea",
-        "url": "https://www.curseforge.com/api/v1/mods/945095/files/5180585/download",
+        "url": "https://mediafilez.forgecdn.net/files/5180/585/Create_FTBQuests.zip",
         "path": "resourcepacks/Create_FTBQuests.zip"
       }
     },
@@ -1867,7 +1867,7 @@
       "artifact": {
         "size": 1160337,
         "MD5": "e03f91af8a74d0d15c9190f48172eac9",
-        "url": "https://www.curseforge.com/api/v1/mods/896746/files/8732859/download",
+        "url": "https://mediafilez.forgecdn.net/files/8732/859/amendments-1.21-2.1.9-neoforge.jar",
         "path": "curseforge/896746/8732859/amendments-1.21-2.1.9-neoforge.jar"
       }
     },
@@ -1878,7 +1878,7 @@
       "artifact": {
         "size": 465013,
         "MD5": "48540138881ebc454ef3a07c1bd4c250",
-        "url": "https://www.curseforge.com/api/v1/mods/447673/files/8403576/download",
+        "url": "https://mediafilez.forgecdn.net/files/8403/576/sodium-extra-neoforge-0.9.3%2Bmc1.21.1.jar",
         "path": "curseforge/447673/8403576/sodium-extra-neoforge-0.9.3+mc1.21.1.jar"
       }
     },
@@ -1889,7 +1889,7 @@
       "artifact": {
         "size": 852705,
         "MD5": "bfc62c760f2062aa58fe6fbe6e0968d5",
-        "url": "https://www.curseforge.com/api/v1/mods/851046/files/8451084/download",
+        "url": "https://mediafilez.forgecdn.net/files/8451/84/neruina-3.3.3%2B1.21.1-neoforge.jar",
         "path": "curseforge/851046/8451084/neruina-3.3.3+1.21.1-neoforge.jar"
       }
     },
@@ -1900,7 +1900,7 @@
       "artifact": {
         "size": 387334,
         "MD5": "06f94f31d9e0b59c8b42a5b0df7013d6",
-        "url": "https://www.curseforge.com/api/v1/mods/549225/files/7530361/download",
+        "url": "https://mediafilez.forgecdn.net/files/7530/361/framework-neoforge-1.21.1-0.13.11.jar",
         "path": "curseforge/549225/7530361/framework-neoforge-1.21.1-0.13.11.jar"
       }
     },
@@ -1911,7 +1911,7 @@
       "artifact": {
         "size": 67464,
         "MD5": "ae0f8c876eb424e33536722423393540",
-        "url": "https://www.curseforge.com/api/v1/mods/1232926/files/7651561/download",
+        "url": "https://mediafilez.forgecdn.net/files/7651/561/create_chocolate_fountain-1.21.1-1.1.0.jar",
         "path": "curseforge/1232926/7651561/create_chocolate_fountain-1.21.1-1.1.0.jar"
       }
     },
@@ -1922,7 +1922,7 @@
       "artifact": {
         "size": 774220,
         "MD5": "969860e6a6ebe4dc2e2154b56f05483e",
-        "url": "https://www.curseforge.com/api/v1/mods/360438/files/8330365/download",
+        "url": "https://mediafilez.forgecdn.net/files/8330/365/lithium-neoforge-0.15.4%2Bmc1.21.1.jar",
         "path": "curseforge/360438/8330365/lithium-neoforge-0.15.4+mc1.21.1.jar"
       }
     },
@@ -1933,7 +1933,7 @@
       "artifact": {
         "size": 389834,
         "MD5": "3ebbdb2620b4b8a97166653479df9809",
-        "url": "https://www.curseforge.com/api/v1/mods/1015100/files/8702150/download",
+        "url": "https://mediafilez.forgecdn.net/files/8702/150/YungsApi-1.21.1-NeoForge-5.1.8.jar",
         "path": "curseforge/1015100/8702150/YungsApi-1.21.1-NeoForge-5.1.8.jar"
       }
     },
@@ -1944,7 +1944,7 @@
       "artifact": {
         "size": 12986136,
         "MD5": "01ee2d5fa1ce388eadfed5d83a89950c",
-        "url": "https://www.curseforge.com/api/v1/mods/1312371/files/8673825/download",
+        "url": "https://mediafilez.forgecdn.net/files/8673/825/sable-neoforge-1.21.1-2.0.5.jar",
         "path": "curseforge/1312371/8673825/sable-neoforge-1.21.1-2.0.5.jar"
       }
     },
@@ -1955,7 +1955,7 @@
       "artifact": {
         "size": 16436,
         "MD5": "64d4eb44b8dd6a302609efc1aa01fbc0",
-        "url": "https://www.curseforge.com/api/v1/mods/1266798/files/7370476/download",
+        "url": "https://mediafilez.forgecdn.net/files/7370/476/coppersplashing_1.21.1_v1.jar",
         "path": "curseforge/1266798/7370476/coppersplashing_1.21.1_v1.jar"
       }
     },
@@ -1966,7 +1966,7 @@
       "artifact": {
         "size": 8003762,
         "MD5": "f43712a04bcc2e5916b15e3dd714ac87",
-        "url": "https://www.curseforge.com/api/v1/mods/1007714/files/8036048/download",
+        "url": "https://mediafilez.forgecdn.net/files/8036/48/create_optical-0.4.2.jar",
         "path": "curseforge/1007714/8036048/create_optical-0.4.2.jar"
       }
     },
@@ -1977,7 +1977,7 @@
       "artifact": {
         "size": 7132842,
         "MD5": "0f875f5741a6fad6f1c4f6fdbe5f538b",
-        "url": "https://www.curseforge.com/api/v1/mods/538214/files/6330030/download",
+        "url": "https://mediafilez.forgecdn.net/files/6330/30/handcrafted-neoforge-1.21.1-4.0.3.jar",
         "path": "curseforge/538214/6330030/handcrafted-neoforge-1.21.1-4.0.3.jar"
       }
     },
@@ -1988,7 +1988,7 @@
       "artifact": {
         "size": 375132,
         "MD5": "c0b5cd2692f1baa9cf5c320d4a4b378e",
-        "url": "https://www.curseforge.com/api/v1/mods/337396/files/7118750/download",
+        "url": "https://mediafilez.forgecdn.net/files/7118/750/boatload-1.21.1-6.0.2.jar",
         "path": "curseforge/337396/7118750/boatload-1.21.1-6.0.2.jar"
       }
     },
@@ -1999,7 +1999,7 @@
       "artifact": {
         "size": 221764,
         "MD5": "ae96b6c00e6a87ffe6d5df48302690fd",
-        "url": "https://www.curseforge.com/api/v1/mods/1072349/files/7155413/download",
+        "url": "https://mediafilez.forgecdn.net/files/7155/413/create_pattern_schematics-2.0.10.jar",
         "path": "curseforge/1072349/7155413/create_pattern_schematics-2.0.10.jar"
       }
     },
@@ -2010,7 +2010,7 @@
       "artifact": {
         "size": 618842,
         "MD5": "6e77d08299ea1ec7756a299263bc469b",
-        "url": "https://www.curseforge.com/api/v1/mods/410295/files/5453385/download",
+        "url": "https://mediafilez.forgecdn.net/files/5453/385/konkrete_neoforge_1.9.9_MC_1.21.jar",
         "path": "curseforge/410295/5453385/konkrete_neoforge_1.9.9_MC_1.21.jar"
       }
     },
@@ -2021,7 +2021,7 @@
       "artifact": {
         "size": 108711,
         "MD5": "fd08d69a8c65af615291bf09433b8b4c",
-        "url": "https://www.curseforge.com/api/v1/mods/1622142/files/8736099/download",
+        "url": "https://mediafilez.forgecdn.net/files/8736/99/sablexaeromaps-1.21.1-1.4.0.jar",
         "path": "curseforge/1622142/8736099/sablexaeromaps-1.21.1-1.4.0.jar"
       }
     },
@@ -2032,7 +2032,7 @@
       "artifact": {
         "size": 1040,
         "MD5": "69119a297ab50da993212381473de327",
-        "url": "https://www.curseforge.com/api/v1/mods/1457764/files/7596654/download",
+        "url": "https://mediafilez.forgecdn.net/files/7596/654/createtransmission_zh_hk_translation.zip",
         "path": "resourcepacks/createtransmission_zh_hk_translation.zip"
       }
     },
@@ -2043,7 +2043,7 @@
       "artifact": {
         "size": 15576704,
         "MD5": "7eecf92568194350f449681ebbf5769f",
-        "url": "https://www.curseforge.com/api/v1/mods/243121/files/8420966/download",
+        "url": "https://mediafilez.forgecdn.net/files/8420/966/Quark-4.1-482.jar",
         "path": "curseforge/243121/8420966/Quark-4.1-482.jar"
       }
     },
@@ -2054,7 +2054,7 @@
       "artifact": {
         "size": 65716,
         "MD5": "741721a51d325dfccf1b74f0a792bd88",
-        "url": "https://www.curseforge.com/api/v1/mods/237749/files/7796187/download",
+        "url": "https://mediafilez.forgecdn.net/files/7796/187/coroutil-neoforge-1.21.0-1.3.9.jar",
         "path": "curseforge/237749/7796187/coroutil-neoforge-1.21.0-1.3.9.jar"
       }
     },
@@ -2065,7 +2065,7 @@
       "artifact": {
         "size": 6276522,
         "MD5": "69cd87744e40cc444b4176022ec6d17a",
-        "url": "https://www.curseforge.com/api/v1/mods/1104882/files/6533725/download",
+        "url": "https://mediafilez.forgecdn.net/files/6533/725/txnilib-neoforge-1.0.24-1.21.1.jar",
         "path": "curseforge/1104882/6533725/txnilib-neoforge-1.0.24-1.21.1.jar"
       }
     },
@@ -2076,7 +2076,7 @@
       "artifact": {
         "size": 724898,
         "MD5": "b820181baa731d37c60214d5778c4598",
-        "url": "https://www.curseforge.com/api/v1/mods/1394354/files/7552615/download",
+        "url": "https://mediafilez.forgecdn.net/files/7552/615/create_wrapped-1.0.3-neoforge-1.21.1.jar",
         "path": "curseforge/1394354/7552615/create_wrapped-1.0.3-neoforge-1.21.1.jar"
       }
     },
@@ -2087,7 +2087,7 @@
       "artifact": {
         "size": 562895,
         "MD5": "4ff7a7a894a683f16a5f64a6d99f53c2",
-        "url": "https://www.curseforge.com/api/v1/mods/1091339/files/8648639/download",
+        "url": "https://mediafilez.forgecdn.net/files/8648/639/alltheleaks-1.1.12%2B1.21.1-neoforge.jar",
         "path": "curseforge/1091339/8648639/alltheleaks-1.1.12+1.21.1-neoforge.jar"
       }
     },
@@ -2098,7 +2098,7 @@
       "artifact": {
         "size": 159182,
         "MD5": "5f813806c45855ca9104d86ed5ec2535",
-        "url": "https://www.curseforge.com/api/v1/mods/1092048/files/8438541/download",
+        "url": "https://mediafilez.forgecdn.net/files/8438/541/configurable-3.5.2%2B1.21.1-neoforge.jar",
         "path": "curseforge/1092048/8438541/configurable-3.5.2+1.21.1-neoforge.jar"
       }
     },
@@ -2109,7 +2109,7 @@
       "artifact": {
         "size": 1122,
         "MD5": "1636677dc40d8947102bdac74a2b18fa",
-        "url": "https://www.curseforge.com/api/v1/mods/978589/files/7585727/download",
+        "url": "https://mediafilez.forgecdn.net/files/7585/727/charcoal_to_coal_1.21.zip",
         "path": "config/paxi/datapacks/charcoal_to_coal_1.21.zip"
       }
     },
@@ -2120,7 +2120,7 @@
       "artifact": {
         "size": 2481,
         "MD5": "37e4f174d29ac0bd55d1105c18a61852",
-        "url": "https://www.curseforge.com/api/v1/mods/975573/files/5113181/download",
+        "url": "https://mediafilez.forgecdn.net/files/5113/181/createtweakedcontrollerunofficialzhhktranslationr.zip",
         "path": "resourcepacks/createtweakedcontrollerunofficialzhhktranslationr.zip"
       }
     },
@@ -2131,7 +2131,7 @@
       "artifact": {
         "size": 1934,
         "MD5": "b01eabd48fae2c9f2f11cba703b56bb3",
-        "url": "https://www.curseforge.com/api/v1/mods/1457762/files/7596646/download",
+        "url": "https://mediafilez.forgecdn.net/files/7596/646/create_train_parts_zh_hk.zip",
         "path": "resourcepacks/create_train_parts_zh_hk.zip"
       }
     },
@@ -2142,7 +2142,7 @@
       "artifact": {
         "size": 1074131,
         "MD5": "5f856654fb7616e78cd5602bc0c81348",
-        "url": "https://www.curseforge.com/api/v1/mods/1005676/files/8466444/download",
+        "url": "https://mediafilez.forgecdn.net/files/8466/444/create_aquatic_ambitions-1.21.1-2.0.4.jar",
         "path": "curseforge/1005676/8466444/create_aquatic_ambitions-1.21.1-2.0.4.jar"
       }
     },
@@ -2153,7 +2153,7 @@
       "artifact": {
         "size": 746263,
         "MD5": "d15a6ebe7f3011625507d610d80c039c",
-        "url": "https://www.curseforge.com/api/v1/mods/885449/files/5872111/download",
+        "url": "https://mediafilez.forgecdn.net/files/5872/111/EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar",
         "path": "curseforge/885449/5872111/EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar"
       }
     },
@@ -2164,7 +2164,7 @@
       "artifact": {
         "size": 2398,
         "MD5": "382bb8e57208bc125a562c242ffb1a19",
-        "url": "https://www.curseforge.com/api/v1/mods/1456295/files/7588950/download",
+        "url": "https://mediafilez.forgecdn.net/files/7588/950/Create_Vibrant_Vaults_ZH_HK.zip",
         "path": "resourcepacks/Create_Vibrant_Vaults_ZH_HK.zip"
       }
     },
@@ -2175,7 +2175,7 @@
       "artifact": {
         "size": 1631621,
         "MD5": "1bbd2466d78e076647f59505b6d84126",
-        "url": "https://www.curseforge.com/api/v1/mods/1477581/files/8004324/download",
+        "url": "https://mediafilez.forgecdn.net/files/8004/324/tradeworks-1.0.7.jar",
         "path": "curseforge/1477581/8004324/tradeworks-1.0.7.jar"
       }
     },
@@ -2186,7 +2186,7 @@
       "artifact": {
         "size": 2506723,
         "MD5": "8cde0c5421118b0c2de9bf8c2c3af4cd",
-        "url": "https://www.curseforge.com/api/v1/mods/1398383/files/8706168/download",
+        "url": "https://mediafilez.forgecdn.net/files/8706/168/bits_n_bobs-2.2.7.jar",
         "path": "curseforge/1398383/8706168/bits_n_bobs-2.2.7.jar"
       }
     },
@@ -2197,7 +2197,7 @@
       "artifact": {
         "size": 2127265,
         "MD5": "4e499ff47731b598c102553205c137eb",
-        "url": "https://www.curseforge.com/api/v1/mods/531834/files/8063074/download",
+        "url": "https://mediafilez.forgecdn.net/files/8063/74/create-confectionery1.21.1_v1.1.3b.jar",
         "path": "curseforge/531834/8063074/create-confectionery1.21.1_v1.1.3b.jar"
       }
     },
@@ -2208,7 +2208,7 @@
       "artifact": {
         "size": 75804,
         "MD5": "db5fe7619d502cf5b9bc972a955cd3bc",
-        "url": "https://www.curseforge.com/api/v1/mods/248787/files/7854442/download",
+        "url": "https://mediafilez.forgecdn.net/files/7854/442/appleskin-neoforge-mc1.21-3.0.9.jar",
         "path": "curseforge/248787/7854442/appleskin-neoforge-mc1.21-3.0.9.jar"
       }
     },
@@ -2219,7 +2219,7 @@
       "artifact": {
         "size": 143992,
         "MD5": "b51766fc730e071db0fb073abfa5beb6",
-        "url": "https://www.curseforge.com/api/v1/mods/456239/files/7151100/download",
+        "url": "https://mediafilez.forgecdn.net/files/7151/100/EasyMagic-v21.1.4-1.21.1-NeoForge.jar",
         "path": "curseforge/456239/7151100/EasyMagic-v21.1.4-1.21.1-NeoForge.jar"
       }
     },
@@ -2230,7 +2230,7 @@
       "artifact": {
         "size": 14485475,
         "MD5": "e214a6552af3845994da96b3f79c516d",
-        "url": "https://www.curseforge.com/api/v1/mods/605375/files/8232359/download",
+        "url": "https://mediafilez.forgecdn.net/files/8232/359/idas-1.13.7%2B1.21.1-neoforge.jar",
         "path": "curseforge/605375/8232359/idas-1.13.7+1.21.1-neoforge.jar"
       }
     },
@@ -2241,7 +2241,7 @@
       "artifact": {
         "size": 410690,
         "MD5": "e8f0a3574264bb202c153b90293dc84c",
-        "url": "https://www.curseforge.com/api/v1/mods/309927/files/6529130/download",
+        "url": "https://mediafilez.forgecdn.net/files/6529/130/curios-neoforge-9.5.1%2B1.21.1.jar",
         "path": "curseforge/309927/6529130/curios-neoforge-9.5.1+1.21.1.jar"
       }
     },
@@ -2252,7 +2252,7 @@
       "artifact": {
         "size": 324058,
         "MD5": "208b373fb2bdc703cdd2e087753ed859",
-        "url": "https://www.curseforge.com/api/v1/mods/283644/files/8463693/download",
+        "url": "https://mediafilez.forgecdn.net/files/8463/693/Placebo-1.21.1-9.9.2.jar",
         "path": "curseforge/283644/8463693/Placebo-1.21.1-9.9.2.jar"
       }
     },
@@ -2263,7 +2263,7 @@
       "artifact": {
         "size": 1118651,
         "MD5": "c346120062c3364a0d215c228354030e",
-        "url": "https://www.curseforge.com/api/v1/mods/667299/files/7437845/download",
+        "url": "https://mediafilez.forgecdn.net/files/7437/845/yet_another_config_lib_v3-3.8.2%2B1.21.1-neoforge.jar",
         "path": "curseforge/667299/7437845/yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar"
       }
     },
@@ -2274,7 +2274,7 @@
       "artifact": {
         "size": 546928,
         "MD5": "0a3553109dbe689a9f76d1aedc8f50c6",
-        "url": "https://www.curseforge.com/api/v1/mods/385587/files/8123288/download",
+        "url": "https://mediafilez.forgecdn.net/files/8123/288/ComplementaryUnbound_r5.8.1.zip",
         "path": "shaderpacks/ComplementaryUnbound_r5.8.1.zip"
       }
     },
@@ -2285,7 +2285,7 @@
       "artifact": {
         "size": 1354014,
         "MD5": "f0ed9a88cc4b2ca56fa976933b042c3f",
-        "url": "https://www.curseforge.com/api/v1/mods/659674/files/8547315/download",
+        "url": "https://mediafilez.forgecdn.net/files/8547/315/sliceanddice-4.3.3-neoforge.jar",
         "path": "curseforge/659674/8547315/sliceanddice-4.3.3-neoforge.jar"
       }
     },
@@ -2296,7 +2296,7 @@
       "artifact": {
         "size": 1350779,
         "MD5": "83971df25d5b332956f2fcefd853e8de",
-        "url": "https://www.curseforge.com/api/v1/mods/1316585/files/7350975/download",
+        "url": "https://mediafilez.forgecdn.net/files/7350/975/i_architecture-0.1.1b.jar",
         "path": "curseforge/1316585/7350975/i_architecture-0.1.1b.jar"
       }
     },
@@ -2307,7 +2307,7 @@
       "artifact": {
         "size": 127007,
         "MD5": "b6ad4e50564ff3553b904c3c3a770c9a",
-        "url": "https://www.curseforge.com/api/v1/mods/1414959/files/8682173/download",
+        "url": "https://mediafilez.forgecdn.net/files/8682/173/reliable_recipes-neoforge-1.21.1-3.1.5.jar",
         "path": "curseforge/1414959/8682173/reliable_recipes-neoforge-1.21.1-3.1.5.jar"
       }
     },
@@ -2318,7 +2318,7 @@
       "artifact": {
         "size": 599474,
         "MD5": "b488341cd5172f6bb16b5ec6d0856c4d",
-        "url": "https://www.curseforge.com/api/v1/mods/790626/files/8459650/download",
+        "url": "https://mediafilez.forgecdn.net/files/8459/650/modernfix-neoforge-5.27.20%2Bmc1.21.1.jar",
         "path": "curseforge/790626/8459650/modernfix-neoforge-5.27.20+mc1.21.1.jar"
       }
     },
@@ -2329,7 +2329,7 @@
       "artifact": {
         "size": 5125265,
         "MD5": "27211eb209e71e310c93e35bd41a26c7",
-        "url": "https://www.curseforge.com/api/v1/mods/815548/files/7802495/download",
+        "url": "https://mediafilez.forgecdn.net/files/7802/495/integrated_stronghold-1.1.4%2B1.21.1-neoforge.jar",
         "path": "curseforge/815548/7802495/integrated_stronghold-1.1.4+1.21.1-neoforge.jar"
       }
     },
@@ -2340,7 +2340,7 @@
       "artifact": {
         "size": 78624,
         "MD5": "bbce0f41ed77cdec33fe68dd05c1ceff",
-        "url": "https://www.curseforge.com/api/v1/mods/656346/files/7084444/download",
+        "url": "https://mediafilez.forgecdn.net/files/7084/444/lmft-1.1.1%2B1.21.9-neoforge.jar",
         "path": "curseforge/656346/7084444/lmft-1.1.1+1.21.9-neoforge.jar"
       }
     },
@@ -2351,7 +2351,7 @@
       "artifact": {
         "size": 470460,
         "MD5": "fd8de24e1ddd9d87b8d3055e07a7884f",
-        "url": "https://www.curseforge.com/api/v1/mods/817709/files/8636576/download",
+        "url": "https://mediafilez.forgecdn.net/files/8636/576/integrated_api-neoforge-1.21.1-1.8.0.jar",
         "path": "curseforge/817709/8636576/integrated_api-neoforge-1.21.1-1.8.0.jar"
       }
     },
@@ -2362,7 +2362,7 @@
       "artifact": {
         "size": 1799269,
         "MD5": "af7d68d8c263810b8f21906a91990524",
-        "url": "https://www.curseforge.com/api/v1/mods/968398/files/8714287/download",
+        "url": "https://mediafilez.forgecdn.net/files/8714/287/copycats-3.0.8%2Bmc.1.21.1-neoforge.jar",
         "path": "curseforge/968398/8714287/copycats-3.0.8+mc.1.21.1-neoforge.jar"
       }
     },
@@ -2373,7 +2373,7 @@
       "artifact": {
         "size": 726853,
         "MD5": "67b89f182472859d1e478477716c9462",
-        "url": "https://www.curseforge.com/api/v1/mods/324717/files/8591319/download",
+        "url": "https://mediafilez.forgecdn.net/files/8591/319/Jade-1.21.1-NeoForge-15.10.6.jar",
         "path": "curseforge/324717/8591319/Jade-1.21.1-NeoForge-15.10.6.jar"
       }
     },
@@ -2384,7 +2384,7 @@
       "artifact": {
         "size": 48048,
         "MD5": "3393834ba1605dac25e78c63be6d2f81",
-        "url": "https://www.curseforge.com/api/v1/mods/870545/files/7568078/download",
+        "url": "https://mediafilez.forgecdn.net/files/7568/78/Create%20Immersive%20Aircrafts%20Datapack%201.21.1%20-%203.0.zip",
         "path": "config/paxi/datapacks/Create Immersive Aircrafts Datapack 1.21.1 - 3.0.zip"
       }
     },
@@ -2395,7 +2395,7 @@
       "artifact": {
         "size": 954028,
         "MD5": "cfbcf4d1be760ea595639cc4c5053062",
-        "url": "https://www.curseforge.com/api/v1/mods/936015/files/8660310/download",
+        "url": "https://mediafilez.forgecdn.net/files/8660/310/lithostitched-1.8.0%2Bbeta4-neoforge-21.1.jar",
         "path": "curseforge/936015/8660310/lithostitched-1.8.0+beta4-neoforge-21.1.jar"
       }
     },
@@ -2406,7 +2406,7 @@
       "artifact": {
         "size": 484332,
         "MD5": "32da88903167d24bb20febeeb2c79225",
-        "url": "https://www.curseforge.com/api/v1/mods/570073/files/5973188/download",
+        "url": "https://mediafilez.forgecdn.net/files/5973/188/resourcefullib-neoforge-1.21-3.0.12.jar",
         "path": "curseforge/570073/5973188/resourcefullib-neoforge-1.21-3.0.12.jar"
       }
     },
@@ -2417,7 +2417,7 @@
       "artifact": {
         "size": 102980,
         "MD5": "c9d84fe87e9ec88825eeb3b119393125",
-        "url": "https://www.curseforge.com/api/v1/mods/1015157/files/6485740/download",
+        "url": "https://mediafilez.forgecdn.net/files/6485/740/Paxi-1.21.1-NeoForge-5.1.3.jar",
         "path": "curseforge/1015157/6485740/Paxi-1.21.1-NeoForge-5.1.3.jar"
       }
     },
@@ -2428,7 +2428,7 @@
       "artifact": {
         "size": 2687938,
         "MD5": "8fe767bf30e682d1156a379d6bdaeea2",
-        "url": "https://www.curseforge.com/api/v1/mods/1251719/files/6463890/download",
+        "url": "https://mediafilez.forgecdn.net/files/6463/890/create_vibrant_vaults-0.3.2.jar",
         "path": "curseforge/1251719/6463890/create_vibrant_vaults-0.3.2.jar"
       }
     },
@@ -2439,7 +2439,7 @@
       "artifact": {
         "size": 1970253,
         "MD5": "1e342c26ff43a94af7fa7eaabd8c11bd",
-        "url": "https://www.curseforge.com/api/v1/mods/1494004/files/8557872/download",
+        "url": "https://mediafilez.forgecdn.net/files/8557/872/petrochem-neoforge-1.21.1-1.3.2.jar",
         "path": "curseforge/1494004/8557872/petrochem-neoforge-1.21.1-1.3.2.jar"
       }
     },
@@ -2450,7 +2450,7 @@
       "artifact": {
         "size": 187714,
         "MD5": "364cfe56dc98ef637f662f7fe146ade9",
-        "url": "https://www.curseforge.com/api/v1/mods/1529882/files/8618590/download",
+        "url": "https://mediafilez.forgecdn.net/files/8618/590/create_aeronautics_throwable_rope_connector-0.4.3.jar",
         "path": "curseforge/1529882/8618590/create_aeronautics_throwable_rope_connector-0.4.3.jar"
       }
     },
@@ -2461,7 +2461,7 @@
       "artifact": {
         "size": 1249099,
         "MD5": "8ad0a211d478de56b9df1d19c348e723",
-        "url": "https://www.curseforge.com/api/v1/mods/864781/files/8037481/download",
+        "url": "https://mediafilez.forgecdn.net/files/8037/481/DnDesires-1.21.1-2.3a-BETA.jar",
         "path": "curseforge/864781/8037481/DnDesires-1.21.1-2.3a-BETA.jar"
       }
     },
@@ -2472,7 +2472,7 @@
       "artifact": {
         "size": 25912346,
         "MD5": "c39effc7b3619d996858b5eee3b7c6f3",
-        "url": "https://www.curseforge.com/api/v1/mods/367706/files/8752297/download",
+        "url": "https://mediafilez.forgecdn.net/files/8752/297/fancymenu_neoforge_3.9.12_MC_1.21.1.jar",
         "path": "curseforge/367706/8752297/fancymenu_neoforge_3.9.12_MC_1.21.1.jar"
       }
     },
@@ -2483,7 +2483,7 @@
       "artifact": {
         "size": 2618795,
         "MD5": "198d93478e6816e64e0b5624b83633ef",
-        "url": "https://www.curseforge.com/api/v1/mods/1317252/files/8723463/download",
+        "url": "https://mediafilez.forgecdn.net/files/8723/463/create_bb-1.0.8-1.21.1.jar",
         "path": "curseforge/1317252/8723463/create_bb-1.0.8-1.21.1.jar"
       }
     },
@@ -2494,7 +2494,7 @@
       "artifact": {
         "size": 36966,
         "MD5": "de033387fe1955841bea50360aec0315",
-        "url": "https://www.curseforge.com/api/v1/mods/580689/files/6640970/download",
+        "url": "https://mediafilez.forgecdn.net/files/6640/970/lootintegrations-1.21.1-4.7.jar",
         "path": "curseforge/580689/6640970/lootintegrations-1.21.1-4.7.jar"
       }
     },
@@ -2505,7 +2505,7 @@
       "artifact": {
         "size": 3110804,
         "MD5": "04cc55211a4ea736e5a6d2ce56ce1221",
-        "url": "https://www.curseforge.com/api/v1/mods/829380/files/8549840/download",
+        "url": "https://mediafilez.forgecdn.net/files/8549/840/Create%20Encased-1.21.1-1.9.0-ht3.jar",
         "path": "curseforge/829380/8549840/Create Encased-1.21.1-1.9.0-ht3.jar"
       }
     },
@@ -2516,7 +2516,7 @@
       "artifact": {
         "size": 4051,
         "MD5": "d54cf497e228047f8c3572ca655e793c",
-        "url": "https://www.curseforge.com/api/v1/mods/975575/files/5113190/download",
+        "url": "https://mediafilez.forgecdn.net/files/5113/190/handcraftedzhtwunofficialtranslation.zip",
         "path": "resourcepacks/handcraftedzhtwunofficialtranslation.zip"
       }
     },
@@ -2527,7 +2527,7 @@
       "artifact": {
         "size": 317587,
         "MD5": "ee9815832930fa423e071f13b767bb17",
-        "url": "https://www.curseforge.com/api/v1/mods/415974/files/8048724/download",
+        "url": "https://mediafilez.forgecdn.net/files/8048/724/personality-1.21.1-5.0.2.jar",
         "path": "curseforge/415974/8048724/personality-1.21.1-5.0.2.jar"
       }
     },
@@ -2538,7 +2538,7 @@
       "artifact": {
         "size": 763725,
         "MD5": "cc0d6e584cfca1f1383c9f120c035c22",
-        "url": "https://www.curseforge.com/api/v1/mods/968868/files/7980010/download",
+        "url": "https://mediafilez.forgecdn.net/files/7980/10/Zeta-1.1-40.jar",
         "path": "curseforge/968868/7980010/Zeta-1.1-40.jar"
       }
     },
@@ -2549,7 +2549,7 @@
       "artifact": {
         "size": 18382,
         "MD5": "8b42a9d7a72bde90fa061d17e2859e7b",
-        "url": "https://www.curseforge.com/api/v1/mods/256717/files/5623731/download",
+        "url": "https://mediafilez.forgecdn.net/files/5623/731/Clumps-neoforge-1.21.1-19.0.0.1.jar",
         "path": "curseforge/256717/5623731/Clumps-neoforge-1.21.1-19.0.0.1.jar"
       }
     },
@@ -2560,7 +2560,7 @@
       "artifact": {
         "size": 1942,
         "MD5": "155aa5dd0fc39d731ab804714511f8a2",
-        "url": "https://www.curseforge.com/api/v1/mods/1457748/files/7596607/download",
+        "url": "https://mediafilez.forgecdn.net/files/7596/607/trading_floor_zh_hk.zip",
         "path": "resourcepacks/trading_floor_zh_hk.zip"
       }
     },
@@ -2571,7 +2571,7 @@
       "artifact": {
         "size": 1287223,
         "MD5": "14cceaaa0953aa2f78034e87c3a02813",
-        "url": "https://www.curseforge.com/api/v1/mods/1355767/files/8050591/download",
+        "url": "https://mediafilez.forgecdn.net/files/8050/591/createprism-1.2.2.jar",
         "path": "curseforge/1355767/8050591/createprism-1.2.2.jar"
       }
     },
@@ -2582,7 +2582,7 @@
       "artifact": {
         "size": 3699282,
         "MD5": "e832bd56d0eefe9fa9b0d01c56fb6a91",
-        "url": "https://www.curseforge.com/api/v1/mods/1294279/files/8482079/download",
+        "url": "https://mediafilez.forgecdn.net/files/8482/79/create_train_parts-0.5.2-1.21.1-6.0.10-281.jar",
         "path": "curseforge/1294279/8482079/create_train_parts-0.5.2-1.21.1-6.0.10-281.jar"
       }
     },
@@ -2593,7 +2593,7 @@
       "artifact": {
         "size": 1038830,
         "MD5": "d7a4ae525b16f4b05eb63b7e3f518128",
-        "url": "https://www.curseforge.com/api/v1/mods/1216624/files/8633162/download",
+        "url": "https://mediafilez.forgecdn.net/files/8633/162/CreateDragonsPlus-1.11.7b.jar",
         "path": "curseforge/1216624/8633162/CreateDragonsPlus-1.11.7b.jar"
       }
     },
@@ -2604,7 +2604,7 @@
       "artifact": {
         "size": 1939625,
         "MD5": "c03ddc5499304f81f17be246c7e395a3",
-        "url": "https://www.curseforge.com/api/v1/mods/433760/files/8274908/download",
+        "url": "https://mediafilez.forgecdn.net/files/8274/908/notenoughanimations-neoforge-1.12.4-mc1.21.1.jar",
         "path": "curseforge/433760/8274908/notenoughanimations-neoforge-1.12.4-mc1.21.1.jar"
       }
     },
@@ -2615,7 +2615,7 @@
       "artifact": {
         "size": 212765,
         "MD5": "8ac11f38ff8eac6b8f935e97e4687c31",
-        "url": "https://www.curseforge.com/api/v1/mods/623265/files/8653064/download",
+        "url": "https://mediafilez.forgecdn.net/files/8653/64/create_factory-0.7b-1.21.1.jar",
         "path": "curseforge/623265/8653064/create_factory-0.7b-1.21.1.jar"
       }
     },
@@ -2626,7 +2626,7 @@
       "artifact": {
         "size": 9502179,
         "MD5": "24dbe46dbcbc01d4b20799a70326635c",
-        "url": "https://www.curseforge.com/api/v1/mods/959439/files/8603640/download",
+        "url": "https://mediafilez.forgecdn.net/files/8603/640/createfood-neoforge-1.21.1-2.7.1.jar",
         "path": "curseforge/959439/8603640/createfood-neoforge-1.21.1-2.7.1.jar"
       }
     },
@@ -2637,7 +2637,7 @@
       "artifact": {
         "size": 6329899,
         "MD5": "18a1bbc60ad9084d3bdff5eed4b8f953",
-        "url": "https://www.curseforge.com/api/v1/mods/923238/files/8156977/download",
+        "url": "https://mediafilez.forgecdn.net/files/8156/977/Design-n-Decor-1.21.1-2.2b.jar",
         "path": "curseforge/923238/8156977/Design-n-Decor-1.21.1-2.2b.jar"
       }
     },
@@ -2648,7 +2648,7 @@
       "artifact": {
         "size": 389898,
         "MD5": "32b75ab7c07108298ca6133be8116278",
-        "url": "https://www.curseforge.com/api/v1/mods/938959/files/6475177/download",
+        "url": "https://mediafilez.forgecdn.net/files/6475/177/Create_UI_1.21.zip",
         "path": "resourcepacks/Create_UI_1.21.zip"
       }
     },
@@ -2659,7 +2659,7 @@
       "artifact": {
         "size": 152297,
         "MD5": "869e136e160ef739bee32e4bd6860d2a",
-        "url": "https://www.curseforge.com/api/v1/mods/682567/files/5733955/download",
+        "url": "https://mediafilez.forgecdn.net/files/5733/955/EasyAnvils-v21.1.0-1.21.1-NeoForge.jar",
         "path": "curseforge/682567/5733955/EasyAnvils-v21.1.0-1.21.1-NeoForge.jar"
       }
     },
@@ -2670,7 +2670,7 @@
       "artifact": {
         "size": 353781,
         "MD5": "4c46f27151f6965b720641ff6c6e3cf6",
-        "url": "https://www.curseforge.com/api/v1/mods/1288893/files/8210441/download",
+        "url": "https://mediafilez.forgecdn.net/files/8210/441/Aoc_Core_1.21_v2.jar",
         "path": "curseforge/1288893/8210441/Aoc_Core_1.21_v2.jar"
       }
     },
@@ -2681,7 +2681,7 @@
       "artifact": {
         "size": 6574,
         "MD5": "96a47a7cff915294a949f73a5f2a8816",
-        "url": "https://www.curseforge.com/api/v1/mods/882495/files/5513549/download",
+        "url": "https://mediafilez.forgecdn.net/files/5513/549/gpumemleakfix-1.21-1.8.jar",
         "path": "curseforge/882495/5513549/gpumemleakfix-1.21-1.8.jar"
       }
     },
@@ -2692,7 +2692,7 @@
       "artifact": {
         "size": 120364,
         "MD5": "9510cef4ca24d7f6bc3144dbf6693f7d",
-        "url": "https://www.curseforge.com/api/v1/mods/940057/files/6054947/download",
+        "url": "https://mediafilez.forgecdn.net/files/6054/947/TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
         "path": "curseforge/940057/6054947/TerraBlender-neoforge-1.21.1-4.1.0.8.jar"
       }
     },
@@ -2703,7 +2703,7 @@
       "artifact": {
         "size": 584734,
         "MD5": "aefbea361809755c331126bcff6e6d3e",
-        "url": "https://www.curseforge.com/api/v1/mods/419699/files/8492726/download",
+        "url": "https://mediafilez.forgecdn.net/files/8492/726/architectury-13.0.11-neoforge.jar",
         "path": "curseforge/419699/8492726/architectury-13.0.11-neoforge.jar"
       }
     },
@@ -2714,7 +2714,7 @@
       "artifact": {
         "size": 1425176,
         "MD5": "4ee80ed6cebef297e3c5a82cf7db559f",
-        "url": "https://www.curseforge.com/api/v1/mods/495476/files/8251525/download",
+        "url": "https://mediafilez.forgecdn.net/files/8251/525/PuzzlesLib-v21.1.52-1.21.1-NeoForge.jar",
         "path": "curseforge/495476/8251525/PuzzlesLib-v21.1.52-1.21.1-NeoForge.jar"
       }
     },
@@ -2725,7 +2725,7 @@
       "artifact": {
         "size": 242108,
         "MD5": "dadb2a05ea773c7a970aa9db2bbac663",
-        "url": "https://www.curseforge.com/api/v1/mods/1528764/files/8464450/download",
+        "url": "https://mediafilez.forgecdn.net/files/8464/450/climbable_ropes-2.1.1.jar",
         "path": "curseforge/1528764/8464450/climbable_ropes-2.1.1.jar"
       }
     },
@@ -2736,7 +2736,7 @@
       "artifact": {
         "size": 1347181,
         "MD5": "58e52a7e0b880f5e4bf92bd626950750",
-        "url": "https://www.curseforge.com/api/v1/mods/466792/files/8664066/download",
+        "url": "https://mediafilez.forgecdn.net/files/8664/66/create-stuff-additions1.21.1_v2.1.4b.jar",
         "path": "curseforge/466792/8664066/create-stuff-additions1.21.1_v2.1.4b.jar"
       }
     },
@@ -2747,7 +2747,7 @@
       "artifact": {
         "size": 30439,
         "MD5": "14fac27fbd7980b01a341f6ba3b5a875",
-        "url": "https://www.curseforge.com/api/v1/mods/1321349/files/6850945/download",
+        "url": "https://mediafilez.forgecdn.net/files/6850/945/WrencheablePlanes2.0.zip",
         "path": "config/paxi/datapacks/WrencheablePlanes2.0.zip"
       }
     },
@@ -2758,7 +2758,7 @@
       "artifact": {
         "size": 328813,
         "MD5": "9f627fe031221159d74a491e279f773a",
-        "url": "https://www.curseforge.com/api/v1/mods/228525/files/7606240/download",
+        "url": "https://mediafilez.forgecdn.net/files/7606/240/bookshelf-neoforge-1.21.1-21.1.81.jar",
         "path": "curseforge/228525/7606240/bookshelf-neoforge-1.21.1-21.1.81.jar"
       }
     },
@@ -2769,7 +2769,7 @@
       "artifact": {
         "size": 65924,
         "MD5": "91f29b23db77eb67ef2366d05cc1cbd3",
-        "url": "https://www.curseforge.com/api/v1/mods/491290/files/7120722/download",
+        "url": "https://mediafilez.forgecdn.net/files/7120/722/smarterfarmers-1.21-2.2.4-neoforge.jar",
         "path": "curseforge/491290/7120722/smarterfarmers-1.21-2.2.4-neoforge.jar"
       }
     },
@@ -2780,7 +2780,7 @@
       "artifact": {
         "size": 4771388,
         "MD5": "a400544b9647e64a1359c742c3888795",
-        "url": "https://www.curseforge.com/api/v1/mods/1443327/files/8345582/download",
+        "url": "https://mediafilez.forgecdn.net/files/8345/582/electroenergetics-1.21.1-1.1.1.jar",
         "path": "curseforge/1443327/8345582/electroenergetics-1.21.1-1.1.1.jar"
       }
     },
@@ -2791,7 +2791,7 @@
       "artifact": {
         "size": 1250,
         "MD5": "8facb6026d9a3206db29d394fa41a2c4",
-        "url": "https://www.curseforge.com/api/v1/mods/1455793/files/7586163/download",
+        "url": "https://mediafilez.forgecdn.net/files/7586/163/boatload_1.21_ZH_HK_Translation.zip",
         "path": "resourcepacks/boatload_1.21_ZH_HK_Translation.zip"
       }
     },
@@ -2802,7 +2802,7 @@
       "artifact": {
         "size": 1498,
         "MD5": "bae10d66264e3554a317a23d2c44a236",
-        "url": "https://www.curseforge.com/api/v1/mods/1457754/files/7596623/download",
+        "url": "https://mediafilez.forgecdn.net/files/7596/623/create_blaze_burner_fuels_zh_hk.zip",
         "path": "resourcepacks/create_blaze_burner_fuels_zh_hk.zip"
       }
     },
@@ -2813,7 +2813,7 @@
       "artifact": {
         "size": 385815,
         "MD5": "19ca2330c30674b01cf8ff75cee2c3a5",
-        "url": "https://www.curseforge.com/api/v1/mods/1193454/files/6164360/download",
+        "url": "https://mediafilez.forgecdn.net/files/6164/360/chunkactivitytracker-neoforge-1.0.1-1.21.1.jar",
         "path": "curseforge/1193454/6164360/chunkactivitytracker-neoforge-1.0.1-1.21.1.jar"
       }
     },
@@ -2824,7 +2824,7 @@
       "artifact": {
         "size": 630584,
         "MD5": "5cf29155ad6071b5dcba2ea24cd27350",
-        "url": "https://www.curseforge.com/api/v1/mods/388172/files/8350073/download",
+        "url": "https://mediafilez.forgecdn.net/files/8350/73/geckolib-neoforge-1.21.1-4.9.2.jar",
         "path": "curseforge/388172/8350073/geckolib-neoforge-1.21.1-4.9.2.jar"
       }
     },
@@ -2835,7 +2835,7 @@
       "artifact": {
         "size": 25085,
         "MD5": "0976995753b9426ecb11d189bfe9714d",
-        "url": "https://www.curseforge.com/api/v1/mods/551894/files/7404415/download",
+        "url": "https://mediafilez.forgecdn.net/files/7404/415/better-compatability-checker-neoforge-21.1.8.jar",
         "path": "curseforge/551894/7404415/better-compatability-checker-neoforge-21.1.8.jar"
       }
     },
@@ -2846,7 +2846,7 @@
       "artifact": {
         "size": 121731,
         "MD5": "ebb9adcccccb4267f140b5524228257b",
-        "url": "https://www.curseforge.com/api/v1/mods/539057/files/7143451/download",
+        "url": "https://mediafilez.forgecdn.net/files/7143/451/TradingPost-v21.1.1-1.21.1-NeoForge.jar",
         "path": "curseforge/539057/7143451/TradingPost-v21.1.1-1.21.1-NeoForge.jar"
       }
     },
@@ -2857,7 +2857,7 @@
       "artifact": {
         "size": 137893,
         "MD5": "1473f61d5e6ba30e3df7c83d7f7e4756",
-        "url": "https://www.curseforge.com/api/v1/mods/1420447/files/8651826/download",
+        "url": "https://mediafilez.forgecdn.net/files/8651/826/reliable_remover-neoforge-1.21.1-2.12.1.jar",
         "path": "curseforge/1420447/8651826/reliable_remover-neoforge-1.21.1-2.12.1.jar"
       }
     },
@@ -2868,7 +2868,7 @@
       "artifact": {
         "size": 716599,
         "MD5": "4623e1d59a3831e8b575168ed5a7baa4",
-        "url": "https://www.curseforge.com/api/v1/mods/411816/files/8489200/download",
+        "url": "https://mediafilez.forgecdn.net/files/8489/200/SimpleRPC-4.1.4.jar",
         "path": "curseforge/411816/8489200/SimpleRPC-4.1.4.jar"
       }
     },
@@ -2879,7 +2879,7 @@
       "artifact": {
         "size": 513007,
         "MD5": "037d5e32dbab370be5d32ae53266cb3b",
-        "url": "https://www.curseforge.com/api/v1/mods/1161283/files/7831305/download",
+        "url": "https://mediafilez.forgecdn.net/files/7831/305/create_winery-2.0.2-neoforge-1.21.1.jar",
         "path": "curseforge/1161283/7831305/create_winery-2.0.2-neoforge-1.21.1.jar"
       }
     },
@@ -2890,7 +2890,7 @@
       "artifact": {
         "size": 30346,
         "MD5": "46ced46b15cbdb852d2100aaec091414",
-        "url": "https://www.curseforge.com/api/v1/mods/1541139/files/8158810/download",
+        "url": "https://mediafilez.forgecdn.net/files/8158/810/SableStuffAdditionsCompat%20v1.0.3-1.21.1.jar",
         "path": "curseforge/1541139/8158810/SableStuffAdditionsCompat v1.0.3-1.21.1.jar"
       }
     },
@@ -2901,7 +2901,7 @@
       "artifact": {
         "size": 81945,
         "MD5": "8baebdd1f10920df0850206c13ed6b7b",
-        "url": "https://www.curseforge.com/api/v1/mods/500273/files/6798196/download",
+        "url": "https://mediafilez.forgecdn.net/files/6798/196/VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar",
         "path": "curseforge/500273/6798196/VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar"
       }
     },
@@ -2912,7 +2912,7 @@
       "artifact": {
         "size": 35774091,
         "MD5": "4c702a3dc2f03130f28484744007db18",
-        "url": "https://www.curseforge.com/api/v1/mods/1592344/files/8603518/download",
+        "url": "https://mediafilez.forgecdn.net/files/8603/518/snassets-1.0.2.jar",
         "path": "curseforge/1592344/8603518/snassets-1.0.2.jar"
       }
     },
@@ -2923,7 +2923,7 @@
       "artifact": {
         "size": 546142,
         "MD5": "4a0e33080646f2e80097d85cf40f7bbf",
-        "url": "https://www.curseforge.com/api/v1/mods/1281336/files/8541877/download",
+        "url": "https://mediafilez.forgecdn.net/files/8541/877/create_hypertube-0.6.0-NEOFORGE.jar",
         "path": "curseforge/1281336/8541877/create_hypertube-0.6.0-NEOFORGE.jar"
       }
     },
@@ -2934,7 +2934,7 @@
       "artifact": {
         "size": 60833,
         "MD5": "c6ab08c1607e6b1eba091455a499f581",
-        "url": "https://www.curseforge.com/api/v1/mods/832882/files/7962596/download",
+        "url": "https://mediafilez.forgecdn.net/files/7962/596/structureessentials-1.21.1-5.0.jar",
         "path": "curseforge/832882/7962596/structureessentials-1.21.1-5.0.jar"
       }
     },
@@ -2945,7 +2945,7 @@
       "artifact": {
         "size": 51371,
         "MD5": "c859ab15948f1f7fc6c22a6cedcd31c5",
-        "url": "https://www.curseforge.com/api/v1/mods/969423/files/5731913/download",
+        "url": "https://mediafilez.forgecdn.net/files/5731/913/CutThrough-v21.1.0-1.21.1-NeoForge.jar",
         "path": "curseforge/969423/5731913/CutThrough-v21.1.0-1.21.1-NeoForge.jar"
       }
     },
@@ -2956,7 +2956,7 @@
       "artifact": {
         "size": 567827,
         "MD5": "b7f1c8a4f16281fa69b9e09e8154544b",
-        "url": "https://www.curseforge.com/api/v1/mods/844662/files/8063559/download",
+        "url": "https://mediafilez.forgecdn.net/files/8063/559/entity_model_features-3.2.4-1.21-neoforge.jar",
         "path": "curseforge/844662/8063559/entity_model_features-3.2.4-1.21-neoforge.jar"
       }
     },
@@ -2967,7 +2967,7 @@
       "artifact": {
         "size": 210569,
         "MD5": "395253024ca2839433d824b9eb715ad4",
-        "url": "https://www.curseforge.com/api/v1/mods/1285475/files/7924942/download",
+        "url": "https://mediafilez.forgecdn.net/files/7924/942/colorwheel_patcher-neoforge-1.0.5%2Bmc1.21.1.jar",
         "path": "curseforge/1285475/7924942/colorwheel_patcher-neoforge-1.0.5+mc1.21.1.jar"
       }
     },
@@ -2978,7 +2978,7 @@
       "artifact": {
         "size": 415550,
         "MD5": "adcc6d8fc52fababa889d15fb5f6b99c",
-        "url": "https://www.curseforge.com/api/v1/mods/1549447/files/8246369/download",
+        "url": "https://mediafilez.forgecdn.net/files/8246/369/create-stockmarket-1.1.0%2Bmc1.21.1.jar",
         "path": "curseforge/1549447/8246369/create-stockmarket-1.1.0+mc1.21.1.jar"
       }
     },
@@ -2989,7 +2989,7 @@
       "artifact": {
         "size": 768288,
         "MD5": "2fe409afb7cda9dfc8a93d138331aa56",
-        "url": "https://www.curseforge.com/api/v1/mods/1320903/files/7444038/download",
+        "url": "https://mediafilez.forgecdn.net/files/7444/38/create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar",
         "path": "curseforge/1320903/7444038/create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar"
       }
     },
@@ -3000,7 +3000,7 @@
       "artifact": {
         "size": 12852,
         "MD5": "a3c55088f5e9b228e8e94ae20e639a7a",
-        "url": "https://www.curseforge.com/api/v1/mods/582327/files/6296628/download",
+        "url": "https://mediafilez.forgecdn.net/files/6296/628/smoothchunk-1.21-4.1.jar",
         "path": "curseforge/582327/6296628/smoothchunk-1.21-4.1.jar"
       }
     },
@@ -3011,7 +3011,7 @@
       "artifact": {
         "size": 21079,
         "MD5": "1f83b8749f48753bb50d9e22e5f6706c",
-        "url": "https://www.curseforge.com/api/v1/mods/271740/files/6751464/download",
+        "url": "https://mediafilez.forgecdn.net/files/6751/464/ToastControl-1.21.1-9.0.1.jar",
         "path": "curseforge/271740/6751464/ToastControl-1.21.1-9.0.1.jar"
       }
     },
@@ -3022,7 +3022,7 @@
       "artifact": {
         "size": 217587,
         "MD5": "8cdabfc021f961363b24f1abe57a4fb2",
-        "url": "https://www.curseforge.com/api/v1/mods/1191845/files/6148845/download",
+        "url": "https://mediafilez.forgecdn.net/files/6148/845/redirected-neoforge-1.0.0-1.21.1.jar",
         "path": "curseforge/1191845/6148845/redirected-neoforge-1.0.0-1.21.1.jar"
       }
     },
@@ -3033,7 +3033,7 @@
       "artifact": {
         "size": 77555,
         "MD5": "7141c2d0bb774dc6e4481be32b685179",
-        "url": "https://www.curseforge.com/api/v1/mods/250398/files/6368976/download",
+        "url": "https://mediafilez.forgecdn.net/files/6368/976/Controlling-neoforge-1.21.1-19.0.5.jar",
         "path": "curseforge/250398/6368976/Controlling-neoforge-1.21.1-19.0.5.jar"
       }
     },
@@ -3044,7 +3044,7 @@
       "artifact": {
         "size": 153045,
         "MD5": "90d332cdedbdc6babe722a008eb3163b",
-        "url": "https://www.curseforge.com/api/v1/mods/889915/files/8653466/download",
+        "url": "https://mediafilez.forgecdn.net/files/8653/466/ftb-xmod-compat-neoforge-21.1.11.jar",
         "path": "curseforge/889915/8653466/ftb-xmod-compat-neoforge-21.1.11.jar"
       }
     },
@@ -3055,7 +3055,7 @@
       "artifact": {
         "size": 391516,
         "MD5": "e03b496bd0e7da29d23feef74e1a6269",
-        "url": "https://www.curseforge.com/api/v1/mods/1173553/files/8159692/download",
+        "url": "https://mediafilez.forgecdn.net/files/8159/692/gallery-1.21.1-2.0.1.jar",
         "path": "curseforge/1173553/8159692/gallery-1.21.1-2.0.1.jar"
       }
     },
@@ -3066,7 +3066,7 @@
       "artifact": {
         "size": 2201061,
         "MD5": "6f84449a0cef44b70a51bee9f77e5c67",
-        "url": "https://www.curseforge.com/api/v1/mods/499980/files/8749776/download",
+        "url": "https://mediafilez.forgecdn.net/files/8749/776/moonlight-1.21.1-3.5.2-neoforge.jar",
         "path": "curseforge/499980/8749776/moonlight-1.21.1-3.5.2-neoforge.jar"
       }
     },
@@ -3077,7 +3077,7 @@
       "artifact": {
         "size": 453964,
         "MD5": "2f487ef132b11735f8532b48f564b818",
-        "url": "https://www.curseforge.com/api/v1/mods/951232/files/5136274/download",
+        "url": "https://mediafilez.forgecdn.net/files/5136/274/AOC%20Resources.zip",
         "path": "resourcepacks/AOC Resources.zip"
       }
     },
@@ -3088,7 +3088,7 @@
       "artifact": {
         "size": 13528390,
         "MD5": "fa22b4316e903e738a8ffcc5083fc32b",
-        "url": "https://www.curseforge.com/api/v1/mods/412082/files/8757040/download",
+        "url": "https://mediafilez.forgecdn.net/files/8757/40/supplementaries-1.21.1-3.9.5-neoforge.jar",
         "path": "curseforge/412082/8757040/supplementaries-1.21.1-3.9.5-neoforge.jar"
       }
     },
@@ -3099,7 +3099,7 @@
       "artifact": {
         "size": 739966,
         "MD5": "ecf72b1c4241b4d3404719baba21af52",
-        "url": "https://www.curseforge.com/api/v1/mods/966104/files/7287996/download",
+        "url": "https://mediafilez.forgecdn.net/files/7287/996/createmetalwork-2.0.0.jar",
         "path": "curseforge/966104/7287996/createmetalwork-2.0.0.jar"
       }
     },
@@ -3110,7 +3110,7 @@
       "artifact": {
         "size": 1868,
         "MD5": "739b7ff8ff2528d23150573469b6b8df",
-        "url": "https://www.curseforge.com/api/v1/mods/964705/files/5707673/download",
+        "url": "https://mediafilez.forgecdn.net/files/5707/673/Create_Addons_Fix_v1.zip",
         "path": "resourcepacks/Create_Addons_Fix_v1.zip"
       }
     },
@@ -3121,7 +3121,7 @@
       "artifact": {
         "size": 458916,
         "MD5": "0cea5ade5e5139f06d2e7a8fd305941e",
-        "url": "https://www.curseforge.com/api/v1/mods/979544/files/8663871/download",
+        "url": "https://mediafilez.forgecdn.net/files/8663/871/aoc_data_1.21.1_v5.zip",
         "path": "config/paxi/datapacks/aoc_data_1.21.1_v5.zip"
       }
     },
@@ -3132,7 +3132,7 @@
       "artifact": {
         "size": 2871366,
         "MD5": "9e91741c76ae0fddbaac2d93bca8540e",
-        "url": "https://www.curseforge.com/api/v1/mods/953126/files/8394637/download",
+        "url": "https://mediafilez.forgecdn.net/files/8394/637/createframed-1.21.1-1.8.2.jar",
         "path": "curseforge/953126/8394637/createframed-1.21.1-1.8.2.jar"
       }
     },
@@ -3143,7 +3143,7 @@
       "artifact": {
         "size": 306668,
         "MD5": "07496752e6b64dd33d68cd5166818402",
-        "url": "https://www.curseforge.com/api/v1/mods/634062/files/5885735/download",
+        "url": "https://mediafilez.forgecdn.net/files/5885/735/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
         "path": "curseforge/634062/5885735/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar"
       }
     },
@@ -3154,7 +3154,7 @@
       "artifact": {
         "size": 605614,
         "MD5": "0942887cdf3edca4030eb8cc45530c61",
-        "url": "https://www.curseforge.com/api/v1/mods/1232978/files/8502329/download",
+        "url": "https://mediafilez.forgecdn.net/files/8502/329/create_mobile_packages-1.21.1-0.7.7.jar",
         "path": "curseforge/1232978/8502329/create_mobile_packages-1.21.1-0.7.7.jar"
       }
     },
@@ -3165,7 +3165,7 @@
       "artifact": {
         "size": 1055815,
         "MD5": "015746413b5209f04c0046dc89e51feb",
-        "url": "https://www.curseforge.com/api/v1/mods/652202/files/8169164/download",
+        "url": "https://mediafilez.forgecdn.net/files/8169/164/create_things_and_misc-4.1.1-neoforge-1.21.1.jar",
         "path": "curseforge/652202/8169164/create_things_and_misc-4.1.1-neoforge-1.21.1.jar"
       }
     },
@@ -3176,7 +3176,7 @@
       "artifact": {
         "size": 193619,
         "MD5": "5f4d8adfa8bf7407fb387a93ea408848",
-        "url": "https://www.curseforge.com/api/v1/mods/905040/files/6299879/download",
+        "url": "https://mediafilez.forgecdn.net/files/6299/879/bellsandwhistles-0.4.7-1.21.1.jar",
         "path": "curseforge/905040/6299879/bellsandwhistles-0.4.7-1.21.1.jar"
       }
     },
@@ -3187,7 +3187,7 @@
       "artifact": {
         "size": 215558,
         "MD5": "4a0de6a02acfaed444b9799d3bafe228",
-        "url": "https://www.curseforge.com/api/v1/mods/1486746/files/8540112/download",
+        "url": "https://mediafilez.forgecdn.net/files/8540/112/struts-1.3.0.jar",
         "path": "curseforge/1486746/8540112/struts-1.3.0.jar"
       }
     },
@@ -3198,7 +3198,7 @@
       "artifact": {
         "size": 1422531,
         "MD5": "6d34d3f783578735d475495eee2a1083",
-        "url": "https://www.curseforge.com/api/v1/mods/317780/files/8698659/download",
+        "url": "https://mediafilez.forgecdn.net/files/8698/659/xaeroworldmap-neoforge-1.21.1-1.45.0.jar",
         "path": "curseforge/317780/8698659/xaeroworldmap-neoforge-1.21.1-1.45.0.jar"
       }
     },
@@ -3209,7 +3209,7 @@
       "artifact": {
         "size": 301532,
         "MD5": "1d987ab5865d890c88ffd7664644a778",
-        "url": "https://www.curseforge.com/api/v1/mods/1530988/files/8681404/download",
+        "url": "https://mediafilez.forgecdn.net/files/8681/404/sablejade-1.3.0.jar",
         "path": "curseforge/1530988/8681404/sablejade-1.3.0.jar"
       }
     },
@@ -3220,7 +3220,7 @@
       "artifact": {
         "size": 2071249,
         "MD5": "e0681d090129d534ddbd938c2c703c17",
-        "url": "https://www.curseforge.com/api/v1/mods/935929/files/8175347/download",
+        "url": "https://mediafilez.forgecdn.net/files/8175/347/createrailwaysnavigator-neoforge-1.21.1-beta-0.9.1-C6.jar",
         "path": "curseforge/935929/8175347/createrailwaysnavigator-neoforge-1.21.1-beta-0.9.1-C6.jar"
       }
     },
@@ -3231,7 +3231,7 @@
       "artifact": {
         "size": 91948,
         "MD5": "290351c72febae5145711f8a0b2904d3",
-        "url": "https://www.curseforge.com/api/v1/mods/407206/files/8642154/download",
+        "url": "https://mediafilez.forgecdn.net/files/8642/154/chat_heads-0.15.7-neoforge-1.21.jar",
         "path": "curseforge/407206/8642154/chat_heads-0.15.7-neoforge-1.21.jar"
       }
     },
@@ -3242,7 +3242,7 @@
       "artifact": {
         "size": 4758,
         "MD5": "ae3a79f894e6dda5dd2b62f0d8cea770",
-        "url": "https://www.curseforge.com/api/v1/mods/1456302/files/7589028/download",
+        "url": "https://mediafilez.forgecdn.net/files/7589/28/create_stuff_additions_zh_hk.zip",
         "path": "resourcepacks/create_stuff_additions_zh_hk.zip"
       }
     },
@@ -3253,7 +3253,7 @@
       "artifact": {
         "size": 390889,
         "MD5": "5c2e3049eaa47cd3412aebb514d5c642",
-        "url": "https://www.curseforge.com/api/v1/mods/542235/files/7419660/download",
+        "url": "https://mediafilez.forgecdn.net/files/7419/660/createcafe-1.4.3.jar",
         "path": "curseforge/542235/7419660/createcafe-1.4.3.jar"
       }
     },
@@ -3264,7 +3264,7 @@
       "artifact": {
         "size": 19123767,
         "MD5": "179189c52b45a469e683570be4e77188",
-        "url": "https://www.curseforge.com/api/v1/mods/328085/files/7963363/download",
+        "url": "https://mediafilez.forgecdn.net/files/7963/363/create-1.21.1-6.0.10.jar",
         "path": "curseforge/328085/7963363/create-1.21.1-6.0.10.jar"
       }
     },
@@ -3275,7 +3275,7 @@
       "artifact": {
         "size": 95555,
         "MD5": "0152c88f0aa0b5e75792f5f208acd9a5",
-        "url": "https://www.curseforge.com/api/v1/mods/915672/files/4765635/download",
+        "url": "https://mediafilez.forgecdn.net/files/4765/635/CU%20-%203d%20Wrench.zip",
         "path": "resourcepacks/CU - 3d Wrench.zip"
       }
     },
@@ -3286,7 +3286,7 @@
       "artifact": {
         "size": 292088,
         "MD5": "3e18cab0cb7ee834573e6b20dcb5543f",
-        "url": "https://www.curseforge.com/api/v1/mods/240630/files/6506298/download",
+        "url": "https://mediafilez.forgecdn.net/files/6506/298/JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar",
         "path": "curseforge/240630/6506298/JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar"
       }
     },
@@ -3297,7 +3297,7 @@
       "artifact": {
         "size": 458075,
         "MD5": "d30558e280ec4ee34b831f96ebd2e148",
-        "url": "https://www.curseforge.com/api/v1/mods/1191080/files/6145369/download",
+        "url": "https://mediafilez.forgecdn.net/files/6145/369/despawntweaks-neoforge-1.0.0-1.21.1.jar",
         "path": "curseforge/1191080/6145369/despawntweaks-neoforge-1.0.0-1.21.1.jar"
       }
     },
@@ -3308,7 +3308,7 @@
       "artifact": {
         "size": 2039,
         "MD5": "8e34763712fca99e634aa258b0c92ba5",
-        "url": "https://www.curseforge.com/api/v1/mods/1457759/files/7596639/download",
+        "url": "https://mediafilez.forgecdn.net/files/7596/639/create_more_package_couriers_zh_hk.zip",
         "path": "resourcepacks/create_more_package_couriers_zh_hk.zip"
       }
     },
@@ -3319,7 +3319,7 @@
       "artifact": {
         "size": 1163890,
         "MD5": "4c3757160403fcccb8ad468c2ea22862",
-        "url": "https://www.curseforge.com/api/v1/mods/348521/files/5729127/download",
+        "url": "https://mediafilez.forgecdn.net/files/5729/127/cloth-config-15.0.140-neoforge.jar",
         "path": "curseforge/348521/5729127/cloth-config-15.0.140-neoforge.jar"
       }
     },
@@ -3330,7 +3330,7 @@
       "artifact": {
         "size": 2857,
         "MD5": "ee185999125a73e1f7bc6e56f70cd865",
-        "url": "https://www.curseforge.com/api/v1/mods/989975/files/5198465/download",
+        "url": "https://mediafilez.forgecdn.net/files/5198/465/createadvancementplague.zip",
         "path": "resourcepacks/createadvancementplague.zip"
       }
     },
@@ -3341,7 +3341,7 @@
       "artifact": {
         "size": 168632,
         "MD5": "41953cf1db90494f98f97f915716a016",
-        "url": "https://www.curseforge.com/api/v1/mods/511770/files/8552907/download",
+        "url": "https://mediafilez.forgecdn.net/files/8552/907/drippyloadingscreen_neoforge_3.1.5_MC_1.21.1.jar",
         "path": "curseforge/511770/8552907/drippyloadingscreen_neoforge_3.1.5_MC_1.21.1.jar"
       }
     },
@@ -3352,7 +3352,7 @@
       "artifact": {
         "size": 1979027,
         "MD5": "3dcd70a8c73100efefc23167bf6c1000",
-        "url": "https://www.curseforge.com/api/v1/mods/521480/files/8274824/download",
+        "url": "https://mediafilez.forgecdn.net/files/8274/824/skinlayers3d-neoforge-1.11.2-mc1.21.1.jar",
         "path": "curseforge/521480/8274824/skinlayers3d-neoforge-1.11.2-mc1.21.1.jar"
       }
     },
@@ -3363,7 +3363,7 @@
       "artifact": {
         "size": 1439018,
         "MD5": "591ef2ad7c9610689d22b301e0e3a678",
-        "url": "https://www.curseforge.com/api/v1/mods/404465/files/8569579/download",
+        "url": "https://mediafilez.forgecdn.net/files/8569/579/ftb-library-neoforge-2101.1.35.jar",
         "path": "curseforge/404465/8569579/ftb-library-neoforge-2101.1.35.jar"
       }
     },
@@ -3374,7 +3374,7 @@
       "artifact": {
         "size": 451898,
         "MD5": "f64d8b98fa4047253c3ba0ea99ec9811",
-        "url": "https://www.curseforge.com/api/v1/mods/422951/files/7701961/download",
+        "url": "https://mediafilez.forgecdn.net/files/7701/961/someassemblyrequired-5.2.8.jar",
         "path": "curseforge/422951/7701961/someassemblyrequired-5.2.8.jar"
       }
     },
@@ -3385,7 +3385,7 @@
       "artifact": {
         "size": 512624,
         "MD5": "5b3693779f0bd150f57957b91d3da4be",
-        "url": "https://www.curseforge.com/api/v1/mods/1260145/files/8679269/download",
+        "url": "https://mediafilez.forgecdn.net/files/8679/269/escalated-1.3.2-mc.1.21.1.jar",
         "path": "curseforge/1260145/8679269/escalated-1.3.2-mc.1.21.1.jar"
       }
     },
@@ -3396,7 +3396,7 @@
       "artifact": {
         "size": 73938,
         "MD5": "4ab6e808a59fdebecfbc92438b85b470",
-        "url": "https://www.curseforge.com/api/v1/mods/60089/files/5637846/download",
+        "url": "https://mediafilez.forgecdn.net/files/5637/846/MouseTweaks-neoforge-mc1.21-2.26.1.jar",
         "path": "curseforge/60089/5637846/MouseTweaks-neoforge-mc1.21-2.26.1.jar"
       }
     },
@@ -3407,7 +3407,7 @@
       "artifact": {
         "size": 174972,
         "MD5": "2368e0c92ae882677bbf4b87418656b9",
-        "url": "https://www.curseforge.com/api/v1/mods/388800/files/6794589/download",
+        "url": "https://mediafilez.forgecdn.net/files/6794/589/polymorph-neoforge-1.1.0%2B1.21.1.jar",
         "path": "curseforge/388800/6794589/polymorph-neoforge-1.1.0+1.21.1.jar"
       }
     },
@@ -3418,7 +3418,7 @@
       "artifact": {
         "size": 142951,
         "MD5": "22114be98fc455a2609a32e11521ef8d",
-        "url": "https://www.curseforge.com/api/v1/mods/1466331/files/8661574/download",
+        "url": "https://mediafilez.forgecdn.net/files/8661/574/azimuth-1.4.7.jar",
         "path": "curseforge/1466331/8661574/azimuth-1.4.7.jar"
       }
     },
@@ -3429,7 +3429,7 @@
       "artifact": {
         "size": 1061931,
         "MD5": "7ae605279aacf6ae233bb1aafe2775c4",
-        "url": "https://www.curseforge.com/api/v1/mods/342584/files/8341460/download",
+        "url": "https://mediafilez.forgecdn.net/files/8341/460/collective-1.21.1-8.39.jar",
         "path": "curseforge/342584/8341460/collective-1.21.1-8.39.jar"
       }
     },
@@ -3440,7 +3440,7 @@
       "artifact": {
         "size": 203149,
         "MD5": "ecb81c9479605db12a77bea774b88406",
-        "url": "https://www.curseforge.com/api/v1/mods/658587/files/7389814/download",
+        "url": "https://mediafilez.forgecdn.net/files/7389/814/player-animation-lib-forge-2.0.4%2B1.21.1.jar",
         "path": "curseforge/658587/7389814/player-animation-lib-forge-2.0.4+1.21.1.jar"
       }
     },
@@ -3451,7 +3451,7 @@
       "artifact": {
         "size": 14702,
         "MD5": "86226e9feb644204b20a00646889b2bd",
-        "url": "https://www.curseforge.com/api/v1/mods/1520961/files/7977632/download",
+        "url": "https://mediafilez.forgecdn.net/files/7977/632/aerocopycats-1.1.1.jar",
         "path": "curseforge/1520961/7977632/aerocopycats-1.1.1.jar"
       }
     },
@@ -3462,7 +3462,7 @@
       "artifact": {
         "size": 664332,
         "MD5": "58801cffbf0f76d5b5128b0a2013cde8",
-        "url": "https://www.curseforge.com/api/v1/mods/849519/files/8526346/download",
+        "url": "https://mediafilez.forgecdn.net/files/8526/346/e4mc-neoforge-6.2.1.jar",
         "path": "curseforge/849519/8526346/e4mc-neoforge-6.2.1.jar"
       }
     },
@@ -3473,7 +3473,7 @@
       "artifact": {
         "size": 2185409,
         "MD5": "17eff3fe469527971f1f05990f3527f8",
-        "url": "https://www.curseforge.com/api/v1/mods/263420/files/8449819/download",
+        "url": "https://mediafilez.forgecdn.net/files/8449/819/xaerominimap-neoforge-1.21.1-26.4.2.jar",
         "path": "curseforge/263420/8449819/xaerominimap-neoforge-1.21.1-26.4.2.jar"
       }
     },
@@ -3484,7 +3484,7 @@
       "artifact": {
         "size": 253695,
         "MD5": "1d3f40f9cf85f1e3a330201ea2e85c2c",
-        "url": "https://www.curseforge.com/api/v1/mods/316582/files/7018307/download",
+        "url": "https://mediafilez.forgecdn.net/files/7018/307/corpse-neoforge-1.21.1-1.1.13.jar",
         "path": "curseforge/316582/7018307/corpse-neoforge-1.21.1-1.1.13.jar"
       }
     },
@@ -3495,7 +3495,7 @@
       "artifact": {
         "size": 732792,
         "MD5": "116edb653f02f23d5ae921f70b5579a5",
-        "url": "https://www.curseforge.com/api/v1/mods/1312780/files/8192296/download",
+        "url": "https://mediafilez.forgecdn.net/files/8192/296/createornithopterglider-1.2.0-1.21.1.jar",
         "path": "curseforge/1312780/8192296/createornithopterglider-1.2.0-1.21.1.jar"
       }
     },
@@ -3506,7 +3506,7 @@
       "artifact": {
         "size": 964,
         "MD5": "902810717ac907c68c13494aa3f8bc2d",
-        "url": "https://www.curseforge.com/api/v1/mods/979652/files/5136804/download",
+        "url": "https://mediafilez.forgecdn.net/files/5136/804/IDAS%20Chinese%20Translation%20ZH%20HK.zip",
         "path": "resourcepacks/IDAS Chinese Translation ZH HK.zip"
       }
     },
@@ -3517,7 +3517,7 @@
       "artifact": {
         "size": 2388846,
         "MD5": "d82f71bd952b4fec418a88dbe5ec0f7d",
-        "url": "https://www.curseforge.com/api/v1/mods/1236537/files/7575506/download",
+        "url": "https://mediafilez.forgecdn.net/files/7575/506/creategarnished-0.1.7.4%2B1.21.1-neoforged.jar",
         "path": "curseforge/1236537/7575506/creategarnished-0.1.7.4+1.21.1-neoforged.jar"
       }
     },
@@ -3532,7 +3532,7 @@
       "artifact": {
         "size": 7981721,
         "MD5": "b2c7fee15e07017c3802c01a78a23ca8",
-        "url": "https://www.curseforge.com/api/v1/mods/835847/files/8406701/download",
+        "url": "https://mediafilez.forgecdn.net/files/8406/701/controlify-3.0.1%2Blts%2B1.21.1-neoforge.jar",
         "path": "curseforge/835847/8406701/controlify-3.0.1+lts+1.21.1-neoforge.jar"
       }
     },
@@ -3547,7 +3547,7 @@
       "artifact": {
         "size": 220193,
         "MD5": "e5ef3e5d37eedad79cf44897229fd8f2",
-        "url": "https://www.curseforge.com/api/v1/mods/335493/files/7546938/download",
+        "url": "https://mediafilez.forgecdn.net/files/7546/938/dynamic-fps-3.11.4%2Bminecraft-1.21.0-neoforge.jar",
         "path": "curseforge/335493/7546938/dynamic-fps-3.11.4+minecraft-1.21.0-neoforge.jar"
       }
     }

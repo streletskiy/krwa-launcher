@@ -167,13 +167,22 @@ $modModules = $manifest.files | ForEach-Object -Parallel {
         throw "CurseForge did not return a file name for $projectId/$fileId"
     }
 
+    # The website download endpoint is protected by an interactive Cloudflare
+    # challenge and returns 403 to launchers. CurseForge's official CDN uses
+    # deterministic paths based on the file ID and the escaped file name.
+    $numericFileId = [long]$fileId
+    $cdnBucket = [long][Math]::Floor($numericFileId / 1000)
+    $cdnRemainder = $numericFileId % 1000
+    $escapedFileName = [Uri]::EscapeDataString($fileName)
+    $downloadUrl = "https://mediafilez.forgecdn.net/files/$cdnBucket/$cdnRemainder/$escapedFileName"
+
     $lookup = $using:lookupSnapshot
     $cacheRoot = $using:cacheSnapshot
     $sourcePath = $lookup[$fileName.ToLowerInvariant()]
     if (-not $sourcePath) {
         $sourcePath = Join-Path $cacheRoot "$projectId-$fileId-$fileName"
         if (-not (Test-Path -LiteralPath $sourcePath) -or (Get-Item -LiteralPath $sourcePath).Length -ne [long]$metadata.data.fileLength) {
-            Invoke-WebRequest -Uri "https://www.curseforge.com/api/v1/mods/$projectId/files/$fileId/download" -OutFile $sourcePath -MaximumRetryCount 4 -RetryIntervalSec 2
+            Invoke-WebRequest -Uri $downloadUrl -OutFile $sourcePath -MaximumRetryCount 4 -RetryIntervalSec 2
         }
     }
 
@@ -217,7 +226,7 @@ $modModules = $manifest.files | ForEach-Object -Parallel {
             artifact = [ordered]@{
                 size = $item.Length
                 MD5 = (Get-FileHash -LiteralPath $sourcePath -Algorithm MD5).Hash.ToLowerInvariant()
-                url = "https://www.curseforge.com/api/v1/mods/$projectId/files/$fileId/download"
+                url = $downloadUrl
                 path = $artifactPath
             }
         }

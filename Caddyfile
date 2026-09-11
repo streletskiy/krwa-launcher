@@ -26,6 +26,23 @@
 	handle @community {
 		reverse_proxy community:3001
 	}
+	@curseForgeFallback {
+		method GET HEAD
+		path_regexp ^/cf-files/files/[0-9]+/[0-9]+/[^/]+$
+	}
+	handle @curseForgeFallback {
+		reverse_proxy mod-cache:3002 {
+			lb_try_duration 15s
+			lb_try_interval 500ms
+			transport http {
+				dial_timeout 5s
+				response_header_timeout 180s
+			}
+		}
+	}
+	handle /cf-files/* {
+		respond 404
+	}
 	@repository path /downloads/* /distribution.json /health.json /servers/* /repo/* /modpacks/* /pack/*
 	handle @repository {
 		root * /srv

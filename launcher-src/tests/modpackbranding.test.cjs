@@ -9,6 +9,10 @@ const layoutPath = path.join(profile, 'files', 'config', 'fancymenu', 'customiza
 const backgroundPath = path.join(profile, 'files', 'config', 'fancymenu', 'assets', 'bg-krwa.png')
 const fancyMenuAssets = path.join(profile, 'files', 'config', 'fancymenu', 'assets')
 
+function flattenModules(modules) {
+    return modules.flatMap(module => [module, ...flattenModules(module.subModules ?? [])])
+}
+
 test('KRWA profile excludes public server browsers and hosting promotions', () => {
     const lock = JSON.parse(fs.readFileSync(path.join(profile, 'neoforge-lock.json'), 'utf8'))
     assert.equal(lock.modules.some(module => /serverbrowser/i.test(`${module.id} ${module.name}`)), false)
@@ -56,4 +60,24 @@ test('KRWA main menu opens Multiplayer once per game session', () => {
     assert(multiplayer)
     assert.match(multiplayer, /automated_button_clicks = 1/)
     assert.match(multiplayer, /load_once_per_session = true/)
+})
+
+test('CurseForge artifacts use non-interactive CDN URLs', () => {
+    const lock = JSON.parse(fs.readFileSync(path.join(profile, 'neoforge-lock.json'), 'utf8'))
+    const distribution = JSON.parse(fs.readFileSync(path.resolve(profile, '..', '..', 'distribution.json'), 'utf8'))
+    const server = distribution.servers.find(candidate => candidate.id === 'krwa-aeronautics-1.21.1')
+    const lockArtifacts = flattenModules(lock.modules).map(module => module.artifact)
+    const distributionArtifacts = flattenModules(server.modules).map(module => module.artifact)
+    const curseForgeArtifacts = lockArtifacts.filter(artifact => artifact.url.includes('forgecdn.net'))
+
+    assert(curseForgeArtifacts.length > 0)
+    assert.equal(lockArtifacts.some(artifact => artifact.url.includes('www.curseforge.com/api/v1/')), false)
+    assert.equal(distributionArtifacts.some(artifact => artifact.url.includes('www.curseforge.com/api/v1/')), false)
+    for(const artifact of curseForgeArtifacts) {
+        const url = new URL(artifact.url)
+        assert.equal(url.protocol, 'https:')
+        assert.equal(url.hostname, 'mediafilez.forgecdn.net')
+        assert.match(url.pathname, /^\/files\/\d+\/\d+\/[^/]+$/)
+        assert.equal(decodeURIComponent(url.pathname.split('/').at(-1)), artifact.path.split('/').at(-1))
+    }
 })
