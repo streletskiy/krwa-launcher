@@ -68,7 +68,13 @@ test('CurseForge artifacts use non-interactive CDN URLs', () => {
     const server = distribution.servers.find(candidate => candidate.id === 'krwa-aeronautics-1.21.1')
     const lockArtifacts = flattenModules(lock.modules).map(module => module.artifact)
     const distributionArtifacts = flattenModules(server.modules).map(module => module.artifact)
-    const curseForgeArtifacts = lockArtifacts.filter(artifact => artifact.url.includes('forgecdn.net'))
+    const curseForgeArtifacts = lockArtifacts.filter(artifact => {
+        try {
+            return new URL(artifact.url).hostname === 'mediafilez.forgecdn.net'
+        } catch {
+            return false
+        }
+    })
 
     assert(curseForgeArtifacts.length > 0)
     assert.equal(lockArtifacts.some(artifact => artifact.url.includes('www.curseforge.com/api/v1/')), false)
