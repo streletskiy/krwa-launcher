@@ -22,25 +22,42 @@ for %%M in ("launcher-src\dist\latest.yml" "launcher-src\dist-linux\latest-linux
     exit /b 1
   )
 )
+for %%F in (
+  "launcher-src\dist\KRWA-Launcher-setup-%KRWA_VERSION%.exe"
+  "launcher-src\dist\KRWA-Launcher-setup-%KRWA_VERSION%.exe.blockmap"
+  "launcher-src\dist-linux\KRWA-Launcher-%KRWA_VERSION%-x86_64.AppImage"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.dmg"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.dmg.blockmap"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.zip"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.zip.blockmap"
+) do (
+  if not exist "%%~F" (
+    echo Missing release artifact: %%~F
+    exit /b 1
+  )
+)
 if /i "%~1"=="--check" (
-  echo Launcher %KRWA_VERSION% has complete manifests for Windows, Linux and macOS.
+  echo Launcher %KRWA_VERSION% has complete manifests and artifacts for Windows, Linux and macOS.
   exit /b 0
 )
 if not exist "repository\downloads" mkdir "repository\downloads"
-for %%F in (launcher-src\dist\*.exe launcher-src\dist\*.AppImage launcher-src\dist\*.blockmap) do (
-  if exist "%%F" copy /y "%%F" "repository\downloads\" >nul
-)
-for %%F in (launcher-src\dist-linux\*.AppImage launcher-src\dist-linux\*.blockmap) do (
-  if exist "%%F" copy /y "%%F" "repository\downloads\" >nul
-)
-for %%F in (launcher-src\dist-mac\*.dmg launcher-src\dist-mac\*.zip launcher-src\dist-mac\*.blockmap) do (
-  if exist "%%F" copy /y "%%F" "repository\downloads\" >nul
+for %%F in (
+  "launcher-src\dist\KRWA-Launcher-setup-%KRWA_VERSION%.exe"
+  "launcher-src\dist\KRWA-Launcher-setup-%KRWA_VERSION%.exe.blockmap"
+  "launcher-src\dist-linux\KRWA-Launcher-%KRWA_VERSION%-x86_64.AppImage"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.dmg"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.dmg.blockmap"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.zip"
+  "launcher-src\dist-mac\KRWA-Launcher-%KRWA_VERSION%-mac-universal.zip.blockmap"
+) do (
+  copy /y "%%~F" "repository\downloads\" >nul
+  if errorlevel 1 exit /b 1
 )
 rem Publish manifests last so clients never see a release before its artifacts exist.
-for %%F in (launcher-src\dist\latest*.yml launcher-src\dist-linux\latest*.yml launcher-src\dist-mac\latest-mac.yml) do (
-  if exist "%%F" (
-    copy /y "%%F" "repository\downloads\%%~nxF.tmp" >nul
-    move /y "repository\downloads\%%~nxF.tmp" "repository\downloads\%%~nxF" >nul
-  )
+for %%F in ("launcher-src\dist\latest.yml" "launcher-src\dist-linux\latest-linux.yml" "launcher-src\dist-mac\latest-mac.yml") do (
+  copy /y "%%~F" "repository\downloads\%%~nxF.tmp" >nul
+  if errorlevel 1 exit /b 1
+  move /y "repository\downloads\%%~nxF.tmp" "repository\downloads\%%~nxF" >nul
+  if errorlevel 1 exit /b 1
 )
 echo Launcher files published to repository\downloads

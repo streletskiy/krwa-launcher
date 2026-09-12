@@ -14,6 +14,7 @@ const localeOverridesPath = path.resolve(__dirname, '../app/assets/lang/krwa-loc
 const settingsTemplatePath = path.resolve(__dirname, '../app/settings.ejs')
 const processBuilderPath = path.resolve(__dirname, '../app/assets/js/processbuilder.js')
 const devUpdatePath = path.resolve(__dirname, '../dev-app-update.yml')
+const publishScriptPath = path.resolve(__dirname, '../../publish-launcher.cmd')
 
 test('landing script only references controls that exist in the rendered launcher', async () => {
     Lang.setupLanguage('ru_RU', ['ru-RU'])
@@ -77,4 +78,15 @@ test('project links and user-visible branding point to KRWA', () => {
     assert.equal(processBuilder.match(/-Xdock:name=KRWA Launcher/g)?.length, 2)
     assert.match(devUpdate, /provider:\s*generic/)
     assert.ok(devUpdate.includes('https://mc.krwa.ru/downloads/'))
+})
+
+test('release publishing copies only the current version artifacts', () => {
+    const source = fs.readFileSync(publishScriptPath, 'utf8')
+    assert.ok(source.includes('KRWA-Launcher-setup-%KRWA_VERSION%.exe'))
+    assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-x86_64.AppImage'))
+    assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-mac-universal.dmg'))
+    assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-mac-universal.zip'))
+    assert.ok(!source.includes('launcher-src\\dist\\*.exe'))
+    assert.ok(!source.includes('launcher-src\\dist-linux\\*.AppImage'))
+    assert.ok(!source.includes('launcher-src\\dist-mac\\*.dmg'))
 })
