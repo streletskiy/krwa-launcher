@@ -1,7 +1,8 @@
 {
   "name": "krwa-launcher",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "productName": "KRWA Launcher",
+  "desktopName": "ru.krwa.launcher",
   "description": "Минималистичный лаунчер сервера KRWA",
   "author": "streletskiy; based on Helios Launcher by Daniel Scalzi",
   "license": "MIT",
@@ -53,5 +54,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/streletskiy/krwa-launcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/streletskiy/krwa-launcher/issues"
   }
 }

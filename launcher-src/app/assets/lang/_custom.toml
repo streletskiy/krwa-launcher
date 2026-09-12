@@ -48,7 +48,7 @@ newsErrorLoadSpan = "Проверяем новости..."
 newsErrorFailedSpan = "Не удалось загрузить новости"
 newsErrorRetryButton = "Повторить"
 newsErrorNoneSpan = "Новостей пока нет"
-mediaGitHubURL = "https://github.com/dscalzi/HeliosLauncher"
+mediaGitHubURL = "https://github.com/streletskiy/krwa-launcher"
 mediaXURL = "#"
 mediaInstagramURL = "#"
 mediaYouTubeURL = "#"
@@ -129,7 +129,7 @@ launcherUpdatesHeaderDesc = "Проверка, загрузка и устано�
 checkForUpdates = "Проверить обновления"
 whatsNew = "Что нового"
 updateReleaseNotes = "Изменения в обновлении"
-sourceGithubLink = "https://github.com/dscalzi/HeliosLauncher"
+sourceGithubLink = "https://github.com/streletskiy/krwa-launcher"
 supportLink = "https://mc.krwa.ru/"
 
 [ejs.overlay]

@@ -9,6 +9,11 @@ const appPath = path.resolve(__dirname, '../app/app.ejs')
 const landingPath = path.resolve(__dirname, '../app/assets/js/scripts/landing.js')
 const uiCorePath = path.resolve(__dirname, '../app/assets/js/scripts/uicore.js')
 const themePath = path.resolve(__dirname, '../app/assets/css/krwa-theme.css')
+const customLocalePath = path.resolve(__dirname, '../app/assets/lang/_custom.toml')
+const localeOverridesPath = path.resolve(__dirname, '../app/assets/lang/krwa-locales.json')
+const settingsTemplatePath = path.resolve(__dirname, '../app/settings.ejs')
+const processBuilderPath = path.resolve(__dirname, '../app/assets/js/processbuilder.js')
+const devUpdatePath = path.resolve(__dirname, '../dev-app-update.yml')
 
 test('landing script only references controls that exist in the rendered launcher', async () => {
     Lang.setupLanguage('ru_RU', ['ru-RU'])
@@ -51,4 +56,25 @@ test('macOS update action uses the stable KRWA download alias', () => {
     const source = fs.readFileSync(uiCorePath, 'utf8')
     assert.ok(source.includes("info.darwindownload = 'https://mc.krwa.ru/download/macos'"))
     assert.ok(!source.includes('github.com/dscalzi/HeliosLauncher/releases'))
+})
+
+test('project links and user-visible branding point to KRWA', () => {
+    const repositoryUrl = 'https://github.com/streletskiy/krwa-launcher'
+    const customLocale = fs.readFileSync(customLocalePath, 'utf8')
+    const localeOverrides = JSON.parse(fs.readFileSync(localeOverridesPath, 'utf8'))
+    const settingsTemplate = fs.readFileSync(settingsTemplatePath, 'utf8')
+    const processBuilder = fs.readFileSync(processBuilderPath, 'utf8')
+    const devUpdate = fs.readFileSync(devUpdatePath, 'utf8')
+
+    assert.ok(customLocale.includes(`sourceGithubLink = "${repositoryUrl}"`))
+    assert.ok(customLocale.includes(`mediaGitHubURL = "${repositoryUrl}"`))
+    for(const language of ['en_US', 'pl_PL']) {
+        assert.equal(localeOverrides[language].ejs.settings.sourceGithubLink, repositoryUrl)
+    }
+    assert.equal(localeOverrides.en_US.ejs.landing.mediaGitHubURL, repositoryUrl)
+    assert.ok(!settingsTemplate.includes('github.com/dscalzi/HeliosLauncher'))
+    assert.ok(!processBuilder.includes('-Xdock:name=HeliosLauncher'))
+    assert.equal(processBuilder.match(/-Xdock:name=KRWA Launcher/g)?.length, 2)
+    assert.match(devUpdate, /provider:\s*generic/)
+    assert.ok(devUpdate.includes('https://mc.krwa.ru/downloads/'))
 })

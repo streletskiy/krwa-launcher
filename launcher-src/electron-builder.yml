@@ -50,6 +50,7 @@ mac:
 # Linux Configuration
 linux: 
   target: 'AppImage'
+  syncDesktopName: true
   artifactName: 'KRWA-Launcher-${version}-${arch}.${ext}'
   maintainer: 'streletskiy'
   vendor: 'streletskiy'

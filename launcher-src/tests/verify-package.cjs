@@ -20,6 +20,7 @@ assert.deepEqual(leakedEntries, [], `Build-only files leaked into app.asar: ${le
 
 const packageJson = JSON.parse(asar.extractFile(archivePath, 'package.json').toString('utf8'))
 assert.equal(packageJson.version, expectedVersion, 'Packaged launcher version does not match the release version')
+assert.equal(packageJson.desktopName, 'ru.krwa.launcher', 'Packaged launcher is missing its Linux desktop identity')
 
 const maxArchiveBytes = 100 * 1024 * 1024
 const archiveBytes = fs.statSync(archivePath).size

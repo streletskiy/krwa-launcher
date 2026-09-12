@@ -26,10 +26,10 @@
         "addMojangAccount": "+ Add KRWA account",
         "memoryDesc": "6 GB recommended for this pack.",
         "supportLink": "https://mc.krwa.ru/",
-        "sourceGithubLink": "https://github.com/dscalzi/HeliosLauncher"
+        "sourceGithubLink": "https://github.com/streletskiy/krwa-launcher"
       },
       "landing": {
-        "mediaGitHubURL": "https://github.com/dscalzi/HeliosLauncher",
+        "mediaGitHubURL": "https://github.com/streletskiy/krwa-launcher",
         "mediaXURL": "#",
         "mediaInstagramURL": "#",
         "mediaYouTubeURL": "#",
@@ -136,7 +136,7 @@
         "addMojangAccount": "+ Dodaj konto KRWA",
         "memoryDesc": "Zalecane 6 GB dla tej paczki.",
         "supportLink": "https://mc.krwa.ru/",
-        "sourceGithubLink": "https://github.com/dscalzi/HeliosLauncher",
+        "sourceGithubLink": "https://github.com/streletskiy/krwa-launcher",
         "navHeaderText": "Ustawienia",
         "navAccount": "Konto",
         "navMinecraft": "Gra",
