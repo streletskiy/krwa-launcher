@@ -15,6 +15,7 @@ const settingsTemplatePath = path.resolve(__dirname, '../app/settings.ejs')
 const processBuilderPath = path.resolve(__dirname, '../app/assets/js/processbuilder.js')
 const devUpdatePath = path.resolve(__dirname, '../dev-app-update.yml')
 const publishScriptPath = path.resolve(__dirname, '../../publish-launcher.cmd')
+const macReleaseWorkflowPath = path.resolve(__dirname, '../../.github/workflows/verify-macos-release.yml')
 
 test('landing script only references controls that exist in the rendered launcher', async () => {
     Lang.setupLanguage('ru_RU', ['ru-RU'])
@@ -89,4 +90,11 @@ test('release publishing copies only the current version artifacts', () => {
     assert.ok(!source.includes('launcher-src\\dist\\*.exe'))
     assert.ok(!source.includes('launcher-src\\dist-linux\\*.AppImage'))
     assert.ok(!source.includes('launcher-src\\dist-mac\\*.dmg'))
+})
+
+test('published macOS verification accepts a case-insensitive SHA-256 input', () => {
+    const source = fs.readFileSync(macReleaseWorkflowPath, 'utf8')
+    assert.ok(source.includes("tr '[:upper:]' '[:lower:]'"))
+    assert.ok(source.includes('^[0-9a-f]{64}$'))
+    assert.ok(!source.includes('default: 0.1.13'))
 })

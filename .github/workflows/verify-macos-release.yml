@@ -6,11 +6,9 @@ on:
       version:
         description: Launcher version to verify
         required: true
-        default: 0.1.13
       sha256:
         description: Expected SHA-256 of the DMG
         required: true
-        default: e833f4dfdf3609c532d1718352c23ded70f50d9fc1c9048f701b169bcf8fc763
 
 permissions:
   contents: read
@@ -29,7 +27,9 @@ jobs:
           curl --fail --location --retry 3 --output launcher.dmg \
             "https://mc.krwa.ru/downloads/KRWA-Launcher-${RELEASE_VERSION}-mac-universal.dmg"
           actual_sha256="$(shasum -a 256 launcher.dmg | awk '{ print $1 }')"
-          test "$actual_sha256" = "$EXPECTED_SHA256"
+          expected_sha256="$(printf '%s' "$EXPECTED_SHA256" | tr '[:upper:]' '[:lower:]')"
+          [[ "$expected_sha256" =~ ^[0-9a-f]{64}$ ]]
+          test "$actual_sha256" = "$expected_sha256"
 
       - name: Mount and smoke-test the application
         run: |
