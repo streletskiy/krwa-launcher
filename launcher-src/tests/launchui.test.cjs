@@ -77,8 +77,10 @@ test('project links and user-visible branding point to KRWA', () => {
     assert.ok(!settingsTemplate.includes('github.com/dscalzi/HeliosLauncher'))
     assert.ok(!processBuilder.includes('-Xdock:name=HeliosLauncher'))
     assert.equal(processBuilder.match(/-Xdock:name=KRWA Launcher/g)?.length, 2)
-    assert.match(devUpdate, /provider:\s*generic/)
-    assert.ok(devUpdate.includes('https://mc.krwa.ru/downloads/'))
+    assert.equal(
+        devUpdate.replaceAll('\r\n', '\n'),
+        'provider: generic\nurl: https://mc.krwa.ru/downloads/\n'
+    )
 })
 
 test('release publishing copies only the current version artifacts', () => {
