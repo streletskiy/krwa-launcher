@@ -4,14 +4,27 @@ services:
   files:
     image: caddy@sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d
     restart: always
+    entrypoint: ["/bin/sh", "/usr/local/bin/run-files-with-forwarding-watchdog.sh"]
     ports:
       - "8088:8080"
       - "8089:8081"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./scripts/run-files-with-forwarding-watchdog.sh:/usr/local/bin/run-files-with-forwarding-watchdog.sh:ro
       - ./repository:/srv:ro
     environment:
       LEGACY_SITE_HOSTS: "${LEGACY_SITE_HOSTS:-127.0.0.1 localhost}"
+      FORWARDING_HEALTH_URI: "http://host.docker.internal:8088/health.json"
+      FORWARDING_HEALTH_INTERVAL_SECONDS: "30"
+      FORWARDING_HEALTH_FAILURES: "3"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-T", "10", "-O", "/dev/null", "http://host.docker.internal:8088/health.json"]
+      interval: 30s
+      timeout: 12s
+      retries: 3
+      start_period: 20s
     depends_on:
       community:
         condition: service_started
