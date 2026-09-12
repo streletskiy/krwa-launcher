@@ -13,6 +13,7 @@ const customLocalePath = path.resolve(__dirname, '../app/assets/lang/_custom.tom
 const localeOverridesPath = path.resolve(__dirname, '../app/assets/lang/krwa-locales.json')
 const settingsTemplatePath = path.resolve(__dirname, '../app/settings.ejs')
 const processBuilderPath = path.resolve(__dirname, '../app/assets/js/processbuilder.js')
+const ipcConstantsPath = path.resolve(__dirname, '../app/assets/js/ipcconstants.js')
 const devUpdatePath = path.resolve(__dirname, '../dev-app-update.yml')
 const publishScriptPath = path.resolve(__dirname, '../../publish-launcher.cmd')
 const macReleaseWorkflowPath = path.resolve(__dirname, '../../.github/workflows/verify-macos-release.yml')
@@ -66,6 +67,7 @@ test('project links and user-visible branding point to KRWA', () => {
     const localeOverrides = JSON.parse(fs.readFileSync(localeOverridesPath, 'utf8'))
     const settingsTemplate = fs.readFileSync(settingsTemplatePath, 'utf8')
     const processBuilder = fs.readFileSync(processBuilderPath, 'utf8')
+    const ipcConstants = fs.readFileSync(ipcConstantsPath, 'utf8')
     const devUpdate = fs.readFileSync(devUpdatePath, 'utf8')
 
     assert.ok(customLocale.includes(`sourceGithubLink = "${repositoryUrl}"`))
@@ -77,6 +79,8 @@ test('project links and user-visible branding point to KRWA', () => {
     assert.ok(!settingsTemplate.includes('github.com/dscalzi/HeliosLauncher'))
     assert.ok(!processBuilder.includes('-Xdock:name=HeliosLauncher'))
     assert.equal(processBuilder.match(/-Xdock:name=KRWA Launcher/g)?.length, 2)
+    assert.match(ipcConstants, /SEE \.\.\/\.\.\/\.\.\/docs\/MicrosoftAuth\.md/)
+    assert.doesNotMatch(ipcConstants, /dscalzi\/HeliosLauncher/)
     assert.equal(
         devUpdate.replaceAll('\r\n', '\n'),
         'provider: generic\nurl: https://mc.krwa.ru/downloads/\n'
