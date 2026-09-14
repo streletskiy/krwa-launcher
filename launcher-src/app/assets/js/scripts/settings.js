@@ -1,6 +1,7 @@
 // Requirements
 const os     = require('os')
 const semver = require('semver')
+const { releaseNotesToPlainText } = require('./assets/js/releasenotes')
 
 const DropinModUtil  = require('./assets/js/dropinmodutil')
 const { MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR } = require('./assets/js/ipcconstants')
@@ -1475,7 +1476,7 @@ function populateReleaseNotes(){
                         throw new Error('Release feed returned an unexpected link.')
                     }
                     settingsAboutChangelogTitle.textContent = entry.find('title').text()
-                    settingsAboutChangelogText.textContent = entry.find('content').text()
+                    settingsAboutChangelogText.textContent = releaseNotesToPlainText(entry.find('content').text())
                     settingsAboutChangelogButton.href = releaseUrl.toString()
                 }
             }
@@ -1533,8 +1534,8 @@ function populateSettingsUpdateInformation(data){
     if(data != null){
         settingsUpdateTitle.innerHTML = isPrerelease(data.version) ? Lang.queryJS('settings.updates.newPreReleaseTitle') : Lang.queryJS('settings.updates.newReleaseTitle')
         settingsUpdateChangelogCont.style.display = null
-        settingsUpdateChangelogTitle.innerHTML = data.releaseName
-        settingsUpdateChangelogText.innerHTML = data.releaseNotes
+        settingsUpdateChangelogTitle.textContent = data.releaseName
+        settingsUpdateChangelogText.textContent = releaseNotesToPlainText(data.releaseNotes)
         populateVersionInformation(data.version, settingsUpdateVersionValue, settingsUpdateVersionTitle, settingsUpdateVersionCheck)
         
         if(process.platform === 'darwin'){

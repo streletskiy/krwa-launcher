@@ -2261,6 +2261,9 @@ input:checked + .toggleSwitchSlider:before {
 /* Changelog text content container. */
 .settingsChangelogText {
     font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
 }
 
 /* Styles for the changelog elements. */

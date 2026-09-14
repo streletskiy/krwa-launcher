@@ -56,5 +56,8 @@ test('release notes use text-only rendering and the KRWA release feed', () => {
     assert.ok(settings.includes('https://github.com/streletskiy/krwa-launcher/releases.atom'))
     assert.ok(settings.includes('settingsAboutChangelogTitle.textContent'))
     assert.ok(settings.includes('settingsAboutChangelogText.textContent'))
+    assert.ok(settings.includes('settingsUpdateChangelogTitle.textContent'))
+    assert.ok(settings.includes('settingsUpdateChangelogText.textContent'))
     assert.ok(!settings.includes('settingsAboutChangelogText.innerHTML'))
+    assert.ok(!settings.includes('settingsUpdateChangelogText.innerHTML'))
 })
