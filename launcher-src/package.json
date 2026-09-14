@@ -1,6 +1,6 @@
 {
   "name": "krwa-launcher",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "productName": "KRWA Launcher",
   "desktopName": "ru.krwa.launcher",
   "description": "Минималистичный лаунчер сервера KRWA",
