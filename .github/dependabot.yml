@@ -22,6 +22,9 @@ updates:
     groups:
       nebula-patches:
         update-types: [patch]
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     open-pull-requests-limit: 10
 
   - package-ecosystem: github-actions
