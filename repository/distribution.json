@@ -7,7 +7,7 @@
       "name": "KRWA Aeronautics",
       "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
       "icon": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/krwa.png",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "address": "create.krwa.ru:25565",
       "minecraftVersion": "1.21.1",
       "mainServer": true,
@@ -3563,6 +3563,21 @@
             "MD5": "e5ef3e5d37eedad79cf44897229fd8f2",
             "url": "https://mediafilez.forgecdn.net/files/7546/938/dynamic-fps-3.11.4%2Bminecraft-1.21.0-neoforge.jar",
             "path": "curseforge/335493/7546938/dynamic-fps-3.11.4+minecraft-1.21.0-neoforge.jar"
+          }
+        },
+        {
+          "id": "curseforge.project-561885:file:6290230@jar",
+          "name": "Just Zoom 2.1.0",
+          "type": "ForgeMod",
+          "required": {
+            "value": false,
+            "def": true
+          },
+          "artifact": {
+            "size": 43798,
+            "MD5": "3c28fc81aa5a9be514905e6c88e02d6d",
+            "url": "https://mediafilez.forgecdn.net/files/6290/230/justzoom_neoforge_2.1.0_MC_1.21.1.jar",
+            "path": "curseforge/561885/6290230/justzoom_neoforge_2.1.0_MC_1.21.1.jar"
           }
         },
         {
