@@ -91,6 +91,7 @@ test('release publishing copies only the current version artifacts', () => {
     const source = fs.readFileSync(publishScriptPath, 'utf8')
     assert.ok(source.includes('KRWA-Launcher-setup-%KRWA_VERSION%.exe'))
     assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-x86_64.AppImage'))
+    assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-amd64.deb'))
     assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-mac-universal.dmg'))
     assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-mac-universal.zip'))
     assert.ok(!source.includes('launcher-src\\dist\\*.exe'))

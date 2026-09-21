@@ -91,3 +91,38 @@ test('macOS download alias selects the universal DMG from the update manifest', 
         await rm(directory, { recursive: true })
     }
 })
+
+test('Linux DEB alias selects the package while AppImage keeps its existing alias', async () => {
+    const directory = await mkdtemp(join(tmpdir(), 'krwa-catalog-'))
+    await mkdir(join(directory, 'downloads'))
+    const manifest = join(directory, 'downloads/latest-linux.yml')
+    const server = createCommunityServer(directory)
+    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
+    const base = 'http://127.0.0.1:' + server.address().port
+    try {
+        await writeFile(manifest, [
+            'version: 0.1.20',
+            'files:',
+            '  - url: KRWA-Launcher-0.1.20-x86_64.AppImage',
+            '  - url: KRWA-Launcher-0.1.20-amd64.deb',
+            'path: KRWA-Launcher-0.1.20-x86_64.AppImage',
+            '',
+        ].join('\n'))
+        for (const [slug, target] of [
+            ['linux', 'KRWA-Launcher-0.1.20-x86_64.AppImage'],
+            ['linux-deb', 'KRWA-Launcher-0.1.20-amd64.deb'],
+        ]) {
+            const response = await fetch(base + '/download/' + slug, { redirect: 'manual' })
+            assert.equal(response.status, 302)
+            assert.equal(response.headers.get('location'), '/downloads/' + target)
+            assert.equal(response.headers.get('cache-control'), 'no-store')
+        }
+        await writeFile(manifest, 'version: 1\nfiles:\n  - url: https://untrusted.example/file.deb\n')
+        assert.equal((await fetch(base + '/download/linux-deb', { redirect: 'manual' })).status, 404)
+    } finally {
+        server.close()
+        assert.equal(dirname(resolve(directory)), resolve(tmpdir()))
+        assert(basename(directory).startsWith('krwa-catalog-'))
+        await rm(directory, { recursive: true })
+    }
+})

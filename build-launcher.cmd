@@ -30,7 +30,7 @@ if errorlevel 1 exit /b %errorlevel%
 "%KRWA_NODE%" "%KRWA_BUILDER%" --win nsis --prepackaged ".\dist\win-unpacked"
 if errorlevel 1 exit /b %errorlevel%
 cd /d "%~dp0"
-docker run --rm -v "%~dp0launcher-src:/project" -v krwa_launcher_node_modules:/project/node_modules -w /project electronuserland/builder:22 bash -lc "npm ci --no-audit --no-fund --prefer-offline && npx electron-builder --linux AppImage --config.directories.output=dist-linux"
+docker run --rm -v "%~dp0launcher-src:/project" -v krwa_launcher_node_modules:/project/node_modules -w /project electronuserland/builder:22 bash -lc "npm ci --no-audit --no-fund --prefer-offline && npx electron-builder --linux AppImage deb --config.directories.output=dist-linux"
 if errorlevel 1 exit /b %errorlevel%
 cd /d "%~dp0launcher-src"
 "%KRWA_NODE%" ".\tests\verify-package.cjs" ".\dist-linux\linux-unpacked\resources\app.asar" "%KRWA_VERSION%"

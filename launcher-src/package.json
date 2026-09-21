@@ -1,6 +1,6 @@
 {
   "name": "krwa-launcher",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "productName": "KRWA Launcher",
   "desktopName": "ru.krwa.launcher",
   "description": "Минималистичный лаунчер сервера KRWA",
@@ -46,9 +46,9 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.6.1",
-    "electron": "^44.3.0",
-    "electron-builder": "^26.15.3",
-    "eslint": "^10.10.0",
+    "electron": "^44.4.3",
+    "electron-builder": "^26.16.1",
+    "eslint": "^10.11.0",
     "eslint-plugin-security": "^4.0.1",
     "globals": "^17.12.0"
   },

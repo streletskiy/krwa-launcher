@@ -2,15 +2,18 @@
 
 Открытый лаунчер Minecraft для сервера KRWA. Он устанавливает подходящую Java, Minecraft, NeoForge и файлы модпака, проверяет их контрольные суммы, запускает игру и обновляет себя без ручной настройки клиента.
 
-Текущая версия лаунчера — **0.1.19**. Основной профиль — **KRWA Aeronautics 1.0.6** на Minecraft 1.21.1 и NeoForge 21.1.248.
+Текущая версия лаунчера — **0.1.20**. Основной профиль — **KRWA Aeronautics 1.0.7** на Minecraft 1.21.1 и NeoForge 21.1.248.
 
 ## Скачать
 
 - [Windows 10/11 x64](https://mc.krwa.ru/download/windows)
 - [Linux x64 AppImage](https://mc.krwa.ru/download/linux)
+- [Linux x64 DEB для Debian/Ubuntu](https://mc.krwa.ru/download/linux-deb)
 - [macOS Universal — Intel и Apple Silicon](https://mc.krwa.ru/download/macos)
 
 Это постоянные ссылки: при следующем релизе они автоматически будут вести на актуальную стабильную версию.
+
+Для AppImage нужно разрешить запуск файла (`chmod +x`). Если в системе нет `libfuse.so.2`, на Debian/Ubuntu используйте DEB; для других дистрибутивов см. [инструкцию AppImage по FUSE](https://docs.appimage.org/user-guide/troubleshooting/fuse.html).
 
 ## Возможности
 
@@ -66,7 +69,7 @@ npm run dist
 
 В корне также есть вспомогательные команды:
 
-- `build-launcher.cmd` — Windows x64 NSIS и Linux x64 AppImage;
+- `build-launcher.cmd` — Windows x64 NSIS, Linux x64 AppImage и DEB;
 - workflow `Build macOS launcher` — универсальные macOS DMG и ZIP на GitHub Actions;
 - `publish-launcher.cmd` — проверка одной версии и совместная публикация готовых артефактов трёх платформ в `repository/downloads`;
 - `release-launcher.cmd <version>` — обновление версии и локальная сборка Windows/Linux перед запуском macOS workflow;
