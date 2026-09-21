@@ -1,7 +1,7 @@
 [extend]
 useDefault = true
 
-[[allowlists]]
+[allowlist]
 description = "Known non-secret identifiers in vendored sample and disabled client encryption config"
 paths = [
   '''^launcher-src/docs/sample_distribution\.json$''',

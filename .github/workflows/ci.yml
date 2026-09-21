@@ -71,3 +71,35 @@ jobs:
       - name: Run tests
         working-directory: community
         run: node --test server.test.mjs
+
+  linux-package:
+    name: Linux AppImage and DEB build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: launcher-src/package-lock.json
+      - name: Install dependencies
+        working-directory: launcher-src
+        run: npm ci
+      - name: Build Linux packages
+        working-directory: launcher-src
+        run: npx electron-builder --linux AppImage deb --config.directories.output=dist-linux
+      - name: Verify packages and update manifest
+        working-directory: launcher-src
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          appimage="dist-linux/KRWA-Launcher-${version}-x86_64.AppImage"
+          deb="dist-linux/KRWA-Launcher-${version}-amd64.deb"
+          test -s "$appimage"
+          test -s "$deb"
+          test -f dist-linux/latest-linux.yml
+          grep -F "url: KRWA-Launcher-${version}-x86_64.AppImage" dist-linux/latest-linux.yml
+          grep -F "url: KRWA-Launcher-${version}-amd64.deb" dist-linux/latest-linux.yml
+          test "$(dpkg-deb --field "$deb" Architecture)" = amd64
+          test "$(dpkg-deb --field "$deb" Version)" = "$version"
+          node tests/verify-package.cjs dist-linux/linux-unpacked/resources/app.asar "$version"
