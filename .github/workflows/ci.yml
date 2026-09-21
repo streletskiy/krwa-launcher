@@ -102,4 +102,5 @@ jobs:
           grep -F "url: KRWA-Launcher-${version}-amd64.deb" dist-linux/latest-linux.yml
           test "$(dpkg-deb --field "$deb" Architecture)" = amd64
           test "$(dpkg-deb --field "$deb" Version)" = "$version"
+          dpkg-deb --field "$deb" Depends | grep -F 'libasound2t64 | libasound2'
           node tests/verify-package.cjs dist-linux/linux-unpacked/resources/app.asar "$version"
