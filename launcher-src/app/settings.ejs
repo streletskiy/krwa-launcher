@@ -309,6 +309,26 @@
                 </div>
                 <div class="settingsFileSelDesc"><%- lang('settings.dataDirectoryDesc') %></div>
             </div>
+            <% if(process.platform === 'linux') { %>
+            <div class="settingsFieldContainer" id="settingsLinuxInstallContainer">
+                <div class="settingsFieldLeft">
+                    <span class="settingsFieldTitle"><%= native('Установить лаунчер как приложение') %></span>
+                    <span class="settingsFieldDesc"><%= native('Создаст ярлык приложения и добавит KRWA Launcher в библиотеку Steam на SteamOS.') %></span>
+                    <span class="settingsFieldDesc" id="settingsLinuxInstallStatus" aria-live="polite"></span>
+                </div>
+                <div class="settingsFieldRight">
+                    <button
+                        class="settingsActionButton"
+                        id="settingsLinuxInstallButton"
+                        data-installing="<%= native('Устанавливаем…') %>"
+                        data-ready="<%= native('Установить и добавить в Steam') %>"
+                        data-success="<%= native('Готово: лаунчер установлен и добавлен в Steam.') %>"
+                        data-manual="<%= native('Лаунчер установлен. В Steam выбери «Добавить стороннюю игру» → KRWA Launcher.') %>"
+                        data-failed="<%= native('Не удалось установить ярлык. Запусти AppImage из обычной папки и попробуй ещё раз.') %>"
+                    ><%= native('Установить и добавить в Steam') %></button>
+                </div>
+            </div>
+            <% } %>
         </div>
         <div id="settingsTabAbout" class="settingsTab" style="display: none;">
             <div class="settingsTabHeader">

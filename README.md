@@ -9,11 +9,12 @@
 - [Windows 10/11 x64](https://mc.krwa.ru/download/windows)
 - [Linux x64 AppImage](https://mc.krwa.ru/download/linux)
 - [Linux x64 DEB для Debian/Ubuntu](https://mc.krwa.ru/download/linux-deb)
+- [Steam Deck / Arch Linux x64 (pacman)](https://mc.krwa.ru/download/linux-arch)
 - [macOS Universal — Intel и Apple Silicon](https://mc.krwa.ru/download/macos)
 
 Это постоянные ссылки: при следующем релизе они автоматически будут вести на актуальную стабильную версию.
 
-Для AppImage нужно разрешить запуск файла (`chmod +x`). Если в системе нет `libfuse.so.2`, на Debian/Ubuntu используйте DEB; для других дистрибутивов см. [инструкцию AppImage по FUSE](https://docs.appimage.org/user-guide/troubleshooting/fuse.html).
+Для AppImage нужно разрешить запуск файла (`chmod +x`). На Steam Deck откройте лаунчер в Desktop Mode, затем в настройках лаунчера нажмите «Установить и добавить в Steam»: AppImage будет перенесён в домашний каталог, появится в меню приложений и в библиотеке Steam. Если системный помощник SteamOS недоступен, лаунчер покажет короткую ручную инструкцию. DEB предназначен для Debian/Ubuntu, пакет `.pacman` — для Arch Linux; на SteamOS безопаснее AppImage, потому что системный раздел обновляется атомарно. Если нет `libfuse.so.2`, см. [инструкцию AppImage по FUSE](https://docs.appimage.org/user-guide/troubleshooting/fuse.html).
 
 ## Возможности
 
@@ -69,7 +70,7 @@ npm run dist
 
 В корне также есть вспомогательные команды:
 
-- `build-launcher.cmd` — Windows x64 NSIS, Linux x64 AppImage и DEB;
+- `build-launcher.cmd` — Windows x64 NSIS, Linux x64 AppImage, DEB и пакет Arch Linux;
 - workflow `Build macOS launcher` — универсальные macOS DMG и ZIP на GitHub Actions;
 - `publish-launcher.cmd` — проверка одной версии и совместная публикация готовых артефактов трёх платформ в `repository/downloads`;
 - `release-launcher.cmd <version>` — обновление версии и локальная сборка Windows/Linux перед запуском macOS workflow;

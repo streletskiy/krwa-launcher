@@ -79,6 +79,31 @@ function bindFileSelectors(){
 
 bindFileSelectors()
 
+const settingsLinuxInstallButton = document.getElementById('settingsLinuxInstallButton')
+if(settingsLinuxInstallButton) {
+    const status = document.getElementById('settingsLinuxInstallStatus')
+    settingsLinuxInstallButton.onclick = async () => {
+        settingsLinuxInstallButton.disabled = true
+        settingsLinuxInstallButton.textContent = settingsLinuxInstallButton.dataset.installing
+        status.textContent = ''
+        try {
+            const result = await ipcRenderer.invoke('installLinuxIntegration')
+            if(result.ok) {
+                status.textContent = result.steamAdded
+                    ? settingsLinuxInstallButton.dataset.success
+                    : settingsLinuxInstallButton.dataset.manual
+            } else {
+                status.textContent = settingsLinuxInstallButton.dataset.failed
+            }
+        } catch {
+            status.textContent = settingsLinuxInstallButton.dataset.failed
+        } finally {
+            settingsLinuxInstallButton.disabled = false
+            settingsLinuxInstallButton.textContent = settingsLinuxInstallButton.dataset.ready
+        }
+    }
+}
+
 
 /**
  * General Settings Functions

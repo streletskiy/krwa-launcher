@@ -12,6 +12,8 @@ const themePath = path.resolve(__dirname, '../app/assets/css/krwa-theme.css')
 const customLocalePath = path.resolve(__dirname, '../app/assets/lang/_custom.toml')
 const localeOverridesPath = path.resolve(__dirname, '../app/assets/lang/krwa-locales.json')
 const settingsTemplatePath = path.resolve(__dirname, '../app/settings.ejs')
+const settingsScriptPath = path.resolve(__dirname, '../app/assets/js/scripts/settings.js')
+const mainPath = path.resolve(__dirname, '../index.js')
 const processBuilderPath = path.resolve(__dirname, '../app/assets/js/processbuilder.js')
 const ipcConstantsPath = path.resolve(__dirname, '../app/assets/js/ipcconstants.js')
 const devUpdatePath = path.resolve(__dirname, '../dev-app-update.yml')
@@ -55,6 +57,22 @@ test('download stage reports the file count in every language', () => {
     }
 })
 
+test('Linux settings expose user-local installation and Steam integration', async () => {
+    Lang.setupLanguage('ru_RU', ['ru-RU'])
+    const html = await ejs.renderFile(settingsTemplatePath, {
+        process: { platform: 'linux' },
+        lang: Lang.queryEJS,
+        native: Lang.native
+    })
+    const settingsScript = fs.readFileSync(settingsScriptPath, 'utf8')
+    const main = fs.readFileSync(mainPath, 'utf8')
+
+    assert.ok(html.includes('id="settingsLinuxInstallButton"'))
+    assert.ok(html.includes('Установить и добавить в Steam'))
+    assert.ok(settingsScript.includes("ipcRenderer.invoke('installLinuxIntegration')"))
+    assert.ok(main.includes("ipcMain.handle('installLinuxIntegration'"))
+})
+
 test('macOS update action uses the stable KRWA download alias', () => {
     const source = fs.readFileSync(uiCorePath, 'utf8')
     assert.ok(source.includes("info.darwindownload = 'https://mc.krwa.ru/download/macos'"))
@@ -92,6 +110,7 @@ test('release publishing copies only the current version artifacts', () => {
     assert.ok(source.includes('KRWA-Launcher-setup-%KRWA_VERSION%.exe'))
     assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-x86_64.AppImage'))
     assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-amd64.deb'))
+    assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-x86_64.pacman'))
     assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-mac-universal.dmg'))
     assert.ok(source.includes('KRWA-Launcher-%KRWA_VERSION%-mac-universal.zip'))
     assert.ok(!source.includes('launcher-src\\dist\\*.exe'))

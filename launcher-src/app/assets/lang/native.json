@@ -1,4 +1,32 @@
 {
+  "Готово: лаунчер установлен и добавлен в Steam.": {
+    "en_US": "Done: the launcher is installed and added to Steam.",
+    "pl_PL": "Gotowe: launcher został zainstalowany i dodany do Steam."
+  },
+  "Лаунчер установлен. В Steam выбери «Добавить стороннюю игру» → KRWA Launcher.": {
+    "en_US": "The launcher is installed. In Steam, choose Add a Non-Steam Game → KRWA Launcher.",
+    "pl_PL": "Launcher jest zainstalowany. W Steam wybierz Dodaj grę spoza Steam → KRWA Launcher."
+  },
+  "Не удалось установить ярлык. Запусти AppImage из обычной папки и попробуй ещё раз.": {
+    "en_US": "Could not install the shortcut. Run the AppImage from a regular folder and try again.",
+    "pl_PL": "Nie udało się zainstalować skrótu. Uruchom AppImage ze zwykłego folderu i spróbuj ponownie."
+  },
+  "Создаст ярлык приложения и добавит KRWA Launcher в библиотеку Steam на SteamOS.": {
+    "en_US": "Creates an application shortcut and adds KRWA Launcher to the Steam library on SteamOS.",
+    "pl_PL": "Tworzy skrót aplikacji i dodaje KRWA Launcher do biblioteki Steam w SteamOS."
+  },
+  "Устанавливаем…": {
+    "en_US": "Installing…",
+    "pl_PL": "Instalowanie…"
+  },
+  "Установить и добавить в Steam": {
+    "en_US": "Install and add to Steam",
+    "pl_PL": "Zainstaluj i dodaj do Steam"
+  },
+  "Установить лаунчер как приложение": {
+    "en_US": "Install the launcher as an application",
+    "pl_PL": "Zainstaluj launcher jako aplikację"
+  },
   "4–16 букв, цифр или _. Ник нельзя изменить.": {
     "en_US": "4–16 letters, digits or _. The nickname is permanent.",
     "pl_PL": "4–16 liter, cyfr lub _. Nick jest stały."

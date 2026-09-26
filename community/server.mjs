@@ -85,6 +85,7 @@ export async function downloadLinks(repository) {
         { platform: 'Windows', slug: 'windows', manifest: 'latest.yml', pattern: /^KRWA-Launcher-setup-[\w.-]+\.exe$/ },
         { platform: 'Linux', slug: 'linux', manifest: 'latest-linux.yml', pattern: /^KRWA-Launcher-[\w.-]+\.AppImage$/ },
         { platform: 'Linux (Debian/Ubuntu)', slug: 'linux-deb', manifest: 'latest-linux.yml', pattern: /^KRWA-Launcher-[\w.-]+-amd64\.deb$/, fromFiles: true },
+        { platform: 'Steam Deck / Arch Linux', slug: 'linux-arch', manifest: 'latest-linux.yml', pattern: /^KRWA-Launcher-[\w.-]+-x86_64\.pacman$/, fromFiles: true },
         { platform: 'macOS', slug: 'macos', manifest: 'latest-mac.yml', pattern: /^KRWA-Launcher-[\w.-]+-mac-universal\.dmg$/, fromFiles: true },
     ]
     for (const { platform, slug, manifest, pattern, fromFiles } of platforms) {
@@ -104,7 +105,7 @@ export async function downloadLinks(repository) {
 export function createCommunityServer(repository) {
     let cached, expires = 0, pending
     return createServer(async (req, res) => {
-        if (['/download/windows', '/download/linux', '/download/linux-deb', '/download/macos'].includes(req.url) && ['GET', 'HEAD'].includes(req.method)) {
+        if (['/download/windows', '/download/linux', '/download/linux-deb', '/download/linux-arch', '/download/macos'].includes(req.url) && ['GET', 'HEAD'].includes(req.method)) {
             const download = (await downloadLinks(repository)).find(d => d.url === req.url)
             res.writeHead(download ? 302 : 404, { 'Cache-Control': 'no-store', ...(download ? { Location: download.target } : {}) })
             res.end(); return

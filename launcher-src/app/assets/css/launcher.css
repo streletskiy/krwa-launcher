@@ -1315,6 +1315,32 @@ body, button {
     color: rgba(255, 255, 255, .95);
     margin-top: 5px;
 }
+.settingsActionButton {
+    border: 1px solid rgba(126, 126, 126, 0.57);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    color: white;
+    background: rgba(126, 126, 126, 0.35);
+    font-family: 'Nunito Variable', 'Nunito', sans-serif;
+    transition: 0.25s ease;
+}
+.settingsActionButton:hover,
+.settingsActionButton:focus {
+    background: rgba(126, 126, 126, 0.57);
+    text-shadow: 0px 0px 20px white;
+    outline: none;
+}
+.settingsActionButton:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+#settingsLinuxInstallContainer .settingsFieldLeft {
+    max-width: 62%;
+}
+#settingsLinuxInstallStatus:empty {
+    display: none;
+}
 .settingsDivider {
     height: 1px;
     width: 75%;
@@ -1553,7 +1579,6 @@ input:checked + .toggleSwitchSlider:before {
     height: 60px;
     width: 60px;
 }
-
 .accountListingImage {
     border: 1px solid rgba(255, 255, 255, 0.65);
     border-radius: 3px;

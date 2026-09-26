@@ -13,6 +13,7 @@ const { pathToFileURL }                 = require('url')
 const { AZURE_CLIENT_ID, MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR, SHELL_OPCODE } = require('./app/assets/js/ipcconstants')
 const LangLoader                        = require('./app/assets/js/langloader')
 const StartupUpdate                     = require('./app/assets/js/startupupdate')
+const { installLinuxIntegration }        = require('./app/assets/js/linuxintegration')
 let updaterInitialized = false
 let startupUpdate
 
@@ -32,6 +33,24 @@ ipcMain.on('ensurePublicServer', (event, { gameDir, name, address }) => {
 ipcMain.handle('setLauncherLanguage', (_event, language) => {
     LangLoader.setPreference(language)
     LangLoader.setupLanguage()
+})
+
+ipcMain.handle('installLinuxIntegration', async event => {
+    if (!win || event.sender !== win.webContents || event.senderFrame !== win.webContents.mainFrame) {
+        return { ok: false, reason: 'unauthorized' }
+    }
+    if(process.platform !== 'linux' || !app.isPackaged) {
+        return { ok: false, reason: 'unsupported' }
+    }
+    try {
+        const result = await installLinuxIntegration({
+            iconSource: path.join(__dirname, 'app', 'assets', 'images', 'SealCircle.png')
+        })
+        return { ok: true, steamAdded: result.steamAdded }
+    } catch(error) {
+        console.error('Unable to install Linux desktop integration.', error)
+        return { ok: false, reason: 'failed' }
+    }
 })
 
 // Setup auto updater.

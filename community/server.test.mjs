@@ -92,7 +92,7 @@ test('macOS download alias selects the universal DMG from the update manifest', 
     }
 })
 
-test('Linux DEB alias selects the package while AppImage keeps its existing alias', async () => {
+test('Linux package aliases select AppImage, DEB and Arch artifacts', async () => {
     const directory = await mkdtemp(join(tmpdir(), 'krwa-catalog-'))
     await mkdir(join(directory, 'downloads'))
     const manifest = join(directory, 'downloads/latest-linux.yml')
@@ -105,12 +105,14 @@ test('Linux DEB alias selects the package while AppImage keeps its existing alia
             'files:',
             '  - url: KRWA-Launcher-0.1.20-x86_64.AppImage',
             '  - url: KRWA-Launcher-0.1.20-amd64.deb',
+            '  - url: KRWA-Launcher-0.1.20-x86_64.pacman',
             'path: KRWA-Launcher-0.1.20-x86_64.AppImage',
             '',
         ].join('\n'))
         for (const [slug, target] of [
             ['linux', 'KRWA-Launcher-0.1.20-x86_64.AppImage'],
             ['linux-deb', 'KRWA-Launcher-0.1.20-amd64.deb'],
+            ['linux-arch', 'KRWA-Launcher-0.1.20-x86_64.pacman'],
         ]) {
             const response = await fetch(base + '/download/' + slug, { redirect: 'manual' })
             assert.equal(response.status, 302)
