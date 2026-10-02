@@ -4,3 +4,7 @@
 # Default: 128
 # Range: > 1
 turbineProduction = 128
+#.
+#
+#Whether basins leak gasses without a basin shroud
+basinsLeakGas = true

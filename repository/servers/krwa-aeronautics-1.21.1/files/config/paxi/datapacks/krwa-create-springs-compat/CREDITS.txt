@@ -1,0 +1,5 @@
+Recipes derived from Create Springs 1.2.1 by _Portality_.
+Mod authors: _Portality_, Dz_andrey, drugan_xlph39847.
+Source: https://www.curseforge.com/minecraft/mc-mods/create-springs
+License: MIT (https://www.curseforge.com/minecraft/mc-mods/create-springs/license).
+KRWA changes: JSON keys only; ingredients, output amounts, chances and loops are unchanged.

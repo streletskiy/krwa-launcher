@@ -29,7 +29,6 @@
     "quark:pickarang",
     "createthrusters:entity_launcher",
     "createthrusters:physics_staff",
-    "createthrusters:vector_bearing",
     "createthrusters:bi_directional_gearshift"
   ]
 }

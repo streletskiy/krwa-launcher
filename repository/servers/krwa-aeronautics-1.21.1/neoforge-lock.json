@@ -1,16 +1,16 @@
 {
   "formatVersion": 1,
   "minecraftVersion": "1.21.1",
-  "neoforgeVersion": "21.1.248",
+  "neoforgeVersion": "21.1.250",
   "source": {
     "name": "All of Create - Aeronautics",
-    "version": "v2.5",
+    "version": "v2.7",
     "manifest": "source/curseforge-manifest.json"
   },
   "modules": [
     {
       "id": "io.github.zekerzhayard:ForgeWrapper:prism-2026-08-01",
-      "name": "NeoForge 21.1.248 via ForgeWrapper",
+      "name": "NeoForge 21.1.250 via ForgeWrapper",
       "type": "ForgeHosted",
       "artifact": {
         "size": 29800,
@@ -20,36 +20,36 @@
       },
       "subModules": [
         {
-          "id": "neoforge-21.1.248",
-          "name": "NeoForge 21.1.248 version manifest",
+          "id": "neoforge-21.1.250",
+          "name": "NeoForge 21.1.250 version manifest",
           "type": "VersionManifest",
           "artifact": {
             "size": 20738,
-            "MD5": "f641f29097e4f80c38b580577184fd27",
-            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/loader/neoforge-21.1.248.json",
-            "path": "neoforge-21.1.248.json"
+            "MD5": "8da0acba4a63c2219666141b31eeaccc",
+            "url": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/loader/neoforge-21.1.250.json",
+            "path": "neoforge-21.1.250.json"
           }
         },
         {
-          "id": "net.neoforged.fancymodloader:earlydisplay:4.0.43",
-          "name": "net.neoforged.fancymodloader:earlydisplay:4.0.43",
+          "id": "net.neoforged.fancymodloader:earlydisplay:4.0.44",
+          "name": "net.neoforged.fancymodloader:earlydisplay:4.0.44",
           "type": "Library",
           "artifact": {
-            "size": 261719,
-            "MD5": "282b24cc474417af1db04ef5ecf12d8b",
-            "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/4.0.43/earlydisplay-4.0.43.jar",
-            "path": "net/neoforged/fancymodloader/earlydisplay/4.0.43/earlydisplay-4.0.43.jar"
+            "size": 261718,
+            "MD5": "7646fcabfb8a5f608361f03b8d68dddb",
+            "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/earlydisplay/4.0.44/earlydisplay-4.0.44.jar",
+            "path": "net/neoforged/fancymodloader/earlydisplay/4.0.44/earlydisplay-4.0.44.jar"
           }
         },
         {
-          "id": "net.neoforged.fancymodloader:loader:4.0.43",
-          "name": "net.neoforged.fancymodloader:loader:4.0.43",
+          "id": "net.neoforged.fancymodloader:loader:4.0.44",
+          "name": "net.neoforged.fancymodloader:loader:4.0.44",
           "type": "Library",
           "artifact": {
-            "size": 505633,
-            "MD5": "a5fdf15a1e832adb1d559703824646ae",
-            "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/4.0.43/loader-4.0.43.jar",
-            "path": "net/neoforged/fancymodloader/loader/4.0.43/loader-4.0.43.jar"
+            "size": 505708,
+            "MD5": "552c6cb730601460b332545e18ce33fc",
+            "url": "https://maven.neoforged.net/releases/net/neoforged/fancymodloader/loader/4.0.44/loader-4.0.44.jar",
+            "path": "net/neoforged/fancymodloader/loader/4.0.44/loader-4.0.44.jar"
           }
         },
         {
@@ -515,15 +515,15 @@
           }
         },
         {
-          "id": "net.neoforged:neoforge:21.1.248:installer",
-          "name": "net.neoforged:neoforge:21.1.248:installer",
+          "id": "net.neoforged:neoforge:21.1.250:installer",
+          "name": "net.neoforged:neoforge:21.1.250:installer",
           "type": "Library",
           "classpath": false,
           "artifact": {
-            "size": 6972104,
-            "MD5": "90eee26ffd6be552a8453e23a15a6e35",
-            "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.248/neoforge-21.1.248-installer.jar",
-            "path": "net/neoforged/neoforge/21.1.248/neoforge-21.1.248-installer.jar"
+            "size": 6972109,
+            "MD5": "f9c778063ae778b92530742cba48d15d",
+            "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.250/neoforge-21.1.250-installer.jar",
+            "path": "net/neoforged/neoforge/21.1.250/neoforge-21.1.250-installer.jar"
           }
         },
         {
@@ -791,39 +791,39 @@
           }
         },
         {
-          "id": "net.neoforged:neoforge:21.1.248:universal",
-          "name": "net.neoforged:neoforge:21.1.248:universal",
+          "id": "net.neoforged:neoforge:21.1.250:universal",
+          "name": "net.neoforged:neoforge:21.1.250:universal",
           "type": "Library",
           "classpath": false,
           "artifact": {
-            "size": 3551268,
-            "MD5": "7f785a4d65644293f4c591b5109788ee",
-            "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.248/neoforge-21.1.248-universal.jar",
-            "path": "net/neoforged/neoforge/21.1.248/neoforge-21.1.248-universal.jar"
+            "size": 3551255,
+            "MD5": "092e2490e7bce352debef8689921ef4c",
+            "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.250/neoforge-21.1.250-universal.jar",
+            "path": "net/neoforged/neoforge/21.1.250/neoforge-21.1.250-universal.jar"
           }
         }
       ]
     },
     {
-      "id": "curseforge.project-888790:file:7920161@jar",
-      "name": "clientcrafting-1.21-2.1.jar",
+      "id": "curseforge.project-623265:file:8653064@jar",
+      "name": "create_factory-0.7b-1.21.1.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 7144,
-        "MD5": "09e8c9e83844ea5a9b1a569b8c14f515",
-        "url": "https://mediafilez.forgecdn.net/files/7920/161/clientcrafting-1.21-2.1.jar",
-        "path": "curseforge/888790/7920161/clientcrafting-1.21-2.1.jar"
+        "size": 212765,
+        "MD5": "8ac11f38ff8eac6b8f935e97e4687c31",
+        "url": "https://mediafilez.forgecdn.net/files/8653/64/create_factory-0.7b-1.21.1.jar",
+        "path": "curseforge/623265/8653064/create_factory-0.7b-1.21.1.jar"
       }
     },
     {
-      "id": "curseforge.project-1166576:file:7449378@jar",
-      "name": "GnKinetics-1.21.1-1.0m",
+      "id": "curseforge.project-1279337:file:8585611@jar",
+      "name": "CreateFantasizing-1.2.0-beta3-neoforge-1.21.1.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 560814,
-        "MD5": "e26773d4e8967c7d9f3f0c4f3d88db1c",
-        "url": "https://mediafilez.forgecdn.net/files/7449/378/GnKinetics-1.21.1-1.0m.jar",
-        "path": "curseforge/1166576/7449378/GnKinetics-1.21.1-1.0m.jar"
+        "size": 633064,
+        "MD5": "d1386b1aa9882976b0910722f14d81ea",
+        "url": "https://mediafilez.forgecdn.net/files/8585/611/create_fantasizing-1.21.1-1.2.0-b3.jar",
+        "path": "curseforge/1279337/8585611/create_fantasizing-1.21.1-1.2.0-b3.jar"
       }
     },
     {
@@ -838,36 +838,25 @@
       }
     },
     {
-      "id": "curseforge.project-583345:file:6315149@jar",
-      "name": "[NeoForge 1.21.1] 6.1.0",
-      "type": "ForgeMod",
+      "id": "curseforge-656900-6292148-Create Touch-Ups v1.0.zip",
+      "name": "Create Touch-Ups v1.0.zip",
+      "type": "File",
       "artifact": {
-        "size": 74419,
-        "MD5": "81f8035bc735c75463add09f923ad372",
-        "url": "https://mediafilez.forgecdn.net/files/6315/149/JadeAddons-1.21.1-NeoForge-6.1.0.jar",
-        "path": "curseforge/583345/6315149/JadeAddons-1.21.1-NeoForge-6.1.0.jar"
+        "size": 150044,
+        "MD5": "e63f233d61a9c46e6dfd2bd52c95ee29",
+        "url": "https://mediafilez.forgecdn.net/files/6292/148/Create%20Touch-Ups%20v1.0.zip",
+        "path": "resourcepacks/Create Touch-Ups v1.0.zip"
       }
     },
     {
-      "id": "curseforge.project-417645:file:7966681@jar",
-      "name": "JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+      "id": "curseforge.project-583345:file:8777229@jar",
+      "name": "[NeoForge 1.21.1] 6.1.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 24879,
-        "MD5": "68ae6dbb6b7a88cd74c85025dd68cf12",
-        "url": "https://mediafilez.forgecdn.net/files/7966/681/JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
-        "path": "curseforge/417645/7966681/JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1254143:file:8206645@jar",
-      "name": "1.2.9+mc1.21.1-neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 398004,
-        "MD5": "5fb6fde45515060b695c245ecbf5f1ae",
-        "url": "https://mediafilez.forgecdn.net/files/8206/645/colorwheel-neoforge-1.2.9%2Bmc1.21.1.jar",
-        "path": "curseforge/1254143/8206645/colorwheel-neoforge-1.2.9+mc1.21.1.jar"
+        "size": 75431,
+        "MD5": "26c75b35c8e07ec289a1ab769773c00b",
+        "url": "https://mediafilez.forgecdn.net/files/8777/229/JadeAddons-1.21.1-NeoForge-6.1.1.jar",
+        "path": "curseforge/583345/8777229/JadeAddons-1.21.1-NeoForge-6.1.1.jar"
       }
     },
     {
@@ -882,25 +871,25 @@
       }
     },
     {
-      "id": "curseforge.project-938643:file:5453382@jar",
-      "name": "[NeoForge] v1.0.10 MC 1.21",
+      "id": "curseforge.project-1254143:file:8990905@jar",
+      "name": "1.3.0+mc1.21.1-neoforge",
       "type": "ForgeMod",
       "artifact": {
-        "size": 36096,
-        "MD5": "875f4a68f2cd7ee2cc135904653c93d4",
-        "url": "https://mediafilez.forgecdn.net/files/5453/382/melody_neoforge_1.0.10_MC_1.21.jar",
-        "path": "curseforge/938643/5453382/melody_neoforge_1.0.10_MC_1.21.jar"
+        "size": 514376,
+        "MD5": "66228f0a96b9c802a72db5c42a4322f0",
+        "url": "https://mediafilez.forgecdn.net/files/8990/905/colorwheel-neoforge-1.3.0%2Bmc1.21.1.jar",
+        "path": "curseforge/1254143/8990905/colorwheel-neoforge-1.3.0+mc1.21.1.jar"
       }
     },
     {
-      "id": "curseforge-1457757-7596632-sliceanddice_zh_hk.zip",
-      "name": "sliceanddice_zh_hk.zip",
-      "type": "File",
+      "id": "curseforge.project-417645:file:7966681@jar",
+      "name": "JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+      "type": "ForgeMod",
       "artifact": {
-        "size": 1211,
-        "MD5": "3e60d0fec6e4dfdd940a4550b3fdfd41",
-        "url": "https://mediafilez.forgecdn.net/files/7596/632/sliceanddice_zh_hk.zip",
-        "path": "resourcepacks/sliceanddice_zh_hk.zip"
+        "size": 24879,
+        "MD5": "68ae6dbb6b7a88cd74c85025dd68cf12",
+        "url": "https://mediafilez.forgecdn.net/files/7966/681/JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+        "path": "curseforge/417645/7966681/JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar"
       }
     },
     {
@@ -915,17 +904,6 @@
       }
     },
     {
-      "id": "curseforge-821020-7568054-Create Immersive Aircrafts Resource Pack 1.21.1 - 3.0.zip",
-      "name": "Create Immersive Aircrafts 3.0 (1.21.1)",
-      "type": "File",
-      "artifact": {
-        "size": 190790,
-        "MD5": "26214813d60836a101c5fd4813280020",
-        "url": "https://mediafilez.forgecdn.net/files/7568/54/Create%20Immersive%20Aircrafts%20Resource%20Pack%201.21.1%20-%203.0.zip",
-        "path": "resourcepacks/Create Immersive Aircrafts Resource Pack 1.21.1 - 3.0.zip"
-      }
-    },
-    {
       "id": "curseforge.project-889079:file:8726480@jar",
       "name": "[1.21.1] Forgified Fabric API 0.116.15+2.3.5+1.21.1",
       "type": "ForgeMod",
@@ -934,6 +912,17 @@
         "MD5": "52c80dfbeee55cbb7ecd244710088dd8",
         "url": "https://mediafilez.forgecdn.net/files/8726/480/forgified-fabric-api-0.116.15%2B2.3.5%2B1.21.1.jar",
         "path": "curseforge/889079/8726480/forgified-fabric-api-0.116.15+2.3.5+1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge-1457757-7596632-sliceanddice_zh_hk.zip",
+      "name": "sliceanddice_zh_hk.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1211,
+        "MD5": "3e60d0fec6e4dfdd940a4550b3fdfd41",
+        "url": "https://mediafilez.forgecdn.net/files/7596/632/sliceanddice_zh_hk.zip",
+        "path": "resourcepacks/sliceanddice_zh_hk.zip"
       }
     },
     {
@@ -959,47 +948,14 @@
       }
     },
     {
-      "id": "curseforge.project-1319223:file:8127223@jar",
-      "name": "cmpackagecouriers-neoforge-2.3.0.jar",
+      "id": "curseforge.project-938643:file:5453382@jar",
+      "name": "[NeoForge] v1.0.10 MC 1.21",
       "type": "ForgeMod",
       "artifact": {
-        "size": 284825,
-        "MD5": "a4b5174a930f06394f80e5603243f680",
-        "url": "https://mediafilez.forgecdn.net/files/8127/223/cmpackagecouriers-neoforge-2.3.0.jar",
-        "path": "curseforge/1319223/8127223/cmpackagecouriers-neoforge-2.3.0.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1196142:file:7315860@jar",
-      "name": "Create: Sound of Steam Beta 0.8.2-1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 6593821,
-        "MD5": "24e848aae3b21b47386dbd790a115a12",
-        "url": "https://mediafilez.forgecdn.net/files/7315/860/pipeorgans-0.8.2%2B1.21.1.jar",
-        "path": "curseforge/1196142/7315860/pipeorgans-0.8.2+1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-856906:file:8755808@jar",
-      "name": "leaky-1.21-3.3.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 39777,
-        "MD5": "60b9623ecd72851ac952ad62a06cf37d",
-        "url": "https://mediafilez.forgecdn.net/files/8755/808/leaky-1.21-3.3.jar",
-        "path": "curseforge/856906/8755808/leaky-1.21-3.3.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1354280:file:8646664@jar",
-      "name": "createtransmission-1.2.2+neoforge-create6-1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 250901,
-        "MD5": "38ee78af4d8941533ce1bc2f2ffbcd77",
-        "url": "https://mediafilez.forgecdn.net/files/8646/664/createtransmission-1.2.2%2Bneoforge-create6-1.21.1.jar",
-        "path": "curseforge/1354280/8646664/createtransmission-1.2.2+neoforge-create6-1.21.1.jar"
+        "size": 36096,
+        "MD5": "875f4a68f2cd7ee2cc135904653c93d4",
+        "url": "https://mediafilez.forgecdn.net/files/5453/382/melody_neoforge_1.0.10_MC_1.21.jar",
+        "path": "curseforge/938643/5453382/melody_neoforge_1.0.10_MC_1.21.jar"
       }
     },
     {
@@ -1014,91 +970,80 @@
       }
     },
     {
-      "id": "curseforge.project-820977:file:8616574@jar",
-      "name": "Create: Central Kitchen 2.6.0 for Create 1.21.1-6.0.10",
+      "id": "curseforge.project-1196142:file:7315860@jar",
+      "name": "Create: Sound of Steam Beta 0.8.2-1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 488390,
-        "MD5": "935bba621404132b9f50a3597bcd5fd6",
-        "url": "https://mediafilez.forgecdn.net/files/8616/574/create-central-kitchen-2.6.0.jar",
-        "path": "curseforge/820977/8616574/create-central-kitchen-2.6.0.jar"
+        "size": 6593821,
+        "MD5": "24e848aae3b21b47386dbd790a115a12",
+        "url": "https://mediafilez.forgecdn.net/files/7315/860/pipeorgans-0.8.2%2B1.21.1.jar",
+        "path": "curseforge/1196142/7315860/pipeorgans-0.8.2+1.21.1.jar"
       }
     },
     {
-      "id": "curseforge.project-666014:file:8158291@jar",
-      "name": "[NeoForge 1.21.1] Immersive Aircraft - 1.4.6",
+      "id": "curseforge.project-1319223:file:8127223@jar",
+      "name": "cmpackagecouriers-neoforge-2.3.0.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 2447578,
-        "MD5": "30b69d207825cc0a811427fe9141062a",
-        "url": "https://mediafilez.forgecdn.net/files/8158/291/immersive_aircraft-1.4.6%2B1.21.1-neoforge.jar",
-        "path": "curseforge/666014/8158291/immersive_aircraft-1.4.6+1.21.1-neoforge.jar"
+        "size": 284825,
+        "MD5": "a4b5174a930f06394f80e5603243f680",
+        "url": "https://mediafilez.forgecdn.net/files/8127/223/cmpackagecouriers-neoforge-2.3.0.jar",
+        "path": "curseforge/1319223/8127223/cmpackagecouriers-neoforge-2.3.0.jar"
       }
     },
     {
-      "id": "curseforge.project-636608:file:8690620@jar",
-      "name": "open-parties-and-claims-neoforge-1.21.1-0.30.3.jar",
+      "id": "curseforge.project-1354280:file:8646664@jar",
+      "name": "createtransmission-1.2.2+neoforge-create6-1.21.1.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1821784,
-        "MD5": "bb25621c80190d79269ad70e3f1ea021",
-        "url": "https://mediafilez.forgecdn.net/files/8690/620/open-parties-and-claims-neoforge-1.21.1-0.30.3.jar",
-        "path": "curseforge/636608/8690620/open-parties-and-claims-neoforge-1.21.1-0.30.3.jar"
+        "size": 250901,
+        "MD5": "38ee78af4d8941533ce1bc2f2ffbcd77",
+        "url": "https://mediafilez.forgecdn.net/files/8646/664/createtransmission-1.2.2%2Bneoforge-create6-1.21.1.jar",
+        "path": "curseforge/1354280/8646664/createtransmission-1.2.2+neoforge-create6-1.21.1.jar"
       }
     },
     {
-      "id": "curseforge.project-899386:file:8539619@jar",
-      "name": "justenoughbreeding-neoforge-1.21.1-3.2.1.jar",
+      "id": "curseforge.project-820977:file:8944879@jar",
+      "name": "Create: Central Kitchen 2.6.2 for Create 1.21.1-6.0.10",
       "type": "ForgeMod",
       "artifact": {
-        "size": 593705,
-        "MD5": "fd4ae8a317acf52a140f891d9dd98abc",
-        "url": "https://mediafilez.forgecdn.net/files/8539/619/justenoughbreeding-neoforge-1.21.1-3.2.1.jar",
-        "path": "curseforge/899386/8539619/justenoughbreeding-neoforge-1.21.1-3.2.1.jar"
+        "size": 511685,
+        "MD5": "43408180b9a34aa86e16d7c4da61487a",
+        "url": "https://mediafilez.forgecdn.net/files/8944/879/create-central-kitchen-2.6.2.jar",
+        "path": "curseforge/820977/8944879/create-central-kitchen-2.6.2.jar"
       }
     },
     {
-      "id": "curseforge-627557-8123287-ComplementaryReimagined_r5.8.1.zip",
-      "name": "Complementary Reimagined r5.8.1",
-      "type": "File",
+      "id": "curseforge.project-666014:file:8914644@jar",
+      "name": "[NeoForge 1.21.1] Immersive Aircraft - 1.5.2",
+      "type": "ForgeMod",
       "artifact": {
-        "size": 546925,
-        "MD5": "8dbb914ed233d6e8183ce34eb26beaab",
-        "url": "https://mediafilez.forgecdn.net/files/8123/287/ComplementaryReimagined_r5.8.1.zip",
-        "path": "shaderpacks/ComplementaryReimagined_r5.8.1.zip"
+        "size": 2469769,
+        "MD5": "c4e5f6cf29e09bab8fb1537b639661ed",
+        "url": "https://mediafilez.forgecdn.net/files/8914/644/immersive_aircraft-1.5.2%2B1.21.1-neoforge.jar",
+        "path": "curseforge/666014/8914644/immersive_aircraft-1.5.2+1.21.1-neoforge.jar"
       }
     },
     {
-      "id": "curseforge.project-907856:file:8463998@jar",
-      "name": "recipeessentials-1.21.1-4.7.jar",
+      "id": "curseforge.project-856906:file:8763884@jar",
+      "name": "leaky-1.21-3.4.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 43983,
-        "MD5": "4903471f5b2e51e8d414a2295030d2de",
-        "url": "https://mediafilez.forgecdn.net/files/8463/998/recipeessentials-1.21.1-4.7.jar",
-        "path": "curseforge/907856/8463998/recipeessentials-1.21.1-4.7.jar"
+        "size": 40009,
+        "MD5": "158b33f7d5a67931f91a2b9063cf78cd",
+        "url": "https://mediafilez.forgecdn.net/files/8763/884/leaky-1.21-3.4.jar",
+        "path": "curseforge/856906/8763884/leaky-1.21-3.4.jar"
       }
     },
     {
-      "id": "curseforge.project-238222:file:8732390@jar",
-      "name": "19.44.0.405 for NeoForge 1.21.1",
+      "id": "curseforge.project-636608:file:8848852@jar",
+      "name": "open-parties-and-claims-neoforge-1.21.1-0.31.6.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1699520,
-        "MD5": "229c8ee654715c58e14e411cb1ed5df1",
-        "url": "https://mediafilez.forgecdn.net/files/8732/390/jei-1.21.1-neoforge-19.44.0.405.jar",
-        "path": "curseforge/238222/8732390/jei-1.21.1-neoforge-19.44.0.405.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-568563:file:7930620@jar",
-      "name": "NeoForge - 1.21 - 7.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 752334,
-        "MD5": "07c98cc3e76f514eee3adee43d05dae9",
-        "url": "https://mediafilez.forgecdn.net/files/7930/620/entity_texture_features_1.21-neoforge-7.1.jar",
-        "path": "curseforge/568563/7930620/entity_texture_features_1.21-neoforge-7.1.jar"
+        "size": 1826827,
+        "MD5": "1b67b55c7be948088875375e40c79ac2",
+        "url": "https://mediafilez.forgecdn.net/files/8848/852/open-parties-and-claims-neoforge-1.21.1-0.31.6.jar",
+        "path": "curseforge/636608/8848852/open-parties-and-claims-neoforge-1.21.1-0.31.6.jar"
       }
     },
     {
@@ -1113,25 +1058,58 @@
       }
     },
     {
-      "id": "curseforge.project-1279337:file:8585611@jar",
-      "name": "CreateFantasizing-1.2.0-beta3-neoforge-1.21.1.jar",
+      "id": "curseforge.project-568563:file:8908931@jar",
+      "name": "7.2.4-neoforge-1.21",
       "type": "ForgeMod",
       "artifact": {
-        "size": 633064,
-        "MD5": "d1386b1aa9882976b0910722f14d81ea",
-        "url": "https://mediafilez.forgecdn.net/files/8585/611/create_fantasizing-1.21.1-1.2.0-b3.jar",
-        "path": "curseforge/1279337/8585611/create_fantasizing-1.21.1-1.2.0-b3.jar"
+        "size": 790080,
+        "MD5": "c16df62a5dc282591fd613948f972147",
+        "url": "https://mediafilez.forgecdn.net/files/8908/931/entity_texture_features-7.2.4-1.21-neoforge.jar",
+        "path": "curseforge/568563/8908931/entity_texture_features-7.2.4-1.21-neoforge.jar"
       }
     },
     {
-      "id": "curseforge.project-306770:file:7730942@jar",
-      "name": "Patchouli-1.21.1-93-NEOFORGE.jar",
+      "id": "curseforge-821020-7568054-Create Immersive Aircrafts Resource Pack 1.21.1 - 3.0.zip",
+      "name": "Create Immersive Aircrafts 3.0 (1.21.1)",
+      "type": "File",
+      "artifact": {
+        "size": 190790,
+        "MD5": "26214813d60836a101c5fd4813280020",
+        "url": "https://mediafilez.forgecdn.net/files/7568/54/Create%20Immersive%20Aircrafts%20Resource%20Pack%201.21.1%20-%203.0.zip",
+        "path": "resourcepacks/Create Immersive Aircrafts Resource Pack 1.21.1 - 3.0.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-238222:file:9009406@jar",
+      "name": "19.57.0.450 for NeoForge 1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 646777,
-        "MD5": "8178d65cd07dd7a646446729058ae2bf",
-        "url": "https://mediafilez.forgecdn.net/files/7730/942/Patchouli-1.21.1-93-NEOFORGE.jar",
-        "path": "curseforge/306770/7730942/Patchouli-1.21.1-93-NEOFORGE.jar"
+        "size": 2253016,
+        "MD5": "e5b68f3828246968a562c59309b83ed1",
+        "url": "https://mediafilez.forgecdn.net/files/9009/406/jei-1.21.1-neoforge-19.57.0.450.jar",
+        "path": "curseforge/238222/9009406/jei-1.21.1-neoforge-19.57.0.450.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-676721:file:8763471@jar",
+      "name": "Create Aeronautics 1.3.2 for mc1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 33123131,
+        "MD5": "d866c3be71910c633f68f17543f11e8e",
+        "url": "https://mediafilez.forgecdn.net/files/8763/471/create-aeronautics-bundled-1.21.1-1.3.2.jar",
+        "path": "curseforge/676721/8763471/create-aeronautics-bundled-1.21.1-1.3.2.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-907856:file:8463998@jar",
+      "name": "recipeessentials-1.21.1-4.7.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 43983,
+        "MD5": "4903471f5b2e51e8d414a2295030d2de",
+        "url": "https://mediafilez.forgecdn.net/files/8463/998/recipeessentials-1.21.1-4.7.jar",
+        "path": "curseforge/907856/8463998/recipeessentials-1.21.1-4.7.jar"
       }
     },
     {
@@ -1146,58 +1124,58 @@
       }
     },
     {
-      "id": "curseforge.project-1522736:file:8496246@jar",
-      "name": "1.1.5",
+      "id": "curseforge.project-306770:file:7730942@jar",
+      "name": "Patchouli-1.21.1-93-NEOFORGE.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1707765,
-        "MD5": "054843664d3bef2d61e6e492503fd824",
-        "url": "https://mediafilez.forgecdn.net/files/8496/246/createpropulsion-1.1.5.jar",
-        "path": "curseforge/1522736/8496246/createpropulsion-1.1.5.jar"
+        "size": 646777,
+        "MD5": "8178d65cd07dd7a646446729058ae2bf",
+        "url": "https://mediafilez.forgecdn.net/files/7730/942/Patchouli-1.21.1-93-NEOFORGE.jar",
+        "path": "curseforge/306770/7730942/Patchouli-1.21.1-93-NEOFORGE.jar"
       }
     },
     {
-      "id": "curseforge.project-858542:file:5831692@jar",
-      "name": "Searchables-neoforge-1.21.1-1.0.2.jar",
+      "id": "curseforge.project-890127:file:8654089@jar",
+      "name": "Connector 2.0.0 beta 17",
       "type": "ForgeMod",
       "artifact": {
-        "size": 77326,
-        "MD5": "0a0a8665bb4d77e3f8139750cb98d9e4",
-        "url": "https://mediafilez.forgecdn.net/files/5831/692/Searchables-neoforge-1.21.1-1.0.2.jar",
-        "path": "curseforge/858542/5831692/Searchables-neoforge-1.21.1-1.0.2.jar"
+        "size": 4573244,
+        "MD5": "b3e451facbf76338a06d765e7d1c7e9c",
+        "url": "https://mediafilez.forgecdn.net/files/8654/89/connector-2.0.0-beta.17%2B1.21.1-full.jar",
+        "path": "curseforge/890127/8654089/connector-2.0.0-beta.17+1.21.1-full.jar"
       }
     },
     {
-      "id": "curseforge.project-946163:file:8176502@jar",
-      "name": "dragonlib-neoforge-1.21.1-beta-3.0.28",
+      "id": "curseforge.project-1166576:file:7449378@jar",
+      "name": "GnKinetics-1.21.1-1.0m",
       "type": "ForgeMod",
       "artifact": {
-        "size": 2107270,
-        "MD5": "4c631268718d6cdb34714de2936d7a79",
-        "url": "https://mediafilez.forgecdn.net/files/8176/502/dragonlib-neoforge-1.21.1-beta-3.0.28.jar",
-        "path": "curseforge/946163/8176502/dragonlib-neoforge-1.21.1-beta-3.0.28.jar"
+        "size": 560814,
+        "MD5": "e26773d4e8967c7d9f3f0c4f3d88db1c",
+        "url": "https://mediafilez.forgecdn.net/files/7449/378/GnKinetics-1.21.1-1.0m.jar",
+        "path": "curseforge/1166576/7449378/GnKinetics-1.21.1-1.0m.jar"
       }
     },
     {
-      "id": "curseforge.project-915902:file:8177588@jar",
-      "name": "Euphoria Patcher 1.9.3-r5.8.1-neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 4210708,
-        "MD5": "a9345aa0e7ef271ce23c8bbc56fc8972",
-        "url": "https://mediafilez.forgecdn.net/files/8177/588/EuphoriaPatcher-1.9.3-r5.8.1-neoforge.jar",
-        "path": "curseforge/915902/8177588/EuphoriaPatcher-1.9.3-r5.8.1-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge-971920-5136820-createquestingzhhk.zip",
-      "name": "createquestingzhhk.zip",
+      "id": "curseforge-1456295-7588950-Create_Vibrant_Vaults_ZH_HK.zip",
+      "name": "Create_Vibrant_Vaults_ZH_HK.zip",
       "type": "File",
       "artifact": {
-        "size": 942,
-        "MD5": "1f2c9c50f1996a50f925304600c268f2",
-        "url": "https://mediafilez.forgecdn.net/files/5136/820/createquestingzhhk.zip",
-        "path": "resourcepacks/createquestingzhhk.zip"
+        "size": 2398,
+        "MD5": "382bb8e57208bc125a562c242ffb1a19",
+        "url": "https://mediafilez.forgecdn.net/files/7588/950/Create_Vibrant_Vaults_ZH_HK.zip",
+        "path": "resourcepacks/Create_Vibrant_Vaults_ZH_HK.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-915902:file:8884680@jar",
+      "name": "Euphoria Patcher 1.10.5-r5.9.3-neoforge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 4492151,
+        "MD5": "bd5c75509abe109cd1f886cffae43ca0",
+        "url": "https://mediafilez.forgecdn.net/files/8884/680/EuphoriaPatcher-1.10.5-r5.9.3-neoforge.jar",
+        "path": "curseforge/915902/8884680/EuphoriaPatcher-1.10.5-r5.9.3-neoforge.jar"
       }
     },
     {
@@ -1212,17 +1190,6 @@
       }
     },
     {
-      "id": "curseforge.project-1260229:file:6519954@jar",
-      "name": "createmechanicalconfection-0.3.0.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 402546,
-        "MD5": "41762fcc5ab64b4de7e7b5f34988d847",
-        "url": "https://mediafilez.forgecdn.net/files/6519/954/createmechanicalconfection-0.3.0.jar",
-        "path": "curseforge/1260229/6519954/createmechanicalconfection-0.3.0.jar"
-      }
-    },
-    {
       "id": "curseforge.project-351441:file:6409785@jar",
       "name": "[NEOFORGE] [1.21.1] PickUpNotifier-v21.1.1",
       "type": "ForgeMod",
@@ -1234,58 +1201,25 @@
       }
     },
     {
-      "id": "curseforge.project-1102591:file:7625579@jar",
-      "name": "Create: Trading Floor 3.0.16 Neoforge 1.21.1",
+      "id": "curseforge.project-947914:file:8777573@jar",
+      "name": "create_connected 1.3.3-mc1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 214343,
-        "MD5": "2f15922ce52580ed466b48ade0ef2d38",
-        "url": "https://mediafilez.forgecdn.net/files/7625/579/trading_floor-3.0.16.jar",
-        "path": "curseforge/1102591/7625579/trading_floor-3.0.16.jar"
+        "size": 6786784,
+        "MD5": "97c050e64ff0a950a701248dee8a4d20",
+        "url": "https://mediafilez.forgecdn.net/files/8777/573/create_connected-1.3.3-mc1.21.1.jar",
+        "path": "curseforge/947914/8777573/create_connected-1.3.3-mc1.21.1.jar"
       }
     },
     {
-      "id": "curseforge.project-947914:file:8299240@jar",
-      "name": "create_connected 1.3.2-mc1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 6779410,
-        "MD5": "5ec87500b99fc02cc83f74d995d00044",
-        "url": "https://mediafilez.forgecdn.net/files/8299/240/create_connected-1.3.2-mc1.21.1.jar",
-        "path": "curseforge/947914/8299240/create_connected-1.3.2-mc1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1020173:file:7624342@jar",
-      "name": "create_deep_dark-3.0.2-neoforge-1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 254417,
-        "MD5": "c3e7c668402ef85825c13203ba3ad8cb",
-        "url": "https://mediafilez.forgecdn.net/files/7624/342/create_deep_dark-3.0.2-neoforge-1.21.1.jar",
-        "path": "curseforge/1020173/7624342/create_deep_dark-3.0.2-neoforge-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge-1457750-7596612-create_chocolate_fountain_zh_hk.zip",
-      "name": "create_chocolate_fountain_zh_hk.zip",
+      "id": "curseforge-971920-5136820-createquestingzhhk.zip",
+      "name": "createquestingzhhk.zip",
       "type": "File",
       "artifact": {
-        "size": 1251,
-        "MD5": "249bf0aa95ab2c6dfb73c9dbf92b4012",
-        "url": "https://mediafilez.forgecdn.net/files/7596/612/create_chocolate_fountain_zh_hk.zip",
-        "path": "resourcepacks/create_chocolate_fountain_zh_hk.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-455508:file:8242804@jar",
-      "name": "Iris 1.8.14 Beta 1 for NeoForge 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2540723,
-        "MD5": "6b68276a6718656ec476cfac69dfe013",
-        "url": "https://mediafilez.forgecdn.net/files/8242/804/iris-neoforge-1.8.14-beta.1%2Bmc1.21.1.jar",
-        "path": "curseforge/455508/8242804/iris-neoforge-1.8.14-beta.1+mc1.21.1.jar"
+        "size": 942,
+        "MD5": "1f2c9c50f1996a50f925304600c268f2",
+        "url": "https://mediafilez.forgecdn.net/files/5136/820/createquestingzhhk.zip",
+        "path": "resourcepacks/createquestingzhhk.zip"
       }
     },
     {
@@ -1300,25 +1234,91 @@
       }
     },
     {
-      "id": "curseforge-353554-5493450-Stay_True_1.21.zip",
-      "name": "Stay True 1.21",
-      "type": "File",
+      "id": "curseforge.project-1020173:file:7624342@jar",
+      "name": "create_deep_dark-3.0.2-neoforge-1.21.1.jar",
+      "type": "ForgeMod",
       "artifact": {
-        "size": 2152322,
-        "MD5": "1743567759c02d1b7486f2109aad9860",
-        "url": "https://mediafilez.forgecdn.net/files/5493/450/Stay_True_1.21.zip",
-        "path": "resourcepacks/Stay_True_1.21.zip"
+        "size": 254417,
+        "MD5": "c3e7c668402ef85825c13203ba3ad8cb",
+        "url": "https://mediafilez.forgecdn.net/files/7624/342/create_deep_dark-3.0.2-neoforge-1.21.1.jar",
+        "path": "curseforge/1020173/7624342/create_deep_dark-3.0.2-neoforge-1.21.1.jar"
       }
     },
     {
-      "id": "curseforge-412189-5287023-guiretextures-1.11.zip",
-      "name": "v1.11 (MC 1.20.5+)",
+      "id": "curseforge.project-1102591:file:7625579@jar",
+      "name": "Create: Trading Floor 3.0.16 Neoforge 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 214343,
+        "MD5": "2f15922ce52580ed466b48ade0ef2d38",
+        "url": "https://mediafilez.forgecdn.net/files/7625/579/trading_floor-3.0.16.jar",
+        "path": "curseforge/1102591/7625579/trading_floor-3.0.16.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1260229:file:6519954@jar",
+      "name": "createmechanicalconfection-0.3.0.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 402546,
+        "MD5": "41762fcc5ab64b4de7e7b5f34988d847",
+        "url": "https://mediafilez.forgecdn.net/files/6519/954/createmechanicalconfection-0.3.0.jar",
+        "path": "curseforge/1260229/6519954/createmechanicalconfection-0.3.0.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-455508:file:8242804@jar",
+      "name": "Iris 1.8.14 Beta 1 for NeoForge 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 2540723,
+        "MD5": "6b68276a6718656ec476cfac69dfe013",
+        "url": "https://mediafilez.forgecdn.net/files/8242/804/iris-neoforge-1.8.14-beta.1%2Bmc1.21.1.jar",
+        "path": "curseforge/455508/8242804/iris-neoforge-1.8.14-beta.1+mc1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1403841:file:8450442@jar",
+      "name": "createsprings-1.2.1-neoforge.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1428130,
+        "MD5": "046755a832067cdd06b6fc0b8837d4a3",
+        "url": "https://mediafilez.forgecdn.net/files/8450/442/createsprings-1.2.1-neoforge.jar",
+        "path": "curseforge/1403841/8450442/createsprings-1.2.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge-1457750-7596612-create_chocolate_fountain_zh_hk.zip",
+      "name": "create_chocolate_fountain_zh_hk.zip",
       "type": "File",
       "artifact": {
-        "size": 673423,
-        "MD5": "33ac08e422e2086080756dd5f5cd5d10",
-        "url": "https://mediafilez.forgecdn.net/files/5287/23/guiretextures-1.11.zip",
-        "path": "resourcepacks/guiretextures-1.11.zip"
+        "size": 1251,
+        "MD5": "249bf0aa95ab2c6dfb73c9dbf92b4012",
+        "url": "https://mediafilez.forgecdn.net/files/7596/612/create_chocolate_fountain_zh_hk.zip",
+        "path": "resourcepacks/create_chocolate_fountain_zh_hk.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-470193:file:9008904@jar",
+      "name": "connectivity-1.21.1-7.7.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 115891,
+        "MD5": "fa487bdc207e7867189247519d101892",
+        "url": "https://mediafilez.forgecdn.net/files/9008/904/connectivity-1.21.1-7.7.jar",
+        "path": "curseforge/470193/9008904/connectivity-1.21.1-7.7.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-398521:file:8765184@jar",
+      "name": "Farmer's Delight 1.3.4 - 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 3160490,
+        "MD5": "588f140d2c343e9029dc30f10b73fdd4",
+        "url": "https://mediafilez.forgecdn.net/files/8765/184/FarmersDelight-1.21.1-1.3.4.jar",
+        "path": "curseforge/398521/8765184/FarmersDelight-1.21.1-1.3.4.jar"
       }
     },
     {
@@ -1330,17 +1330,6 @@
         "MD5": "512d6e79b39e980c320d197668a142cf",
         "url": "https://mediafilez.forgecdn.net/files/6060/28/ConfiguredDefaults-v21.1.3-1.21.1-NeoForge.jar",
         "path": "curseforge/930131/6060028/ConfiguredDefaults-v21.1.3-1.21.1-NeoForge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-398521:file:8672744@jar",
-      "name": "Farmer's Delight 1.3.3 - 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 3160883,
-        "MD5": "f6194ef306c3991de220ee2cdffdac98",
-        "url": "https://mediafilez.forgecdn.net/files/8672/744/FarmersDelight-1.21.1-1.3.3.jar",
-        "path": "curseforge/398521/8672744/FarmersDelight-1.21.1-1.3.3.jar"
       }
     },
     {
@@ -1366,25 +1355,36 @@
       }
     },
     {
-      "id": "curseforge.project-470193:file:7367221@jar",
-      "name": "connectivity-1.21.1-7.6.jar",
+      "id": "curseforge.project-1321420:file:8880715@jar",
+      "name": "Power Grid - 0.6.2 - NeoForge",
       "type": "ForgeMod",
       "artifact": {
-        "size": 114165,
-        "MD5": "f2d38f850688eefa338b807801df2b4b",
-        "url": "https://mediafilez.forgecdn.net/files/7367/221/connectivity-1.21.1-7.6.jar",
-        "path": "curseforge/470193/7367221/connectivity-1.21.1-7.6.jar"
+        "size": 5738480,
+        "MD5": "b962c042ffcaabd55f026e5baa71998b",
+        "url": "https://mediafilez.forgecdn.net/files/8880/715/powergrid-mc1.21.1-0.6.2.jar",
+        "path": "curseforge/1321420/8880715/powergrid-mc1.21.1-0.6.2.jar"
       }
     },
     {
-      "id": "curseforge.project-689467:file:7221528@jar",
-      "name": "Packet Fixer 3.3.1",
+      "id": "curseforge.project-1689768:file:9019059@jar",
+      "name": "MezzConfig 0.6.6 for NeoForge 1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 46623,
-        "MD5": "8f22fb065079340a72ae5ce0da12efcb",
-        "url": "https://mediafilez.forgecdn.net/files/7221/528/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar",
-        "path": "curseforge/689467/7221528/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar"
+        "size": 312220,
+        "MD5": "920b70e3ee6c5c521508e27ec04cb043",
+        "url": "https://mediafilez.forgecdn.net/files/9019/59/mezz_config-1.21.1-neoforge-0.6.6-standalone.jar",
+        "path": "curseforge/1689768/9019059/mezz_config-1.21.1-neoforge-0.6.6-standalone.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-686911:file:8875640@jar",
+      "name": "ImmediatelyFast 1.6.14",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 365195,
+        "MD5": "713f24298eb47e6e1f83f6891d96db64",
+        "url": "https://mediafilez.forgecdn.net/files/8875/640/ImmediatelyFast-NeoForge-1.6.14%2B1.21.1.jar",
+        "path": "curseforge/686911/8875640/ImmediatelyFast-NeoForge-1.6.14+1.21.1.jar"
       }
     },
     {
@@ -1399,36 +1399,36 @@
       }
     },
     {
-      "id": "curseforge.project-1321420:file:8738576@jar",
-      "name": "Power Grid - 0.6.1 - NeoForge",
+      "id": "curseforge.project-689467:file:7221528@jar",
+      "name": "Packet Fixer 3.3.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 7965088,
-        "MD5": "6129121e5eb78eb9ec1e23cd2ef9f181",
-        "url": "https://mediafilez.forgecdn.net/files/8738/576/powergrid-mc1.21.1-0.6.1.jar",
-        "path": "curseforge/1321420/8738576/powergrid-mc1.21.1-0.6.1.jar"
+        "size": 46623,
+        "MD5": "8f22fb065079340a72ae5ce0da12efcb",
+        "url": "https://mediafilez.forgecdn.net/files/7221/528/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar",
+        "path": "curseforge/689467/7221528/packetfixer-3.3.1-1.20.5-1.21.X-merged.jar"
       }
     },
     {
-      "id": "curseforge.project-686911:file:8749421@jar",
-      "name": "ImmediatelyFast 1.6.13",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 362740,
-        "MD5": "c00a4e7f37026af024016a238aed5d10",
-        "url": "https://mediafilez.forgecdn.net/files/8749/421/ImmediatelyFast-NeoForge-1.6.13%2B1.21.1.jar",
-        "path": "curseforge/686911/8749421/ImmediatelyFast-NeoForge-1.6.13+1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge-656900-6292148-Create Touch-Ups v1.0.zip",
-      "name": "Create Touch-Ups v1.0.zip",
+      "id": "curseforge-353554-5493450-Stay_True_1.21.zip",
+      "name": "Stay True 1.21",
       "type": "File",
       "artifact": {
-        "size": 150044,
-        "MD5": "e63f233d61a9c46e6dfd2bd52c95ee29",
-        "url": "https://mediafilez.forgecdn.net/files/6292/148/Create%20Touch-Ups%20v1.0.zip",
-        "path": "resourcepacks/Create Touch-Ups v1.0.zip"
+        "size": 2152322,
+        "MD5": "1743567759c02d1b7486f2109aad9860",
+        "url": "https://mediafilez.forgecdn.net/files/5493/450/Stay_True_1.21.zip",
+        "path": "resourcepacks/Stay_True_1.21.zip"
+      }
+    },
+    {
+      "id": "curseforge-412189-5287023-guiretextures-1.11.zip",
+      "name": "v1.11 (MC 1.20.5+)",
+      "type": "File",
+      "artifact": {
+        "size": 673423,
+        "MD5": "33ac08e422e2086080756dd5f5cd5d10",
+        "url": "https://mediafilez.forgecdn.net/files/5287/23/guiretextures-1.11.zip",
+        "path": "resourcepacks/guiretextures-1.11.zip"
       }
     },
     {
@@ -1443,6 +1443,17 @@
       }
     },
     {
+      "id": "curseforge.project-1522736:file:8496246@jar",
+      "name": "1.1.5",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1707765,
+        "MD5": "054843664d3bef2d61e6e492503fd824",
+        "url": "https://mediafilez.forgecdn.net/files/8496/246/createpropulsion-1.1.5.jar",
+        "path": "curseforge/1522736/8496246/createpropulsion-1.1.5.jar"
+      }
+    },
+    {
       "id": "curseforge.project-241160:file:5623547@jar",
       "name": "netherportalfix-neoforge-1.21.1-21.1.1.jar",
       "type": "ForgeMod",
@@ -1454,14 +1465,14 @@
       }
     },
     {
-      "id": "curseforge.project-890127:file:8654089@jar",
-      "name": "Connector 2.0.0 beta 17",
+      "id": "curseforge.project-899386:file:9019426@jar",
+      "name": "justenoughbreeding-neoforge-1.21.1-3.3.0.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 4573244,
-        "MD5": "b3e451facbf76338a06d765e7d1c7e9c",
-        "url": "https://mediafilez.forgecdn.net/files/8654/89/connector-2.0.0-beta.17%2B1.21.1-full.jar",
-        "path": "curseforge/890127/8654089/connector-2.0.0-beta.17+1.21.1-full.jar"
+        "size": 626726,
+        "MD5": "7ef4582f2df301178a7b97710d4abb67",
+        "url": "https://mediafilez.forgecdn.net/files/9019/426/justenoughbreeding-neoforge-1.21.1-3.3.0.jar",
+        "path": "curseforge/899386/9019426/justenoughbreeding-neoforge-1.21.1-3.3.0.jar"
       }
     },
     {
@@ -1476,25 +1487,14 @@
       }
     },
     {
-      "id": "curseforge.project-1276978:file:8106211@jar",
-      "name": "Create: Mechanical Botany 1.1.3 for mc1.21.1",
+      "id": "curseforge.project-429235:file:7524151@jar",
+      "name": "ferritecore-7.0.3-neoforge",
       "type": "ForgeMod",
       "artifact": {
-        "size": 807129,
-        "MD5": "c33dbb51043d8992a0b1d7bd0c39336e",
-        "url": "https://mediafilez.forgecdn.net/files/8106/211/mechanical_botany-1.1.3%2B1.21.1-neoforged.jar",
-        "path": "curseforge/1276978/8106211/mechanical_botany-1.1.3+1.21.1-neoforged.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-676721:file:8666959@jar",
-      "name": "Create Aeronautics 1.3.1 for mc1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 33121810,
-        "MD5": "f4579b0eb8243b70e0bd2fd9f7469ea0",
-        "url": "https://mediafilez.forgecdn.net/files/8666/959/create-aeronautics-bundled-1.21.1-1.3.1.jar",
-        "path": "curseforge/676721/8666959/create-aeronautics-bundled-1.21.1-1.3.1.jar"
+        "size": 121559,
+        "MD5": "e0374dac41d6c641903f9e241911e1d3",
+        "url": "https://mediafilez.forgecdn.net/files/7524/151/ferritecore-7.0.3-neoforge.jar",
+        "path": "curseforge/429235/7524151/ferritecore-7.0.3-neoforge.jar"
       }
     },
     {
@@ -1509,17 +1509,6 @@
       }
     },
     {
-      "id": "curseforge.project-394468:file:8756580@jar",
-      "name": "Sodium 0.8.13 for NeoForge 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1292934,
-        "MD5": "c2bc7287841c29e25ce553baae1700a0",
-        "url": "https://mediafilez.forgecdn.net/files/8756/580/sodium-neoforge-0.8.13%2Bmc1.21.1.jar",
-        "path": "curseforge/394468/8756580/sodium-neoforge-0.8.13+mc1.21.1.jar"
-      }
-    },
-    {
       "id": "curseforge.project-404468:file:8724782@jar",
       "name": "[NEOFORGE][1.21.1] FTB Teams 2101.1.11",
       "type": "ForgeMod",
@@ -1531,256 +1520,25 @@
       }
     },
     {
-      "id": "curseforge.project-531761:file:8645517@jar",
-      "name": "balm-neoforge-1.21.1-21.0.65.jar",
+      "id": "curseforge-975573-5113181-createtweakedcontrollerunofficialzhhktranslationr.zip",
+      "name": "createtweakedcontrollerunofficialzhhktranslationr.zip",
+      "type": "File",
+      "artifact": {
+        "size": 2481,
+        "MD5": "37e4f174d29ac0bd55d1105c18a61852",
+        "url": "https://mediafilez.forgecdn.net/files/5113/181/createtweakedcontrollerunofficialzhhktranslationr.zip",
+        "path": "resourcepacks/createtweakedcontrollerunofficialzhhktranslationr.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-531761:file:8969738@jar",
+      "name": "balm-neoforge-1.21.1-21.0.66.jar",
       "type": "ForgeMod",
       "artifact": {
         "size": 783793,
-        "MD5": "ffd35f57254160816b17db7e66f196a8",
-        "url": "https://mediafilez.forgecdn.net/files/8645/517/balm-neoforge-1.21.1-21.0.65.jar",
-        "path": "curseforge/531761/8645517/balm-neoforge-1.21.1-21.0.65.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1537945:file:8523257@jar",
-      "name": "Gadgets & Gizmos - 1.1.3",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 32887560,
-        "MD5": "d02d87256f44699ebfdb2f542de37411",
-        "url": "https://mediafilez.forgecdn.net/files/8523/257/createthrusters-bundled-V1.1.3.jar",
-        "path": "curseforge/1537945/8523257/createthrusters-bundled-V1.1.3.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-326652:file:8749806@jar",
-      "name": "cupboard-1.21.1-4.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 30206,
-        "MD5": "1b871a5f53cec9fd1c6b0402ac5517d2",
-        "url": "https://mediafilez.forgecdn.net/files/8749/806/cupboard-1.21.1-4.1.jar",
-        "path": "curseforge/326652/8749806/cupboard-1.21.1-4.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1583035:file:8729982@jar",
-      "name": "Iris Search 1.6.1-neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 200176,
-        "MD5": "6940bf883527790c717de302762f8f2d",
-        "url": "https://mediafilez.forgecdn.net/files/8729/982/IrisSearch-1.6.1-neoforge.jar",
-        "path": "curseforge/1583035/8729982/IrisSearch-1.6.1-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge-1455778-7586038-no_dnd_diamond_1.21.zip",
-      "name": "no_dnd_diamond_1.21.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1990,
-        "MD5": "d544738f85c590c0604930b804bc287f",
-        "url": "https://mediafilez.forgecdn.net/files/7586/38/no_dnd_diamond_1.21.zip",
-        "path": "config/paxi/datapacks/no_dnd_diamond_1.21.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-1514529:file:8493955@jar",
-      "name": "aeroclaims-0.9.3.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 207202,
-        "MD5": "83f06cdbe86f795c7d487be3addd2f69",
-        "url": "https://mediafilez.forgecdn.net/files/8493/955/aeroclaims-0.9.3.jar",
-        "path": "curseforge/1514529/8493955/aeroclaims-0.9.3.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1532334:file:8547039@jar",
-      "name": "createaeronauticscurios-neoforge-1.21.1-2.2",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 44697,
-        "MD5": "5f8facf32dcd368b6819b30c7fa63ab1",
-        "url": "https://mediafilez.forgecdn.net/files/8547/39/createaeronauticscurios-neoforge-1.21.1-2.2.jar",
-        "path": "curseforge/1532334/8547039/createaeronauticscurios-neoforge-1.21.1-2.2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-905861:file:8215216@jar",
-      "name": "1.2.0 for Neoforge 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1644485,
-        "MD5": "5bcea3a1df072447c0d71d3e40e3ff11",
-        "url": "https://mediafilez.forgecdn.net/files/8215/216/create-new-age-1.2.0%2Bneoforge-mc1.21.1.jar",
-        "path": "curseforge/905861/8215216/create-new-age-1.2.0+neoforge-mc1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge-1446673-7537707-Create_Easy_Stone_Generators_ No_Obsidian_Gen.zip",
-      "name": "Create_Easy_Stone_Generators_ No_Obsidian_Gen.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1158,
-        "MD5": "88bd7fb2f283963520c2a6240d0879ef",
-        "url": "https://mediafilez.forgecdn.net/files/7537/707/Create_Easy_Stone_Generators_%20No_Obsidian_Gen.zip",
-        "path": "config/paxi/datapacks/Create_Easy_Stone_Generators_ No_Obsidian_Gen.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-1626954:file:8754093@jar",
-      "name": "Create: Rolling Tones - 1.21.1 - V3",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 120235,
-        "MD5": "5d5175cf9af385f2e155b7ff4adb71f7",
-        "url": "https://mediafilez.forgecdn.net/files/8754/93/rolling-tones-0.2.2.jar",
-        "path": "curseforge/1626954/8754093/rolling-tones-0.2.2.jar"
-      }
-    },
-    {
-      "id": "curseforge-840329-5380486-Create_Style_Hopper_24_5_29.zip",
-      "name": "Create_Style_Hopper_24_5_29.zip",
-      "type": "File",
-      "artifact": {
-        "size": 14997,
-        "MD5": "ed621e8e0d6527f307a5f4dfe76ec367",
-        "url": "https://mediafilez.forgecdn.net/files/5380/486/Create_Style_Hopper_24_5_29.zip",
-        "path": "resourcepacks/Create_Style_Hopper_24_5_29.zip"
-      }
-    },
-    {
-      "id": "curseforge-1093675-5677450-create_pattern_schematics_zh_hk_translation.zip",
-      "name": "create_pattern_schematics_zh_hk_translation.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1680,
-        "MD5": "55f18b3b1062664f739d4c25052ac804",
-        "url": "https://mediafilez.forgecdn.net/files/5677/450/create_pattern_schematics_zh_hk_translation.zip",
-        "path": "resourcepacks/create_pattern_schematics_zh_hk_translation.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-382216:file:8397829@jar",
-      "name": "Blueprint 1.21.1 - 8.1.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1202822,
-        "MD5": "6a19153e234b067459acb6f698aaf2f2",
-        "url": "https://mediafilez.forgecdn.net/files/8397/829/blueprint-1.21.1-8.1.1.jar",
-        "path": "curseforge/382216/8397829/blueprint-1.21.1-8.1.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-898849:file:7958165@jar",
-      "name": "1.21.1 Version 1.2.7",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 303343,
-        "MD5": "b7cfe34fa390acad58e8a42ce90718f8",
-        "url": "https://mediafilez.forgecdn.net/files/7958/165/create_tweaked_controllers-1.21.1-1.2.7.jar",
-        "path": "curseforge/898849/7958165/create_tweaked_controllers-1.21.1-1.2.7.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1249131:file:8744189@jar",
-      "name": "Create: Integrated Farming 1.3.3b for Create 1.21.1-6.0.10",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 629469,
-        "MD5": "70232faa3ae34ccef80d7e51d85311a9",
-        "url": "https://mediafilez.forgecdn.net/files/8744/189/create-integrated-farming-1.3.3b.jar",
-        "path": "curseforge/1249131/8744189/create-integrated-farming-1.3.3b.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-661376:file:8161672@jar",
-      "name": "integrated_villages-1.3.3+1.21.1-neoforge.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 4592084,
-        "MD5": "702bb71855f689e139f040941ca9883d",
-        "url": "https://mediafilez.forgecdn.net/files/8161/672/integrated_villages-1.3.3%2B1.21.1-neoforge.jar",
-        "path": "curseforge/661376/8161672/integrated_villages-1.3.3+1.21.1-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1442925:file:8707235@jar",
-      "name": "NoChatRestrictions-NeoForge-MC1.21.11-v1.0.2.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 10508,
-        "MD5": "7b0c884c2999832d8c0269b08b961a8f",
-        "url": "https://mediafilez.forgecdn.net/files/8707/235/NoChatRestrictions-NeoForge-MC1.21.11-v1.0.2.jar",
-        "path": "curseforge/1442925/8707235/NoChatRestrictions-NeoForge-MC1.21.11-v1.0.2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-867099:file:8117841@jar",
-      "name": "[NeoForge 1.21/1] CraterLib - 3.1.2",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1483241,
-        "MD5": "c55d1fc991daec7f0fdcfd759503999c",
-        "url": "https://mediafilez.forgecdn.net/files/8117/841/CraterLib-Neoforge-1.21-3.1.2.jar",
-        "path": "curseforge/867099/8117841/CraterLib-Neoforge-1.21-3.1.2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1352204:file:7666279@jar",
-      "name": "CFC_v1.4.1_neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 74294,
-        "MD5": "29d403bf1114a346ce18dbdb3f179a66",
-        "url": "https://mediafilez.forgecdn.net/files/7666/279/CreateFastSchematicCannon-1.4.1-neoforge-1.21.1.jar",
-        "path": "curseforge/1352204/7666279/CreateFastSchematicCannon-1.4.1-neoforge-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-289412:file:8730556@jar",
-      "name": "[NEOFORGE][1.21.1] FTB Quests 2101.1.34",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1609252,
-        "MD5": "9495f99e3d67a1a396140c4dac901d04",
-        "url": "https://mediafilez.forgecdn.net/files/8730/556/ftb-quests-neoforge-2101.1.34.jar",
-        "path": "curseforge/289412/8730556/ftb-quests-neoforge-2101.1.34.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1206505:file:7088011@jar",
-      "name": "create_generators-1.2.5-neoforge-1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 215204,
-        "MD5": "80c22e1d34d82440c5f778c80ea893fa",
-        "url": "https://mediafilez.forgecdn.net/files/7088/11/create_generators-1.2.5-neoforge-1.21.1.jar",
-        "path": "curseforge/1206505/7088011/create_generators-1.2.5-neoforge-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge-1540335-8597672-CreateRubberworks_Compat_v6.zip",
-      "name": "CreateRubberworks_Compat_v6.zip",
-      "type": "File",
-      "artifact": {
-        "size": 13018,
-        "MD5": "486e9e3e872bdd4339e80220f797b899",
-        "url": "https://mediafilez.forgecdn.net/files/8597/672/CreateRubberworks_Compat_v6.zip",
-        "path": "config/paxi/datapacks/CreateRubberworks_Compat_v6.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-250419:file:8693034@jar",
-      "name": "enchdesc-neoforge-1.21.1-21.1.11.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 82648,
-        "MD5": "0314f02f2f7ec9af0b589b66388d0d91",
-        "url": "https://mediafilez.forgecdn.net/files/8693/34/enchdesc-neoforge-1.21.1-21.1.11.jar",
-        "path": "curseforge/250419/8693034/enchdesc-neoforge-1.21.1-21.1.11.jar"
+        "MD5": "ce9f17b4efae1aa4d826298f6d5f538a",
+        "url": "https://mediafilez.forgecdn.net/files/8969/738/balm-neoforge-1.21.1-21.0.66.jar",
+        "path": "curseforge/531761/8969738/balm-neoforge-1.21.1-21.0.66.jar"
       }
     },
     {
@@ -1795,14 +1553,267 @@
       }
     },
     {
-      "id": "curseforge.project-308989:file:5694215@jar",
-      "name": "caelus-neoforge-7.0.1+1.21.1.jar",
+      "id": "curseforge.project-1537945:file:8983532@jar",
+      "name": "Create Aeronautics: Gadgets & Gizmos 1.2.5",
       "type": "ForgeMod",
       "artifact": {
-        "size": 50235,
-        "MD5": "d8f9e005af3644cee127d7da1fe2ed79",
-        "url": "https://mediafilez.forgecdn.net/files/5694/215/caelus-neoforge-7.0.1%2B1.21.1.jar",
-        "path": "curseforge/308989/5694215/caelus-neoforge-7.0.1+1.21.1.jar"
+        "size": 32927013,
+        "MD5": "e1a20bb84f960f01496c7651412a13b5",
+        "url": "https://mediafilez.forgecdn.net/files/8983/532/gadgets-and-gizmos-bundled-V1.2.5.jar",
+        "path": "curseforge/1537945/8983532/gadgets-and-gizmos-bundled-V1.2.5.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-898849:file:7958165@jar",
+      "name": "1.21.1 Version 1.2.7",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 303343,
+        "MD5": "b7cfe34fa390acad58e8a42ce90718f8",
+        "url": "https://mediafilez.forgecdn.net/files/7958/165/create_tweaked_controllers-1.21.1-1.2.7.jar",
+        "path": "curseforge/898849/7958165/create_tweaked_controllers-1.21.1-1.2.7.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1583035:file:8871534@jar",
+      "name": "Iris Search 1.8.1-neoforge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 218612,
+        "MD5": "833e9252a5775512565dd282520fc012",
+        "url": "https://mediafilez.forgecdn.net/files/8871/534/IrisSearch-1.8.1-neoforge.jar",
+        "path": "curseforge/1583035/8871534/IrisSearch-1.8.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-905861:file:8215216@jar",
+      "name": "1.2.0 for Neoforge 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1644485,
+        "MD5": "5bcea3a1df072447c0d71d3e40e3ff11",
+        "url": "https://mediafilez.forgecdn.net/files/8215/216/create-new-age-1.2.0%2Bneoforge-mc1.21.1.jar",
+        "path": "curseforge/905861/8215216/create-new-age-1.2.0+neoforge-mc1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-326652:file:8889050@jar",
+      "name": "cupboard-1.21.1-4.2.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 30517,
+        "MD5": "157cec3eeae81606df0183c9f6bdf341",
+        "url": "https://mediafilez.forgecdn.net/files/8889/50/cupboard-1.21.1-4.2.jar",
+        "path": "curseforge/326652/8889050/cupboard-1.21.1-4.2.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1514529:file:8836872@jar",
+      "name": "aeroclaims-0.9.4.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 236800,
+        "MD5": "8f5e0b96644720569176c6242ec13469",
+        "url": "https://mediafilez.forgecdn.net/files/8836/872/aeroclaims-0.9.4.jar",
+        "path": "curseforge/1514529/8836872/aeroclaims-0.9.4.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1626954:file:8754093@jar",
+      "name": "Create: Rolling Tones - 1.21.1 - V3",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 120235,
+        "MD5": "5d5175cf9af385f2e155b7ff4adb71f7",
+        "url": "https://mediafilez.forgecdn.net/files/8754/93/rolling-tones-0.2.2.jar",
+        "path": "curseforge/1626954/8754093/rolling-tones-0.2.2.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-382216:file:8819375@jar",
+      "name": "Blueprint 1.21.1 - 8.2.0",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1214507,
+        "MD5": "4cd57a62d5989584960d30d50d96dcd0",
+        "url": "https://mediafilez.forgecdn.net/files/8819/375/blueprint-1.21.1-8.2.0.jar",
+        "path": "curseforge/382216/8819375/blueprint-1.21.1-8.2.0.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1532334:file:8547039@jar",
+      "name": "createaeronauticscurios-neoforge-1.21.1-2.2",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 44697,
+        "MD5": "5f8facf32dcd368b6819b30c7fa63ab1",
+        "url": "https://mediafilez.forgecdn.net/files/8547/39/createaeronauticscurios-neoforge-1.21.1-2.2.jar",
+        "path": "curseforge/1532334/8547039/createaeronauticscurios-neoforge-1.21.1-2.2.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1249131:file:8937623@jar",
+      "name": "Create: Integrated Farming 1.4.3 for Create 1.21.1-6.0.10",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 865429,
+        "MD5": "819497f906035795a5e2d4fe71f46081",
+        "url": "https://mediafilez.forgecdn.net/files/8937/623/create-integrated-farming-1.4.3.jar",
+        "path": "curseforge/1249131/8937623/create-integrated-farming-1.4.3.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-661376:file:8161672@jar",
+      "name": "integrated_villages-1.3.3+1.21.1-neoforge.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 4592084,
+        "MD5": "702bb71855f689e139f040941ca9883d",
+        "url": "https://mediafilez.forgecdn.net/files/8161/672/integrated_villages-1.3.3%2B1.21.1-neoforge.jar",
+        "path": "curseforge/661376/8161672/integrated_villages-1.3.3+1.21.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge-1455778-7586038-no_dnd_diamond_1.21.zip",
+      "name": "no_dnd_diamond_1.21.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1990,
+        "MD5": "d544738f85c590c0604930b804bc287f",
+        "url": "https://mediafilez.forgecdn.net/files/7586/38/no_dnd_diamond_1.21.zip",
+        "path": "config/paxi/datapacks/no_dnd_diamond_1.21.zip"
+      }
+    },
+    {
+      "id": "curseforge-1446673-7537707-Create_Easy_Stone_Generators_ No_Obsidian_Gen.zip",
+      "name": "Create_Easy_Stone_Generators_ No_Obsidian_Gen.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1158,
+        "MD5": "88bd7fb2f283963520c2a6240d0879ef",
+        "url": "https://mediafilez.forgecdn.net/files/7537/707/Create_Easy_Stone_Generators_%20No_Obsidian_Gen.zip",
+        "path": "config/paxi/datapacks/Create_Easy_Stone_Generators_ No_Obsidian_Gen.zip"
+      }
+    },
+    {
+      "id": "curseforge-840329-5380486-Create_Style_Hopper_24_5_29.zip",
+      "name": "Create_Style_Hopper_24_5_29.zip",
+      "type": "File",
+      "artifact": {
+        "size": 14997,
+        "MD5": "ed621e8e0d6527f307a5f4dfe76ec367",
+        "url": "https://mediafilez.forgecdn.net/files/5380/486/Create_Style_Hopper_24_5_29.zip",
+        "path": "resourcepacks/Create_Style_Hopper_24_5_29.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-1352204:file:7666279@jar",
+      "name": "CFC_v1.4.1_neoforge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 74294,
+        "MD5": "29d403bf1114a346ce18dbdb3f179a66",
+        "url": "https://mediafilez.forgecdn.net/files/7666/279/CreateFastSchematicCannon-1.4.1-neoforge-1.21.1.jar",
+        "path": "curseforge/1352204/7666279/CreateFastSchematicCannon-1.4.1-neoforge-1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge-1093675-5677450-create_pattern_schematics_zh_hk_translation.zip",
+      "name": "create_pattern_schematics_zh_hk_translation.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1680,
+        "MD5": "55f18b3b1062664f739d4c25052ac804",
+        "url": "https://mediafilez.forgecdn.net/files/5677/450/create_pattern_schematics_zh_hk_translation.zip",
+        "path": "resourcepacks/create_pattern_schematics_zh_hk_translation.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-289412:file:8885017@jar",
+      "name": "[NEOFORGE][1.21.1] FTB Quests 2101.1.36",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1609984,
+        "MD5": "90798f934aec638e97c595947838f843",
+        "url": "https://mediafilez.forgecdn.net/files/8885/17/ftb-quests-neoforge-2101.1.36.jar",
+        "path": "curseforge/289412/8885017/ftb-quests-neoforge-2101.1.36.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1442925:file:9017051@jar",
+      "name": "NoChatRestrictions-NeoForge-MC1.21.11-v1.0.3.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 9377,
+        "MD5": "fcc6cb120e5531e46916b83ca3a4760b",
+        "url": "https://mediafilez.forgecdn.net/files/9017/51/NoChatRestrictions-NeoForge-MC1.21.11-v1.0.3.jar",
+        "path": "curseforge/1442925/9017051/NoChatRestrictions-NeoForge-MC1.21.11-v1.0.3.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-867099:file:8884785@jar",
+      "name": "[NeoForge 1.21/1] CraterLib - 3.1.3",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1485401,
+        "MD5": "f1384d95a8e7e04b288722db95b519ef",
+        "url": "https://mediafilez.forgecdn.net/files/8884/785/CraterLib-Neoforge-1.21-3.1.3.jar",
+        "path": "curseforge/867099/8884785/CraterLib-Neoforge-1.21-3.1.3.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-250419:file:8693034@jar",
+      "name": "enchdesc-neoforge-1.21.1-21.1.11.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 82648,
+        "MD5": "0314f02f2f7ec9af0b589b66388d0d91",
+        "url": "https://mediafilez.forgecdn.net/files/8693/34/enchdesc-neoforge-1.21.1-21.1.11.jar",
+        "path": "curseforge/250419/8693034/enchdesc-neoforge-1.21.1-21.1.11.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-885449:file:5872111@jar",
+      "name": "EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 746263,
+        "MD5": "d15a6ebe7f3011625507d610d80c039c",
+        "url": "https://mediafilez.forgecdn.net/files/5872/111/EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar",
+        "path": "curseforge/885449/5872111/EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1236537:file:7575506@jar",
+      "name": "Create: Garnished Reworked 0.1.7.4 for mc1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 2388846,
+        "MD5": "d82f71bd952b4fec418a88dbe5ec0f7d",
+        "url": "https://mediafilez.forgecdn.net/files/7575/506/creategarnished-0.1.7.4%2B1.21.1-neoforged.jar",
+        "path": "curseforge/1236537/7575506/creategarnished-0.1.7.4+1.21.1-neoforged.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-394468:file:8756580@jar",
+      "name": "Sodium 0.8.13 for NeoForge 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1292934,
+        "MD5": "c2bc7287841c29e25ce553baae1700a0",
+        "url": "https://mediafilez.forgecdn.net/files/8756/580/sodium-neoforge-0.8.13%2Bmc1.21.1.jar",
+        "path": "curseforge/394468/8756580/sodium-neoforge-0.8.13+mc1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge-1457762-7596646-create_train_parts_zh_hk.zip",
+      "name": "create_train_parts_zh_hk.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1934,
+        "MD5": "b01eabd48fae2c9f2f11cba703b56bb3",
+        "url": "https://mediafilez.forgecdn.net/files/7596/646/create_train_parts_zh_hk.zip",
+        "path": "resourcepacks/create_train_parts_zh_hk.zip"
       }
     },
     {
@@ -1817,14 +1828,14 @@
       }
     },
     {
-      "id": "curseforge.project-943925:file:7429011@jar",
-      "name": "[NEOFORGE][1.21.1] FTB Filter System 21.1.4",
-      "type": "ForgeMod",
+      "id": "curseforge-978589-7585727-charcoal_to_coal_1.21.zip",
+      "name": "charcoal_to_coal_1.21.zip",
+      "type": "File",
       "artifact": {
-        "size": 211671,
-        "MD5": "3ffbb42f64dd6f7d850acb032b6eb90c",
-        "url": "https://mediafilez.forgecdn.net/files/7429/11/ftb-filter-system-neoforge-21.1.4.jar",
-        "path": "curseforge/943925/7429011/ftb-filter-system-neoforge-21.1.4.jar"
+        "size": 1122,
+        "MD5": "1636677dc40d8947102bdac74a2b18fa",
+        "url": "https://mediafilez.forgecdn.net/files/7585/727/charcoal_to_coal_1.21.zip",
+        "path": "config/paxi/datapacks/charcoal_to_coal_1.21.zip"
       }
     },
     {
@@ -1839,58 +1850,47 @@
       }
     },
     {
-      "id": "curseforge.project-429235:file:7524151@jar",
-      "name": "ferritecore-7.0.3-neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 121559,
-        "MD5": "e0374dac41d6c641903f9e241911e1d3",
-        "url": "https://mediafilez.forgecdn.net/files/7524/151/ferritecore-7.0.3-neoforge.jar",
-        "path": "curseforge/429235/7524151/ferritecore-7.0.3-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge-945095-5180585-Create_FTBQuests.zip",
-      "name": "Create Questbook v2",
+      "id": "curseforge-627557-8884654-ComplementaryReimagined_r5.9.3.zip",
+      "name": "Complementary Reimagined r5.9.3",
       "type": "File",
       "artifact": {
-        "size": 2110,
-        "MD5": "a7174b6f993562abdb908da41bef02ea",
-        "url": "https://mediafilez.forgecdn.net/files/5180/585/Create_FTBQuests.zip",
-        "path": "resourcepacks/Create_FTBQuests.zip"
+        "size": 553397,
+        "MD5": "54cd249cd1e95a4e19f0ea2cb4369e71",
+        "url": "https://mediafilez.forgecdn.net/files/8884/654/ComplementaryReimagined_r5.9.3.zip",
+        "path": "shaderpacks/ComplementaryReimagined_r5.9.3.zip"
       }
     },
     {
-      "id": "curseforge.project-896746:file:8732859@jar",
-      "name": "amendments-1.21-2.1.9-neoforge",
+      "id": "curseforge.project-1276978:file:8106211@jar",
+      "name": "Create: Mechanical Botany 1.1.3 for mc1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1160337,
-        "MD5": "e03f91af8a74d0d15c9190f48172eac9",
-        "url": "https://mediafilez.forgecdn.net/files/8732/859/amendments-1.21-2.1.9-neoforge.jar",
-        "path": "curseforge/896746/8732859/amendments-1.21-2.1.9-neoforge.jar"
+        "size": 807129,
+        "MD5": "c33dbb51043d8992a0b1d7bd0c39336e",
+        "url": "https://mediafilez.forgecdn.net/files/8106/211/mechanical_botany-1.1.3%2B1.21.1-neoforged.jar",
+        "path": "curseforge/1276978/8106211/mechanical_botany-1.1.3+1.21.1-neoforged.jar"
       }
     },
     {
-      "id": "curseforge.project-447673:file:8403576@jar",
-      "name": "[NeoForge] Sodium Extra 0.9.3 for Minecraft 1.21.1",
+      "id": "curseforge.project-896746:file:8825641@jar",
+      "name": "amendments-1.21-2.1.10-neoforge",
       "type": "ForgeMod",
       "artifact": {
-        "size": 465013,
-        "MD5": "48540138881ebc454ef3a07c1bd4c250",
-        "url": "https://mediafilez.forgecdn.net/files/8403/576/sodium-extra-neoforge-0.9.3%2Bmc1.21.1.jar",
-        "path": "curseforge/447673/8403576/sodium-extra-neoforge-0.9.3+mc1.21.1.jar"
+        "size": 1168211,
+        "MD5": "c3e4ddf15dace265c20ce2a8bb3efeb4",
+        "url": "https://mediafilez.forgecdn.net/files/8825/641/amendments-1.21-2.1.10-neoforge.jar",
+        "path": "curseforge/896746/8825641/amendments-1.21-2.1.10-neoforge.jar"
       }
     },
     {
-      "id": "curseforge.project-851046:file:8451084@jar",
-      "name": "Neruina Neoforge 3.3.3 for 1.21.1",
+      "id": "curseforge.project-447673:file:8892306@jar",
+      "name": "[NeoForge] Sodium Extra 0.9.4 - Minecraft 1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 852705,
-        "MD5": "bfc62c760f2062aa58fe6fbe6e0968d5",
-        "url": "https://mediafilez.forgecdn.net/files/8451/84/neruina-3.3.3%2B1.21.1-neoforge.jar",
-        "path": "curseforge/851046/8451084/neruina-3.3.3+1.21.1-neoforge.jar"
+        "size": 472060,
+        "MD5": "dcfa5d569244924440d052c6ebe5d75e",
+        "url": "https://mediafilez.forgecdn.net/files/8892/306/sodium-extra-neoforge-0.9.4%2Bmc1.21.1.jar",
+        "path": "curseforge/447673/8892306/sodium-extra-neoforge-0.9.4+mc1.21.1.jar"
       }
     },
     {
@@ -1905,17 +1905,6 @@
       }
     },
     {
-      "id": "curseforge.project-1232926:file:7651561@jar",
-      "name": "Create Chocolate Fountain 1.21.1-1.1.0",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 67464,
-        "MD5": "ae0f8c876eb424e33536722423393540",
-        "url": "https://mediafilez.forgecdn.net/files/7651/561/create_chocolate_fountain-1.21.1-1.1.0.jar",
-        "path": "curseforge/1232926/7651561/create_chocolate_fountain-1.21.1-1.1.0.jar"
-      }
-    },
-    {
       "id": "curseforge.project-360438:file:8330365@jar",
       "name": "Lithium mc1.21.1-0.15.4 for Neoforge",
       "type": "ForgeMod",
@@ -1927,14 +1916,36 @@
       }
     },
     {
-      "id": "curseforge.project-1015100:file:8702150@jar",
-      "name": "[1.21.1] YUNG's API v5.1.8 (NeoForge)",
+      "id": "curseforge.project-851046:file:8451084@jar",
+      "name": "Neruina Neoforge 3.3.3 for 1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 389834,
-        "MD5": "3ebbdb2620b4b8a97166653479df9809",
-        "url": "https://mediafilez.forgecdn.net/files/8702/150/YungsApi-1.21.1-NeoForge-5.1.8.jar",
-        "path": "curseforge/1015100/8702150/YungsApi-1.21.1-NeoForge-5.1.8.jar"
+        "size": 852705,
+        "MD5": "bfc62c760f2062aa58fe6fbe6e0968d5",
+        "url": "https://mediafilez.forgecdn.net/files/8451/84/neruina-3.3.3%2B1.21.1-neoforge.jar",
+        "path": "curseforge/851046/8451084/neruina-3.3.3+1.21.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge-945095-5180585-Create_FTBQuests.zip",
+      "name": "Create Questbook v2",
+      "type": "File",
+      "artifact": {
+        "size": 2110,
+        "MD5": "a7174b6f993562abdb908da41bef02ea",
+        "url": "https://mediafilez.forgecdn.net/files/5180/585/Create_FTBQuests.zip",
+        "path": "resourcepacks/Create_FTBQuests.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-1232926:file:7651561@jar",
+      "name": "Create Chocolate Fountain 1.21.1-1.1.0",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 67464,
+        "MD5": "ae0f8c876eb424e33536722423393540",
+        "url": "https://mediafilez.forgecdn.net/files/7651/561/create_chocolate_fountain-1.21.1-1.1.0.jar",
+        "path": "curseforge/1232926/7651561/create_chocolate_fountain-1.21.1-1.1.0.jar"
       }
     },
     {
@@ -1949,25 +1960,25 @@
       }
     },
     {
-      "id": "curseforge.project-1266798:file:7370476@jar",
-      "name": "coppersplashing_1.21.1_v1.jar",
+      "id": "curseforge.project-1015100:file:8894736@jar",
+      "name": "[1.21.1] YUNG's API v5.1.9 (NeoForge)",
       "type": "ForgeMod",
       "artifact": {
-        "size": 16436,
-        "MD5": "64d4eb44b8dd6a302609efc1aa01fbc0",
-        "url": "https://mediafilez.forgecdn.net/files/7370/476/coppersplashing_1.21.1_v1.jar",
-        "path": "curseforge/1266798/7370476/coppersplashing_1.21.1_v1.jar"
+        "size": 413763,
+        "MD5": "efb56fb5799379b2b7ec9c7694e2ad62",
+        "url": "https://mediafilez.forgecdn.net/files/8894/736/YungsApi-1.21.1-NeoForge-5.1.9.jar",
+        "path": "curseforge/1015100/8894736/YungsApi-1.21.1-NeoForge-5.1.9.jar"
       }
     },
     {
-      "id": "curseforge.project-1007714:file:8036048@jar",
-      "name": "Create Optical 0.4.2 - 1.21.1",
+      "id": "curseforge.project-337396:file:7118750@jar",
+      "name": "Boatload 1.21.1 - 6.0.2",
       "type": "ForgeMod",
       "artifact": {
-        "size": 8003762,
-        "MD5": "f43712a04bcc2e5916b15e3dd714ac87",
-        "url": "https://mediafilez.forgecdn.net/files/8036/48/create_optical-0.4.2.jar",
-        "path": "curseforge/1007714/8036048/create_optical-0.4.2.jar"
+        "size": 375132,
+        "MD5": "c0b5cd2692f1baa9cf5c320d4a4b378e",
+        "url": "https://mediafilez.forgecdn.net/files/7118/750/boatload-1.21.1-6.0.2.jar",
+        "path": "curseforge/337396/7118750/boatload-1.21.1-6.0.2.jar"
       }
     },
     {
@@ -1982,14 +1993,14 @@
       }
     },
     {
-      "id": "curseforge.project-337396:file:7118750@jar",
-      "name": "Boatload 1.21.1 - 6.0.2",
+      "id": "curseforge.project-1007714:file:8036048@jar",
+      "name": "Create Optical 0.4.2 - 1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 375132,
-        "MD5": "c0b5cd2692f1baa9cf5c320d4a4b378e",
-        "url": "https://mediafilez.forgecdn.net/files/7118/750/boatload-1.21.1-6.0.2.jar",
-        "path": "curseforge/337396/7118750/boatload-1.21.1-6.0.2.jar"
+        "size": 8003762,
+        "MD5": "f43712a04bcc2e5916b15e3dd714ac87",
+        "url": "https://mediafilez.forgecdn.net/files/8036/48/create_optical-0.4.2.jar",
+        "path": "curseforge/1007714/8036048/create_optical-0.4.2.jar"
       }
     },
     {
@@ -2015,6 +2026,17 @@
       }
     },
     {
+      "id": "curseforge.project-1266798:file:7370476@jar",
+      "name": "coppersplashing_1.21.1_v1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 16436,
+        "MD5": "64d4eb44b8dd6a302609efc1aa01fbc0",
+        "url": "https://mediafilez.forgecdn.net/files/7370/476/coppersplashing_1.21.1_v1.jar",
+        "path": "curseforge/1266798/7370476/coppersplashing_1.21.1_v1.jar"
+      }
+    },
+    {
       "id": "curseforge.project-1622142:file:8736099@jar",
       "name": "sablexaeromaps-1.21.1-1.4.0.jar",
       "type": "ForgeMod",
@@ -2026,28 +2048,6 @@
       }
     },
     {
-      "id": "curseforge-1457764-7596654-createtransmission_zh_hk_translation.zip",
-      "name": "createtransmission_zh_hk_translation.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1040,
-        "MD5": "69119a297ab50da993212381473de327",
-        "url": "https://mediafilez.forgecdn.net/files/7596/654/createtransmission_zh_hk_translation.zip",
-        "path": "resourcepacks/createtransmission_zh_hk_translation.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-243121:file:8420966@jar",
-      "name": "Quark-4.1-482.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 15576704,
-        "MD5": "7eecf92568194350f449681ebbf5769f",
-        "url": "https://mediafilez.forgecdn.net/files/8420/966/Quark-4.1-482.jar",
-        "path": "curseforge/243121/8420966/Quark-4.1-482.jar"
-      }
-    },
-    {
       "id": "curseforge.project-237749:file:7796187@jar",
       "name": "coroutil-neoforge-1.21.0-1.3.9.jar",
       "type": "ForgeMod",
@@ -2056,6 +2056,17 @@
         "MD5": "741721a51d325dfccf1b74f0a792bd88",
         "url": "https://mediafilez.forgecdn.net/files/7796/187/coroutil-neoforge-1.21.0-1.3.9.jar",
         "path": "curseforge/237749/7796187/coroutil-neoforge-1.21.0-1.3.9.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-243121:file:8895753@jar",
+      "name": "Quark-4.1-485.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 15590176,
+        "MD5": "e815269dd242eaeab4d32fc1fb8f7342",
+        "url": "https://mediafilez.forgecdn.net/files/8895/753/Quark-4.1-485.jar",
+        "path": "curseforge/243121/8895753/Quark-4.1-485.jar"
       }
     },
     {
@@ -2081,14 +2092,25 @@
       }
     },
     {
-      "id": "curseforge.project-1091339:file:8648639@jar",
-      "name": "alltheleaks-1.1.12+1.21.1-neoforge.jar",
+      "id": "curseforge.project-1091339:file:8943912@jar",
+      "name": "alltheleaks-1.1.13+1.21.1-neoforge.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 562895,
-        "MD5": "4ff7a7a894a683f16a5f64a6d99f53c2",
-        "url": "https://mediafilez.forgecdn.net/files/8648/639/alltheleaks-1.1.12%2B1.21.1-neoforge.jar",
-        "path": "curseforge/1091339/8648639/alltheleaks-1.1.12+1.21.1-neoforge.jar"
+        "size": 565062,
+        "MD5": "00af273671fee07bed717ad84cd86dfb",
+        "url": "https://mediafilez.forgecdn.net/files/8943/912/alltheleaks-1.1.13%2B1.21.1-neoforge.jar",
+        "path": "curseforge/1091339/8943912/alltheleaks-1.1.13+1.21.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge-1457764-7596654-createtransmission_zh_hk_translation.zip",
+      "name": "createtransmission_zh_hk_translation.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1040,
+        "MD5": "69119a297ab50da993212381473de327",
+        "url": "https://mediafilez.forgecdn.net/files/7596/654/createtransmission_zh_hk_translation.zip",
+        "path": "resourcepacks/createtransmission_zh_hk_translation.zip"
       }
     },
     {
@@ -2103,36 +2125,25 @@
       }
     },
     {
-      "id": "curseforge-978589-7585727-charcoal_to_coal_1.21.zip",
-      "name": "charcoal_to_coal_1.21.zip",
-      "type": "File",
+      "id": "curseforge.project-943925:file:7429011@jar",
+      "name": "[NEOFORGE][1.21.1] FTB Filter System 21.1.4",
+      "type": "ForgeMod",
       "artifact": {
-        "size": 1122,
-        "MD5": "1636677dc40d8947102bdac74a2b18fa",
-        "url": "https://mediafilez.forgecdn.net/files/7585/727/charcoal_to_coal_1.21.zip",
-        "path": "config/paxi/datapacks/charcoal_to_coal_1.21.zip"
+        "size": 211671,
+        "MD5": "3ffbb42f64dd6f7d850acb032b6eb90c",
+        "url": "https://mediafilez.forgecdn.net/files/7429/11/ftb-filter-system-neoforge-21.1.4.jar",
+        "path": "curseforge/943925/7429011/ftb-filter-system-neoforge-21.1.4.jar"
       }
     },
     {
-      "id": "curseforge-975573-5113181-createtweakedcontrollerunofficialzhhktranslationr.zip",
-      "name": "createtweakedcontrollerunofficialzhhktranslationr.zip",
-      "type": "File",
+      "id": "curseforge.project-308989:file:5694215@jar",
+      "name": "caelus-neoforge-7.0.1+1.21.1.jar",
+      "type": "ForgeMod",
       "artifact": {
-        "size": 2481,
-        "MD5": "37e4f174d29ac0bd55d1105c18a61852",
-        "url": "https://mediafilez.forgecdn.net/files/5113/181/createtweakedcontrollerunofficialzhhktranslationr.zip",
-        "path": "resourcepacks/createtweakedcontrollerunofficialzhhktranslationr.zip"
-      }
-    },
-    {
-      "id": "curseforge-1457762-7596646-create_train_parts_zh_hk.zip",
-      "name": "create_train_parts_zh_hk.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1934,
-        "MD5": "b01eabd48fae2c9f2f11cba703b56bb3",
-        "url": "https://mediafilez.forgecdn.net/files/7596/646/create_train_parts_zh_hk.zip",
-        "path": "resourcepacks/create_train_parts_zh_hk.zip"
+        "size": 50235,
+        "MD5": "d8f9e005af3644cee127d7da1fe2ed79",
+        "url": "https://mediafilez.forgecdn.net/files/5694/215/caelus-neoforge-7.0.1%2B1.21.1.jar",
+        "path": "curseforge/308989/5694215/caelus-neoforge-7.0.1+1.21.1.jar"
       }
     },
     {
@@ -2147,58 +2158,47 @@
       }
     },
     {
-      "id": "curseforge.project-885449:file:5872111@jar",
-      "name": "EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar",
+      "id": "curseforge.project-946163:file:8176502@jar",
+      "name": "dragonlib-neoforge-1.21.1-beta-3.0.28",
       "type": "ForgeMod",
       "artifact": {
-        "size": 746263,
-        "MD5": "d15a6ebe7f3011625507d610d80c039c",
-        "url": "https://mediafilez.forgecdn.net/files/5872/111/EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar",
-        "path": "curseforge/885449/5872111/EpheroLib-1.21.1-NEO-FORGE-1.2.0.jar"
+        "size": 2107270,
+        "MD5": "4c631268718d6cdb34714de2936d7a79",
+        "url": "https://mediafilez.forgecdn.net/files/8176/502/dragonlib-neoforge-1.21.1-beta-3.0.28.jar",
+        "path": "curseforge/946163/8176502/dragonlib-neoforge-1.21.1-beta-3.0.28.jar"
       }
     },
     {
-      "id": "curseforge-1456295-7588950-Create_Vibrant_Vaults_ZH_HK.zip",
-      "name": "Create_Vibrant_Vaults_ZH_HK.zip",
+      "id": "curseforge.project-858542:file:5831692@jar",
+      "name": "Searchables-neoforge-1.21.1-1.0.2.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 77326,
+        "MD5": "0a0a8665bb4d77e3f8139750cb98d9e4",
+        "url": "https://mediafilez.forgecdn.net/files/5831/692/Searchables-neoforge-1.21.1-1.0.2.jar",
+        "path": "curseforge/858542/5831692/Searchables-neoforge-1.21.1-1.0.2.jar"
+      }
+    },
+    {
+      "id": "curseforge-979544-8663871-aoc_data_1.21.1_v5.zip",
+      "name": "aoc_data_1.21.1_v5.zip",
       "type": "File",
       "artifact": {
-        "size": 2398,
-        "MD5": "382bb8e57208bc125a562c242ffb1a19",
-        "url": "https://mediafilez.forgecdn.net/files/7588/950/Create_Vibrant_Vaults_ZH_HK.zip",
-        "path": "resourcepacks/Create_Vibrant_Vaults_ZH_HK.zip"
+        "size": 458916,
+        "MD5": "0cea5ade5e5139f06d2e7a8fd305941e",
+        "url": "https://mediafilez.forgecdn.net/files/8663/871/aoc_data_1.21.1_v5.zip",
+        "path": "config/paxi/datapacks/aoc_data_1.21.1_v5.zip"
       }
     },
     {
-      "id": "curseforge.project-1477581:file:8004324@jar",
-      "name": "Create: Tradeworks [1.0.7]",
-      "type": "ForgeMod",
+      "id": "curseforge-1455793-7586163-boatload_1.21_ZH_HK_Translation.zip",
+      "name": "boatload_1.21_ZH_HK_Translation.zip",
+      "type": "File",
       "artifact": {
-        "size": 1631621,
-        "MD5": "1bbd2466d78e076647f59505b6d84126",
-        "url": "https://mediafilez.forgecdn.net/files/8004/324/tradeworks-1.0.7.jar",
-        "path": "curseforge/1477581/8004324/tradeworks-1.0.7.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1398383:file:8706168@jar",
-      "name": "Create Bits 'n' Bobs 2.2.7 NeoForge 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2506723,
-        "MD5": "8cde0c5421118b0c2de9bf8c2c3af4cd",
-        "url": "https://mediafilez.forgecdn.net/files/8706/168/bits_n_bobs-2.2.7.jar",
-        "path": "curseforge/1398383/8706168/bits_n_bobs-2.2.7.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-531834:file:8063074@jar",
-      "name": "create-confectionery1.21.1_v1.1.3b.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2127265,
-        "MD5": "4e499ff47731b598c102553205c137eb",
-        "url": "https://mediafilez.forgecdn.net/files/8063/74/create-confectionery1.21.1_v1.1.3b.jar",
-        "path": "curseforge/531834/8063074/create-confectionery1.21.1_v1.1.3b.jar"
+        "size": 1250,
+        "MD5": "8facb6026d9a3206db29d394fa41a2c4",
+        "url": "https://mediafilez.forgecdn.net/files/7586/163/boatload_1.21_ZH_HK_Translation.zip",
+        "path": "resourcepacks/boatload_1.21_ZH_HK_Translation.zip"
       }
     },
     {
@@ -2210,6 +2210,17 @@
         "MD5": "db5fe7619d502cf5b9bc972a955cd3bc",
         "url": "https://mediafilez.forgecdn.net/files/7854/442/appleskin-neoforge-mc1.21-3.0.9.jar",
         "path": "curseforge/248787/7854442/appleskin-neoforge-mc1.21-3.0.9.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-667299:file:7437845@jar",
+      "name": "3.8.2 for neoforge 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1118651,
+        "MD5": "c346120062c3364a0d215c228354030e",
+        "url": "https://mediafilez.forgecdn.net/files/7437/845/yet_another_config_lib_v3-3.8.2%2B1.21.1-neoforge.jar",
+        "path": "curseforge/667299/7437845/yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar"
       }
     },
     {
@@ -2235,6 +2246,17 @@
       }
     },
     {
+      "id": "curseforge.project-656346:file:7084444@jar",
+      "name": "LMFT Neoforge 1.1.1 for Minecraft 1.21.9",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 78624,
+        "MD5": "bbce0f41ed77cdec33fe68dd05c1ceff",
+        "url": "https://mediafilez.forgecdn.net/files/7084/444/lmft-1.1.1%2B1.21.9-neoforge.jar",
+        "path": "curseforge/656346/7084444/lmft-1.1.1+1.21.9-neoforge.jar"
+      }
+    },
+    {
       "id": "curseforge.project-309927:file:6529130@jar",
       "name": "curios-neoforge-9.5.1+1.21.1.jar",
       "type": "ForgeMod",
@@ -2257,542 +2279,14 @@
       }
     },
     {
-      "id": "curseforge.project-667299:file:7437845@jar",
-      "name": "3.8.2 for neoforge 1.21.1",
+      "id": "curseforge.project-1414959:file:8883922@jar",
+      "name": "Reliable Recipes Neoforge 1.21.1 - 3.2.0",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1118651,
-        "MD5": "c346120062c3364a0d215c228354030e",
-        "url": "https://mediafilez.forgecdn.net/files/7437/845/yet_another_config_lib_v3-3.8.2%2B1.21.1-neoforge.jar",
-        "path": "curseforge/667299/7437845/yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge-385587-8123288-ComplementaryUnbound_r5.8.1.zip",
-      "name": "Complementary Unbound r5.8.1",
-      "type": "File",
-      "artifact": {
-        "size": 546928,
-        "MD5": "0a3553109dbe689a9f76d1aedc8f50c6",
-        "url": "https://mediafilez.forgecdn.net/files/8123/288/ComplementaryUnbound_r5.8.1.zip",
-        "path": "shaderpacks/ComplementaryUnbound_r5.8.1.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-659674:file:8547315@jar",
-      "name": "Neoforge 4.3.3",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1354014,
-        "MD5": "f0ed9a88cc4b2ca56fa976933b042c3f",
-        "url": "https://mediafilez.forgecdn.net/files/8547/315/sliceanddice-4.3.3-neoforge.jar",
-        "path": "curseforge/659674/8547315/sliceanddice-4.3.3-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1316585:file:7350975@jar",
-      "name": "i_architecture-0.1.1b-1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1350779,
-        "MD5": "83971df25d5b332956f2fcefd853e8de",
-        "url": "https://mediafilez.forgecdn.net/files/7350/975/i_architecture-0.1.1b.jar",
-        "path": "curseforge/1316585/7350975/i_architecture-0.1.1b.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1414959:file:8682173@jar",
-      "name": "Reliable Recipes Neoforge 1.21.1 - 3.1.5",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 127007,
-        "MD5": "b6ad4e50564ff3553b904c3c3a770c9a",
-        "url": "https://mediafilez.forgecdn.net/files/8682/173/reliable_recipes-neoforge-1.21.1-3.1.5.jar",
-        "path": "curseforge/1414959/8682173/reliable_recipes-neoforge-1.21.1-3.1.5.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-790626:file:8459650@jar",
-      "name": "modernfix-neoforge-5.27.20+mc1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 599474,
-        "MD5": "b488341cd5172f6bb16b5ec6d0856c4d",
-        "url": "https://mediafilez.forgecdn.net/files/8459/650/modernfix-neoforge-5.27.20%2Bmc1.21.1.jar",
-        "path": "curseforge/790626/8459650/modernfix-neoforge-5.27.20+mc1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-815548:file:7802495@jar",
-      "name": "integrated_stronghold-1.1.4+1.21.1-neoforge.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 5125265,
-        "MD5": "27211eb209e71e310c93e35bd41a26c7",
-        "url": "https://mediafilez.forgecdn.net/files/7802/495/integrated_stronghold-1.1.4%2B1.21.1-neoforge.jar",
-        "path": "curseforge/815548/7802495/integrated_stronghold-1.1.4+1.21.1-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-656346:file:7084444@jar",
-      "name": "LMFT Neoforge 1.1.1 for Minecraft 1.21.9",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 78624,
-        "MD5": "bbce0f41ed77cdec33fe68dd05c1ceff",
-        "url": "https://mediafilez.forgecdn.net/files/7084/444/lmft-1.1.1%2B1.21.9-neoforge.jar",
-        "path": "curseforge/656346/7084444/lmft-1.1.1+1.21.9-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-817709:file:8636576@jar",
-      "name": "integrated_api-neoforge-1.21.1-1.8.0.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 470460,
-        "MD5": "fd8de24e1ddd9d87b8d3055e07a7884f",
-        "url": "https://mediafilez.forgecdn.net/files/8636/576/integrated_api-neoforge-1.21.1-1.8.0.jar",
-        "path": "curseforge/817709/8636576/integrated_api-neoforge-1.21.1-1.8.0.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-968398:file:8714287@jar",
-      "name": "copycats-3.0.8+mc.1.21.1-neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1799269,
-        "MD5": "af7d68d8c263810b8f21906a91990524",
-        "url": "https://mediafilez.forgecdn.net/files/8714/287/copycats-3.0.8%2Bmc.1.21.1-neoforge.jar",
-        "path": "curseforge/968398/8714287/copycats-3.0.8+mc.1.21.1-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-324717:file:8591319@jar",
-      "name": "[NeoForge 1.21.1] 15.10.6",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 726853,
-        "MD5": "67b89f182472859d1e478477716c9462",
-        "url": "https://mediafilez.forgecdn.net/files/8591/319/Jade-1.21.1-NeoForge-15.10.6.jar",
-        "path": "curseforge/324717/8591319/Jade-1.21.1-NeoForge-15.10.6.jar"
-      }
-    },
-    {
-      "id": "curseforge-870545-7568078-Create Immersive Aircrafts Datapack 1.21.1 - 3.0.zip",
-      "name": "Create Immersive Aircrafts 3.0 - Datapack (1.21.1)",
-      "type": "File",
-      "artifact": {
-        "size": 48048,
-        "MD5": "3393834ba1605dac25e78c63be6d2f81",
-        "url": "https://mediafilez.forgecdn.net/files/7568/78/Create%20Immersive%20Aircrafts%20Datapack%201.21.1%20-%203.0.zip",
-        "path": "config/paxi/datapacks/Create Immersive Aircrafts Datapack 1.21.1 - 3.0.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-936015:file:8660310@jar",
-      "name": "v1.8.0+beta4 ~ Neoforge 21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 954028,
-        "MD5": "cfbcf4d1be760ea595639cc4c5053062",
-        "url": "https://mediafilez.forgecdn.net/files/8660/310/lithostitched-1.8.0%2Bbeta4-neoforge-21.1.jar",
-        "path": "curseforge/936015/8660310/lithostitched-1.8.0+beta4-neoforge-21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-570073:file:5973188@jar",
-      "name": "[NeoForge] Resourceful Lib 3.0.12",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 484332,
-        "MD5": "32da88903167d24bb20febeeb2c79225",
-        "url": "https://mediafilez.forgecdn.net/files/5973/188/resourcefullib-neoforge-1.21-3.0.12.jar",
-        "path": "curseforge/570073/5973188/resourcefullib-neoforge-1.21-3.0.12.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1015157:file:6485740@jar",
-      "name": "[1.21.1] Paxi v5.1.3 (NeoForge)",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 102980,
-        "MD5": "c9d84fe87e9ec88825eeb3b119393125",
-        "url": "https://mediafilez.forgecdn.net/files/6485/740/Paxi-1.21.1-NeoForge-5.1.3.jar",
-        "path": "curseforge/1015157/6485740/Paxi-1.21.1-NeoForge-5.1.3.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1251719:file:6463890@jar",
-      "name": "Create: Vibrant Vaults 0.3.2",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2687938,
-        "MD5": "8fe767bf30e682d1156a379d6bdaeea2",
-        "url": "https://mediafilez.forgecdn.net/files/6463/890/create_vibrant_vaults-0.3.2.jar",
-        "path": "curseforge/1251719/6463890/create_vibrant_vaults-0.3.2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1494004:file:8557872@jar",
-      "name": "petrochem-neoforge-1.21.1-1.3.2",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1970253,
-        "MD5": "1e342c26ff43a94af7fa7eaabd8c11bd",
-        "url": "https://mediafilez.forgecdn.net/files/8557/872/petrochem-neoforge-1.21.1-1.3.2.jar",
-        "path": "curseforge/1494004/8557872/petrochem-neoforge-1.21.1-1.3.2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1529882:file:8618590@jar",
-      "name": "create_aeronautics_throwable_rope_connector-0.4.3.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 187714,
-        "MD5": "364cfe56dc98ef637f662f7fe146ade9",
-        "url": "https://mediafilez.forgecdn.net/files/8618/590/create_aeronautics_throwable_rope_connector-0.4.3.jar",
-        "path": "curseforge/1529882/8618590/create_aeronautics_throwable_rope_connector-0.4.3.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-864781:file:8037481@jar",
-      "name": "DnDesires-1.21.1-2.3a-BETA",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1249099,
-        "MD5": "8ad0a211d478de56b9df1d19c348e723",
-        "url": "https://mediafilez.forgecdn.net/files/8037/481/DnDesires-1.21.1-2.3a-BETA.jar",
-        "path": "curseforge/864781/8037481/DnDesires-1.21.1-2.3a-BETA.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-367706:file:8752297@jar",
-      "name": "[NeoForge] v3.9.12 MC 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 25912346,
-        "MD5": "c39effc7b3619d996858b5eee3b7c6f3",
-        "url": "https://mediafilez.forgecdn.net/files/8752/297/fancymenu_neoforge_3.9.12_MC_1.21.1.jar",
-        "path": "curseforge/367706/8752297/fancymenu_neoforge_3.9.12_MC_1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1317252:file:8723463@jar",
-      "name": "Create: Blocks & Bogies v1.0.8 | NeoForge | 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2618795,
-        "MD5": "198d93478e6816e64e0b5624b83633ef",
-        "url": "https://mediafilez.forgecdn.net/files/8723/463/create_bb-1.0.8-1.21.1.jar",
-        "path": "curseforge/1317252/8723463/create_bb-1.0.8-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-580689:file:6640970@jar",
-      "name": "lootintegrations-1.21.1-4.7.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 36966,
-        "MD5": "de033387fe1955841bea50360aec0315",
-        "url": "https://mediafilez.forgecdn.net/files/6640/970/lootintegrations-1.21.1-4.7.jar",
-        "path": "curseforge/580689/6640970/lootintegrations-1.21.1-4.7.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-829380:file:8549840@jar",
-      "name": "Create Encased 1.9.0-ht3 for mc1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 3110804,
-        "MD5": "04cc55211a4ea736e5a6d2ce56ce1221",
-        "url": "https://mediafilez.forgecdn.net/files/8549/840/Create%20Encased-1.21.1-1.9.0-ht3.jar",
-        "path": "curseforge/829380/8549840/Create Encased-1.21.1-1.9.0-ht3.jar"
-      }
-    },
-    {
-      "id": "curseforge-975575-5113190-handcraftedzhtwunofficialtranslation.zip",
-      "name": "handcraftedzhtwunofficialtranslation.zip",
-      "type": "File",
-      "artifact": {
-        "size": 4051,
-        "MD5": "d54cf497e228047f8c3572ca655e793c",
-        "url": "https://mediafilez.forgecdn.net/files/5113/190/handcraftedzhtwunofficialtranslation.zip",
-        "path": "resourcepacks/handcraftedzhtwunofficialtranslation.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-415974:file:8048724@jar",
-      "name": "Personality 1.21.1 - 5.0.2",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 317587,
-        "MD5": "ee9815832930fa423e071f13b767bb17",
-        "url": "https://mediafilez.forgecdn.net/files/8048/724/personality-1.21.1-5.0.2.jar",
-        "path": "curseforge/415974/8048724/personality-1.21.1-5.0.2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-968868:file:7980010@jar",
-      "name": "Zeta-1.1-40.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 763725,
-        "MD5": "cc0d6e584cfca1f1383c9f120c035c22",
-        "url": "https://mediafilez.forgecdn.net/files/7980/10/Zeta-1.1-40.jar",
-        "path": "curseforge/968868/7980010/Zeta-1.1-40.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-256717:file:5623731@jar",
-      "name": "Clumps-neoforge-1.21.1-19.0.0.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 18382,
-        "MD5": "8b42a9d7a72bde90fa061d17e2859e7b",
-        "url": "https://mediafilez.forgecdn.net/files/5623/731/Clumps-neoforge-1.21.1-19.0.0.1.jar",
-        "path": "curseforge/256717/5623731/Clumps-neoforge-1.21.1-19.0.0.1.jar"
-      }
-    },
-    {
-      "id": "curseforge-1457748-7596607-trading_floor_zh_hk.zip",
-      "name": "trading_floor_zh_hk.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1942,
-        "MD5": "155aa5dd0fc39d731ab804714511f8a2",
-        "url": "https://mediafilez.forgecdn.net/files/7596/607/trading_floor_zh_hk.zip",
-        "path": "resourcepacks/trading_floor_zh_hk.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-1355767:file:8050591@jar",
-      "name": "Create Prismatic Shine 1.2.2 Neoforge 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1287223,
-        "MD5": "14cceaaa0953aa2f78034e87c3a02813",
-        "url": "https://mediafilez.forgecdn.net/files/8050/591/createprism-1.2.2.jar",
-        "path": "curseforge/1355767/8050591/createprism-1.2.2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1294279:file:8482079@jar",
-      "name": "create_train_parts-0.5.2-1.21.1-6.0.10-281.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 3699282,
-        "MD5": "e832bd56d0eefe9fa9b0d01c56fb6a91",
-        "url": "https://mediafilez.forgecdn.net/files/8482/79/create_train_parts-0.5.2-1.21.1-6.0.10-281.jar",
-        "path": "curseforge/1294279/8482079/create_train_parts-0.5.2-1.21.1-6.0.10-281.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1216624:file:8633162@jar",
-      "name": "Create: Dragons Plus 1.11.7b for Create 1.21.1-6.0.10",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1038830,
-        "MD5": "d7a4ae525b16f4b05eb63b7e3f518128",
-        "url": "https://mediafilez.forgecdn.net/files/8633/162/CreateDragonsPlus-1.11.7b.jar",
-        "path": "curseforge/1216624/8633162/CreateDragonsPlus-1.11.7b.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-433760:file:8274908@jar",
-      "name": "1.12.4-1.21.1 - NeoForge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1939625,
-        "MD5": "c03ddc5499304f81f17be246c7e395a3",
-        "url": "https://mediafilez.forgecdn.net/files/8274/908/notenoughanimations-neoforge-1.12.4-mc1.21.1.jar",
-        "path": "curseforge/433760/8274908/notenoughanimations-neoforge-1.12.4-mc1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-623265:file:8653064@jar",
-      "name": "create_factory-0.7b-1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 212765,
-        "MD5": "8ac11f38ff8eac6b8f935e97e4687c31",
-        "url": "https://mediafilez.forgecdn.net/files/8653/64/create_factory-0.7b-1.21.1.jar",
-        "path": "curseforge/623265/8653064/create_factory-0.7b-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-959439:file:8603640@jar",
-      "name": "createfood-neoforge-1.21.1-2.7.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 9502179,
-        "MD5": "24dbe46dbcbc01d4b20799a70326635c",
-        "url": "https://mediafilez.forgecdn.net/files/8603/640/createfood-neoforge-1.21.1-2.7.1.jar",
-        "path": "curseforge/959439/8603640/createfood-neoforge-1.21.1-2.7.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-923238:file:8156977@jar",
-      "name": "Design-n-Decor-1.21.1-2.2b",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 6329899,
-        "MD5": "18a1bbc60ad9084d3bdff5eed4b8f953",
-        "url": "https://mediafilez.forgecdn.net/files/8156/977/Design-n-Decor-1.21.1-2.2b.jar",
-        "path": "curseforge/923238/8156977/Design-n-Decor-1.21.1-2.2b.jar"
-      }
-    },
-    {
-      "id": "curseforge-938959-6475177-Create_UI_1.21.zip",
-      "name": "Create UI 1.21",
-      "type": "File",
-      "artifact": {
-        "size": 389898,
-        "MD5": "32b75ab7c07108298ca6133be8116278",
-        "url": "https://mediafilez.forgecdn.net/files/6475/177/Create_UI_1.21.zip",
-        "path": "resourcepacks/Create_UI_1.21.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-682567:file:5733955@jar",
-      "name": "[NEOFORGE] [1.21.1] EasyAnvils-v21.1.0",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 152297,
-        "MD5": "869e136e160ef739bee32e4bd6860d2a",
-        "url": "https://mediafilez.forgecdn.net/files/5733/955/EasyAnvils-v21.1.0-1.21.1-NeoForge.jar",
-        "path": "curseforge/682567/5733955/EasyAnvils-v21.1.0-1.21.1-NeoForge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1288893:file:8210441@jar",
-      "name": "Aoc_Core_1.21_v2.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 353781,
-        "MD5": "4c46f27151f6965b720641ff6c6e3cf6",
-        "url": "https://mediafilez.forgecdn.net/files/8210/441/Aoc_Core_1.21_v2.jar",
-        "path": "curseforge/1288893/8210441/Aoc_Core_1.21_v2.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-882495:file:5513549@jar",
-      "name": "gpumemleakfix-1.21-1.8.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 6574,
-        "MD5": "96a47a7cff915294a949f73a5f2a8816",
-        "url": "https://mediafilez.forgecdn.net/files/5513/549/gpumemleakfix-1.21-1.8.jar",
-        "path": "curseforge/882495/5513549/gpumemleakfix-1.21-1.8.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-940057:file:6054947@jar",
-      "name": "TerraBlender NeoForge 1.21.1-4.1.0.8",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 120364,
-        "MD5": "9510cef4ca24d7f6bc3144dbf6693f7d",
-        "url": "https://mediafilez.forgecdn.net/files/6054/947/TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
-        "path": "curseforge/940057/6054947/TerraBlender-neoforge-1.21.1-4.1.0.8.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-419699:file:8492726@jar",
-      "name": "[NeoForge 1.21] v13.0.11",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 584734,
-        "MD5": "aefbea361809755c331126bcff6e6d3e",
-        "url": "https://mediafilez.forgecdn.net/files/8492/726/architectury-13.0.11-neoforge.jar",
-        "path": "curseforge/419699/8492726/architectury-13.0.11-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-495476:file:8251525@jar",
-      "name": "[NEOFORGE] [1.21.1] PuzzlesLib-v21.1.52",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1425176,
-        "MD5": "4ee80ed6cebef297e3c5a82cf7db559f",
-        "url": "https://mediafilez.forgecdn.net/files/8251/525/PuzzlesLib-v21.1.52-1.21.1-NeoForge.jar",
-        "path": "curseforge/495476/8251525/PuzzlesLib-v21.1.52-1.21.1-NeoForge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1528764:file:8464450@jar",
-      "name": "[2.1.1] Climbable Ropes",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 242108,
-        "MD5": "dadb2a05ea773c7a970aa9db2bbac663",
-        "url": "https://mediafilez.forgecdn.net/files/8464/450/climbable_ropes-2.1.1.jar",
-        "path": "curseforge/1528764/8464450/climbable_ropes-2.1.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-466792:file:8664066@jar",
-      "name": "Create S&A 1.21.1 V2.1.4b",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1347181,
-        "MD5": "58e52a7e0b880f5e4bf92bd626950750",
-        "url": "https://mediafilez.forgecdn.net/files/8664/66/create-stuff-additions1.21.1_v2.1.4b.jar",
-        "path": "curseforge/466792/8664066/create-stuff-additions1.21.1_v2.1.4b.jar"
-      }
-    },
-    {
-      "id": "curseforge-1321349-6850945-WrencheablePlanes2.0.zip",
-      "name": "WrencheablePlanes2.0.zip",
-      "type": "File",
-      "artifact": {
-        "size": 30439,
-        "MD5": "14fac27fbd7980b01a341f6ba3b5a875",
-        "url": "https://mediafilez.forgecdn.net/files/6850/945/WrencheablePlanes2.0.zip",
-        "path": "config/paxi/datapacks/WrencheablePlanes2.0.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-228525:file:7606240@jar",
-      "name": "bookshelf-neoforge-1.21.1-21.1.81.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 328813,
-        "MD5": "9f627fe031221159d74a491e279f773a",
-        "url": "https://mediafilez.forgecdn.net/files/7606/240/bookshelf-neoforge-1.21.1-21.1.81.jar",
-        "path": "curseforge/228525/7606240/bookshelf-neoforge-1.21.1-21.1.81.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-491290:file:7120722@jar",
-      "name": "smarterfarmers-1.21-2.2.4-neoforge.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 65924,
-        "MD5": "91f29b23db77eb67ef2366d05cc1cbd3",
-        "url": "https://mediafilez.forgecdn.net/files/7120/722/smarterfarmers-1.21-2.2.4-neoforge.jar",
-        "path": "curseforge/491290/7120722/smarterfarmers-1.21-2.2.4-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1443327:file:8345582@jar",
-      "name": "electroenergetics-1.21.1-1.1.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 4771388,
-        "MD5": "a400544b9647e64a1359c742c3888795",
-        "url": "https://mediafilez.forgecdn.net/files/8345/582/electroenergetics-1.21.1-1.1.1.jar",
-        "path": "curseforge/1443327/8345582/electroenergetics-1.21.1-1.1.1.jar"
-      }
-    },
-    {
-      "id": "curseforge-1455793-7586163-boatload_1.21_ZH_HK_Translation.zip",
-      "name": "boatload_1.21_ZH_HK_Translation.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1250,
-        "MD5": "8facb6026d9a3206db29d394fa41a2c4",
-        "url": "https://mediafilez.forgecdn.net/files/7586/163/boatload_1.21_ZH_HK_Translation.zip",
-        "path": "resourcepacks/boatload_1.21_ZH_HK_Translation.zip"
+        "size": 134296,
+        "MD5": "46abc13ec348382a4847d9847ba40bac",
+        "url": "https://mediafilez.forgecdn.net/files/8883/922/reliable_recipes-neoforge-1.21.1-3.2.0.jar",
+        "path": "curseforge/1414959/8883922/reliable_recipes-neoforge-1.21.1-3.2.0.jar"
       }
     },
     {
@@ -2807,6 +2301,226 @@
       }
     },
     {
+      "id": "curseforge.project-815548:file:7802495@jar",
+      "name": "integrated_stronghold-1.1.4+1.21.1-neoforge.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 5125265,
+        "MD5": "27211eb209e71e310c93e35bd41a26c7",
+        "url": "https://mediafilez.forgecdn.net/files/7802/495/integrated_stronghold-1.1.4%2B1.21.1-neoforge.jar",
+        "path": "curseforge/815548/7802495/integrated_stronghold-1.1.4+1.21.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-790626:file:8774737@jar",
+      "name": "modernfix-neoforge-5.27.24+mc1.21.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 604333,
+        "MD5": "fc329974db57c6ec176b5a8b51899b3a",
+        "url": "https://mediafilez.forgecdn.net/files/8774/737/modernfix-neoforge-5.27.24%2Bmc1.21.1.jar",
+        "path": "curseforge/790626/8774737/modernfix-neoforge-5.27.24+mc1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1316585:file:7350975@jar",
+      "name": "i_architecture-0.1.1b-1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1350779,
+        "MD5": "83971df25d5b332956f2fcefd853e8de",
+        "url": "https://mediafilez.forgecdn.net/files/7350/975/i_architecture-0.1.1b.jar",
+        "path": "curseforge/1316585/7350975/i_architecture-0.1.1b.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-817709:file:8943419@jar",
+      "name": "integrated_api-neoforge-1.21.1-1.9.0.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 483960,
+        "MD5": "463a21f9be8513817c3525ad67470b38",
+        "url": "https://mediafilez.forgecdn.net/files/8943/419/integrated_api-neoforge-1.21.1-1.9.0.jar",
+        "path": "curseforge/817709/8943419/integrated_api-neoforge-1.21.1-1.9.0.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-659674:file:8929365@jar",
+      "name": "Neoforge 4.3.4",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1356389,
+        "MD5": "6bec2b5c7f6629da1d0cc78298e7501c",
+        "url": "https://mediafilez.forgecdn.net/files/8929/365/sliceanddice-4.3.4-neoforge.jar",
+        "path": "curseforge/659674/8929365/sliceanddice-4.3.4-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-324717:file:8591319@jar",
+      "name": "[NeoForge 1.21.1] 15.10.6",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 726853,
+        "MD5": "67b89f182472859d1e478477716c9462",
+        "url": "https://mediafilez.forgecdn.net/files/8591/319/Jade-1.21.1-NeoForge-15.10.6.jar",
+        "path": "curseforge/324717/8591319/Jade-1.21.1-NeoForge-15.10.6.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-936015:file:8944659@jar",
+      "name": "v1.8.0 ~ Neoforge 21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 979783,
+        "MD5": "0d62d726e64ca1e36f5267da597d9371",
+        "url": "https://mediafilez.forgecdn.net/files/8944/659/lithostitched-1.8.0-neoforge-21.1.jar",
+        "path": "curseforge/936015/8944659/lithostitched-1.8.0-neoforge-21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-968398:file:8822348@jar",
+      "name": "copycats-3.0.9+mc.1.21.1-neoforge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1799381,
+        "MD5": "e817b77c897d6f3ce7dd8ef4fd38a289",
+        "url": "https://mediafilez.forgecdn.net/files/8822/348/copycats-3.0.9%2Bmc.1.21.1-neoforge.jar",
+        "path": "curseforge/968398/8822348/copycats-3.0.9+mc.1.21.1-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-570073:file:5973188@jar",
+      "name": "[NeoForge] Resourceful Lib 3.0.12",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 484332,
+        "MD5": "32da88903167d24bb20febeeb2c79225",
+        "url": "https://mediafilez.forgecdn.net/files/5973/188/resourcefullib-neoforge-1.21-3.0.12.jar",
+        "path": "curseforge/570073/5973188/resourcefullib-neoforge-1.21-3.0.12.jar"
+      }
+    },
+    {
+      "id": "curseforge-385587-8884656-ComplementaryUnbound_r5.9.3.zip",
+      "name": "Complementary Unbound r5.9.3",
+      "type": "File",
+      "artifact": {
+        "size": 553400,
+        "MD5": "e9c0e174f43125d45b192ef684f5d4d4",
+        "url": "https://mediafilez.forgecdn.net/files/8884/656/ComplementaryUnbound_r5.9.3.zip",
+        "path": "shaderpacks/ComplementaryUnbound_r5.9.3.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-1015157:file:6485740@jar",
+      "name": "[1.21.1] Paxi v5.1.3 (NeoForge)",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 102980,
+        "MD5": "c9d84fe87e9ec88825eeb3b119393125",
+        "url": "https://mediafilez.forgecdn.net/files/6485/740/Paxi-1.21.1-NeoForge-5.1.3.jar",
+        "path": "curseforge/1015157/6485740/Paxi-1.21.1-NeoForge-5.1.3.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1529882:file:8618590@jar",
+      "name": "create_aeronautics_throwable_rope_connector-0.4.3.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 187714,
+        "MD5": "364cfe56dc98ef637f662f7fe146ade9",
+        "url": "https://mediafilez.forgecdn.net/files/8618/590/create_aeronautics_throwable_rope_connector-0.4.3.jar",
+        "path": "curseforge/1529882/8618590/create_aeronautics_throwable_rope_connector-0.4.3.jar"
+      }
+    },
+    {
+      "id": "curseforge-870545-7568078-Create Immersive Aircrafts Datapack 1.21.1 - 3.0.zip",
+      "name": "Create Immersive Aircrafts 3.0 - Datapack (1.21.1)",
+      "type": "File",
+      "artifact": {
+        "size": 48048,
+        "MD5": "3393834ba1605dac25e78c63be6d2f81",
+        "url": "https://mediafilez.forgecdn.net/files/7568/78/Create%20Immersive%20Aircrafts%20Datapack%201.21.1%20-%203.0.zip",
+        "path": "config/paxi/datapacks/Create Immersive Aircrafts Datapack 1.21.1 - 3.0.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-367706:file:9002957@jar",
+      "name": "[NeoForge] v3.9.14 MC 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 25922080,
+        "MD5": "d3619a53a017661c51375f20abc13c20",
+        "url": "https://mediafilez.forgecdn.net/files/9002/957/fancymenu_neoforge_3.9.14_MC_1.21.1.jar",
+        "path": "curseforge/367706/9002957/fancymenu_neoforge_3.9.14_MC_1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1494004:file:8926887@jar",
+      "name": "petrochem-neoforge-1.21.1-1.3.3.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1984887,
+        "MD5": "3f6a8dc5caf5430be287f5fd0c862667",
+        "url": "https://mediafilez.forgecdn.net/files/8926/887/petrochem-neoforge-1.21.1-1.3.3.jar",
+        "path": "curseforge/1494004/8926887/petrochem-neoforge-1.21.1-1.3.3.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1251719:file:6463890@jar",
+      "name": "Create: Vibrant Vaults 0.3.2",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 2687938,
+        "MD5": "8fe767bf30e682d1156a379d6bdaeea2",
+        "url": "https://mediafilez.forgecdn.net/files/6463/890/create_vibrant_vaults-0.3.2.jar",
+        "path": "curseforge/1251719/6463890/create_vibrant_vaults-0.3.2.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-864781:file:8037481@jar",
+      "name": "DnDesires-1.21.1-2.3a-BETA",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1249099,
+        "MD5": "8ad0a211d478de56b9df1d19c348e723",
+        "url": "https://mediafilez.forgecdn.net/files/8037/481/DnDesires-1.21.1-2.3a-BETA.jar",
+        "path": "curseforge/864781/8037481/DnDesires-1.21.1-2.3a-BETA.jar"
+      }
+    },
+    {
+      "id": "curseforge-975575-5113190-handcraftedzhtwunofficialtranslation.zip",
+      "name": "handcraftedzhtwunofficialtranslation.zip",
+      "type": "File",
+      "artifact": {
+        "size": 4051,
+        "MD5": "d54cf497e228047f8c3572ca655e793c",
+        "url": "https://mediafilez.forgecdn.net/files/5113/190/handcraftedzhtwunofficialtranslation.zip",
+        "path": "resourcepacks/handcraftedzhtwunofficialtranslation.zip"
+      }
+    },
+    {
+      "id": "curseforge-1321349-6850945-WrencheablePlanes2.0.zip",
+      "name": "WrencheablePlanes2.0.zip",
+      "type": "File",
+      "artifact": {
+        "size": 30439,
+        "MD5": "14fac27fbd7980b01a341f6ba3b5a875",
+        "url": "https://mediafilez.forgecdn.net/files/6850/945/WrencheablePlanes2.0.zip",
+        "path": "config/paxi/datapacks/WrencheablePlanes2.0.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-1317252:file:8723463@jar",
+      "name": "Create: Blocks & Bogies v1.0.8 | NeoForge | 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 2618795,
+        "MD5": "198d93478e6816e64e0b5624b83633ef",
+        "url": "https://mediafilez.forgecdn.net/files/8723/463/create_bb-1.0.8-1.21.1.jar",
+        "path": "curseforge/1317252/8723463/create_bb-1.0.8-1.21.1.jar"
+      }
+    },
+    {
       "id": "curseforge.project-1193454:file:6164360@jar",
       "name": "ChunkActivityTracker Neoforge 1.0.1 for 1.21.1",
       "type": "ForgeMod",
@@ -2818,58 +2532,377 @@
       }
     },
     {
-      "id": "curseforge.project-388172:file:8350073@jar",
-      "name": "NeoForge 1.21.1 4.9.2",
+      "id": "curseforge.project-415974:file:8048724@jar",
+      "name": "Personality 1.21.1 - 5.0.2",
       "type": "ForgeMod",
       "artifact": {
-        "size": 630584,
-        "MD5": "5cf29155ad6071b5dcba2ea24cd27350",
-        "url": "https://mediafilez.forgecdn.net/files/8350/73/geckolib-neoforge-1.21.1-4.9.2.jar",
-        "path": "curseforge/388172/8350073/geckolib-neoforge-1.21.1-4.9.2.jar"
+        "size": 317587,
+        "MD5": "ee9815832930fa423e071f13b767bb17",
+        "url": "https://mediafilez.forgecdn.net/files/8048/724/personality-1.21.1-5.0.2.jar",
+        "path": "curseforge/415974/8048724/personality-1.21.1-5.0.2.jar"
       }
     },
     {
-      "id": "curseforge.project-551894:file:7404415@jar",
-      "name": "Better Compatability Checker - 21.1.8 - NeoForge",
+      "id": "curseforge.project-1355767:file:9008802@jar",
+      "name": "Create Prismatic Shine 1.2.3 Neoforge 1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 25085,
-        "MD5": "0976995753b9426ecb11d189bfe9714d",
-        "url": "https://mediafilez.forgecdn.net/files/7404/415/better-compatability-checker-neoforge-21.1.8.jar",
-        "path": "curseforge/551894/7404415/better-compatability-checker-neoforge-21.1.8.jar"
+        "size": 1304089,
+        "MD5": "d1203ea283936f871a0eb8a989a8986f",
+        "url": "https://mediafilez.forgecdn.net/files/9008/802/createprism-1.2.3.jar",
+        "path": "curseforge/1355767/9008802/createprism-1.2.3.jar"
       }
     },
     {
-      "id": "curseforge.project-539057:file:7143451@jar",
-      "name": "[NEOFORGE] [1.21.1] TradingPost-v21.1.1",
+      "id": "curseforge.project-433760:file:8925075@jar",
+      "name": "1.12.6-1.21.1 - NeoForge",
       "type": "ForgeMod",
       "artifact": {
-        "size": 121731,
-        "MD5": "ebb9adcccccb4267f140b5524228257b",
-        "url": "https://mediafilez.forgecdn.net/files/7143/451/TradingPost-v21.1.1-1.21.1-NeoForge.jar",
-        "path": "curseforge/539057/7143451/TradingPost-v21.1.1-1.21.1-NeoForge.jar"
+        "size": 1866035,
+        "MD5": "05c1ab42ea74d2da604030a4a3176ebd",
+        "url": "https://mediafilez.forgecdn.net/files/8925/75/notenoughanimations-neoforge-1.12.6-mc1.21.1.jar",
+        "path": "curseforge/433760/8925075/notenoughanimations-neoforge-1.12.6-mc1.21.1.jar"
       }
     },
     {
-      "id": "curseforge.project-1420447:file:8651826@jar",
-      "name": "Reliable Remover Neoforge 1.21.1 - 2.12.1",
+      "id": "curseforge.project-968868:file:7980010@jar",
+      "name": "Zeta-1.1-40.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 137893,
-        "MD5": "1473f61d5e6ba30e3df7c83d7f7e4756",
-        "url": "https://mediafilez.forgecdn.net/files/8651/826/reliable_remover-neoforge-1.21.1-2.12.1.jar",
-        "path": "curseforge/1420447/8651826/reliable_remover-neoforge-1.21.1-2.12.1.jar"
+        "size": 763725,
+        "MD5": "cc0d6e584cfca1f1383c9f120c035c22",
+        "url": "https://mediafilez.forgecdn.net/files/7980/10/Zeta-1.1-40.jar",
+        "path": "curseforge/968868/7980010/Zeta-1.1-40.jar"
       }
     },
     {
-      "id": "curseforge.project-411816:file:8489200@jar",
-      "name": "[1.18.2 - 26.2] Simple RPC Universal 4.1.4",
+      "id": "curseforge.project-1294279:file:8482079@jar",
+      "name": "create_train_parts-0.5.2-1.21.1-6.0.10-281.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 716599,
-        "MD5": "4623e1d59a3831e8b575168ed5a7baa4",
-        "url": "https://mediafilez.forgecdn.net/files/8489/200/SimpleRPC-4.1.4.jar",
-        "path": "curseforge/411816/8489200/SimpleRPC-4.1.4.jar"
+        "size": 3699282,
+        "MD5": "e832bd56d0eefe9fa9b0d01c56fb6a91",
+        "url": "https://mediafilez.forgecdn.net/files/8482/79/create_train_parts-0.5.2-1.21.1-6.0.10-281.jar",
+        "path": "curseforge/1294279/8482079/create_train_parts-0.5.2-1.21.1-6.0.10-281.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-959439:file:8995951@jar",
+      "name": "createfood-neoforge-1.21.1-3.0.0.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 11968172,
+        "MD5": "ce1eb69634525cd3f5bf94932e99fde9",
+        "url": "https://mediafilez.forgecdn.net/files/8995/951/createfood-neoforge-1.21.1-3.0.0.jar",
+        "path": "curseforge/959439/8995951/createfood-neoforge-1.21.1-3.0.0.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-888790:file:7920161@jar",
+      "name": "clientcrafting-1.21-2.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 7144,
+        "MD5": "09e8c9e83844ea5a9b1a569b8c14f515",
+        "url": "https://mediafilez.forgecdn.net/files/7920/161/clientcrafting-1.21-2.1.jar",
+        "path": "curseforge/888790/7920161/clientcrafting-1.21-2.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1216624:file:8900055@jar",
+      "name": "Create: Dragons Plus 1.11.9 for Create 1.21.1-6.0.10",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1085674,
+        "MD5": "bdb66a5991de6c6ee792e14bdaeda02a",
+        "url": "https://mediafilez.forgecdn.net/files/8900/55/CreateDragonsPlus-1.11.9.jar",
+        "path": "curseforge/1216624/8900055/CreateDragonsPlus-1.11.9.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-923238:file:8156977@jar",
+      "name": "Design-n-Decor-1.21.1-2.2b",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 6329899,
+        "MD5": "18a1bbc60ad9084d3bdff5eed4b8f953",
+        "url": "https://mediafilez.forgecdn.net/files/8156/977/Design-n-Decor-1.21.1-2.2b.jar",
+        "path": "curseforge/923238/8156977/Design-n-Decor-1.21.1-2.2b.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-256717:file:5623731@jar",
+      "name": "Clumps-neoforge-1.21.1-19.0.0.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 18382,
+        "MD5": "8b42a9d7a72bde90fa061d17e2859e7b",
+        "url": "https://mediafilez.forgecdn.net/files/5623/731/Clumps-neoforge-1.21.1-19.0.0.1.jar",
+        "path": "curseforge/256717/5623731/Clumps-neoforge-1.21.1-19.0.0.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1288893:file:8210441@jar",
+      "name": "Aoc_Core_1.21_v2.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 353781,
+        "MD5": "4c46f27151f6965b720641ff6c6e3cf6",
+        "url": "https://mediafilez.forgecdn.net/files/8210/441/Aoc_Core_1.21_v2.jar",
+        "path": "curseforge/1288893/8210441/Aoc_Core_1.21_v2.jar"
+      }
+    },
+    {
+      "id": "curseforge-1457748-7596607-trading_floor_zh_hk.zip",
+      "name": "trading_floor_zh_hk.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1942,
+        "MD5": "155aa5dd0fc39d731ab804714511f8a2",
+        "url": "https://mediafilez.forgecdn.net/files/7596/607/trading_floor_zh_hk.zip",
+        "path": "resourcepacks/trading_floor_zh_hk.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-491290:file:7120722@jar",
+      "name": "smarterfarmers-1.21-2.2.4-neoforge.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 65924,
+        "MD5": "91f29b23db77eb67ef2366d05cc1cbd3",
+        "url": "https://mediafilez.forgecdn.net/files/7120/722/smarterfarmers-1.21-2.2.4-neoforge.jar",
+        "path": "curseforge/491290/7120722/smarterfarmers-1.21-2.2.4-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1420447:file:8855008@jar",
+      "name": "Reliable Remover Neoforge 1.21.1 - 3.1.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 142919,
+        "MD5": "2c41397fddb5dec5e21d5c1610c32ae8",
+        "url": "https://mediafilez.forgecdn.net/files/8855/8/reliable_remover-neoforge-1.21.1-3.1.1.jar",
+        "path": "curseforge/1420447/8855008/reliable_remover-neoforge-1.21.1-3.1.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-419699:file:8492726@jar",
+      "name": "[NeoForge 1.21] v13.0.11",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 584734,
+        "MD5": "aefbea361809755c331126bcff6e6d3e",
+        "url": "https://mediafilez.forgecdn.net/files/8492/726/architectury-13.0.11-neoforge.jar",
+        "path": "curseforge/419699/8492726/architectury-13.0.11-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-682567:file:5733955@jar",
+      "name": "[NEOFORGE] [1.21.1] EasyAnvils-v21.1.0",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 152297,
+        "MD5": "869e136e160ef739bee32e4bd6860d2a",
+        "url": "https://mediafilez.forgecdn.net/files/5733/955/EasyAnvils-v21.1.0-1.21.1-NeoForge.jar",
+        "path": "curseforge/682567/5733955/EasyAnvils-v21.1.0-1.21.1-NeoForge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-228525:file:7606240@jar",
+      "name": "bookshelf-neoforge-1.21.1-21.1.81.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 328813,
+        "MD5": "9f627fe031221159d74a491e279f773a",
+        "url": "https://mediafilez.forgecdn.net/files/7606/240/bookshelf-neoforge-1.21.1-21.1.81.jar",
+        "path": "curseforge/228525/7606240/bookshelf-neoforge-1.21.1-21.1.81.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-940057:file:6054947@jar",
+      "name": "TerraBlender NeoForge 1.21.1-4.1.0.8",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 120364,
+        "MD5": "9510cef4ca24d7f6bc3144dbf6693f7d",
+        "url": "https://mediafilez.forgecdn.net/files/6054/947/TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
+        "path": "curseforge/940057/6054947/TerraBlender-neoforge-1.21.1-4.1.0.8.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-466792:file:8664066@jar",
+      "name": "Create S&A 1.21.1 V2.1.4b",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1347181,
+        "MD5": "58e52a7e0b880f5e4bf92bd626950750",
+        "url": "https://mediafilez.forgecdn.net/files/8664/66/create-stuff-additions1.21.1_v2.1.4b.jar",
+        "path": "curseforge/466792/8664066/create-stuff-additions1.21.1_v2.1.4b.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-495476:file:9007719@jar",
+      "name": "v21.1.62-mc1.21.1+neoforge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1450242,
+        "MD5": "532e956c30ea0db5ed3852027ce304f1",
+        "url": "https://mediafilez.forgecdn.net/files/9007/719/puzzleslib-v21.1.62-mc1.21.1%2Bneoforge.jar",
+        "path": "curseforge/495476/9007719/puzzleslib-v21.1.62-mc1.21.1+neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-882495:file:5513549@jar",
+      "name": "gpumemleakfix-1.21-1.8.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 6574,
+        "MD5": "96a47a7cff915294a949f73a5f2a8816",
+        "url": "https://mediafilez.forgecdn.net/files/5513/549/gpumemleakfix-1.21-1.8.jar",
+        "path": "curseforge/882495/5513549/gpumemleakfix-1.21-1.8.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-829380:file:8549840@jar",
+      "name": "Create Encased 1.9.0-ht3 for mc1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 3110804,
+        "MD5": "04cc55211a4ea736e5a6d2ce56ce1221",
+        "url": "https://mediafilez.forgecdn.net/files/8549/840/Create%20Encased-1.21.1-1.9.0-ht3.jar",
+        "path": "curseforge/829380/8549840/Create Encased-1.21.1-1.9.0-ht3.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1443327:file:8974177@jar",
+      "name": "electroenergetics-1.21.1-1.1.2.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 4774551,
+        "MD5": "4cc3e6febdffd53dc6a285bbee368370",
+        "url": "https://mediafilez.forgecdn.net/files/8974/177/electroenergetics-1.21.1-1.1.2.jar",
+        "path": "curseforge/1443327/8974177/electroenergetics-1.21.1-1.1.2.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-388172:file:8893490@jar",
+      "name": "NeoForge 1.21.1 4.9.3",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 634531,
+        "MD5": "ddb8a5ef680c3a1df09ef98dc8b7c116",
+        "url": "https://mediafilez.forgecdn.net/files/8893/490/geckolib-neoforge-1.21.1-4.9.3.jar",
+        "path": "curseforge/388172/8893490/geckolib-neoforge-1.21.1-4.9.3.jar"
+      }
+    },
+    {
+      "id": "curseforge-938959-6475177-Create_UI_1.21.zip",
+      "name": "Create UI 1.21",
+      "type": "File",
+      "artifact": {
+        "size": 389898,
+        "MD5": "32b75ab7c07108298ca6133be8116278",
+        "url": "https://mediafilez.forgecdn.net/files/6475/177/Create_UI_1.21.zip",
+        "path": "resourcepacks/Create_UI_1.21.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-1601871:file:8655742@jar",
+      "name": "Create: Coasters Simulated 0.1.5",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1892119,
+        "MD5": "629039056d8cebd6be7321c359073fdc",
+        "url": "https://mediafilez.forgecdn.net/files/8655/742/simulatedcoasters-0.1.5.jar",
+        "path": "curseforge/1601871/8655742/simulatedcoasters-0.1.5.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-531834:file:8063074@jar",
+      "name": "create-confectionery1.21.1_v1.1.3b.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 2127265,
+        "MD5": "4e499ff47731b598c102553205c137eb",
+        "url": "https://mediafilez.forgecdn.net/files/8063/74/create-confectionery1.21.1_v1.1.3b.jar",
+        "path": "curseforge/531834/8063074/create-confectionery1.21.1_v1.1.3b.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1398383:file:8886545@jar",
+      "name": "Create Bits 'n' Bobs 2.3.5 NeoForge 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 2433531,
+        "MD5": "95d18ce1642079cf05ebfd2ad8883cff",
+        "url": "https://mediafilez.forgecdn.net/files/8886/545/bits_n_bobs-2.3.5.jar",
+        "path": "curseforge/1398383/8886545/bits_n_bobs-2.3.5.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1528764:file:8976817@jar",
+      "name": "[2.1.4] Climbable Ropes",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 256035,
+        "MD5": "6adfef97fd46bac10775aceca2918ab2",
+        "url": "https://mediafilez.forgecdn.net/files/8976/817/climbable_ropes-2.1.4.jar",
+        "path": "curseforge/1528764/8976817/climbable_ropes-2.1.4.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1206505:file:7088011@jar",
+      "name": "create_generators-1.2.5-neoforge-1.21.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 215204,
+        "MD5": "80c22e1d34d82440c5f778c80ea893fa",
+        "url": "https://mediafilez.forgecdn.net/files/7088/11/create_generators-1.2.5-neoforge-1.21.1.jar",
+        "path": "curseforge/1206505/7088011/create_generators-1.2.5-neoforge-1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-317780:file:8849973@jar",
+      "name": "xaeroworldmap-neoforge-1.21.1-1.46.0.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1422680,
+        "MD5": "d3958f10d39f6ee0c5f9cdcb49937b92",
+        "url": "https://mediafilez.forgecdn.net/files/8849/973/xaeroworldmap-neoforge-1.21.1-1.46.0.jar",
+        "path": "curseforge/317780/8849973/xaeroworldmap-neoforge-1.21.1-1.46.0.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1530988:file:8681404@jar",
+      "name": "sablejade-1.3.0.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 301532,
+        "MD5": "1d987ab5865d890c88ffd7664644a778",
+        "url": "https://mediafilez.forgecdn.net/files/8681/404/sablejade-1.3.0.jar",
+        "path": "curseforge/1530988/8681404/sablejade-1.3.0.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-905040:file:6299879@jar",
+      "name": "bellsandwhistles-0.4.7-1.21.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 193619,
+        "MD5": "5f4d8adfa8bf7407fb387a93ea408848",
+        "url": "https://mediafilez.forgecdn.net/files/6299/879/bellsandwhistles-0.4.7-1.21.1.jar",
+        "path": "curseforge/905040/6299879/bellsandwhistles-0.4.7-1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-500273:file:8793655@jar",
+      "name": "[NEOFORGE] [1.21.1] v21.1.2",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 76670,
+        "MD5": "d92af902a6878dab64fa35f5723bf461",
+        "url": "https://mediafilez.forgecdn.net/files/8793/655/VisualWorkbench-v21.1.2-1.21.1-NeoForge.jar",
+        "path": "curseforge/500273/8793655/VisualWorkbench-v21.1.2-1.21.1-NeoForge.jar"
       }
     },
     {
@@ -2884,28 +2917,6 @@
       }
     },
     {
-      "id": "curseforge.project-1541139:file:8158810@jar",
-      "name": "SableStuffAdditionsCompat v1.0.3-1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 30346,
-        "MD5": "46ced46b15cbdb852d2100aaec091414",
-        "url": "https://mediafilez.forgecdn.net/files/8158/810/SableStuffAdditionsCompat%20v1.0.3-1.21.1.jar",
-        "path": "curseforge/1541139/8158810/SableStuffAdditionsCompat v1.0.3-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-500273:file:6798196@jar",
-      "name": "[NEOFORGE] [1.21.1] VisualWorkbench-v21.1.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 81945,
-        "MD5": "8baebdd1f10920df0850206c13ed6b7b",
-        "url": "https://mediafilez.forgecdn.net/files/6798/196/VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar",
-        "path": "curseforge/500273/6798196/VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar"
-      }
-    },
-    {
       "id": "curseforge.project-1592344:file:8603518@jar",
       "name": "SnAssets - General - V3",
       "type": "ForgeMod",
@@ -2914,6 +2925,17 @@
         "MD5": "4c702a3dc2f03130f28484744007db18",
         "url": "https://mediafilez.forgecdn.net/files/8603/518/snassets-1.0.2.jar",
         "path": "curseforge/1592344/8603518/snassets-1.0.2.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1541139:file:9000433@jar",
+      "name": "SableStuffAdditionsCompat v1.0.4-1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 34881,
+        "MD5": "308c6b13105f3de9276416eb9811c9f3",
+        "url": "https://mediafilez.forgecdn.net/files/9000/433/sable_sa_compat-1.0.4.jar",
+        "path": "curseforge/1541139/9000433/sable_sa_compat-1.0.4.jar"
       }
     },
     {
@@ -2950,14 +2972,25 @@
       }
     },
     {
-      "id": "curseforge.project-844662:file:8063559@jar",
-      "name": "3.2.4-neoforge-1.21",
+      "id": "curseforge.project-844662:file:8909425@jar",
+      "name": "3.3.9-neoforge-1.21",
       "type": "ForgeMod",
       "artifact": {
-        "size": 567827,
-        "MD5": "b7f1c8a4f16281fa69b9e09e8154544b",
-        "url": "https://mediafilez.forgecdn.net/files/8063/559/entity_model_features-3.2.4-1.21-neoforge.jar",
-        "path": "curseforge/844662/8063559/entity_model_features-3.2.4-1.21-neoforge.jar"
+        "size": 641785,
+        "MD5": "16013cf5a76cf436bafea125aed2cc33",
+        "url": "https://mediafilez.forgecdn.net/files/8909/425/entity_model_features-3.3.9-1.21-neoforge.jar",
+        "path": "curseforge/844662/8909425/entity_model_features-3.3.9-1.21-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1320903:file:7444038@jar",
+      "name": "create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 768288,
+        "MD5": "2fe409afb7cda9dfc8a93d138331aa56",
+        "url": "https://mediafilez.forgecdn.net/files/7444/38/create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar",
+        "path": "curseforge/1320903/7444038/create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar"
       }
     },
     {
@@ -2983,39 +3016,6 @@
       }
     },
     {
-      "id": "curseforge.project-1320903:file:7444038@jar",
-      "name": "create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 768288,
-        "MD5": "2fe409afb7cda9dfc8a93d138331aa56",
-        "url": "https://mediafilez.forgecdn.net/files/7444/38/create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar",
-        "path": "curseforge/1320903/7444038/create_blaze_burner_fuels-1.0.2-neoforge-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-582327:file:6296628@jar",
-      "name": "smoothchunk-1.21-4.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 12852,
-        "MD5": "a3c55088f5e9b228e8e94ae20e639a7a",
-        "url": "https://mediafilez.forgecdn.net/files/6296/628/smoothchunk-1.21-4.1.jar",
-        "path": "curseforge/582327/6296628/smoothchunk-1.21-4.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-271740:file:6751464@jar",
-      "name": "ToastControl-1.21.1-9.0.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 21079,
-        "MD5": "1f83b8749f48753bb50d9e22e5f6706c",
-        "url": "https://mediafilez.forgecdn.net/files/6751/464/ToastControl-1.21.1-9.0.1.jar",
-        "path": "curseforge/271740/6751464/ToastControl-1.21.1-9.0.1.jar"
-      }
-    },
-    {
       "id": "curseforge.project-1191845:file:6148845@jar",
       "name": "Redirected Neoforge 1.0.0 for 1.21.1",
       "type": "ForgeMod",
@@ -3024,6 +3024,17 @@
         "MD5": "8cdabfc021f961363b24f1abe57a4fb2",
         "url": "https://mediafilez.forgecdn.net/files/6148/845/redirected-neoforge-1.0.0-1.21.1.jar",
         "path": "curseforge/1191845/6148845/redirected-neoforge-1.0.0-1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-889915:file:8909889@jar",
+      "name": "[NEOFORGE][1.21.1] FTB XMod Compat 21.1.12",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 148575,
+        "MD5": "1cabb5550348a77420405737e344029a",
+        "url": "https://mediafilez.forgecdn.net/files/8909/889/ftb-xmod-compat-neoforge-21.1.12.jar",
+        "path": "curseforge/889915/8909889/ftb-xmod-compat-neoforge-21.1.12.jar"
       }
     },
     {
@@ -3038,14 +3049,25 @@
       }
     },
     {
-      "id": "curseforge.project-889915:file:8653466@jar",
-      "name": "[NEOFORGE][1.21.1] FTB XMod Compat 21.1.11",
+      "id": "curseforge.project-271740:file:6751464@jar",
+      "name": "ToastControl-1.21.1-9.0.1.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 153045,
-        "MD5": "90d332cdedbdc6babe722a008eb3163b",
-        "url": "https://mediafilez.forgecdn.net/files/8653/466/ftb-xmod-compat-neoforge-21.1.11.jar",
-        "path": "curseforge/889915/8653466/ftb-xmod-compat-neoforge-21.1.11.jar"
+        "size": 21079,
+        "MD5": "1f83b8749f48753bb50d9e22e5f6706c",
+        "url": "https://mediafilez.forgecdn.net/files/6751/464/ToastControl-1.21.1-9.0.1.jar",
+        "path": "curseforge/271740/6751464/ToastControl-1.21.1-9.0.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-499980:file:8981395@jar",
+      "name": "moonlight-1.21.1-3.7.0-neoforge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 2298394,
+        "MD5": "4d026ca6821138e3ed72b4955206b06b",
+        "url": "https://mediafilez.forgecdn.net/files/8981/395/moonlight-1.21.1-3.7.0-neoforge.jar",
+        "path": "curseforge/499980/8981395/moonlight-1.21.1-3.7.0-neoforge.jar"
       }
     },
     {
@@ -3060,72 +3082,6 @@
       }
     },
     {
-      "id": "curseforge.project-499980:file:8749776@jar",
-      "name": "moonlight-1.21.1-3.5.2-neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2201061,
-        "MD5": "6f84449a0cef44b70a51bee9f77e5c67",
-        "url": "https://mediafilez.forgecdn.net/files/8749/776/moonlight-1.21.1-3.5.2-neoforge.jar",
-        "path": "curseforge/499980/8749776/moonlight-1.21.1-3.5.2-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge-951232-5136274-AOC Resources.zip",
-      "name": "AOC Resources.zip",
-      "type": "File",
-      "artifact": {
-        "size": 453964,
-        "MD5": "2f487ef132b11735f8532b48f564b818",
-        "url": "https://mediafilez.forgecdn.net/files/5136/274/AOC%20Resources.zip",
-        "path": "resourcepacks/AOC Resources.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-412082:file:8757040@jar",
-      "name": "supplementaries-1.21.1-3.9.5-neoforge",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 13528390,
-        "MD5": "fa22b4316e903e738a8ffcc5083fc32b",
-        "url": "https://mediafilez.forgecdn.net/files/8757/40/supplementaries-1.21.1-3.9.5-neoforge.jar",
-        "path": "curseforge/412082/8757040/supplementaries-1.21.1-3.9.5-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-966104:file:7287996@jar",
-      "name": "createmetalwork-2.0.0.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 739966,
-        "MD5": "ecf72b1c4241b4d3404719baba21af52",
-        "url": "https://mediafilez.forgecdn.net/files/7287/996/createmetalwork-2.0.0.jar",
-        "path": "curseforge/966104/7287996/createmetalwork-2.0.0.jar"
-      }
-    },
-    {
-      "id": "curseforge-964705-5707673-Create_Addons_Fix_v1.zip",
-      "name": "Create_Addons_Fix_v1.zip",
-      "type": "File",
-      "artifact": {
-        "size": 1868,
-        "MD5": "739b7ff8ff2528d23150573469b6b8df",
-        "url": "https://mediafilez.forgecdn.net/files/5707/673/Create_Addons_Fix_v1.zip",
-        "path": "resourcepacks/Create_Addons_Fix_v1.zip"
-      }
-    },
-    {
-      "id": "curseforge-979544-8663871-aoc_data_1.21.1_v5.zip",
-      "name": "aoc_data_1.21.1_v5.zip",
-      "type": "File",
-      "artifact": {
-        "size": 458916,
-        "MD5": "0cea5ade5e5139f06d2e7a8fd305941e",
-        "url": "https://mediafilez.forgecdn.net/files/8663/871/aoc_data_1.21.1_v5.zip",
-        "path": "config/paxi/datapacks/aoc_data_1.21.1_v5.zip"
-      }
-    },
-    {
       "id": "curseforge.project-953126:file:8394637@jar",
       "name": "[Neoforge] Create: Framed 1.8.2 for mc1.21.1",
       "type": "ForgeMod",
@@ -3137,201 +3093,36 @@
       }
     },
     {
-      "id": "curseforge.project-634062:file:5885735@jar",
-      "name": "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+      "id": "curseforge.project-582327:file:6296628@jar",
+      "name": "smoothchunk-1.21-4.1.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 306668,
-        "MD5": "07496752e6b64dd33d68cd5166818402",
-        "url": "https://mediafilez.forgecdn.net/files/5885/735/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
-        "path": "curseforge/634062/5885735/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar"
+        "size": 12852,
+        "MD5": "a3c55088f5e9b228e8e94ae20e639a7a",
+        "url": "https://mediafilez.forgecdn.net/files/6296/628/smoothchunk-1.21-4.1.jar",
+        "path": "curseforge/582327/6296628/smoothchunk-1.21-4.1.jar"
       }
     },
     {
-      "id": "curseforge.project-1232978:file:8502329@jar",
-      "name": "Create: Mobile Packages 1.21.1-0.7.7",
+      "id": "curseforge.project-412082:file:8852720@jar",
+      "name": "supplementaries-1.21.1-3.9.9-neoforge",
       "type": "ForgeMod",
       "artifact": {
-        "size": 605614,
-        "MD5": "0942887cdf3edca4030eb8cc45530c61",
-        "url": "https://mediafilez.forgecdn.net/files/8502/329/create_mobile_packages-1.21.1-0.7.7.jar",
-        "path": "curseforge/1232978/8502329/create_mobile_packages-1.21.1-0.7.7.jar"
+        "size": 13548968,
+        "MD5": "68826f7de4c0b7c71a8853d80680423f",
+        "url": "https://mediafilez.forgecdn.net/files/8852/720/supplementaries-1.21.1-3.9.9-neoforge.jar",
+        "path": "curseforge/412082/8852720/supplementaries-1.21.1-3.9.9-neoforge.jar"
       }
     },
     {
-      "id": "curseforge.project-652202:file:8169164@jar",
-      "name": "[1.21.1] Create Misc and Things 4.1.1",
+      "id": "curseforge.project-966104:file:8995820@jar",
+      "name": "createmetalwork-neoforge-1.21.1-3.0.0.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1055815,
-        "MD5": "015746413b5209f04c0046dc89e51feb",
-        "url": "https://mediafilez.forgecdn.net/files/8169/164/create_things_and_misc-4.1.1-neoforge-1.21.1.jar",
-        "path": "curseforge/652202/8169164/create_things_and_misc-4.1.1-neoforge-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-905040:file:6299879@jar",
-      "name": "bellsandwhistles-0.4.7-1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 193619,
-        "MD5": "5f4d8adfa8bf7407fb387a93ea408848",
-        "url": "https://mediafilez.forgecdn.net/files/6299/879/bellsandwhistles-0.4.7-1.21.1.jar",
-        "path": "curseforge/905040/6299879/bellsandwhistles-0.4.7-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1486746:file:8540112@jar",
-      "name": "Strut Your Stuff 1.3.0 NeoForge 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 215558,
-        "MD5": "4a0de6a02acfaed444b9799d3bafe228",
-        "url": "https://mediafilez.forgecdn.net/files/8540/112/struts-1.3.0.jar",
-        "path": "curseforge/1486746/8540112/struts-1.3.0.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-317780:file:8698659@jar",
-      "name": "xaeroworldmap-neoforge-1.21.1-1.45.0.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1422531,
-        "MD5": "6d34d3f783578735d475495eee2a1083",
-        "url": "https://mediafilez.forgecdn.net/files/8698/659/xaeroworldmap-neoforge-1.21.1-1.45.0.jar",
-        "path": "curseforge/317780/8698659/xaeroworldmap-neoforge-1.21.1-1.45.0.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1530988:file:8681404@jar",
-      "name": "sablejade-1.3.0.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 301532,
-        "MD5": "1d987ab5865d890c88ffd7664644a778",
-        "url": "https://mediafilez.forgecdn.net/files/8681/404/sablejade-1.3.0.jar",
-        "path": "curseforge/1530988/8681404/sablejade-1.3.0.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-935929:file:8175347@jar",
-      "name": "createrailwaysnavigator-neoforge-1.21.1-beta-0.9.1-C6",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2071249,
-        "MD5": "e0681d090129d534ddbd938c2c703c17",
-        "url": "https://mediafilez.forgecdn.net/files/8175/347/createrailwaysnavigator-neoforge-1.21.1-beta-0.9.1-C6.jar",
-        "path": "curseforge/935929/8175347/createrailwaysnavigator-neoforge-1.21.1-beta-0.9.1-C6.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-407206:file:8642154@jar",
-      "name": "[NeoForge 1.21.1] 0.15.7",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 91948,
-        "MD5": "290351c72febae5145711f8a0b2904d3",
-        "url": "https://mediafilez.forgecdn.net/files/8642/154/chat_heads-0.15.7-neoforge-1.21.jar",
-        "path": "curseforge/407206/8642154/chat_heads-0.15.7-neoforge-1.21.jar"
-      }
-    },
-    {
-      "id": "curseforge-1456302-7589028-create_stuff_additions_zh_hk.zip",
-      "name": "create_stuff_additions_zh_hk.zip",
-      "type": "File",
-      "artifact": {
-        "size": 4758,
-        "MD5": "ae3a79f894e6dda5dd2b62f0d8cea770",
-        "url": "https://mediafilez.forgecdn.net/files/7589/28/create_stuff_additions_zh_hk.zip",
-        "path": "resourcepacks/create_stuff_additions_zh_hk.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-542235:file:7419660@jar",
-      "name": "createcafe-1.4.3",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 390889,
-        "MD5": "5c2e3049eaa47cd3412aebb514d5c642",
-        "url": "https://mediafilez.forgecdn.net/files/7419/660/createcafe-1.4.3.jar",
-        "path": "curseforge/542235/7419660/createcafe-1.4.3.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-328085:file:7963363@jar",
-      "name": "Create 6.0.10 for mc1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 19123767,
-        "MD5": "179189c52b45a469e683570be4e77188",
-        "url": "https://mediafilez.forgecdn.net/files/7963/363/create-1.21.1-6.0.10.jar",
-        "path": "curseforge/328085/7963363/create-1.21.1-6.0.10.jar"
-      }
-    },
-    {
-      "id": "curseforge-915672-4765635-CU - 3d Wrench.zip",
-      "name": "3d Wrench Model v0.2",
-      "type": "File",
-      "artifact": {
-        "size": 95555,
-        "MD5": "0152c88f0aa0b5e75792f5f208acd9a5",
-        "url": "https://mediafilez.forgecdn.net/files/4765/635/CU%20-%203d%20Wrench.zip",
-        "path": "resourcepacks/CU - 3d Wrench.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-240630:file:6506298@jar",
-      "name": "JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 292088,
-        "MD5": "3e18cab0cb7ee834573e6b20dcb5543f",
-        "url": "https://mediafilez.forgecdn.net/files/6506/298/JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar",
-        "path": "curseforge/240630/6506298/JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1191080:file:6145369@jar",
-      "name": "DespawnTweaks Neoforge 1.0.0 for 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 458075,
-        "MD5": "d30558e280ec4ee34b831f96ebd2e148",
-        "url": "https://mediafilez.forgecdn.net/files/6145/369/despawntweaks-neoforge-1.0.0-1.21.1.jar",
-        "path": "curseforge/1191080/6145369/despawntweaks-neoforge-1.0.0-1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge-1457759-7596639-create_more_package_couriers_zh_hk.zip",
-      "name": "create_more_package_couriers_zh_hk.zip",
-      "type": "File",
-      "artifact": {
-        "size": 2039,
-        "MD5": "8e34763712fca99e634aa258b0c92ba5",
-        "url": "https://mediafilez.forgecdn.net/files/7596/639/create_more_package_couriers_zh_hk.zip",
-        "path": "resourcepacks/create_more_package_couriers_zh_hk.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-348521:file:5729127@jar",
-      "name": "[NeoForge 1.21] v15.0.140",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1163890,
-        "MD5": "4c3757160403fcccb8ad468c2ea22862",
-        "url": "https://mediafilez.forgecdn.net/files/5729/127/cloth-config-15.0.140-neoforge.jar",
-        "path": "curseforge/348521/5729127/cloth-config-15.0.140-neoforge.jar"
-      }
-    },
-    {
-      "id": "curseforge-989975-5198465-createadvancementplague.zip",
-      "name": "createadvancementplague.zip",
-      "type": "File",
-      "artifact": {
-        "size": 2857,
-        "MD5": "ee185999125a73e1f7bc6e56f70cd865",
-        "url": "https://mediafilez.forgecdn.net/files/5198/465/createadvancementplague.zip",
-        "path": "resourcepacks/createadvancementplague.zip"
+        "size": 2082431,
+        "MD5": "fe82e0d23ba31f5fe8efd62f26307d06",
+        "url": "https://mediafilez.forgecdn.net/files/8995/820/createmetalwork-neoforge-1.21.1-3.0.0.jar",
+        "path": "curseforge/966104/8995820/createmetalwork-neoforge-1.21.1-3.0.0.jar"
       }
     },
     {
@@ -3346,25 +3137,245 @@
       }
     },
     {
-      "id": "curseforge.project-521480:file:8274824@jar",
-      "name": "1.11.2-1.21.1 - NeoForge",
+      "id": "curseforge.project-1477581:file:8004324@jar",
+      "name": "Create: Tradeworks [1.0.7]",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1979027,
-        "MD5": "3dcd70a8c73100efefc23167bf6c1000",
-        "url": "https://mediafilez.forgecdn.net/files/8274/824/skinlayers3d-neoforge-1.11.2-mc1.21.1.jar",
-        "path": "curseforge/521480/8274824/skinlayers3d-neoforge-1.11.2-mc1.21.1.jar"
+        "size": 1631621,
+        "MD5": "1bbd2466d78e076647f59505b6d84126",
+        "url": "https://mediafilez.forgecdn.net/files/8004/324/tradeworks-1.0.7.jar",
+        "path": "curseforge/1477581/8004324/tradeworks-1.0.7.jar"
       }
     },
     {
-      "id": "curseforge.project-404465:file:8569579@jar",
-      "name": "[NEOFORGE][1.21.1] FTB Library 2101.1.35",
+      "id": "curseforge.project-634062:file:5885735@jar",
+      "name": "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 1439018,
-        "MD5": "591ef2ad7c9610689d22b301e0e3a678",
-        "url": "https://mediafilez.forgecdn.net/files/8569/579/ftb-library-neoforge-2101.1.35.jar",
-        "path": "curseforge/404465/8569579/ftb-library-neoforge-2101.1.35.jar"
+        "size": 306668,
+        "MD5": "07496752e6b64dd33d68cd5166818402",
+        "url": "https://mediafilez.forgecdn.net/files/5885/735/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+        "path": "curseforge/634062/5885735/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar"
+      }
+    },
+    {
+      "id": "curseforge-964705-5707673-Create_Addons_Fix_v1.zip",
+      "name": "Create_Addons_Fix_v1.zip",
+      "type": "File",
+      "artifact": {
+        "size": 1868,
+        "MD5": "739b7ff8ff2528d23150573469b6b8df",
+        "url": "https://mediafilez.forgecdn.net/files/5707/673/Create_Addons_Fix_v1.zip",
+        "path": "resourcepacks/Create_Addons_Fix_v1.zip"
+      }
+    },
+    {
+      "id": "curseforge-951232-5136274-AOC Resources.zip",
+      "name": "AOC Resources.zip",
+      "type": "File",
+      "artifact": {
+        "size": 453964,
+        "MD5": "2f487ef132b11735f8532b48f564b818",
+        "url": "https://mediafilez.forgecdn.net/files/5136/274/AOC%20Resources.zip",
+        "path": "resourcepacks/AOC Resources.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-411816:file:8489200@jar",
+      "name": "[1.18.2 - 26.2] Simple RPC Universal 4.1.4",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 716599,
+        "MD5": "4623e1d59a3831e8b575168ed5a7baa4",
+        "url": "https://mediafilez.forgecdn.net/files/8489/200/SimpleRPC-4.1.4.jar",
+        "path": "curseforge/411816/8489200/SimpleRPC-4.1.4.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1232978:file:8502329@jar",
+      "name": "Create: Mobile Packages 1.21.1-0.7.7",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 605614,
+        "MD5": "0942887cdf3edca4030eb8cc45530c61",
+        "url": "https://mediafilez.forgecdn.net/files/8502/329/create_mobile_packages-1.21.1-0.7.7.jar",
+        "path": "curseforge/1232978/8502329/create_mobile_packages-1.21.1-0.7.7.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1520961:file:7977632@jar",
+      "name": "aerocopycats-1.1.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 14702,
+        "MD5": "86226e9feb644204b20a00646889b2bd",
+        "url": "https://mediafilez.forgecdn.net/files/7977/632/aerocopycats-1.1.1.jar",
+        "path": "curseforge/1520961/7977632/aerocopycats-1.1.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1312780:file:8192296@jar",
+      "name": "1.2.0+1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 732792,
+        "MD5": "116edb653f02f23d5ae921f70b5579a5",
+        "url": "https://mediafilez.forgecdn.net/files/8192/296/createornithopterglider-1.2.0-1.21.1.jar",
+        "path": "curseforge/1312780/8192296/createornithopterglider-1.2.0-1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-328085:file:7963363@jar",
+      "name": "Create 6.0.10 for mc1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 19123767,
+        "MD5": "179189c52b45a469e683570be4e77188",
+        "url": "https://mediafilez.forgecdn.net/files/7963/363/create-1.21.1-6.0.10.jar",
+        "path": "curseforge/328085/7963363/create-1.21.1-6.0.10.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-551894:file:7404415@jar",
+      "name": "Better Compatability Checker - 21.1.8 - NeoForge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 25085,
+        "MD5": "0976995753b9426ecb11d189bfe9714d",
+        "url": "https://mediafilez.forgecdn.net/files/7404/415/better-compatability-checker-neoforge-21.1.8.jar",
+        "path": "curseforge/551894/7404415/better-compatability-checker-neoforge-21.1.8.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-542235:file:7419660@jar",
+      "name": "createcafe-1.4.3",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 390889,
+        "MD5": "5c2e3049eaa47cd3412aebb514d5c642",
+        "url": "https://mediafilez.forgecdn.net/files/7419/660/createcafe-1.4.3.jar",
+        "path": "curseforge/542235/7419660/createcafe-1.4.3.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-348521:file:5729127@jar",
+      "name": "[NeoForge 1.21] v15.0.140",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1163890,
+        "MD5": "4c3757160403fcccb8ad468c2ea22862",
+        "url": "https://mediafilez.forgecdn.net/files/5729/127/cloth-config-15.0.140-neoforge.jar",
+        "path": "curseforge/348521/5729127/cloth-config-15.0.140-neoforge.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-935929:file:8974254@jar",
+      "name": "createrailwaysnavigator-neoforge-1.21.1-beta-0.10.0-C6",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 4680276,
+        "MD5": "b4edef96bb952c9c882e81ecdc15f01e",
+        "url": "https://mediafilez.forgecdn.net/files/8974/254/createrailwaysnavigator-neoforge-1.21.1-beta-0.10.0-C6.jar",
+        "path": "curseforge/935929/8974254/createrailwaysnavigator-neoforge-1.21.1-beta-0.10.0-C6.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-580689:file:6640970@jar",
+      "name": "lootintegrations-1.21.1-4.7.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 36966,
+        "MD5": "de033387fe1955841bea50360aec0315",
+        "url": "https://mediafilez.forgecdn.net/files/6640/970/lootintegrations-1.21.1-4.7.jar",
+        "path": "curseforge/580689/6640970/lootintegrations-1.21.1-4.7.jar"
+      }
+    },
+    {
+      "id": "curseforge-1456302-7589028-create_stuff_additions_zh_hk.zip",
+      "name": "create_stuff_additions_zh_hk.zip",
+      "type": "File",
+      "artifact": {
+        "size": 4758,
+        "MD5": "ae3a79f894e6dda5dd2b62f0d8cea770",
+        "url": "https://mediafilez.forgecdn.net/files/7589/28/create_stuff_additions_zh_hk.zip",
+        "path": "resourcepacks/create_stuff_additions_zh_hk.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-240630:file:6506298@jar",
+      "name": "JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 292088,
+        "MD5": "3e18cab0cb7ee834573e6b20dcb5543f",
+        "url": "https://mediafilez.forgecdn.net/files/6506/298/JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar",
+        "path": "curseforge/240630/6506298/JustEnoughResources-NeoForge-1.21.1-1.6.0.17.jar"
+      }
+    },
+    {
+      "id": "curseforge-915672-4765635-CU - 3d Wrench.zip",
+      "name": "3d Wrench Model v0.2",
+      "type": "File",
+      "artifact": {
+        "size": 95555,
+        "MD5": "0152c88f0aa0b5e75792f5f208acd9a5",
+        "url": "https://mediafilez.forgecdn.net/files/4765/635/CU%20-%203d%20Wrench.zip",
+        "path": "resourcepacks/CU - 3d Wrench.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-1191080:file:6145369@jar",
+      "name": "DespawnTweaks Neoforge 1.0.0 for 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 458075,
+        "MD5": "d30558e280ec4ee34b831f96ebd2e148",
+        "url": "https://mediafilez.forgecdn.net/files/6145/369/despawntweaks-neoforge-1.0.0-1.21.1.jar",
+        "path": "curseforge/1191080/6145369/despawntweaks-neoforge-1.0.0-1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-407206:file:8642154@jar",
+      "name": "[NeoForge 1.21.1] 0.15.7",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 91948,
+        "MD5": "290351c72febae5145711f8a0b2904d3",
+        "url": "https://mediafilez.forgecdn.net/files/8642/154/chat_heads-0.15.7-neoforge-1.21.jar",
+        "path": "curseforge/407206/8642154/chat_heads-0.15.7-neoforge-1.21.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-521480:file:8906440@jar",
+      "name": "1.11.3-1.21.1 - NeoForge",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1903528,
+        "MD5": "bb2b35bf0f41d6eecf72c2ffd42bba77",
+        "url": "https://mediafilez.forgecdn.net/files/8906/440/skinlayers3d-neoforge-1.11.3-mc1.21.1.jar",
+        "path": "curseforge/521480/8906440/skinlayers3d-neoforge-1.11.3-mc1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-404465:file:9008089@jar",
+      "name": "[NEOFORGE][1.21.1] FTB Library 2101.1.37",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1439881,
+        "MD5": "26aebcb05d237c98fae141794f5ea2f9",
+        "url": "https://mediafilez.forgecdn.net/files/9008/89/ftb-library-neoforge-2101.1.37.jar",
+        "path": "curseforge/404465/9008089/ftb-library-neoforge-2101.1.37.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-539057:file:7143451@jar",
+      "name": "[NEOFORGE] [1.21.1] TradingPost-v21.1.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 121731,
+        "MD5": "ebb9adcccccb4267f140b5524228257b",
+        "url": "https://mediafilez.forgecdn.net/files/7143/451/TradingPost-v21.1.1-1.21.1-NeoForge.jar",
+        "path": "curseforge/539057/7143451/TradingPost-v21.1.1-1.21.1-NeoForge.jar"
       }
     },
     {
@@ -3376,6 +3387,50 @@
         "MD5": "f64d8b98fa4047253c3ba0ea99ec9811",
         "url": "https://mediafilez.forgecdn.net/files/7701/961/someassemblyrequired-5.2.8.jar",
         "path": "curseforge/422951/7701961/someassemblyrequired-5.2.8.jar"
+      }
+    },
+    {
+      "id": "curseforge-1457759-7596639-create_more_package_couriers_zh_hk.zip",
+      "name": "create_more_package_couriers_zh_hk.zip",
+      "type": "File",
+      "artifact": {
+        "size": 2039,
+        "MD5": "8e34763712fca99e634aa258b0c92ba5",
+        "url": "https://mediafilez.forgecdn.net/files/7596/639/create_more_package_couriers_zh_hk.zip",
+        "path": "resourcepacks/create_more_package_couriers_zh_hk.zip"
+      }
+    },
+    {
+      "id": "curseforge-979652-5136804-IDAS Chinese Translation ZH HK.zip",
+      "name": "IDAS Chinese Translation ZH HK.zip",
+      "type": "File",
+      "artifact": {
+        "size": 964,
+        "MD5": "902810717ac907c68c13494aa3f8bc2d",
+        "url": "https://mediafilez.forgecdn.net/files/5136/804/IDAS%20Chinese%20Translation%20ZH%20HK.zip",
+        "path": "resourcepacks/IDAS Chinese Translation ZH HK.zip"
+      }
+    },
+    {
+      "id": "curseforge-989975-5198465-createadvancementplague.zip",
+      "name": "createadvancementplague.zip",
+      "type": "File",
+      "artifact": {
+        "size": 2857,
+        "MD5": "ee185999125a73e1f7bc6e56f70cd865",
+        "url": "https://mediafilez.forgecdn.net/files/5198/465/createadvancementplague.zip",
+        "path": "resourcepacks/createadvancementplague.zip"
+      }
+    },
+    {
+      "id": "curseforge.project-388800:file:6794589@jar",
+      "name": "polymorph-neoforge-1.1.0+1.21.1.jar",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 174972,
+        "MD5": "2368e0c92ae882677bbf4b87418656b9",
+        "url": "https://mediafilez.forgecdn.net/files/6794/589/polymorph-neoforge-1.1.0%2B1.21.1.jar",
+        "path": "curseforge/388800/6794589/polymorph-neoforge-1.1.0+1.21.1.jar"
       }
     },
     {
@@ -3401,39 +3456,6 @@
       }
     },
     {
-      "id": "curseforge.project-388800:file:6794589@jar",
-      "name": "polymorph-neoforge-1.1.0+1.21.1.jar",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 174972,
-        "MD5": "2368e0c92ae882677bbf4b87418656b9",
-        "url": "https://mediafilez.forgecdn.net/files/6794/589/polymorph-neoforge-1.1.0%2B1.21.1.jar",
-        "path": "curseforge/388800/6794589/polymorph-neoforge-1.1.0+1.21.1.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-1466331:file:8661574@jar",
-      "name": "Azimuth 1.4.7 NeoForge 1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 142951,
-        "MD5": "22114be98fc455a2609a32e11521ef8d",
-        "url": "https://mediafilez.forgecdn.net/files/8661/574/azimuth-1.4.7.jar",
-        "path": "curseforge/1466331/8661574/azimuth-1.4.7.jar"
-      }
-    },
-    {
-      "id": "curseforge.project-342584:file:8341460@jar",
-      "name": "[Fabric/Forge/Neo] 1.21.1-8.39 | Collective",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 1061931,
-        "MD5": "7ae605279aacf6ae233bb1aafe2775c4",
-        "url": "https://mediafilez.forgecdn.net/files/8341/460/collective-1.21.1-8.39.jar",
-        "path": "curseforge/342584/8341460/collective-1.21.1-8.39.jar"
-      }
-    },
-    {
       "id": "curseforge.project-658587:file:7389814@jar",
       "name": "player-animation-lib-forge-2.0.4+1.21.1.jar",
       "type": "ForgeMod",
@@ -3445,36 +3467,36 @@
       }
     },
     {
-      "id": "curseforge.project-1520961:file:7977632@jar",
-      "name": "aerocopycats-1.1.1.jar",
+      "id": "curseforge.project-849519:file:8990752@jar",
+      "name": "[NeoForge] 6.2.2",
       "type": "ForgeMod",
       "artifact": {
-        "size": 14702,
-        "MD5": "86226e9feb644204b20a00646889b2bd",
-        "url": "https://mediafilez.forgecdn.net/files/7977/632/aerocopycats-1.1.1.jar",
-        "path": "curseforge/1520961/7977632/aerocopycats-1.1.1.jar"
+        "size": 665356,
+        "MD5": "4c9b7193f14a147210be095a843b4a2e",
+        "url": "https://mediafilez.forgecdn.net/files/8990/752/e4mc-neoforge-6.2.2.jar",
+        "path": "curseforge/849519/8990752/e4mc-neoforge-6.2.2.jar"
       }
     },
     {
-      "id": "curseforge.project-849519:file:8526346@jar",
-      "name": "[NeoForge] 6.2.1",
+      "id": "curseforge.project-263420:file:8849842@jar",
+      "name": "xaerominimap-neoforge-1.21.1-26.5.0.jar",
       "type": "ForgeMod",
       "artifact": {
-        "size": 664332,
-        "MD5": "58801cffbf0f76d5b5128b0a2013cde8",
-        "url": "https://mediafilez.forgecdn.net/files/8526/346/e4mc-neoforge-6.2.1.jar",
-        "path": "curseforge/849519/8526346/e4mc-neoforge-6.2.1.jar"
+        "size": 2185559,
+        "MD5": "853295d1fc15c12603ade6e9b453a4c4",
+        "url": "https://mediafilez.forgecdn.net/files/8849/842/xaerominimap-neoforge-1.21.1-26.5.0.jar",
+        "path": "curseforge/263420/8849842/xaerominimap-neoforge-1.21.1-26.5.0.jar"
       }
     },
     {
-      "id": "curseforge.project-263420:file:8449819@jar",
-      "name": "xaerominimap-neoforge-1.21.1-26.4.2.jar",
+      "id": "curseforge.project-342584:file:8940150@jar",
+      "name": "[Fabric/Forge/Neo] 1.21.1-8.40 | Collective",
       "type": "ForgeMod",
       "artifact": {
-        "size": 2185409,
-        "MD5": "17eff3fe469527971f1f05990f3527f8",
-        "url": "https://mediafilez.forgecdn.net/files/8449/819/xaerominimap-neoforge-1.21.1-26.4.2.jar",
-        "path": "curseforge/263420/8449819/xaerominimap-neoforge-1.21.1-26.4.2.jar"
+        "size": 1061918,
+        "MD5": "e52a0e8880fd6a6da78bd0c28c96da8f",
+        "url": "https://mediafilez.forgecdn.net/files/8940/150/collective-1.21.1-8.40.jar",
+        "path": "curseforge/342584/8940150/collective-1.21.1-8.40.jar"
       }
     },
     {
@@ -3489,36 +3511,47 @@
       }
     },
     {
-      "id": "curseforge.project-1312780:file:8192296@jar",
-      "name": "1.2.0+1.21.1",
+      "id": "curseforge.project-1486746:file:8812965@jar",
+      "name": "Strut Your Stuff 1.3.1 NeoForge 1.21.1",
       "type": "ForgeMod",
       "artifact": {
-        "size": 732792,
-        "MD5": "116edb653f02f23d5ae921f70b5579a5",
-        "url": "https://mediafilez.forgecdn.net/files/8192/296/createornithopterglider-1.2.0-1.21.1.jar",
-        "path": "curseforge/1312780/8192296/createornithopterglider-1.2.0-1.21.1.jar"
+        "size": 216678,
+        "MD5": "f1522fdbf5c2c1078fe6bd45345c40c7",
+        "url": "https://mediafilez.forgecdn.net/files/8812/965/struts-1.3.1.jar",
+        "path": "curseforge/1486746/8812965/struts-1.3.1.jar"
       }
     },
     {
-      "id": "curseforge-979652-5136804-IDAS Chinese Translation ZH HK.zip",
-      "name": "IDAS Chinese Translation ZH HK.zip",
+      "id": "curseforge.project-652202:file:8169164@jar",
+      "name": "[1.21.1] Create Misc and Things 4.1.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 1055815,
+        "MD5": "015746413b5209f04c0046dc89e51feb",
+        "url": "https://mediafilez.forgecdn.net/files/8169/164/create_things_and_misc-4.1.1-neoforge-1.21.1.jar",
+        "path": "curseforge/652202/8169164/create_things_and_misc-4.1.1-neoforge-1.21.1.jar"
+      }
+    },
+    {
+      "id": "curseforge.project-1466331:file:8911024@jar",
+      "name": "Azimuth 1.4.9 NeoForge 1.21.1",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 143078,
+        "MD5": "5ea1f3233d2f8fb50324835e22c71e51",
+        "url": "https://mediafilez.forgecdn.net/files/8911/24/azimuth-1.4.9.jar",
+        "path": "curseforge/1466331/8911024/azimuth-1.4.9.jar"
+      }
+    },
+    {
+      "id": "curseforge-1540335-8597672-CreateRubberworks_Compat_v6.zip",
+      "name": "CreateRubberworks_Compat_v6.zip",
       "type": "File",
       "artifact": {
-        "size": 964,
-        "MD5": "902810717ac907c68c13494aa3f8bc2d",
-        "url": "https://mediafilez.forgecdn.net/files/5136/804/IDAS%20Chinese%20Translation%20ZH%20HK.zip",
-        "path": "resourcepacks/IDAS Chinese Translation ZH HK.zip"
-      }
-    },
-    {
-      "id": "curseforge.project-1236537:file:7575506@jar",
-      "name": "Create: Garnished Reworked 0.1.7.4 for mc1.21.1",
-      "type": "ForgeMod",
-      "artifact": {
-        "size": 2388846,
-        "MD5": "d82f71bd952b4fec418a88dbe5ec0f7d",
-        "url": "https://mediafilez.forgecdn.net/files/7575/506/creategarnished-0.1.7.4%2B1.21.1-neoforged.jar",
-        "path": "curseforge/1236537/7575506/creategarnished-0.1.7.4+1.21.1-neoforged.jar"
+        "size": 13018,
+        "MD5": "486e9e3e872bdd4339e80220f797b899",
+        "url": "https://mediafilez.forgecdn.net/files/8597/672/CreateRubberworks_Compat_v6.zip",
+        "path": "config/paxi/datapacks/CreateRubberworks_Compat_v6.zip"
       }
     },
     {

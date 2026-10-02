@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "1.0.7",
+    "version": "1.0.9",
     "name": "KRWA Aeronautics",
-    "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
+    "description": "Create Aeronautics \u0438 50+ \u0430\u0434\u0434\u043e\u043d\u043e\u0432 \u2014 NeoForge 1.21.1",
     "icon": "",
     "address": "create.krwa.ru:25565",
     "mainServer": true,
@@ -18,12 +18,14 @@
     }
   },
   "neoforge": {
-    "version": "21.1.248",
+    "version": "21.1.250",
     "lockFile": "neoforge-lock.json"
   },
   "untrackedFiles": [
     {
-      "appliesTo": ["files"],
+      "appliesTo": [
+        "files"
+      ],
       "patterns": [
         "config/euphoria_patcher/.data.json",
         "config/fabric/indigo-renderer.properties",
@@ -32,9 +34,9 @@
         "config/packetfixer.properties",
         "config/sodium-fingerprint.json",
         "config/sodium-options.json",
-        "shaderpacks/*EuphoriaPatches_1.9.3/shaders/lang/*.lang",
-        "shaderpacks/*EuphoriaPatches_1.9.3/shaders/pack.json",
-        "shaderpacks/*EuphoriaPatches_1.9.3/shaders/shaders.properties"
+        "shaderpacks/*EuphoriaPatches_1.10.5/shaders/lang/*.lang",
+        "shaderpacks/*EuphoriaPatches_1.10.5/shaders/pack.json",
+        "shaderpacks/*EuphoriaPatches_1.10.5/shaders/shaders.properties"
       ]
     }
   ]

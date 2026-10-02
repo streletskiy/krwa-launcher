@@ -23,3 +23,5 @@
 	#Claw marker render mode is disabled; OFF is enforced
 	#Allowed Values: DEPTH, DECAL, PARTICLE, OFF
 	clawMarkerRenderMode = "OFF"
+	#Use the V2 node graph interface for Advanced Contraption Controllers
+	advancedControllerV2Ui = true

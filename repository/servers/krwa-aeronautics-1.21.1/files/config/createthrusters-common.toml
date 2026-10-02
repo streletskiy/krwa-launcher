@@ -3,8 +3,8 @@
 
 	#Thruster propulsion, fuel, beam mode, and upgrade scaling
 	[common.thruster]
-		#Base thrust at 100% throttle for normal (non-beam, non-soul) thrusters. Default 640 gives ~2.94 kpN at full throttle in standard atmosphere.
-		# Default: 640.0
+		#Base thrust at 100% throttle for normal thrusters. Default 900.
+		# Default: 900.0
 		# Range: 1.0 ~ 100000.0
 		thrusterBaseThrust = 640.0
 		#Base airflow at 100% throttle
@@ -23,7 +23,7 @@
 		enableThrusterEntityDamage = true
 		#Allow haunting-upgraded thrusters to convert supported mobs instead of dropping loot on death
 		enableThrusterMobHaunting = true
-		#Thrust multiplier for beam (focused/lense) thruster mode. Default 1.5 gives ~4.41 kpN at full throttle, above normal thrusters at ~2.94 kpN.
+		#Thrust multiplier for beam (focused/lense) thruster mode. Default 1.5
 		# Default: 1.5
 		# Range: 0.0 ~ 100.0
 		beamThrustMultiplier = 1.5
@@ -36,11 +36,11 @@
 		# Range: 0.01 ~ 100.0
 		denseFuelEfficiencyMultiplier = 1.45
 		#Fuel efficiency multiplier for fluids tagged as light thruster fuels
-		# Default: 0.7
+		# Default: 1.0
 		# Range: 0.01 ~ 100.0
 		lightFuelEfficiencyMultiplier = 0.7
 		#FE consumed per tick at 100% throttle when a thruster is in focused/beam mode. Scales linearly with throttle.
-		# Default: 90.0
+		# Default: 30.0
 		# Range: 1.0 ~ 100000.0
 		focusedModeFePerTick = 90.0
 		#Maximum FE a beam thruster can store internally
@@ -48,9 +48,13 @@
 		# Range: 1000 ~ 10000000
 		focusedModeFeCapacity = 100000
 		#Maximum multiplier allowed from propulsion upgrades. Tiers apply 2x, 4x, 8x, and 16x before this cap.
-		# Default: 16.0
+		# Default: 32.0
 		# Range: 1.0 ~ 64.0
 		propulsionUpgradeMaxMultiplier = 16.0
+		#Propulsion Simulated Oxidized Fuel Bonus Offset
+		# Default: 0.45
+		# Range: 0.0 ~ 1.0
+		propulsionSimulatedOxidizedFuelBonusShare = 0.45
 
 	#Servo Bearing pivot controls
 	[common.thruster_bearing]
@@ -85,8 +89,6 @@
 
 	#Optional loot and entity drops
 	[common.loot]
-		#Allow Special Thanks Player Mannequins to appear in vanilla chest loot
-		enableSpecialThanksMannequinLoot = true
 		#Allow mobs and players to drop heads through the addon's head-drop system
 		enableMobHeadDrops = true
 
@@ -169,3 +171,18 @@
 		# Default: 0.045
 		# Range: 0.0 ~ 2.0
 		entityLauncherGrappleSwingAcceleration = 0.045
+
+	#Advanced Contraption Controller graph limits
+	[common.advanced_controller]
+		#Maximum number of nodes allowed across an Advanced Contraption Controller graph and its functions
+		# Default: 512
+		# Range: 32 ~ 4096
+		maxNodes = 512
+
+	#App Ownership and persistance
+	[common.diagnostic_tablet]
+		#Enable the Smart Tablet block, item, user interface, apps and networking
+		enabled = false
+		#Who owns the paid apps, PLAYER is shared across tablets, DEVICE is not.
+		#Allowed Values: PLAYER, DEVICE
+		appPurchaseScope = "PLAYER"

@@ -109,6 +109,22 @@
 			physics_gantry_shaft = true
 			#Allow physics gantry belt wheel on this server. Existing content is not removed automatically.
 			physics_gantry_belt_wheel = true
+			#Allow rcs thruster on this server. Existing content is not removed automatically.
+			rcs_thruster = true
+			#Allow blackstone alloy block on this server. Existing content is not removed automatically.
+			blackstone_alloy_block = true
+			#Allow ship control module on this server. Existing content is not removed automatically.
+			ship_control_module = true
+			#Allow ship coupler on this server. Existing content is not removed automatically.
+			ship_coupler = true
+			#Allow ACC Displays on this server. Existing content is not removed automatically.
+			acc_display = true
+			#Allow universal display adapter on this server. Existing content is not removed automatically.
+			universal_display_adapter = true
+			#Allow ship dock on this server. Existing content is not removed automatically.
+			ship_dock = true
+			#Allow physics staff anchor on this server. Existing content is not removed automatically.
+			physics_staff_anchor = true
 
 		[server.features.items]
 			#Allow thruster on this server. Existing content is not removed automatically.
@@ -221,7 +237,7 @@
 			shipping_manifest = true
 			#Allow entity launcher on this server. Existing content is not removed automatically.
 			entity_launcher = true
-			#Allow player mannequin on this server. Existing content is not removed automatically.
+			#Allow Supporter Mannequins on this server. Existing content is not removed automatically.
 			player_mannequin = true
 			#Allow physics goggles on this server. Existing content is not removed automatically.
 			physics_goggles = true
@@ -233,9 +249,42 @@
 			music_disc_twisted_alive = true
 			#Allow music disc unplug the earth on this server. Existing content is not removed automatically.
 			music_disc_unplug_the_earth = true
+			#Allow rcs thruster on this server. Existing content is not removed automatically.
+			rcs_thruster = true
+			#Allow blackstone alloy on this server. Existing content is not removed automatically.
+			blackstone_alloy = true
+			#Allow blackstone sheet on this server. Existing content is not removed automatically.
+			blackstone_sheet = true
+			#Allow computation mechanism on this server. Existing content is not removed automatically.
+			computation_mechanism = true
+			#Allow incomplete computation mechanism on this server. Existing content is not removed automatically.
+			incomplete_computation_mechanism = true
+			#Allow blackstone alloy block on this server. Existing content is not removed automatically.
+			blackstone_alloy_block = true
+			#Allow ship control module on this server. Existing content is not removed automatically.
+			ship_control_module = true
+			#Allow ship coupler on this server. Existing content is not removed automatically.
+			ship_coupler = true
+			#Allow universal display adapter on this server. Existing content is not removed automatically.
+			universal_display_adapter = true
+			#Allow ship dock on this server. Existing content is not removed automatically.
+			ship_dock = true
+			#Allow shipping schedule on this server. Existing content is not removed automatically.
+			shipping_schedule = true
+			#Allow Music Discs on this server. Existing content is not removed automatically.
+			music_discs = true
 
 		[server.features.entities]
 			#Allow launched claw on this server. Existing content is not removed automatically.
 			launched_claw = true
-			#Allow player mannequin on this server. Existing content is not removed automatically.
+			#Allow Supporter Mannequins on this server. Existing content is not removed automatically.
 			player_mannequin = true
+
+	#Advanced Contraption Controller and Ship Control Module tuning
+	[server.ship_control]
+		#Spread shipping schedule maintenance and state updates over this many ticks. Ship physics control still runs every tick.
+		# Default: 2
+		# Range: 1 ~ 4
+		shippingScheduleWorkSpreadTicks = 2
+		#Use the experimental SCM initialization V2 matrix probe, representative propulsion sampling, and interpolated 9x9 bearing maps
+		enableScmInitializationV2 = false

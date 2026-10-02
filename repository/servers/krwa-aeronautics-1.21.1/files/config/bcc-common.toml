@@ -3,11 +3,11 @@
 	#modpackProjectID is now deprecated and will be removed soon
 	# Default: 0
 	# Range: > 0
-	modpackProjectID = 26773
+	modpackProjectID = 0
 	#The name of the modpack
-	modpackName = "All of Create Aeronautics"
+	modpackName = "KRWA Aeronautics"
 	#The version of the modpack
-	modpackVersion = "v2.5"
+	modpackVersion = "1.0.9"
 	#Use the metadata.json to determine the modpack version
 	#ONLY ENABLE THIS IF YOU KNOW WHAT YOU ARE DOING
 	useMetadata = false

@@ -101,12 +101,15 @@
   "supplementaries": {
     "hat_stand": true
   },
+  "createthrusters": {
+    "thruster_resources": true
+  },
   "corpse": {
     "corpse": true
   },
   "createfood": {
     "ration_box": true,
-    "small_bowl": true,
+    "large_bowl": true,
     "consumable_block": true,
     "generic_display": true,
     "empty_display": true,

@@ -366,6 +366,11 @@ configVersion = 5
 	# Default: 1000.0
 	# Range: 0.0 ~ 3.4028234663852886E38
 	hvSwitchSparkPotentialFactor = 1000.0
+	#.
+	#Minimum load percentage for the dynamic motor resistance
+	# Default: 0.05000000074505806
+	# Range: 0.0 ~ 1.0
+	motorMinimumLoad = 0.05000000074505806
 
 	#.
 	#Things related to how the simulation is handled (probably shouldn't be altered unless you know what you are doing)

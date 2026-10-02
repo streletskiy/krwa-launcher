@@ -1,0 +1,93 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:cardboard"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "chance": 120.0,
+      "id": "createsprings:punchcard"
+    },
+    {
+      "chance": 8.0,
+      "id": "create:cardboard"
+    },
+    {
+      "chance": 8.0,
+      "id": "minecraft:map"
+    },
+    {
+      "chance": 5.0,
+      "id": "minecraft:paper"
+    },
+    {
+      "chance": 3.0,
+      "id": "create:clipboard"
+    },
+    {
+      "chance": 2.0,
+      "id": "create:sand_paper"
+    },
+    {
+      "chance": 2.0,
+      "id": "create:attribute_filter"
+    },
+    {
+      "id": "create:empty_schematic"
+    },
+    {
+      "id": "minecraft:painting"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createsprings:incomplete_punchcard"
+        },
+        {
+          "item": "minecraft:paper"
+        }
+      ],
+      "results": [
+        {
+          "id": "createsprings:incomplete_punchcard"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createsprings:incomplete_punchcard"
+        },
+        {
+          "item": "createsprings:spring_alloy_nugget"
+        }
+      ],
+      "results": [
+        {
+          "id": "createsprings:incomplete_punchcard"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createsprings:incomplete_punchcard"
+        }
+      ],
+      "results": [
+        {
+          "id": "createsprings:incomplete_punchcard"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "createsprings:incomplete_punchcard"
+  }
+}

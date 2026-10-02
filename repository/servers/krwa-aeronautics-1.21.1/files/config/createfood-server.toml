@@ -4,6 +4,11 @@
 	[items.effects]
 		category_overrides = []
 		item_overrides = []
+		enable_default_effects = true
+		stack_duration = true
+		# Default: 36000
+		# Range: 0 ~ 1728000
+		max_stacked_duration = 36000
 
 	[items.remainders]
 		enable_egg_impact_remainder = true
@@ -36,13 +41,13 @@
 
 	[blocks.display]
 		enable_cutting_board = true
-		enable_dipping = true
 		enable_generic_display = true
+		generic_display_exclude = ["tag:c:tools"]
+		enable_display_interactions = true
 		# Default: 4000
 		# Range: 1000 ~ 16000
-		small_bowl_capacity_mb = 4000
-		dipping_exclude = []
-		generic_display_exclude = ["tag:c:tools"]
+		large_bowl_capacity_mb = 4000
+		display_interactions_exclude = []
 
 		[blocks.storage.cloth_sack]
 			cloth_sack_allow_food = false
@@ -59,3 +64,7 @@
 			ration_box_inventory = true
 			ration_box_exclude = []
 			ration_box_filter = []
+
+	[compat.create]
+		expanded_basin_fluids = true
+		basin_fluid_items = true

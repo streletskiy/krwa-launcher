@@ -1,0 +1,83 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "createsprings:broken_portative_steam_engine"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "chance": 120.0,
+      "id": "createsprings:portative_steam_engine"
+    },
+    {
+      "chance": 15.0,
+      "id": "create:copper_sheet"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createsprings:broken_portative_steam_engine"
+        },
+        {
+          "item": "create:fluid_tank"
+        }
+      ],
+      "results": [
+        {
+          "id": "createsprings:broken_portative_steam_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createsprings:broken_portative_steam_engine"
+        },
+        {
+          "item": "create:crafter_slot_cover"
+        }
+      ],
+      "results": [
+        {
+          "id": "createsprings:broken_portative_steam_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createsprings:broken_portative_steam_engine"
+        },
+        {
+          "item": "create:andesite_alloy"
+        }
+      ],
+      "results": [
+        {
+          "id": "createsprings:broken_portative_steam_engine"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createsprings:incomplete_punchcard"
+        }
+      ],
+      "results": [
+        {
+          "id": "createsprings:incomplete_punchcard"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "createsprings:broken_portative_steam_engine"
+  }
+}
