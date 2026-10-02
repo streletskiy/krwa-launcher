@@ -8,10 +8,13 @@ const {
 const { LoggerUtil } = require('helios-core')
 const got = require('got')
 const { downloadQueueWithFallback } = require('./downloadfallback')
+const path = require('path')
+const { UserSettingsPreserver } = require('./usersettings')
 
 const log = LoggerUtil.getLogger('RepairReceiver')
 const processors = []
 let assets = []
+let userSettings
 
 async function validate(message) {
     const api = new DistributionAPI(
@@ -23,6 +26,8 @@ async function validate(message) {
     )
     const distribution = await api.getDistributionLocalLoadOnly()
     const server = distribution.getServerById(message.serverId)
+    userSettings?.dispose()
+    userSettings = new UserSettingsPreserver(path.join(message.instanceDirectory, message.serverId), server, log)
     processors.splice(0, processors.length,
         new MojangIndexProcessor(message.commonDirectory, server.rawServer.minecraftVersion),
         new DistributionIndexProcessor(message.commonDirectory, distribution, message.serverId)
@@ -45,6 +50,8 @@ async function validate(message) {
             })
         })).flat().forEach(asset => assets.push(asset))
     }
+    assets = userSettings.filterAssets(assets)
+    if(assets.length === 0) userSettings.commit()
     process.send({ response: 'validateComplete', invalidCount: assets.length })
 }
 
@@ -69,6 +76,7 @@ async function download() {
         }
     }
     for(const processor of processors) await processor.postDownload()
+    userSettings.commit()
     process.send({ response: 'downloadComplete' })
 }
 
@@ -89,6 +97,7 @@ process.on('message', async message => {
         else if(message.action === 'download') await download()
         else throw new Error(`Unknown repair action: ${message.action}`)
     } catch(error) {
+        userSettings?.dispose()
         log.error('Error during repair operation', error)
         let displayable
         try {
