@@ -56,5 +56,8 @@
     "ts-json-schema-generator": "^2.4.0",
     "winston": "^3.19.0",
     "yargs": "^18.2.0"
+  },
+  "overrides": {
+    "http-cache-semantics": "4.3.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "krwa-launcher",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "productName": "KRWA Launcher",
   "desktopName": "ru.krwa.launcher",
   "description": "Минималистичный лаунчер сервера KRWA",
@@ -58,5 +58,9 @@
   },
   "bugs": {
     "url": "https://github.com/streletskiy/krwa-launcher/issues"
+  },
+  "overrides": {
+    "http-cache-semantics": "4.3.0",
+    "global-agent": "4.1.3"
   }
 }
