@@ -8,8 +8,11 @@ updates:
       time: "06:00"
       timezone: Europe/Moscow
     groups:
-      launcher-patches:
-        update-types: [patch]
+      launcher-compatible:
+        update-types: [patch, minor]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     open-pull-requests-limit: 10
 
   - package-ecosystem: npm
@@ -20,9 +23,11 @@ updates:
       time: "06:15"
       timezone: Europe/Moscow
     groups:
-      nebula-patches:
-        update-types: [patch]
+      nebula-compatible:
+        update-types: [patch, minor]
     ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
     open-pull-requests-limit: 10
