@@ -5,7 +5,7 @@ if "%~1"=="" (
   echo Example: release-launcher.cmd 0.1.2
   exit /b 2
 )
-set "KRWA_NODE_DIR=%~dp0tools\node-v22.23.2-win-x64"
+set "KRWA_NODE_DIR=%~dp0tools\node-v22.23.4-win-x64"
 if not exist "%KRWA_NODE_DIR%\npm.cmd" (
   echo npm not found: %KRWA_NODE_DIR%\npm.cmd
   exit /b 1

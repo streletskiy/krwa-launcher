@@ -1,7 +1,7 @@
 @echo off
 setlocal
 cd /d "%~dp0launcher-src"
-set "KRWA_NODE_DIR=%~dp0tools\node-v22.23.2-win-x64"
+set "KRWA_NODE_DIR=%~dp0tools\node-v22.23.4-win-x64"
 set "KRWA_NODE=%KRWA_NODE_DIR%\node.exe"
 set "PATH=%KRWA_NODE_DIR%;%PATH%"
 set "KRWA_BUILDER=.\node_modules\electron-builder\out\cli\cli.js"
