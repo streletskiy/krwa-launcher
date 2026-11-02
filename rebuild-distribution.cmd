@@ -1,7 +1,7 @@
 @echo off
 setlocal
 cd /d "%~dp0nebula-src"
-set "KRWA_NODE=%~dp0tools\node-v22.23.2-win-x64\node.exe"
+set "KRWA_NODE=%~dp0tools\node-v22.23.4-win-x64\node.exe"
 if not exist "%KRWA_NODE%" (
   echo Node.js not found: %KRWA_NODE%
   exit /b 1
