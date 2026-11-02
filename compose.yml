@@ -2,7 +2,8 @@ name: krwa-launcher
 
 services:
   files:
-    image: caddy@sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d
+    build: ./containers/caddy
+    image: krwa/caddy:2.11.7-security-20261102
     restart: always
     entrypoint: ["/bin/sh", "/usr/local/bin/run-files-with-forwarding-watchdog.sh"]
     ports:
@@ -34,7 +35,8 @@ services:
         condition: service_healthy
 
   mod-cache:
-    image: node@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf
+    build: ./containers/node
+    image: krwa/node:24-security-20261102
     restart: always
     user: node
     read_only: true
@@ -60,7 +62,8 @@ services:
       start_period: 10s
 
   community:
-    image: node@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf
+    build: ./containers/node
+    image: krwa/node:24-security-20261102
     restart: always
     user: node
     read_only: true
@@ -74,7 +77,7 @@ services:
   auth:
     build:
       context: "${ASTER_CONTEXT:-../aster}"
-    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.18
+    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.19
     restart: always
     environment:
       ASTER__SERVER__HOST: 0.0.0.0

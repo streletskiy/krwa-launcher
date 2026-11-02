@@ -13,6 +13,25 @@ permissions:
   contents: read
 
 jobs:
+  containers:
+    name: Container security (${{ matrix.image }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [node, caddy]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build runtime and run dependency regressions
+        run: docker build -t krwa-security:${{ matrix.image }} containers/${{ matrix.image }}
+      - name: Audit all container vulnerability severities
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$GITHUB_WORKSPACE/containers/caddy/openvex.json:/openvex.json:ro" \
+            aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c \
+            image --scanners vuln --exit-code 1 --vex /openvex.json krwa-security:${{ matrix.image }}
+
   dependency-review:
     name: Dependency review
     if: github.event_name == 'pull_request'

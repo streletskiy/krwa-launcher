@@ -1,5 +1,35 @@
 version: 2
 updates:
+  - package-ecosystem: gomod
+    directory: /containers/caddy
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:45"
+      timezone: Europe/Moscow
+    groups:
+      caddy-compatible:
+        update-types: [patch, minor]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: docker
+    directories: [/containers/caddy, /containers/node]
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Europe/Moscow
+    groups:
+      runtime-images:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 5
+
   - package-ecosystem: npm
     directory: /launcher-src
     schedule:
