@@ -1,4 +1,4 @@
-FROM golang@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb AS builder
+FROM golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb AS builder
 WORKDIR /build
 RUN apk add --no-cache patch
 COPY go.mod go.sum ./
@@ -15,7 +15,7 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     go test -p 2 -mod=vendor ./... && \
     CGO_ENABLED=0 go build -p 2 -mod=vendor -trimpath -ldflags="-s -w" -o /out/caddy .
 
-FROM alpine@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a
+FROM alpine:3.24@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a
 RUN apk upgrade --no-cache && apk add --no-cache ca-certificates tzdata
 COPY --from=builder /out/caddy /usr/bin/caddy
 ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
