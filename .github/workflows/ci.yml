@@ -26,7 +26,7 @@ jobs:
         run: npm ci
       - name: Audit dependencies
         working-directory: launcher-src
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=low
       - name: Run tests
         working-directory: launcher-src
         run: npm test
@@ -49,7 +49,7 @@ jobs:
         run: npm ci
       - name: Audit dependencies
         working-directory: nebula-src
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=low
       - name: Build
         working-directory: nebula-src
         run: npm run build
@@ -70,6 +70,9 @@ jobs:
           node-version: 22
       - name: Run tests
         working-directory: community
+        run: node --test server.test.mjs
+      - name: Test mod cache allowlist
+        working-directory: mod-cache-service
         run: node --test server.test.mjs
 
   linux-package:
