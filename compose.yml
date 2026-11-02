@@ -2,7 +2,8 @@ name: krwa-launcher
 
 services:
   files:
-    image: caddy@sha256:e70b164da81ef698b3ad19af799ea6086ce6d9e48ed4079eb9fe26f6fbf14ee5
+    build: ./containers/caddy
+    image: krwa/caddy:2.11.7-security-20261102
     restart: always
     entrypoint: ["/bin/sh", "/usr/local/bin/run-files-with-forwarding-watchdog.sh"]
     ports:
@@ -34,7 +35,8 @@ services:
         condition: service_healthy
 
   mod-cache:
-    image: node@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85
+    build: ./containers/node
+    image: krwa/node:24-security-20261102
     restart: always
     user: node
     read_only: true
@@ -60,7 +62,8 @@ services:
       start_period: 10s
 
   community:
-    image: node@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85
+    build: ./containers/node
+    image: krwa/node:24-security-20261102
     restart: always
     user: node
     read_only: true

@@ -1,0 +1,23 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/streletskiy/krwa-launcher/blob/main/containers/caddy/openvex.json",
+  "author": "streletskiy",
+  "timestamp": "2026-11-02T20:58:00Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": { "name": "GO-2026-5932" },
+      "products": [
+        {
+          "@id": "pkg:golang/github.com/streletskiy/krwa-launcher/caddy",
+          "subcomponents": [
+            { "@id": "pkg:golang/golang.org/x/crypto@v0.58.0" }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The advisory applies only to golang.org/x/crypto/openpgp and its subpackages. None are linked into this binary. The Docker build fails if go list -deps contains any openpgp package. Reassess if the dependency set or module version changes."
+    }
+  ]
+}
