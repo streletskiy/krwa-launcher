@@ -2,7 +2,10 @@ module github.com/streletskiy/krwa-launcher/caddy
 
 go 1.27.3
 
-require github.com/caddyserver/caddy/v2 v2.11.7
+require (
+	github.com/caddyserver/caddy/v2 v2.11.9
+	github.com/go-jose/go-jose/v3 v3.0.6-0.20261030183946-0e502b87c7aa
+)
 
 require (
 	cel.dev/cel-go v0.33.2 // indirect
@@ -46,7 +49,6 @@ require (
 	github.com/felixge/httpsnoop v1.1.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.10.0 // indirect
 	github.com/go-chi/chi/v5 v5.5.0 // indirect
-	github.com/go-jose/go-jose/v3 v3.0.6-0.20261030183946-0e502b87c7aa // indirect
 	github.com/go-jose/go-jose/v4 v4.1.8 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
