@@ -2,7 +2,7 @@
 
 Compose builds these small images locally. Node services need only built-in
 modules; their runtime removes npm/Yarn and their unused dependency trees.
-The Caddy image uses Go 1.27.3, refreshed compatible modules and patched Alpine.
+The Caddy image uses Go 1.27.4, refreshed compatible modules and patched Alpine.
 
 The JOSE v3 dependency uses the official [RSA backport](https://github.com/go-jose/go-jose/commit/0e502b87c7aa651155b11ae8e195ec33ce10230a).
 Two unchanged upstream patches add a [JSON depth bound](https://github.com/go-jose/go-jose/commit/a31af25836222f4c45d366d6e8f9b1049dd9935a)
