@@ -19,8 +19,12 @@ const leakedEntries = entries.filter(entry =>
 assert.deepEqual(leakedEntries, [], `Build-only files leaked into app.asar: ${leakedEntries.slice(0, 10).join(', ')}`)
 assert.ok(entries.includes('/app/assets/js/releasenotes.js'), 'Packaged launcher is missing the release-note converter')
 assert.ok(entries.includes('/app/assets/js/usersettings.js'), 'Packaged launcher is missing settings preservation')
-for (const artwork of ['portrait.jpg', 'landscape.jpg', 'hero.jpg', 'logo.png']) {
-    assert.ok(entries.includes(`/app/assets/images/steam/${artwork}`), `Packaged launcher is missing Steam artwork: ${artwork}`)
+for (const artwork of ['krwa-cargo-port.webp', 'krwa-wordmark.svg', 'SealCircle.png',
+    'steam/portrait.jpg', 'steam/landscape.jpg', 'steam/hero.jpg', 'steam/logo.png']) {
+    const entry = `app/assets/images/${artwork}`
+    assert.ok(entries.includes(`/${entry}`), `Packaged launcher is missing artwork: ${artwork}`)
+    assert.ok(asar.extractFile(archivePath, entry).equals(fs.readFileSync(path.join(__dirname, '..', entry))),
+        `Packaged launcher artwork differs from source: ${artwork}`)
 }
 assert.ok(entries.includes('/node_modules/html-to-text/package.json'), 'Packaged launcher is missing the HTML-to-text dependency')
 
