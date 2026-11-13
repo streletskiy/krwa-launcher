@@ -1,5 +1,7 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const { createHash } = require('node:crypto')
+const { atomicWriteFileSync, readFileIfExistsSync } = require('./filesystemutil')
 
 const APP_NAME = 'KRWA Launcher'
 const ARTWORK = [
@@ -8,6 +10,13 @@ const ARTWORK = [
     ['_hero', 'hero.jpg'],
     ['_logo', 'logo.png']
 ]
+// Hashes of the forest artwork shipped before the cargo port theme.
+const PREVIOUS_ARTWORK = {
+    'hero.jpg': 'b6dcd2fb663f6d42b123a0d1b57c50133654cc5432c2a2edf05b00a3695779dd',
+    'landscape.jpg': 'a20290c9030089d6fb156ffb2df8d4f17a12ed49feab4902b330c0ac2c43866a',
+    'logo.png': 'abbf7cdcb308c52d431bf8788194aa4458c9c576ed33d4b86e01d096bee7c0d5',
+    'portrait.jpg': 'f426a529cf86bfe21bc454e6cd65fe8cf0d279fe59892e2cd65e56873a7c2664'
+}
 
 function readSteamShortcuts(file) {
     const bytes = fs.readFileSync(file)
@@ -67,9 +76,20 @@ function installSteamArtwork(shortcuts, artworkDirectory) {
         for (const [suffix, source] of ARTWORK) {
             // Steam accepts either format for each slot. Keep artwork set by the player.
             const basename = path.join(grid, `${appId}${suffix}`)
-            if (['.jpg', '.jpeg', '.png', '.webp'].some(extension => fs.existsSync(basename + extension))) continue
+            const destination = basename + path.extname(source)
+            const bundled = path.join(artworkDirectory, source)
+            const existing = ['.jpg', '.jpeg', '.png', '.webp'].map(extension => basename + extension).filter(file => fs.existsSync(file))
+            if (existing.length) {
+                if (existing.length === 1 && existing[0] === destination) {
+                    const artwork = readFileIfExistsSync(destination)
+                    if (artwork && createHash('sha256').update(artwork).digest('hex') === PREVIOUS_ARTWORK[source]) {
+                        atomicWriteFileSync(destination, fs.readFileSync(bundled))
+                    }
+                }
+                continue
+            }
             try {
-                fs.copyFileSync(path.join(artworkDirectory, source), basename + path.extname(source), fs.constants.COPYFILE_EXCL)
+                fs.copyFileSync(bundled, destination, fs.constants.COPYFILE_EXCL)
             } catch (error) {
                 if (error.code !== 'EEXIST') throw error
             }

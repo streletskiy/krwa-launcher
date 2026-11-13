@@ -11,14 +11,14 @@
     <style>
         body {
             transition: background-image 1s ease;
-            background-image: radial-gradient(circle at 50% 35%, #245867 0%, #15262e 45%, #0a1014 100%);
+            background-image: none;
             background-size: cover;
             -webkit-user-select: none;
         }
         #main {
             display: none;
             height: calc(100% - 22px);
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.06) 100%);
+            background: transparent;
             width: 100%;
             position: absolute;
             z-index: 10;
@@ -68,7 +68,7 @@
     <div id="loadingContainer">
         <div id="loadingContent">
             <div id="loadSpinnerContainer">
-                <img id="loadCenterImage" src="assets/images/krwa-wordmark.png" alt="KRWA">
+                <img id="loadCenterImage" src="assets/images/krwa-wordmark.svg" alt="KRWA">
             </div>
             <div id="launcherUpdateStatus" hidden role="status" aria-live="polite">
                 <p id="launcherUpdateMessage"><%= native("Проверяем обновления лаунчера…") %></p>

@@ -20,9 +20,8 @@ extraResources:
 
 # Windows Configuration
 win: 
-  # Local unsigned build: avoids winCodeSign extraction requiring Windows symlink privileges.
-  # Remove this line when a code-signing certificate/build runner is configured.
-  signAndEditExecutable: false
+  # Keep unsigned builds while applying the launcher icon and metadata.
+  signExecutable: false
   target: 
     - target: 'nsis'
       arch: 'x64'
