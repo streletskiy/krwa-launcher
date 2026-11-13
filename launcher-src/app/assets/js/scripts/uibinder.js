@@ -72,9 +72,7 @@ async function showMainUI(data){
 
         // If this is enabled in a development environment we'll get ratelimited.
         // The relaunch frequency is usually far too high.
-        if(!isDev && isLoggedIn){
-            validateSelectedAccount()
-        }
+        const accountValidation = !isDev && isLoggedIn ? validateSelectedAccount() : Promise.resolve()
 
         if(ConfigManager.isFirstLaunch()){
             currentView = VIEWS.welcome
@@ -93,8 +91,10 @@ async function showMainUI(data){
         }
 
         setTimeout(() => {
-            $('#loadingContainer').fadeOut(500, () => {
+            $('#loadingContainer').fadeOut(500, async () => {
                 $('#loadSpinnerImage').removeClass('rotating')
+                await accountValidation
+                if (!isOverlayVisible()) offerSteamDeckMods(data.getServerById(ConfigManager.getSelectedServer()))
             })
         }, 250)
         

@@ -14,6 +14,8 @@ const { AZURE_CLIENT_ID, MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR, SHELL_OPCODE 
 const LangLoader                        = require('./app/assets/js/langloader')
 const StartupUpdate                     = require('./app/assets/js/startupupdate')
 const { installLinuxIntegration }        = require('./app/assets/js/linuxintegration')
+const { detectSteamDeck }                = require('./app/assets/js/steamdeck')
+const steamDeck                          = detectSteamDeck()
 let updaterInitialized = false
 let startupUpdate
 
@@ -33,6 +35,17 @@ ipcMain.on('ensurePublicServer', (event, { gameDir, name, address }) => {
 ipcMain.handle('setLauncherLanguage', (_event, language) => {
     LangLoader.setPreference(language)
     LangLoader.setupLanguage()
+})
+
+ipcMain.handle('openSteamDeckKeyboard', async event => {
+    if (!steamDeck.detected || !win?.isFocused() || event.sender !== win.webContents ||
+        event.senderFrame !== win.webContents.mainFrame) return false
+    try {
+        await shell.openExternal('steam://open/keyboard')
+        return true
+    } catch {
+        return false
+    }
 })
 
 ipcMain.handle('installLinuxIntegration', async event => {
@@ -279,8 +292,8 @@ function createWindow() {
     win = new BrowserWindow({
         width: 1100,
         height: 700,
-        minWidth: 900,
-        minHeight: 600,
+        minWidth: steamDeck.detected ? 760 : 900,
+        minHeight: steamDeck.detected ? 500 : 600,
         icon: getPlatformIcon('SealCircle'),
         frame: false,
         webPreferences: {
@@ -293,6 +306,7 @@ function createWindow() {
     remoteMain.enable(win.webContents)
 
     const data = {
+        steamDeck,
         launcherVersion: app.getVersion(),
         bkid: Math.floor((Math.random() * fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'backgrounds')).length)),
         native: (str) => LangLoader.native(str),
@@ -302,6 +316,7 @@ function createWindow() {
     Object.entries(data).forEach(([key, val]) => ejse.data(key, val))
 
     win.loadURL(pathToFileURL(path.join(__dirname, 'app', 'app.ejs')).toString())
+    if (steamDeck.gamingMode) win.maximize()
 
     /*win.once('ready-to-show', () => {
         win.show()

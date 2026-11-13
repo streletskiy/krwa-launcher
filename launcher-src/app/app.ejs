@@ -28,7 +28,7 @@
         }
     </style>
 </head>
-<body bkid="0">
+<body bkid="0"<% if (steamDeck.detected) { %> data-steam-deck="<%= steamDeck.gamingMode ? 'gaming' : 'desktop' %>"<% } %>>
     <%- include('frame') %>
     <div id="launcherLanguageControl">
         <button id="launcherLanguageButton" type="button" aria-label="Language / Язык / Język" aria-haspopup="menu" aria-expanded="false">
@@ -59,6 +59,12 @@
         <%- include('landing') %>
     </div>
     <%- include('overlay') %>
+    <div id="gamepadHints" hidden>
+        <span><%= native('Стик / крестовина — выбор') %></span>
+        <span><%= native('A — подтвердить') %></span>
+        <span><%= native('B — назад') %></span>
+        <% if (steamDeck.detected) { %><span><%= native('X / STEAM + X — клавиатура') %></span><% } %>
+    </div>
     <div id="loadingContainer">
         <div id="loadingContent">
             <div id="loadSpinnerContainer">
@@ -72,5 +78,7 @@
         </div>
     </div>
     <script src="./assets/js/scripts/language.js"></script>
+    <script src="./assets/js/scripts/steamdeck.js"></script>
+    <script src="./assets/js/scripts/gamepad.js"></script>
 </body>
 </html>

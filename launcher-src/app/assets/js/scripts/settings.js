@@ -745,6 +745,7 @@ async function resolveModsForUI(){
 
     const distro = await DistroAPI.getDistribution()
     const servConf = ConfigManager.getModConfiguration(serv)
+    updateSteamDeckPreset(distro.getServerById(serv))
 
     const modStr = parseModulesForUI(distro.getServerById(serv).modules, false, servConf.mods)
 
@@ -780,7 +781,7 @@ function parseModulesForUI(mdls, submodules, servConf){
                             </div>
                         </div>
                         <label class="toggleSwitch" reqmod>
-                            <input type="checkbox" checked>
+                            <input type="checkbox" checked disabled>
                             <span class="toggleSwitchSlider"></span>
                         </label>
                     </div>

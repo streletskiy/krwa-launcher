@@ -16,6 +16,7 @@ function isOverlayVisible(){
 }
 
 let overlayHandlerContent
+let overlayPreviousFocus
 
 /**
  * Overlay keydown handler for a non-dismissable overlay.
@@ -23,7 +24,7 @@ let overlayHandlerContent
  * @param {KeyboardEvent} e The keydown event.
  */
 function overlayKeyHandler (e){
-    if(e.key === 'Enter' || e.key === 'Escape'){
+    if(e.key === 'Escape' || (e.key === 'Enter' && !e.target.closest?.('#overlayContainer button'))){
         document.getElementById(overlayHandlerContent).getElementsByClassName('overlayKeybindEnter')[0].click()
     }
 }
@@ -33,7 +34,7 @@ function overlayKeyHandler (e){
  * @param {KeyboardEvent} e The keydown event.
  */
 function overlayKeyDismissableHandler (e){
-    if(e.key === 'Enter'){
+    if(e.key === 'Enter' && !e.target.closest?.('#overlayContainer button')){
         document.getElementById(overlayHandlerContent).getElementsByClassName('overlayKeybindEnter')[0].click()
     } else if(e.key === 'Escape'){
         document.getElementById(overlayHandlerContent).getElementsByClassName('overlayKeybindEsc')[0].click()
@@ -76,10 +77,13 @@ function toggleOverlay(toggleState, dismissable = false, content = 'overlayConte
         dismissable = false
     }
     bindOverlayKeys(toggleState, content, dismissable)
+    const main = document.getElementById('main')
+    const languageControl = document.getElementById('launcherLanguageControl')
     if(toggleState){
-        document.getElementById('main').setAttribute('overlay', true)
-        // Make things untabbable.
-        $('#main *').attr('tabindex', '-1')
+        if (!main.inert) overlayPreviousFocus = document.activeElement
+        main.setAttribute('overlay', true)
+        main.inert = true
+        languageControl.inert = true
         $('#' + content).parent().children().hide()
         $('#' + content).show()
         if(dismissable){
@@ -93,12 +97,15 @@ function toggleOverlay(toggleState, dismissable = false, content = 'overlayConte
                 if(getCurrentView() === VIEWS.settings){
                     document.getElementById('settingsContainer').style.backgroundColor = 'transparent'
                 }
+                document.querySelector(`#${content} button[selected], #${content} .overlayKeybindEnter`)?.focus()
             }
         })
     } else {
-        document.getElementById('main').removeAttribute('overlay')
-        // Make things tabbable.
-        $('#main *').removeAttr('tabindex')
+        main.removeAttribute('overlay')
+        main.inert = false
+        languageControl.inert = false
+        overlayPreviousFocus?.focus({ preventScroll: true })
+        overlayPreviousFocus = null
         $('#overlayContainer').fadeOut({
             duration: 250,
             start: () => {

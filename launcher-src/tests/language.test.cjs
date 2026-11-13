@@ -13,7 +13,7 @@ test('renders the complete launcher in each supported language', async () => {
     for(const language of ['en_US', 'ru_RU', 'pl_PL']) {
         Lang.setupLanguage(language, ['en-US'])
         const html = await ejs.renderFile(path.resolve(__dirname, '../app/app.ejs'), {
-            launcherVersion: 'test', bkid: 0,
+            launcherVersion: 'test', bkid: 0, steamDeck: { detected: false },
             lang: Lang.queryEJS, native: Lang.native,
             language: () => language.replace('_', '-')
         })

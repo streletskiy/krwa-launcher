@@ -137,6 +137,13 @@
                 </div>
             </div>
             <div id="settingsModsContainer">
+                <div id="steamDeckPreset" class="settingsFieldContainer" hidden>
+                    <div class="settingsFieldLeft">
+                        <span class="settingsFieldTitle">Steam Deck</span>
+                        <span class="settingsFieldDesc"><%= native('Controlify для управления и Dynamic FPS для экономии заряда.') %></span>
+                    </div>
+                    <button type="button" id="steamDeckEnableMods" class="settingsActionButton"><%= native('Включить моды для Steam Deck') %></button>
+                </div>
                 <div id="settingsReqModsContainer">
                     <div class="settingsModsHeader"><%- lang('settings.requiredMods') %></div>
                     <div id="settingsReqModsContent">

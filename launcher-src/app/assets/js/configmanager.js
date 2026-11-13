@@ -89,6 +89,7 @@ const DEFAULT_CONFIG = {
         },
         launcher: {
             allowPrerelease: false,
+            steamDeckPromptAnswered: false,
             dataDirectory: dataPath
         }
     },
@@ -106,6 +107,11 @@ const DEFAULT_CONFIG = {
 }
 
 let config = null
+
+exports.hasAnsweredSteamDeckPrompt = () => config.settings.launcher.steamDeckPromptAnswered === true
+exports.markSteamDeckPromptAnswered = () => {
+    config.settings.launcher.steamDeckPromptAnswered = true
+}
 
 // Persistance Utility Functions
 

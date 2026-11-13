@@ -244,6 +244,15 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .settingsChangelogActions { padding: 0 var(--space-5) var(--space-5); }
 .toggleSwitch input:checked + .toggleSwitchSlider { background: #3a9c5d; }
 .toggleSwitch input:focus-visible + .toggleSwitchSlider { outline: 2px solid #9be4a7; outline-offset: 4px; }
+.toggleSwitch input { display: block; position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; }
+.gamepad-navigation :is(button, a, input, select, textarea):focus,
+.gamepad-navigation .toggleSwitch input:focus + .toggleSwitchSlider { outline: 3px solid #9be4a7 !important; outline-offset: 3px; }
+#gamepadHints { position: fixed; z-index: 80; bottom: 7px; left: 50%; transform: translateX(-50%); display: flex; gap: 14px; width: max-content; max-width: 96vw; padding: 5px 12px; border-radius: 12px; background: #10171f; color: #fff; font-size: 12px; pointer-events: none; }
+#gamepadHints[hidden], #steamDeckPreset[hidden] { display: none; }
+@media (max-width: 900px) {
+    body[data-steam-deck] #settingsContainerLeft { flex-basis: 170px; width: 170px; padding-inline: 12px; }
+    body[data-steam-deck] #landingContainer > #lower { width: 58%; }
+}
 #welcomeButton { right: auto; margin-bottom: 0; }
 #welcomeButtonContent { justify-content: center; }
 #loginOptionsContent .loginOptionsMainContent { width: 100%; }

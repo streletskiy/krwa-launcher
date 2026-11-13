@@ -107,12 +107,14 @@ class ProcessBuilder {
 
         logger.info('Launch Arguments:', loggableArgs)
 
+        const detached = ConfigManager.getLaunchDetached() &&
+            !(process.platform === 'linux' && process.env.SteamDeck === '1')
         const child = child_process.spawn(ConfigManager.getJavaExecutable(this.server.rawServer.id), args, {
             cwd: this.gameDir,
-            detached: ConfigManager.getLaunchDetached()
+            detached
         })
 
-        if(ConfigManager.getLaunchDetached()){
+        if(detached){
             child.unref()
         }
 

@@ -23,7 +23,7 @@ const macReleaseWorkflowPath = path.resolve(__dirname, '../../.github/workflows/
 test('landing script only references controls that exist in the rendered launcher', async () => {
     Lang.setupLanguage('ru_RU', ['ru-RU'])
     const html = await ejs.renderFile(appPath, {
-        launcherVersion: 'test', bkid: 0,
+        launcherVersion: 'test', bkid: 0, steamDeck: { detected: true, gamingMode: true },
         lang: Lang.queryEJS, native: Lang.native,
         language: () => 'ru-RU'
     })
@@ -33,6 +33,7 @@ test('landing script only references controls that exist in the rendered launche
     const missingIds = [...new Set(referencedIds)]
         .filter(id => !html.includes(`id="${id}"`))
     assert.deepEqual(missingIds, [])
+    assert.ok(html.includes('data-steam-deck="gaming"'))
     assert.ok(source.includes("document.getElementById('launcherLanguageButton')"))
     assert.ok(!source.includes("document.getElementById('launcherLanguage')"))
 })
