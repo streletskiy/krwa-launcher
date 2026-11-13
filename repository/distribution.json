@@ -7,7 +7,7 @@
       "name": "KRWA Aeronautics",
       "description": "Create Aeronautics и 50+ аддонов — NeoForge 1.21.1",
       "icon": "https://mc.krwa.ru/servers/krwa-aeronautics-1.21.1/krwa.png",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "address": "create.krwa.ru:25565",
       "minecraftVersion": "1.21.1",
       "mainServer": true,
@@ -3581,6 +3581,17 @@
             "MD5": "b2c7fee15e07017c3802c01a78a23ca8",
             "url": "https://mediafilez.forgecdn.net/files/8406/701/controlify-3.0.1%2Blts%2B1.21.1-neoforge.jar",
             "path": "curseforge/835847/8406701/controlify-3.0.1+lts+1.21.1-neoforge.jar"
+          }
+        },
+        {
+          "id": "ru.krwa:krwa-controlify-chat:1.0.1@jar",
+          "name": "KRWA Controlify Chat",
+          "type": "ForgeMod",
+          "artifact": {
+            "size": 5884,
+            "MD5": "def40581656d0f5a9ad8d1632507af32",
+            "url": "https://mc.krwa.ru/repo/mods/krwa-controlify-chat-1.0.1.jar",
+            "path": "ru/krwa/krwa-controlify-chat/1.0.1/krwa-controlify-chat-1.0.1.jar"
           }
         },
         {

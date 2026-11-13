@@ -3,10 +3,11 @@ const path = require('node:path')
 const { createRequire } = require('node:module')
 const { spawnSync } = require('node:child_process')
 
-const [distributionPath, serverId, testRoot, javaExecutable, ...enabledMods] = process.argv.slice(2)
-if(!distributionPath || !serverId || !testRoot || !javaExecutable){
+const [distributionPath, serverId, testDirectory, javaExecutable, ...enabledMods] = process.argv.slice(2)
+if(!distributionPath || !serverId || !testDirectory || !javaExecutable){
     throw new Error('Usage: node smoke-launch-profile.cjs <distribution.json> <server-id> <test-root> <java> [optional-mod-id...]')
 }
+const testRoot = path.resolve(testDirectory)
 
 const launcherRoot = path.join(__dirname, '..', 'launcher-src')
 const requireFromLauncher = createRequire(path.join(launcherRoot, 'package.json'))
