@@ -4,7 +4,7 @@ license = "MIT"
 
 [[mods]]
 modId = "krwa_controlify_chat"
-version = "1.0.0"
+version = "1.0.1"
 displayName = "KRWA Controlify Chat"
 description = "Chat focus compatibility for Controlify and No Chat Reports, with a Cyrillic keyboard layout."
 
