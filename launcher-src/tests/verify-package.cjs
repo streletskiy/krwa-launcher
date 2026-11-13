@@ -23,7 +23,7 @@ for (const artwork of ['krwa-cargo-port.webp', 'krwa-wordmark.svg', 'SealCircle.
     'steam/portrait.jpg', 'steam/landscape.jpg', 'steam/hero.jpg', 'steam/logo.png']) {
     const entry = `app/assets/images/${artwork}`
     assert.ok(entries.includes(`/${entry}`), `Packaged launcher is missing artwork: ${artwork}`)
-    assert.ok(asar.extractFile(archivePath, entry).equals(fs.readFileSync(path.join(__dirname, '..', entry))),
+    assert.ok(asar.extractFile(archivePath, path.normalize(entry)).equals(fs.readFileSync(path.join(__dirname, '..', entry))),
         `Packaged launcher artwork differs from source: ${artwork}`)
 }
 assert.ok(entries.includes('/node_modules/html-to-text/package.json'), 'Packaged launcher is missing the HTML-to-text dependency')
