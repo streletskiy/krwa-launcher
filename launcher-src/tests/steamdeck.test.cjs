@@ -1,7 +1,7 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
 const { HeliosDistribution } = require('helios-core/common')
-const { detectSteamDeck, getSteamDeckMods } = require('../app/assets/js/steamdeck')
+const { detectSteamDeck, getSteamDeckMods, getDisabledSteamDeckMods } = require('../app/assets/js/steamdeck')
 const { findInDirection, readGamepad } = require('../app/assets/js/gamepad')
 const distro = require('../../repository/distribution.json')
 
@@ -25,6 +25,18 @@ test('finds the optional Deck mods by stable IDs in the generated distribution',
     assert.deepEqual(getSteamDeckMods(server), ['curseforge.project-835847:file', 'curseforge.project-335493:file'])
     assert.deepEqual(getSteamDeckMods({ rawServer: server.rawServer, modules: [] }), [])
     assert.deepEqual(getSteamDeckMods(null), [])
+})
+
+test('offers only disabled Deck mods, including after an enabled mod is switched off', () => {
+    const server = new HeliosDistribution(distro, 'common', 'instances').getServerById('krwa-aeronautics-1.21.1')
+    const [controlify, dynamicFps] = getSteamDeckMods(server)
+    const mods = { [controlify]: true, [dynamicFps]: { value: true, mods: {} } }
+    assert.deepEqual(getDisabledSteamDeckMods(server, mods), [])
+    mods[controlify] = false
+    assert.deepEqual(getDisabledSteamDeckMods(server, mods), [controlify])
+    mods[dynamicFps].value = false
+    assert.deepEqual(getDisabledSteamDeckMods(server, mods), [controlify, dynamicFps])
+    assert.deepEqual(getDisabledSteamDeckMods(server, null), [])
 })
 
 test('filters stick drift, prefers the D-pad, and reads the standard button layout', () => {

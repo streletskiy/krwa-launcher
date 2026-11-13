@@ -23,6 +23,13 @@
                 <div id="server_status_wrapper" role="status"><span id="landingPlayerLabel"></span><span id="player_count"><%= native("Проверяем…") %></span></div>
             </div>
             <div id="launch_content"><button id="launch_button"><%- lang('landing.launchButton') %></button></div>
+            <section id="steamDeckOffer" aria-labelledby="steamDeckOfferTitle" hidden>
+                <div>
+                    <strong id="steamDeckOfferTitle">Steam Deck</strong>
+                    <p><%= native('Controlify для управления и Dynamic FPS для экономии заряда.') %></p>
+                </div>
+                <button type="button" id="steamDeckOfferEnable" class="settingsActionButton"><%= native('Включить моды для Steam Deck') %></button>
+            </section>
             <div class="krwa-ready"><%= native("Всё для приключения — в одном месте.") %></div>
             <div id="launch_details" role="status" aria-live="polite">
                 <div id="launch_details_left"><span id="launch_progress_label">0%</span></div>

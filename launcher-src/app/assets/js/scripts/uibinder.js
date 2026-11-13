@@ -45,6 +45,7 @@ function switchView(current, next, currentFadeTime = 500, nextFadeTime = 500, on
         await onCurrentFade()
         $(`${next}`).fadeIn(nextFadeTime, async () => {
             await onNextFade()
+            if (next === VIEWS.landing) refreshSteamDeckOffer()
         })
     })
 }
@@ -72,7 +73,7 @@ async function showMainUI(data){
 
         // If this is enabled in a development environment we'll get ratelimited.
         // The relaunch frequency is usually far too high.
-        const accountValidation = !isDev && isLoggedIn ? validateSelectedAccount() : Promise.resolve()
+        if (!isDev && isLoggedIn) validateSelectedAccount()
 
         if(ConfigManager.isFirstLaunch()){
             currentView = VIEWS.welcome
@@ -91,10 +92,9 @@ async function showMainUI(data){
         }
 
         setTimeout(() => {
-            $('#loadingContainer').fadeOut(500, async () => {
+            $('#loadingContainer').fadeOut(500, () => {
                 $('#loadSpinnerImage').removeClass('rotating')
-                await accountValidation
-                if (!isOverlayVisible()) offerSteamDeckMods(data.getServerById(ConfigManager.getSelectedServer()))
+                refreshSteamDeckOffer()
             })
         }, 250)
         
@@ -135,6 +135,7 @@ function onDistroRefresh(data){
     initNews()
     syncModConfigurations(data)
     ensureJavaSettings(data)
+    refreshSteamDeckOffer()
 }
 
 /**

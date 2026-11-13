@@ -76,6 +76,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 #landingContainer[data-launching='true'] #launch_button::before { flex-basis: 21px; width: 21px; height: 21px; background: none; mask: none; border: 3px solid #ffffff44; border-top-color: white; border-radius: 50%; animation: krwa-spin 1s linear infinite; }
 @keyframes krwa-spin { to { transform: rotate(360deg); } }
 .krwa-ready { font-size: 12px; color: var(--muted); margin-top: 17px; }
+#steamDeckOffer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; margin-top: 14px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: #242e2b; }
+#steamDeckOffer strong { font-size: 13px; }
+#steamDeckOffer p { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+#steamDeckOfferEnable { min-height: 36px; }
+#steamDeckOffer[hidden], #landingContainer[data-launching='true'] #steamDeckOffer, #steamDeckOffer:not([hidden]) + .krwa-ready { display: none; }
 #landingContainer[data-launching='true'] .krwa-ready { display: none; }
 #launch_details { position: relative; top: auto; margin-top: 22px; width: 100%; min-height: 58px; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 12px; row-gap: 12px; align-items: center; max-width: none !important; }
 #launch_details_left { grid-column: 2; grid-row: 1; display: flex; justify-content: flex-end; }
@@ -247,6 +252,9 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .toggleSwitch input { display: block; position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; }
 .gamepad-navigation :is(button, a, input, select, textarea):focus,
 .gamepad-navigation .toggleSwitch input:focus + .toggleSwitchSlider { outline: 3px solid #9be4a7 !important; outline-offset: 3px; }
+#settingsNavItemsContent button:focus-visible,
+.gamepad-navigation #settingsNavItemsContent button:focus { outline-offset: -3px; }
+#settingsDeckModsContent:not(:empty) { display: grid; gap: 4px; margin-bottom: 18px; }
 #gamepadHints { position: fixed; z-index: 80; bottom: 7px; left: 50%; transform: translateX(-50%); display: flex; gap: 14px; width: max-content; max-width: 96vw; padding: 5px 12px; border-radius: 12px; background: #10171f; color: #fff; font-size: 12px; pointer-events: none; }
 #gamepadHints[hidden], #steamDeckPreset[hidden] { display: none; }
 @media (max-width: 900px) {

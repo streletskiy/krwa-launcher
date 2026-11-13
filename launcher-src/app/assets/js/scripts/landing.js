@@ -296,6 +296,7 @@ function updateSelectedServer(serv){
         animateSettingsTabRefresh()
     }
     setLaunchEnabled(serv != null)
+    refreshSteamDeckOffer()
 }
 // Real text is set in uibinder.js on distributionIndexDone.
 server_selection_button.textContent = Lang.queryJS('landing.selectedServer.loading')

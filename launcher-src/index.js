@@ -48,6 +48,23 @@ ipcMain.handle('openSteamDeckKeyboard', async event => {
     }
 })
 
+let linuxIntegration
+function configureLinuxIntegration(automatic = false) {
+    if (!linuxIntegration) {
+        const images = path.join(__dirname, 'app', 'assets', 'images')
+        linuxIntegration = installLinuxIntegration({
+            iconSource: path.join(images, 'SealCircle.png'),
+            artworkDirectory: path.join(images, 'steam'),
+            steamDeck: steamDeck.detected,
+            automatic,
+            version: app.getVersion(),
+            dataHome: process.env.XDG_DATA_HOME,
+            configHome: process.env.XDG_CONFIG_HOME
+        }).finally(() => { linuxIntegration = null })
+    }
+    return linuxIntegration
+}
+
 ipcMain.handle('installLinuxIntegration', async event => {
     if (!win || event.sender !== win.webContents || event.senderFrame !== win.webContents.mainFrame) {
         return { ok: false, reason: 'unauthorized' }
@@ -56,9 +73,7 @@ ipcMain.handle('installLinuxIntegration', async event => {
         return { ok: false, reason: 'unsupported' }
     }
     try {
-        const result = await installLinuxIntegration({
-            iconSource: path.join(__dirname, 'app', 'assets', 'images', 'SealCircle.png')
-        })
+        const result = await configureLinuxIntegration()
         return { ok: true, steamAdded: result.steamAdded }
     } catch(error) {
         console.error('Unable to install Linux desktop integration.', error)
@@ -413,6 +428,13 @@ function getPlatformIcon(filename){
 
 app.on('ready', createWindow)
 app.on('ready', createMenu)
+app.on('ready', () => {
+    if (steamDeck.detected && app.isPackaged) {
+        win.once('ready-to-show', () => {
+            configureLinuxIntegration(true).catch(error => console.warn('Unable to set up Steam Deck shortcuts.', error))
+        })
+    }
+})
 
 app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar

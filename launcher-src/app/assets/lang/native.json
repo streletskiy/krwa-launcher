@@ -1,8 +1,4 @@
 {
-  "Включить Controlify для управления и Dynamic FPS для экономии заряда? Выбор можно изменить в настройках модов.": {
-    "en_US": "Enable Controlify for controller support and Dynamic FPS to save battery? You can change this in the mod settings.",
-    "pl_PL": "Włączyć Controlify do obsługi kontrolera i Dynamic FPS, aby oszczędzać baterię? Możesz to zmienić w ustawieniach modów."
-  },
   "Controlify для управления и Dynamic FPS для экономии заряда.": {
     "en_US": "Controlify adds controller support and Dynamic FPS saves battery.",
     "pl_PL": "Controlify obsługuje kontroler, a Dynamic FPS oszczędza baterię."

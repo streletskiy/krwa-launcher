@@ -25,4 +25,12 @@ function getSteamDeckMods(server) {
     return DECK_MODS.every(id => available.includes(id)) ? DECK_MODS.slice() : []
 }
 
-module.exports = { detectSteamDeck, getSteamDeckMods }
+function getDisabledSteamDeckMods(server, mods) {
+    if (!mods) return []
+    return getSteamDeckMods(server).filter(id => {
+        const value = mods[id]
+        return value !== true && value?.value !== true
+    })
+}
+
+module.exports = { detectSteamDeck, getSteamDeckMods, getDisabledSteamDeckMods }

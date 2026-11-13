@@ -744,13 +744,17 @@ async function resolveModsForUI(){
     const serv = ConfigManager.getSelectedServer()
 
     const distro = await DistroAPI.getDistribution()
+    const server = distro.getServerById(serv)
     const servConf = ConfigManager.getModConfiguration(serv)
-    updateSteamDeckPreset(distro.getServerById(serv))
+    const deckIds = getSteamDeckMods(server)
+    const deckModules = deckIds.map(id => server.modules.find(mod =>
+        mod.rawModule.type === Type.ForgeMod && !mod.getRequired().value && mod.getVersionlessMavenIdentifier() === id))
+    const modStr = parseModulesForUI(server.modules.filter(mod => !deckModules.includes(mod)), false, servConf.mods)
 
-    const modStr = parseModulesForUI(distro.getServerById(serv).modules, false, servConf.mods)
-
+    document.getElementById('settingsDeckModsContent').innerHTML = parseModulesForUI(deckModules, false, servConf.mods).optMods
     document.getElementById('settingsReqModsContent').innerHTML = modStr.reqMods
     document.getElementById('settingsOptModsContent').innerHTML = modStr.optMods
+    updateSteamDeckPreset(deckIds)
 }
 
 /**
