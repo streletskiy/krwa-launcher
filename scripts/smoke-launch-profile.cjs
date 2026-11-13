@@ -3,9 +3,9 @@ const path = require('node:path')
 const { createRequire } = require('node:module')
 const { spawnSync } = require('node:child_process')
 
-const [distributionPath, serverId, testRoot, javaExecutable] = process.argv.slice(2)
+const [distributionPath, serverId, testRoot, javaExecutable, ...enabledMods] = process.argv.slice(2)
 if(!distributionPath || !serverId || !testRoot || !javaExecutable){
-    throw new Error('Usage: node smoke-launch-profile.cjs <distribution.json> <server-id> <test-root> <java>')
+    throw new Error('Usage: node smoke-launch-profile.cjs <distribution.json> <server-id> <test-root> <java> [optional-mod-id...]')
 }
 
 const launcherRoot = path.join(__dirname, '..', 'launcher-src')
@@ -20,7 +20,7 @@ const configManager = {
     getInstanceDirectory: () => instanceDir,
     getCommonDirectory: () => commonDir,
     getTempNativeFolder: () => 'krwa-smoke-natives',
-    getModConfiguration: () => ({ mods: {} }),
+    getModConfiguration: () => ({ mods: Object.fromEntries(enabledMods.map(id => [id, true])) }),
     getJavaExecutable: () => javaExecutable,
     getLaunchDetached: () => false,
     getMaxRAM: () => '8G',
@@ -71,6 +71,11 @@ async function main(){
     const server = distribution.getServerById(serverId)
     if(!server){
         throw new Error(`Server profile not found: ${serverId}`)
+    }
+    for(const id of enabledMods){
+        if(!server.modules.some(mod => !mod.getRequired().value && mod.getVersionlessMavenIdentifier() === id)){
+            throw new Error(`Optional mod not found in ${serverId}: ${id}`)
+        }
     }
 
     const loaderManifest = await new DistributionIndexProcessor(commonDir, distribution, serverId).loadModLoaderVersionJson()

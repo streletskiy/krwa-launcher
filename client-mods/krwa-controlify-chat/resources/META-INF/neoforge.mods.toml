@@ -1,0 +1,26 @@
+modLoader = "lowcodefml"
+loaderVersion = "[1,)"
+license = "MIT"
+
+[[mods]]
+modId = "krwa_controlify_chat"
+version = "1.0.0"
+displayName = "KRWA Controlify Chat"
+description = "Chat focus compatibility for Controlify and No Chat Reports, with a Cyrillic keyboard layout."
+
+[[dependencies.krwa_controlify_chat]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.krwa_controlify_chat]]
+modId = "controlify"
+type = "optional"
+versionRange = "[3.0.1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[mixins]]
+config = "krwa_controlify_chat.mixins.json"

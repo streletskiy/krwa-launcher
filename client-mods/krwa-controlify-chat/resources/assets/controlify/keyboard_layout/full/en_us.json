@@ -1,0 +1,9 @@
+{
+  "width": 12,
+  "keys": [
+    [["1","!"],["2","@"],["3","#"],["4","$"],["5","%"],["6","^"],["7","&"],["8","*"],["9","("],["0",")"],{"regular":{"action":"shift_lock"},"width":2}],
+    ["q","w","e","r","t","y","u","i","o","p",{"regular":{"action":"backspace"},"width":2,"shortcut":"controlify:gui_abstract_action_1"}],
+    [["/","?"],"a","s","d","f","g","h","j","k","l",{"regular":{"action":"enter"},"width":2,"shortcut":"controlify:pause"}],
+    [{"regular":{"action":"shift"},"width":1,"shortcut":"controlify:gui_abstract_action_3"},"z","x","c","v","b","n","m",[",","."],{"regular":{"chars":" ","display_name":"Space"},"width":2,"shortcut":"controlify:gui_abstract_action_2"},{"regular":{"layout":"controlify:krwa_cyrillic","display_name":{"text":"РУС"}},"width":1}]
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "width": 12,
+  "keys": [
+    [["1","!"],["2","@"],["3","#"],["4","$"],["5","%"],["6","^"],["7","&"],["8","*"],["9","("],["0",")"],["ё","Ё"],{"regular":{"action":"shift_lock"},"width":1}],
+    [["й","Й"],["ц","Ц"],["у","У"],["к","К"],["е","Е"],["н","Н"],["г","Г"],["ш","Ш"],["щ","Щ"],["з","З"],{"regular":{"action":"backspace"},"width":2,"shortcut":"controlify:gui_abstract_action_1"}],
+    [["ф","Ф"],["ы","Ы"],["в","В"],["а","А"],["п","П"],["р","Р"],["о","О"],["л","Л"],["д","Д"],["ж","Ж"],{"regular":{"action":"enter"},"width":2,"shortcut":"controlify:pause"}],
+    [{"regular":{"action":"shift"},"width":1,"shortcut":"controlify:gui_abstract_action_3"},["я","Я"],["ч","Ч"],["с","С"],["м","М"],["и","И"],["т","Т"],["ь","Ь"],["б","Б"],["ю","Ю"],{"regular":{"chars":" ","display_name":"Space"},"width":2,"shortcut":"controlify:gui_abstract_action_2"}],
+    [{"regular":{"action":"previous_layout","display_name":{"text":"ABC"}},"width":1},["х","Х"],["ъ","Ъ"],["э","Э"],["/","?"],[",","."],["-","_"],[":",";"],["«","»"],["=","+"],["[","]"],["№","\""]]
+  ]
+}

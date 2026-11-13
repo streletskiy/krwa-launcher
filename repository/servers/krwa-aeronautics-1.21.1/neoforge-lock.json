@@ -3570,6 +3570,17 @@
       }
     },
     {
+      "id": "ru.krwa:krwa-controlify-chat:1.0.0@jar",
+      "name": "KRWA Controlify Chat",
+      "type": "ForgeMod",
+      "artifact": {
+        "size": 5888,
+        "MD5": "75009ce4926d931ce4137e840334a012",
+        "url": "https://mc.krwa.ru/repo/mods/krwa-controlify-chat-1.0.0.jar",
+        "path": "ru/krwa/krwa-controlify-chat/1.0.0/krwa-controlify-chat-1.0.0.jar"
+      }
+    },
+    {
       "id": "curseforge.project-335493:file:7546938@jar",
       "name": "Dynamic FPS 3.11.4 (Steam Deck battery helper)",
       "type": "ForgeMod",
