@@ -3,11 +3,29 @@ const assert = require('node:assert/strict')
 const path = require('node:path')
 const ejs = require('ejs')
 const Lang = require('../app/assets/js/langloader')
+const { getSteamDeckLanguages } = require('../app/assets/js/steamdeck')
 test('detects regional system languages and honours an explicit choice', () => {
     assert.equal(Lang.resolveLanguage('auto', ['pl-PL']), 'pl_PL')
     assert.equal(Lang.resolveLanguage('auto', ['ru-UA']), 'ru_RU')
     assert.equal(Lang.resolveLanguage('pl_PL', ['ru-RU']), 'pl_PL')
     assert.equal(Lang.resolveLanguage('auto', ['zh-CN', 'en-GB']), 'en_US')
+})
+test('uses the Steam UI language in Gaming Mode and the KDE language in Desktop Mode', () => {
+    const options = {
+        homeDirectory: '/home/deck',
+        list: () => ['not-a-process', '124'],
+        read: file => {
+            if (file.endsWith('/comm')) return 'steamwebhelper\n'
+            if (file.endsWith('/cmdline')) return './steamwebhelper\0-lang=ru_RU\0'
+            if (path.basename(file) === 'plasma-localerc') return '[Formats]\nLANG=pl_PL.UTF-8\n\n[Translations]\nLANGUAGE=pl:en_US\n'
+            return ''
+        }
+    }
+    const gaming = getSteamDeckLanguages({ ...options, env: { SteamDeck: '1', LANG: 'en_US.UTF-8' } })
+    const desktop = getSteamDeckLanguages({ ...options, env: { XDG_CURRENT_DESKTOP: 'KDE' } })
+    assert.equal(Lang.resolveLanguage('auto', [...gaming, 'en-US']), 'ru_RU')
+    assert.equal(Lang.resolveLanguage('auto', [...desktop, 'en-US']), 'pl_PL')
+    assert.equal(Lang.resolveLanguage('en_US', gaming), 'en_US')
 })
 test('renders the complete launcher in each supported language', async () => {
     for(const language of ['en_US', 'ru_RU', 'pl_PL']) {

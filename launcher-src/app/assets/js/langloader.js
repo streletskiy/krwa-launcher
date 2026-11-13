@@ -3,6 +3,7 @@ const path = require('path')
 const toml = require('toml')
 const merge = require('lodash.merge')
 const native = require('../lang/native.json')
+const { detectSteamDeck, getSteamDeckLanguages } = require('./steamdeck')
 let lang, selected = 'en_US'
 const supported = ['ru_RU', 'en_US', 'pl_PL']
 exports.resolveLanguage = (preference, systemLanguages = []) => {
@@ -34,6 +35,7 @@ exports.setupLanguage = (override, systemLanguages) => {
     let system = systemLanguages
     if(!system) {
         try { system = electronApp().getPreferredSystemLanguages() } catch { system = [Intl.DateTimeFormat().resolvedOptions().locale] }
+        if (detectSteamDeck().detected) system = [...getSteamDeckLanguages(), ...system]
     }
     selected = exports.resolveLanguage(override || exports.getPreference(), system)
     lang = {}
