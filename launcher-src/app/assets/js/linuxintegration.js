@@ -154,7 +154,8 @@ async function installLinuxIntegration(options = {}) {
     const packagedExecutable = options.packagedExecutable || process.execPath
     const iconSource = options.iconSource
 
-    if(!iconSource || !fs.statSync(iconSource).isFile()) throw new Error('Launcher icon is unavailable')
+    if(!iconSource) throw new Error('Launcher icon is unavailable')
+    const icon = fs.readFileSync(iconSource)
 
     const installDirectory = path.join(homeDirectory, '.local', 'opt', 'krwa-launcher')
     const installedAppImage = path.join(installDirectory, 'KRWA-Launcher.AppImage')
@@ -193,7 +194,9 @@ async function installLinuxIntegration(options = {}) {
     const iconPath = path.join(dataHome, 'icons', 'hicolor', '512x512', 'apps', `${DESKTOP_ID}.png`)
     const desktopFile = path.join(dataHome, 'applications', `${DESKTOP_ID}.desktop`)
     const installedIcon = readIfPresent(iconPath)
-    if (!installedIcon || !installedIcon.equals(fs.readFileSync(iconSource))) atomicCopy(iconSource, iconPath, 0o644)
+    if(!installedIcon?.equals(icon)) {
+        replaceFile(iconPath, temporary => fs.writeFileSync(temporary, icon, { mode: 0o644 }))
+    }
     const entry = desktopEntry(executablePath, iconPath, Boolean(appImageSource))
     atomicWrite(desktopFile, entry, 0o644)
     if (options.steamDeck) {
