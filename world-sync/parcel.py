@@ -90,7 +90,7 @@ def export_world(root, uid, name, target, center=None):
     with zipfile.ZipFile(
         target, "x", compression=zipfile.ZIP_DEFLATED, compresslevel=2
     ) as archive:
-        archive.writestr("level.dat", gzip.compress(encode(data)))
+        archive.writestr("level.dat", gzip.compress(encode(data), mtime=0))
         for folder in FOLDERS:
             groups = defaultdict(list)
             for x, z in tiles:

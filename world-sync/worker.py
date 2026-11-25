@@ -1,11 +1,13 @@
 """Serialize work under Crafty's stopped world lock, with durable file rollback."""
 
+import hashlib
 import importlib.util
 import json
 import logging
 import os
 import threading
 import time
+import zipfile
 from pathlib import Path
 
 import portalocker
@@ -16,7 +18,6 @@ from store import HOME, audit, db, digest, set_state, write_file, write_json
 log = logging.getLogger("world-sync")
 WORLD = Path(os.environ["KRWA_SYNC_WORLD"]).resolve()
 MAINT = HOME / "maintenance.json"
-FREEZE = HOME / "saving.json"
 MUTEX = threading.RLock()
 STOP = threading.Event()
 
@@ -85,62 +86,42 @@ def wait_feedback(logfile, start, endings, timeout=30):
     raise RuntimeError("Нет подтверждения Minecraft в журнале сохранения.")
 
 
-def resume_saving(craft):
-    if not FREEZE.exists():
-        return
-    marker = json.loads(FREEZE.read_text())
-    if not craft.stats().get("running"):
-        FREEZE.unlink()
-        return
-    log_file = WORLD.parent / "logs" / "latest.log"
-    if marker["phase"] == "sent":
-        reply = wait_feedback(
-            log_file,
-            marker["offset"],
-            ("Automatic saving is now disabled", "Saving is already turned off"),
-            8,
-        )
-        if reply == "Saving is already turned off":
-            FREEZE.unlink()
-            return
-    at = log_file.stat().st_size
-    craft.command("save-on")
-    wait_feedback(
-        log_file, at, ("Automatic saving is now enabled", "Saving is already turned on")
-    )
-    FREEZE.unlink()
+def contents(path):
+    with zipfile.ZipFile(path) as archive:
+        result = {}
+        for name in archive.namelist():
+            with archive.open(name) as stream:
+                result[name] = hashlib.file_digest(stream, "sha256").digest()
+        return result
 
 
 def snapshot(trip, access, craft, job):
     logfile = WORLD.parent / "logs" / "latest.log"
     offset = logfile.stat().st_size
-    write_json(FREEZE, {"phase": "sent", "offset": offset})
-    craft.command("save-off")
-    reply = wait_feedback(
-        logfile,
-        offset,
-        ("Automatic saving is now disabled", "Saving is already turned off"),
-    )
-    if reply == "Saving is already turned off":
-        FREEZE.unlink()
-        raise ValueError(
-            "Автосохранение уже отключено администратором. Повторите позднее."
-        )
-    write_json(FREEZE, {"phase": "disabled"})
+    craft.command("save-all flush")
+    wait_feedback(logfile, offset, ("Saved the game", "Saved the world"), 90)
+    first, second = job / "base.next", job / "verification.next"
+    center = (access["cx"], access["cz"])
+    previous = None
     try:
-        offset = logfile.stat().st_size
-        craft.command("save-all flush")
-        wait_feedback(logfile, offset, ("Saved the game", "Saved the world"), 90)
-        stage = job / "base.next"
-        stage.unlink(missing_ok=True)
-        meta = export_world(
-            WORLD, trip["uid"], access["name"], stage, (access["cx"], access["cz"])
+        # Successive captures must agree on every exported byte. A busy parcel
+        # can change between reads, while other parts of the server keep saving.
+        for candidate in (first, second, first):
+            candidate.unlink(missing_ok=True)
+            meta = export_world(WORLD, trip["uid"], access["name"], candidate, center)
+            current = contents(candidate)
+            if current == previous:
+                os.replace(candidate, job / "base.zip")
+                write_json(job / "area.json", meta)
+                set_state(trip["id"], "ready")
+                return
+            previous = current
+        raise ValueError(
+            "Участок менялся во время чтения. Повторите подготовку снимка."
         )
-        os.replace(stage, job / "base.zip")
-        write_json(job / "area.json", meta)
     finally:
-        resume_saving(craft)
-    set_state(trip["id"], "ready")
+        first.unlink(missing_ok=True)
+        second.unlink(missing_ok=True)
 
 
 def session_lock():
@@ -276,7 +257,6 @@ def loop():
     while not STOP.is_set():
         try:
             with MUTEX:
-                resume_saving(craft)
                 recover(craft)
                 with db() as con:
                     trip = con.execute(
@@ -295,7 +275,7 @@ def loop():
                     try:
                         process(trip, craft)
                     except Exception as err:
-                        if MAINT.exists() or FREEZE.exists():
+                        if MAINT.exists():
                             raise
                         log.exception("Trip validation failed %s", trip["id"])
                         set_state(

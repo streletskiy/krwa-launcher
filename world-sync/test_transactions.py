@@ -37,7 +37,9 @@ class TransactionTest(unittest.TestCase):
         data.mkdir()
         os.environ.setdefault("KRWA_SYNC_DATA", str(data))
         os.environ.setdefault("KRWA_SYNC_WORLD", str(self.root))
-        import app, store, worker
+        import app
+        import store
+        import worker
 
         self.app, self.worker = app, worker
         for module, fields in [
@@ -49,7 +51,6 @@ class TransactionTest(unittest.TestCase):
                     "WORLD": self.root,
                     "HOME": data,
                     "MAINT": data / "maintenance.json",
-                    "FREEZE": data / "saving.json",
                 },
             ),
         ]:
