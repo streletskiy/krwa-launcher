@@ -78,8 +78,27 @@ for material in ("wooden", "stone", "iron", "golden", "diamond", "netherite"):
     )
 
 
+def canonical(value):
+    if isinstance(value, nbtlib.Compound):
+        return nbtlib.Compound({key: canonical(value[key]) for key in sorted(value)})
+    if isinstance(value, nbtlib.List):
+        return type(value)(canonical(item) for item in value)
+    return value
+
+
 def text_tag(value):
-    return value.snbt() if value is not None else "—"
+    return canonical(value).snbt() if value is not None else "—"
+
+
+def entity_state(tag):
+    if (
+        tag is not None
+        and str(tag.get("id", "")).startswith("create:")
+        and "NeedsSpeedUpdate" in tag
+    ):
+        # The kinetic graph toggles this transient flag when loading a saved world.
+        tag = nbtlib.Compound({k: v for k, v in tag.items() if k != "NeedsSpeedUpdate"})
+    return text_tag(tag)
 
 
 def clean_items(items):
@@ -247,7 +266,7 @@ def plan(root, uid, meta, base_path, upload_path, live_path=None):
         modified = False
         for pos in entity_maps[0].keys() | entity_maps[2].keys():
             old, cur, new = [e.get(pos) for e in entity_maps]
-            if text_tag(old) != text_tag(new):
+            if entity_state(old) != entity_state(new):
                 containers = {
                     "minecraft:chest",
                     "minecraft:trapped_chest",

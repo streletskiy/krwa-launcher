@@ -77,6 +77,33 @@ def export_world(root, uid, name, target, center=None):
         player.pop(k, None)
     for axis, value in zip("XYZ", pos):
         level["Spawn" + axis] = nbtlib.Int(math.floor(value))
+    dimensions = level.get("WorldGenSettings", {}).get("dimensions", {})
+    if "minecraft:overworld" in dimensions:
+        # A newly decorated neighbouring chunk can generate ore and structures
+        # inside an already saved parcel. Outside the border, generate empty terrain.
+        dimensions["minecraft:overworld"]["generator"] = nbtlib.Compound(
+            {
+                "type": nbtlib.String("minecraft:flat"),
+                "settings": nbtlib.Compound(
+                    {
+                        "biome": nbtlib.String("minecraft:plains"),
+                        "layers": nbtlib.List[nbtlib.Compound](
+                            [
+                                nbtlib.Compound(
+                                    {
+                                        "height": nbtlib.Int(1),
+                                        "block": nbtlib.String("minecraft:air"),
+                                    }
+                                )
+                            ]
+                        ),
+                        "structure_overrides": nbtlib.List[nbtlib.String]([]),
+                        "features": nbtlib.Byte(0),
+                        "lakes": nbtlib.Byte(0),
+                    }
+                ),
+            }
+        )
     level["Player"] = nbtlib.Compound(player)
     level["LevelName"] = nbtlib.String("KRWA · " + name)
     level["allowCommands"] = nbtlib.Byte(0)
