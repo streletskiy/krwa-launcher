@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Офлайн-миры · KRWA</title>
+        <link rel="stylesheet" href="/api/offline-worlds/assets/admin.css" />
+        <script defer src="/api/offline-worlds/assets/admin.js"></script>
+    </head>
+    <body>
+        <main>
+            <nav>
+                <a href="/admin">← Админка KRWA</a
+                ><button id="refresh">Обновить</button>
+            </nav>
+            <h1>Офлайн-миры</h1>
+            <p role="status" id="status"></p>
+            <section>
+                <h2>Доступ игроков</h2>
+                <form id="grant">
+                    <label
+                        >Игровой ник
+                        <input
+                            id="grant-name"
+                            required
+                            maxlength="16"
+                            autocomplete="off"
+                    /></label>
+                    <label
+                        >X
+                        <input
+                            id="grant-x"
+                            type="number"
+                            placeholder="из сохранения"
+                    /></label>
+                    <label
+                        >Z
+                        <input
+                            id="grant-z"
+                            type="number"
+                            placeholder="из сохранения"
+                    /></label>
+                    <button>Разрешить доступ</button>
+                </form>
+                <div id="users"></div>
+            </section>
+            <section>
+                <h2>Поездки</h2>
+                <div id="trips"></div>
+            </section>
+            <section id="review" hidden>
+                <h2 id="review-title">Сравнение</h2>
+                <p id="coordinates"></p>
+                <div class="layout">
+                    <div>
+                        <h3>Карта изменений</h3>
+                        <div id="map"></div>
+                        <small
+                            >Север ↑ · один квадрат — чанк 16 × 16 блоков</small
+                        >
+                        <p>
+                            Зелёный — без пересечений, оранжевый — конфликт,
+                            фиолетовый — ручной перенос.
+                        </p>
+                    </div>
+                    <div>
+                        <h3>Изменения</h3>
+                        <div class="toolbar">
+                            <select id="filter" aria-label="Тип изменений">
+                                <option value="">Все изменения</option>
+                                <option value="conflict">Конфликты</option>
+                                <option value="manual">Ручной перенос</option>
+                                <option value="auto">
+                                    Совместимые
+                                </option></select
+                            ><button id="all">Весь участок</button>
+                        </div>
+                        <div id="slices" hidden>
+                            <div id="slice-heading"></div>
+                            <div id="slice-images"></div>
+                            <small id="under-pointer"></small>
+                        </div>
+                        <div id="comparison"></div>
+                        <button id="more" hidden>Показать ещё</button>
+                    </div>
+                </div>
+                <div id="exports"></div>
+                <div class="actions">
+                    <button id="accept">Применить версию игрока</button
+                    ><button id="revise">Вернуть игроку на доработку</button
+                    ><button id="keep">Оставить мир сервера</button>
+                </div>
+                <div id="confirm" hidden>
+                    <p id="question"></p>
+                    <button id="confirm-action">Подтвердить</button
+                    ><button id="cancel">Отмена</button>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

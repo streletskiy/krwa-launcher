@@ -30,6 +30,7 @@
                 </div>
                 <button type="button" id="steamDeckOfferEnable" class="settingsActionButton"><%= native('Включить моды для Steam Deck') %></button>
             </section>
+            <button type="button" class="settingsActionButton" id="trip-open"><%= native("Офлайн-мир") %></button>
             <div class="krwa-ready"><%= native("Всё для приключения — в одном месте.") %></div>
             <div id="launch_details" role="status" aria-live="polite">
                 <div id="launch_details_left"><span id="launch_progress_label">0%</span></div>
@@ -98,5 +99,13 @@
             </div>
         </div>
     </div>
+    <section id="trip-panel" class="krwa-trip-panel" hidden aria-labelledby="trip-title">
+        <h2 id="trip-title"><%= native('Офлайн-мир') %></h2>
+        <p id="trip-status" role="status" aria-live="polite"></p>
+        <p class="trip-scope"><%= native('Переносятся поддерживаемые блоки, предметы и опыт. Квесты, мобы и движущиеся машины остаются в локальной копии.') %></p>
+        <div id="trip-actions"></div>
+        <button type="button" id="trip-close" class="settingsActionButton"><%= native('Назад') %></button>
+    </section>
     <script src="./assets/js/scripts/landing.js"></script>
+    <script src="./assets/js/scripts/offlineworld.js"></script>
 </div>

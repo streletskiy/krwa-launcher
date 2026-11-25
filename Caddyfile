@@ -22,6 +22,13 @@
 		path / /login /register /reset-password /admin /admin/* /account /account/* /tos /privacy
 	}
 	redir @legacySite https://mc.krwa.ru{uri} 308
+	@worldTrips path /admin/offline-worlds /api/offline-worlds/*
+	handle @worldTrips {
+		request_body {
+			max_size 48MiB
+		}
+		reverse_proxy host.docker.internal:18774
+	}
 	@community path /download/windows /download/linux /download/linux-deb /download/linux-arch /download/macos /community.json
 	handle @community {
 		reverse_proxy community:3001

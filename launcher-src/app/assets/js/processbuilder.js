@@ -39,7 +39,8 @@ function matchesOperatingSystemVersion(pattern) {
  */
 class ProcessBuilder {
 
-    constructor(distroServer, vanillaManifest, modManifest, authUser, launcherVersion){
+    constructor(distroServer, vanillaManifest, modManifest, authUser, launcherVersion, offlineWorld = null){
+        this.offlineWorld = offlineWorld
         this.gameDir = path.join(ConfigManager.getInstanceDirectory(), distroServer.rawServer.id)
         this.commonDir = ConfigManager.getCommonDirectory()
         this.server = distroServer
@@ -107,7 +108,7 @@ class ProcessBuilder {
 
         logger.info('Launch Arguments:', loggableArgs)
 
-        const detached = ConfigManager.getLaunchDetached() &&
+        const detached = !this.offlineWorld && ConfigManager.getLaunchDetached() &&
             !(process.platform === 'linux' && process.env.SteamDeck === '1')
         const child = child_process.spawn(ConfigManager.getJavaExecutable(this.server.rawServer.id), args, {
             cwd: this.gameDir,
@@ -367,6 +368,10 @@ class ProcessBuilder {
     }
 
     _processAutoConnectArg(args){
+        if(this.offlineWorld){
+            args.push('--quickPlaySingleplayer', this.offlineWorld)
+            return
+        }
         if(ConfigManager.getAutoConnect() && this.server.rawServer.autoconnect){
             if(mcVersionAtLeast('1.20', this.server.rawServer.minecraftVersion)){
                 args.push('--quickPlayMultiplayer')
@@ -419,7 +424,7 @@ class ProcessBuilder {
         args.push('-Xmx' + ConfigManager.getMaxRAM(this.server.rawServer.id))
         args.push('-Xms' + ConfigManager.getMinRAM(this.server.rawServer.id))
         args = args.concat(ConfigManager.getJVMOptions(this.server.rawServer.id))
-        args.push(`-javaagent:${path.join(this.gameDir, 'authlib-injector.jar')}=${YGGDRASIL_API_ROOT}`)
+        if(!this.offlineWorld) args.push(`-javaagent:${path.join(this.gameDir, 'authlib-injector.jar')}=${YGGDRASIL_API_ROOT}`)
         args.push('-Djava.library.path=' + tempNativePath)
 
         // Main Java Class
@@ -482,7 +487,7 @@ class ProcessBuilder {
         args.push('-Xmx' + ConfigManager.getMaxRAM(this.server.rawServer.id))
         args.push('-Xms' + ConfigManager.getMinRAM(this.server.rawServer.id))
         args = args.concat(ConfigManager.getJVMOptions(this.server.rawServer.id))
-        args.push(`-javaagent:${path.join(this.gameDir, 'authlib-injector.jar')}=${YGGDRASIL_API_ROOT}`)
+        if(!this.offlineWorld) args.push(`-javaagent:${path.join(this.gameDir, 'authlib-injector.jar')}=${YGGDRASIL_API_ROOT}`)
 
         if(this.usingFabricLoader){
             const systemLibraries = this._resolveFabricSystemLibraries(getClassPathEntries())

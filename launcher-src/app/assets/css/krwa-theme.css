@@ -287,3 +287,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .launcherLanguageOption:hover, .launcherLanguageOption:focus-visible { background: #ffffff12; }
 .launcherLanguageOption[aria-checked='true'] { color: #ffe4a4; background: #e7b86036; }
 #launch_button:disabled { cursor: default; }
+#trip-open { margin-top: 8px; min-height: 36px; width: 100%; }
+.krwa-trip-panel { position: absolute; z-index: 20; inset: 12% max(8%, calc((100% - 600px)/2)) auto; padding: 24px; max-height: 70%; overflow: auto; border: 1px solid var(--line); border-radius: 16px; background: #12343f; color: #edf3ef; box-shadow: 0 0 0 100vmax #08171dc9; }
+.krwa-trip-panel[hidden] { display: none; }
+.krwa-trip-panel h2 { margin: 0 0 12px; }
+.krwa-trip-panel p { margin: 12px 0; line-height: 1.5; }
+#trip-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.krwa-trip-panel button { min-height: 44px; padding: 8px 14px; cursor: pointer; }
+.krwa-trip-panel button:focus-visible { outline: 3px solid #ffe4a4; }

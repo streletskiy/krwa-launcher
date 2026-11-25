@@ -572,7 +572,7 @@ async function downloadJava(effectiveJavaOptions, launchAfter = true) {
 
     // TODO Callback hell
     // Refactor the launch functions
-    asyncSystemScan(effectiveJavaOptions, launchAfter)
+    if (launchAfter) await asyncSystemScan(effectiveJavaOptions, launchAfter)
 
 }
 
@@ -693,6 +693,7 @@ async function dlAsync(login = true) {
 
     const modLoaderData = await distributionIndexProcessor.loadModLoaderVersionJson(serv)
     const versionData = await mojangIndexProcessor.getVersionJson()
+    if (!login) return { modLoaderData, versionData, version: serv.rawServer.version }
 
     if(login) {
         const authUser = ConfigManager.getSelectedAccount()

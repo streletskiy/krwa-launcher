@@ -23,6 +23,8 @@
         }
         if (loading.checkVisibility()) return []
         if (!menu.hidden) return Array.from(menu.querySelectorAll('button')).filter(isVisible)
+        const trip = document.getElementById('trip-panel')
+        if (trip && !trip.hidden) return Array.from(trip.querySelectorAll('button')).filter(isVisible)
         const view = getCurrentView()
         if (!view) return []
         const selector = `${view} :is(${focusable}), #launcherLanguageButton`
@@ -57,7 +59,7 @@
             return
         }
         const selector = isOverlayVisible() ? '.overlayKeybindEsc' :
-            '#settingsNavDone, #nativeAccountBack, #loginCancelButton, #loginOptionCancelButton'
+            '#trip-close, #settingsNavDone, #nativeAccountBack, #loginCancelButton, #loginOptionCancelButton'
         elements.find(el => el.matches(selector))?.click()
     }
 

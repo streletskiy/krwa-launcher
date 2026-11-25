@@ -1,0 +1,5 @@
+fastapi==0.165.0
+uvicorn==0.54.0
+httpx==0.28.1
+nbtlib==2.0.4
+portalocker==4.4.2

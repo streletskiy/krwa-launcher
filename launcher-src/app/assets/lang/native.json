@@ -1,4 +1,40 @@
 {
+  "Офлайн-мир": {
+    "en_US": "Offline world",
+    "pl_PL": "Świat offline"
+  },
+  "Скачать для офлайна": {
+    "en_US": "Download for offline play",
+    "pl_PL": "Pobierz do gry offline"
+  },
+  "Играть офлайн": {
+    "en_US": "Play offline",
+    "pl_PL": "Graj offline"
+  },
+  "Синхронизировать": {
+    "en_US": "Sync changes",
+    "pl_PL": "Synchronizuj zmiany"
+  },
+  "Запросить доступ": {
+    "en_US": "Request access",
+    "pl_PL": "Poproś o dostęp"
+  },
+  "Проверить отправку": {
+    "en_US": "Check submission",
+    "pl_PL": "Sprawdź wysyłkę"
+  },
+  "Проверить статус": {
+    "en_US": "Check status",
+    "pl_PL": "Sprawdź status"
+  },
+  "Обновить статус": {
+    "en_US": "Refresh status",
+    "pl_PL": "Odśwież status"
+  },
+  "Переносятся поддерживаемые блоки, предметы и опыт. Квесты, мобы и движущиеся машины остаются в локальной копии.": {
+    "en_US": "Supported blocks, items and XP can be synced. Quests, mobs and moving machines stay in the local copy.",
+    "pl_PL": "Możesz przenosić obsługiwane bloki, przedmioty i doświadczenie. Zadania, moby i ruchome maszyny pozostają w lokalnej kopii."
+  },
   "Controlify для управления и Dynamic FPS для экономии заряда.": {
     "en_US": "Controlify adds controller support and Dynamic FPS saves battery.",
     "pl_PL": "Controlify obsługuje kontroler, a Dynamic FPS oszczędza baterię."

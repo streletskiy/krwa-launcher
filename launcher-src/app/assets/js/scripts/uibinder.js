@@ -61,7 +61,7 @@ function getCurrentView(){
 
 async function showMainUI(data){
 
-    await runStartupUpdate(ConfigManager.getAllowPrerelease())
+    if (!require('./assets/js/offlineworld').prepared(ConfigManager)) await runStartupUpdate(ConfigManager.getAllowPrerelease())
 
     await prepareSettings(true)
     updateSelectedServer(data.getServerById(ConfigManager.getSelectedServer()))
@@ -73,7 +73,14 @@ async function showMainUI(data){
 
         // If this is enabled in a development environment we'll get ratelimited.
         // The relaunch frequency is usually far too high.
-        if (!isDev && isLoggedIn) validateSelectedAccount()
+        if (!isDev && isLoggedIn) {
+            // An offline trip keeps its local identity. Every server action still authenticates with Aster.
+            const selected = ConfigManager.getSelectedAccount()
+            const { OfflineWorld } = require('./assets/js/offlineworld')
+            if (selected) new OfflineWorld(ConfigManager, selected).local().then(trip => {
+                if (!trip || !['ready', 'sending'].includes(trip.stage)) validateSelectedAccount()
+            }).catch(() => validateSelectedAccount())
+        }
 
         if(ConfigManager.isFirstLaunch()){
             currentView = VIEWS.welcome
@@ -436,7 +443,8 @@ document.addEventListener('readystatechange', async () => {
 // Actions that must be performed after the distribution index is downloaded.
 ipcRenderer.on('distributionIndexDone', async (event, res) => {
     if(res) {
-        const data = await DistroAPI.getDistribution()
+        const preferLocal = require('./assets/js/offlineworld').prepared(ConfigManager) || !navigator.onLine
+        const data = await (preferLocal ? DistroAPI.getDistributionLocalLoadOnly() : DistroAPI.getDistribution())
         syncModConfigurations(data)
         ensureJavaSettings(data)
         if(document.readyState === 'interactive' || document.readyState === 'complete'){

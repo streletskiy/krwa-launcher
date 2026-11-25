@@ -11,6 +11,15 @@ permissions:
   contents: read
 
 jobs:
+  offline-worlds:
+    name: Offline world transactions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: python3 -m venv .venv
+      - run: .venv/bin/pip install -r world-sync/requirements.txt
+      - run: .venv/bin/python -m unittest discover -s world-sync -p 'test_*.py'
+
   launcher:
     name: Launcher tests, lint and audit
     runs-on: ubuntu-latest

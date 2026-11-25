@@ -3,7 +3,9 @@ const path = require('node:path')
 const { createRequire } = require('node:module')
 const { spawnSync } = require('node:child_process')
 
-const [distributionPath, serverId, testDirectory, javaExecutable, ...enabledMods] = process.argv.slice(2)
+const [distributionPath, serverId, testDirectory, javaExecutable, ...options] = process.argv.slice(2)
+const offlineWorld = options.find(value => value.startsWith('--offline-world='))?.slice(16)
+const enabledMods = options.filter(value => !value.startsWith('--offline-world='))
 if(!distributionPath || !serverId || !testDirectory || !javaExecutable){
     throw new Error('Usage: node smoke-launch-profile.cjs <distribution.json> <server-id> <test-root> <java> [optional-mod-id...]')
 }
@@ -87,8 +89,9 @@ async function main(){
         accessToken: 'krwa-smoke-test-token',
         type: 'mojang'
     }
-    const builder = new ProcessBuilder(server, vanillaManifest, loaderManifest, authUser, 'smoke-test')
+    const builder = new ProcessBuilder(server, vanillaManifest, loaderManifest, authUser, 'smoke-test', offlineWorld)
     const child = builder.build()
+    const readyMessage = offlineWorld ? /KRWASmokeTest.*(?:logged in with entity id|joined the game)/i : /Sound engine started|OpenAL initialized|Created:.*(?:atlas|textures)|ScreenCustomizationLayer registered: title_screen/i
     let ready = false
     let shutdownTimer
 
@@ -96,10 +99,16 @@ async function main(){
         const text = data.toString()
         fs.appendFileSync(logPath, text)
         process.stdout.write(text)
-        if(!ready && /Sound engine started|OpenAL initialized|Created:.*(?:atlas|textures)|ScreenCustomizationLayer registered: title_screen/i.test(text)){
+        if(!ready && readyMessage.test(text)){
             ready = true
             process.stdout.write('\nCLIENT_SMOKE_READY\n')
-            shutdownTimer = setTimeout(() => terminateProcessTree(child), 10000)
+            shutdownTimer = setTimeout(() => {
+                if (offlineWorld && process.platform === 'win32') {
+                    const close = spawnSync('powershell.exe', ['-NoProfile', '-Command', `(Get-Process -Id ${child.pid}).CloseMainWindow()`], { encoding: 'utf8' })
+                    if (close.stdout?.trim() === 'True') return
+                }
+                terminateProcessTree(child)
+            }, 10000)
         }
     }
     child.stdout.on('data', capture)
