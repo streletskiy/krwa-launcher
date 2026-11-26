@@ -219,3 +219,15 @@ button[hidden],
     #grant label:nth-child(-n+2), #grant button { grid-column: 1 / -1; }
     #grant button { width: 100%; }
 }
+
+main { max-width:1100px; margin:auto; }
+nav { display:flex; align-items:center; justify-content:space-between; }
+#review .actions { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+#review .actions button,.toolbar select,.toolbar button,.change select { min-height:42px; }
+#merge { background:#e2e3ed; color:#1b1c22; border-color:transparent; font-weight:650; }
+#merge:disabled { opacity:.5; }
+#review details { margin:12px 0; }
+#review summary { cursor:pointer; padding:10px 0; }
+#merge-summary { font-variant-numeric:tabular-nums; }
+#review .change { overflow-wrap:anywhere; }
+@media(max-width:600px){main{padding:10px}#review .actions button{flex:1 1 155px}.states{grid-template-columns:1fr}}

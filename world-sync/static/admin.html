@@ -10,12 +10,10 @@
     <body>
         <main>
             <nav>
-                <a href="/admin">← Админка KRWA</a
-                ><button id="refresh">Обновить</button>
+                <h1>Офлайн-миры</h1><button id="refresh">Обновить</button>
             </nav>
-            <h1>Офлайн-миры</h1>
             <p role="status" id="status"></p>
-            <section id="auth-state" hidden><h2 id="auth-title">Войдите как администратор</h2><a id="login-link" href="/login">Войти</a></section>
+            <section id="auth-state" hidden><h2 id="auth-title">Войдите как администратор</h2><a target="_top" id="login-link" href="/login">Войти</a></section>
             <div id="workspace" hidden>
             <section>
                 <h2>Доступ игроков</h2>
@@ -39,21 +37,23 @@
             <section id="review" hidden>
                 <h2 id="review-title">Сравнение</h2>
                 <p id="coordinates"></p>
+                <p id="merge-summary"></p>
+                <div class="actions">
+                    <button id="merge">Автослияние</button><button id="accept">Принять все конфликты игрока</button
+                    ><button id="accept-existing" hidden>Применить всё, кроме новых чанков</button
+                    ><button id="revise">Вернуть игроку на доработку</button
+                    ><button id="keep">Оставить мир сервера</button>
+                </div>
+                <div id="confirm" hidden>
+                    <p id="question"></p>
+                    <button id="confirm-action">Подтвердить</button
+                    ><button id="cancel">Отмена</button>
+                </div>
                 <div id="dimensions" role="group" aria-label="Измерение" hidden></div>
-                <div class="layout">
-                    <div>
-                        <h3>Карта изменений</h3>
-                        
-                        <div id="map"></div>
-                        <small
-                            >Север ↑ · один квадрат — чанк 16 × 16 блоков</small
-                        >
-                        <p>
-                            Зелёный — без пересечений, оранжевый — конфликт,
-                            фиолетовый — ручной перенос.
-                        </p>
-                    </div>
-                    <div>
+                <details id="map-tools"><summary>Карта и срезы по координатам</summary><div id="map"></div>
+                    <div id="slices" hidden><div id="slice-heading"></div><label>Высота Y <input id="slice-y" type="number" min="-64" max="319"></label><div id="slice-images"></div></div>
+                </details>
+                <div><div>
                         <h3>Изменения</h3>
                         <div class="toolbar">
                             <select id="filter" aria-label="Тип изменений">
@@ -65,28 +65,11 @@
                                 </option></select
                             ><button id="all">Все чанки</button>
                         </div>
-                        <div id="slices" hidden>
-                            <div id="slice-heading"></div>
-                            <label>Высота среза Y <input id="slice-y" type="number" min="-64" max="319" step="1"></label>
-                            <div id="slice-images"></div>
-                            <small id="under-pointer"></small>
-                        </div>
                         <div id="comparison"></div>
                         <button id="more" hidden>Показать ещё</button>
                     </div>
                 </div>
-                <div id="exports"></div>
-                <div class="actions">
-                    <button id="accept">Применить версию игрока</button
-                    ><button id="accept-existing" hidden>Применить изменения в освоенном мире и у персонажа</button
-                    ><button id="revise">Вернуть игроку на доработку</button
-                    ><button id="keep">Оставить мир сервера</button>
-                </div>
-                <div id="confirm" hidden>
-                    <p id="question"></p>
-                    <button id="confirm-action">Подтвердить</button
-                    ><button id="cancel">Отмена</button>
-                </div>
+                <details><summary>Архивы для ручного переноса</summary><div id="exports"></div></details>
             </section>
             </div>
         </main>

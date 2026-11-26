@@ -269,6 +269,41 @@ class TransactionTest(unittest.TestCase):
         self.assertNotEqual(self.fixture.file.read_bytes(), self.fixture.initial)
         self.assertIn("архиве", self.state()["detail"])
 
+    def test_auto_merge_keeps_live_conflict(self):
+        self.fixture.upload_edits({0: "minecraft:stone", 1: "minecraft:bricks"})
+        data = self.fixture.upload.read_bytes()
+        uri = "/api/offline-worlds/trips/" + self.tid
+        self.assertEqual(
+            self.client.put(
+                uri,
+                content=data,
+                headers={"X-Content-SHA256": hashlib.sha256(data).hexdigest()},
+            ).status_code,
+            200,
+        )
+        self.fixture.file.write_bytes(
+            self.fixture.edit(self.fixture.initial, {0: "minecraft:dirt"})
+        )
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "review")
+        uri = "/api/offline-worlds/admin/trips/" + self.tid
+        choice = {"fingerprint": self.state()["review"], "player": []}
+        self.assertEqual(
+            self.client.post(
+                uri + "/merge", json={**choice, "player": ["unknown"]}
+            ).status_code,
+            422,
+        )
+        self.assertEqual(self.client.post(uri + "/merge", json=choice).status_code, 200)
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "done")
+        from anvil import blocks, chunk, record, sections
+
+        live = blocks(sections(chunk(record(self.fixture.file.read_bytes(), -1, 0)))[0])
+        self.assertEqual(
+            live[:2], ["minecraft:dirt", "minecraft:bricks"]
+        )
+
     def test_apply_and_repeat(self):
         self.assertEqual(self.send().status_code, 200)
         self.worker.process(self.state(), self.game)

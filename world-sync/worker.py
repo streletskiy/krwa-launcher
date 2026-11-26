@@ -209,6 +209,9 @@ def process(trip, craft):
             tempfile.TemporaryDirectory(dir=job, prefix="merge-") as staging,
         ):
             meta = json.loads((job / "area.json").read_text())
+            selection = trip["selection"] if trip["state"] == "approved" else None
+            if selection is not None:
+                meta["choices"] = set(json.loads(selection))
             changes, writes = plan(
                 WORLD,
                 uid,
@@ -227,7 +230,12 @@ def process(trip, craft):
             conflicts = any(c["mode"] == "conflict" for c in changes)
             approved = trip["state"] == "approved" and fingerprint == trip["review"]
             skip_new = approved and trip["skip_new"] and can_skip_new(changes)
-            if (unsupported and not skip_new) or (conflicts and not approved):
+            selective = selection is not None and approved
+            if (
+                (selection is not None and not approved)
+                or (unsupported and not skip_new and not selective)
+                or (conflicts and not approved)
+            ):
                 set_state(
                     tid, "review", "Требуется решение администратора.", fingerprint
                 )
@@ -256,7 +264,9 @@ def process(trip, craft):
                     con.execute(
                         "UPDATE trips SET state='done',detail=?,review=?,updated=? WHERE id=?",
                         (
-                            "Новые чанки оставлены в архиве для ручного переноса."
+                            f"Применено совместимых изменений: {sum(c['mode'] == 'auto' for c in changes)}, выбранных конфликтов: {len(meta['choices'])}. Остальные изменения сохранены в архиве."
+                            if selective
+                            else "Новые чанки оставлены в архиве для ручного переноса."
                             if skip_new
                             else "",
                             fingerprint,

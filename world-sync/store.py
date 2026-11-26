@@ -41,6 +41,8 @@ def init():
         con.execute(
             "UPDATE access SET scope='world',cx=NULL,cz=NULL WHERE scope!='world'"
         )
+        if "selection" not in {r[1] for r in con.execute("PRAGMA table_info(trips)")}:
+            con.execute("ALTER TABLE trips ADD COLUMN selection TEXT")
         if "skip_new" not in {r[1] for r in con.execute("PRAGMA table_info(trips)")}:
             con.execute(
                 "ALTER TABLE trips ADD COLUMN skip_new INTEGER NOT NULL DEFAULT 0"

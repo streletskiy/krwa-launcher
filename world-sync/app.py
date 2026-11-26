@@ -18,11 +18,11 @@ import zipfile
 
 import httpx
 from fastapi import Depends, FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from pydantic import BaseModel
 
 from starlette.responses import Response, StreamingResponse
-from merge import can_skip_new, map_slice
+from merge import can_skip_new, conflict_key, map_slice
 import worker
 import transfer
 from whole import DIMENSIONS, dimension_prefix
@@ -67,6 +67,10 @@ async def response_headers(request, call_next):
     result.headers["Content-Security-Policy"] = (
         "default-src 'self'; script-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
     )
+    if request.url.path == API + "/workspace":
+        result.headers["Content-Security-Policy"] = result.headers[
+            "Content-Security-Policy"
+        ].replace("frame-ancestors 'none'", "frame-ancestors 'self'")
     return result
 
 
@@ -459,7 +463,23 @@ async def upload(trip: uuid.UUID, request: Request, uid=Depends(player)):
 
 
 @app.get("/admin/offline-worlds")
-def panel():
+def panel(request: Request):
+    from urllib.parse import urlencode
+
+    params = {
+        k: v
+        for k, v in request.query_params.items()
+        if k in ("trip", "player")
+        and len(v) == 32
+        and all(c in "0123456789abcdef" for c in v)
+    }
+    return RedirectResponse(
+        "/admin/worlds" + ("?" + urlencode(params) if params else ""), status_code=307
+    )
+
+
+@app.get(API + "/workspace")
+def embedded_workspace():
     return FileResponse(ASSETS / "admin.html")
 
 
@@ -563,10 +583,13 @@ def review(trip: uuid.UUID, actor=Depends(admin)):
             json.loads(file.read_text(encoding="utf-8")) if file.exists() else default
         )
 
+    changes = load("changes.json", [])
+    for c in changes:
+        c["key"] = conflict_key(c["kind"], c.get("pos"), c.get("dimension"))
     return {
         "trip": public(row),
         "area": load("area.json", {}),
-        "changes": load("changes.json", []),
+        "changes": changes,
     }
 
 
@@ -620,6 +643,7 @@ def review_archive(trip: uuid.UUID, side: str, actor=Depends(admin)):
 
 class Decision(BaseModel):
     fingerprint: str
+    player: list[str] = []
 
 
 @app.post(API + "/admin/trips/{trip}/{decision}")
@@ -632,12 +656,26 @@ def decide_trip(trip: uuid.UUID, decision: str, body: Decision, actor=Depends(ad
         if row["review"] != body.fingerprint:
             raise HTTPException(409, "Сравнение изменилось. Обновите страницу.")
         skip_new = decision == "accept-existing"
-        if decision == "accept" or skip_new:
+        selection = None
+        if decision in ("accept", "merge") or skip_new:
             file = HOME / trip.hex / "changes.json"
             if row["state"] != "review" or not file.exists():
                 raise HTTPException(409)
             changes = json.loads(file.read_text(encoding="utf-8"))
-            if (skip_new and not can_skip_new(changes)) or (
+            if decision == "merge":
+                possible = {
+                    conflict_key(c["kind"], c.get("pos"), c.get("dimension"))
+                    for c in changes
+                    if c["mode"] == "conflict"
+                }
+                if not set(body.player).issubset(possible) or len(body.player) != len(
+                    set(body.player)
+                ):
+                    raise HTTPException(422, "Неизвестный конфликт.")
+                if not any(c["mode"] == "auto" for c in changes) and not body.player:
+                    raise HTTPException(409, "Выберите правки для переноса.")
+                selection = json.dumps(sorted(body.player))
+            elif (skip_new and not can_skip_new(changes)) or (
                 not skip_new and any(c["mode"] == "manual" for c in changes)
             ):
                 raise HTTPException(409, "Эти изменения требуют ручного переноса.")
@@ -658,8 +696,8 @@ def decide_trip(trip: uuid.UUID, decision: str, body: Decision, actor=Depends(ad
         else:
             raise HTTPException(400)
         con.execute(
-            "UPDATE trips SET state=?,skip_new=?,updated=? WHERE id=?",
-            (state, int(skip_new), int(time.time()), trip.hex),
+            "UPDATE trips SET state=?,skip_new=?,selection=?,updated=? WHERE id=?",
+            (state, int(skip_new), selection, int(time.time()), trip.hex),
         )
         audit(con, actor, decision, trip.hex)
     return {"ok": True}

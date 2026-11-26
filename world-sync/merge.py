@@ -159,6 +159,25 @@ def projected_inventory(items):
     )
 
 
+def conflict_key(kind, pos, dimension=None):
+    return (
+        f"{dimension or 'minecraft:overworld'}|{kind}|{','.join(map(str, pos or []))}"
+    )
+
+
+def selected(meta, change):
+    choices = meta.get("choices")
+    return (
+        choices is None
+        or change["mode"] == "auto"
+        or (
+            change["mode"] == "conflict"
+            and conflict_key(change["kind"], change["pos"], meta.get("dimension"))
+            in choices
+        )
+    )
+
+
 def plan(root, uid, meta, base_path, upload_path, live_path=None, staging=None):
     if meta.get("scope") == "world":
         return plan_whole(root, uid, meta, base_path, upload_path, live_path, staging)
@@ -216,7 +235,7 @@ def plan_records(root, uid, meta, base, offline, live_path=None):
 
         add(field, None, display(a), display(b), display(c), mode)
         changes[-1]["revision"] = hashlib.sha256(text_tag(b).encode()).hexdigest()
-        if valid:
+        if valid and selected(meta, changes[-1]):
             if inventory:
                 old_slots, live_slots, new_slots = (
                     {int(i["Slot"]): i for i in values} for values in (a, b, c)
@@ -323,8 +342,9 @@ def plan_records(root, uid, meta, base, offline, live_path=None):
                         *(projected_inventory(t["Items"]) for t in (old, cur, new)),
                         mode,
                     )
-                    cur["Items"] = new["Items"]
-                    modified = True
+                    if selected(meta, changes[-1]):
+                        cur["Items"] = new["Items"]
+                        modified = True
                 else:
                     # Render these tags as text only. Never copy arbitrary client block NBT.
                     add(
@@ -363,7 +383,7 @@ def plan_records(root, uid, meta, base, offline, live_path=None):
                     "manual" if not valid else "conflict" if live != before else "auto"
                 )
                 add("block", list(pos), before, live, after, mode)
-                if valid:
+                if valid and selected(meta, changes[-1]):
                     cur[i] = after
                     touched = True
             if touched:
@@ -430,7 +450,8 @@ def plan_whole(root, uid, meta, base_path, upload_path, live_path, staging):
                     root, uid, meta.get("team"), rel, before.read(rel), after.read(rel)
                 )
                 changes.extend(edits)
-                writes.update(updates)
+                if all(selected(meta, edit) for edit in edits):
+                    writes.update(updates)
                 continue
             dimension, prefix, rx, rz = region_location(rel, meta.get("dimensions"))
             data = after.read(rel)
@@ -439,7 +460,7 @@ def plan_whole(root, uid, meta, base_path, upload_path, live_path, staging):
             edits, replacements = plan_records(
                 root,
                 uid,
-                {**meta, "chunks": coords, "prefix": prefix},
+                {**meta, "chunks": coords, "prefix": prefix, "dimension": dimension},
                 {**original, rel: base},
                 {**original, rel: data},
                 preview,

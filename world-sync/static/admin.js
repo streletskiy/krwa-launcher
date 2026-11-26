@@ -21,6 +21,7 @@ const dimensions = {
 }
 const dimensionOf = (change) => change.dimension || 'minecraft:overworld'
 let current, tile, limit, pendingAction
+const playerChoices = new Set()
 let selectedDimension = 'minecraft:overworld'
 function node(tag, text, cls) {
     const n = document.createElement(tag)
@@ -47,7 +48,7 @@ async function request(path = '', body) {
         el('auth-state').hidden = false
         el('auth-title').textContent = res.status === 401 ? 'Войдите как администратор' : 'Требуются права администратора'
         el('login-link').hidden = res.status !== 401
-        el('login-link').href = '/login?returnTo=' + encodeURIComponent(location.pathname + location.search)
+        el('login-link').href = '/login?returnTo=' + encodeURIComponent('/admin/worlds' + location.search)
     }
     const result = await res.json()
     if (!res.ok) throw Error(result.detail || 'Не удалось выполнить запрос.')
@@ -141,6 +142,7 @@ async function refresh() {
 async function openTrip(id, name) {
     current = await request('/trips/' + id)
     current.name = name
+    playerChoices.clear()
     tile = null
     limit = 30
     el('filter').value = ''
@@ -211,6 +213,12 @@ async function openTrip(id, name) {
                 ]
                 map.append(b)
             }
+    const countsByMode = mode => current.changes.filter(c => c.mode === mode).length
+    el('merge-summary').textContent = 'Совместимые: ' + countsByMode('auto') + ' · Конфликты: ' + countsByMode('conflict') + ' · Ручной перенос: ' + countsByMode('manual')
+    el('merge').hidden = current.trip.state !== 'review' || !current.trip.review
+    updateMerge()
+    if (countsByMode('conflict')) el('filter').value = 'conflict'
+    else if (countsByMode('manual')) el('filter').value = 'manual'
     el('accept').hidden =
         current.trip.state !== 'review' ||
         !current.trip.review ||
@@ -239,7 +247,7 @@ async function openTrip(id, name) {
         }
     }
     const first = current.changes.find((c) => c.pos)
-    if (first) await drawSlice(first.pos, dimensionOf(first))
+    if (first && el("map-tools").open) await drawSlice(first.pos, dimensionOf(first))
     render()
     el('review').scrollIntoView({ block: 'start' })
 }
@@ -462,12 +470,29 @@ function render() {
                 col.append(node('b', l), document.createTextNode(c[k]))
                 states.append(col)
             }
-            if (c.pos)
-                row.append(
-                    button('Показать на карте', () =>
-                        drawSlice(c.pos, dimensionOf(c)),
-                    ),
-                )
+            if (c.mode === 'conflict' && current.trip.state === 'review') {
+                const control = node('label', 'Версия после слияния ')
+                const select = node('select')
+                for (const [value, label] of [['server', 'Оставить серверную'], ['player', 'Взять у игрока']]) {
+                    const option = node('option', label)
+                    option.value = value
+                    select.append(option)
+                }
+                select.value = playerChoices.has(c.key) ? 'player' : 'server'
+                select.onchange = () => {
+                    if (select.value === 'player') playerChoices.add(c.key)
+                    else playerChoices.delete(c.key)
+                    updateMerge()
+                }
+                control.append(select)
+                row.append(control)
+            }
+            if (c.mode === 'manual') row.append(node('p','Эта правка доступна в архиве игрока для ручного переноса.'))
+            if (c.pos) row.append(button('Показать на карте', async () => {
+                el('map-tools').open = true
+                await drawSlice(c.pos, dimensionOf(c))
+                el('slices').scrollIntoView({block:'nearest'})
+            }))
             row.append(states)
             return row
         }),
@@ -476,7 +501,13 @@ function render() {
         el('comparison').textContent = 'Нет изменений для выбранного фильтра.'
     el('more').hidden = visible.length <= limit
 }
+function updateMerge() {
+    const n = current.changes.filter(c => c.mode === 'auto').length + playerChoices.size
+    el('merge').disabled = n === 0
+    el('merge').textContent = (playerChoices.size ? 'Применить выбранное' : 'Автослияние') + ' · ' + n
+}
 for (const [id, decision] of [
+    ['merge','merge'],
     ['accept', 'accept'],
     ['accept-existing', 'accept-existing'],
     ['keep', 'keep'],
@@ -484,7 +515,7 @@ for (const [id, decision] of [
 ]) {
     el(id).onclick = () =>
         confirmAction(
-            decision === 'accept'
+            decision === 'merge' ? 'Применить совместимые изменения и выбранные версии игрока? Для остальных сохранится версия сервера. Исходная посылка останется в архивах поездки.' : decision === 'accept'
                 ? 'Применить показанные изменения игрока после повторной сверки сервера?'
                 : decision === 'accept-existing'
                   ? 'Применить показанные правки персонажа и освоенных чанков, включая выбранную версию конфликтов? Новая территория останется в архиве для ручного переноса.'
@@ -494,6 +525,7 @@ for (const [id, decision] of [
             async () => {
                 await request('/trips/' + current.trip.id + '/' + decision, {
                     fingerprint: current.trip.review,
+                    ...(decision === "merge" ? {player:[...playerChoices]} : {}),
                 })
                 await refresh()
                 await openTrip(current.trip.id, current.name)
