@@ -75,16 +75,23 @@ services:
       - ./repository:/repository:ro
 
   auth:
-    build:
-      context: "${ASTER_CONTEXT:-../aster}"
-    image: krwa/asteryggdrasil:0.1.0-beta.1-krwa.22
+    image: "${PORTAL_IMAGE:-ghcr.io/streletskiy/krwa-mc-portal:sha-27c628fba85a23b902a2f68092bfe6dc93955426}"
     restart: always
     environment:
       ASTER__SERVER__HOST: 0.0.0.0
       ASTER__DATABASE__URL: sqlite:///data/asteryggdrasil.db?mode=rwc
       ASTER__AUTH__BOOTSTRAP_INSECURE_COOKIES: "false"
+      PORTAL_WORDMARK_DARK_URL: /static/images/krwa-wordmark-light.svg
+      PORTAL_WORDMARK_LIGHT_URL: /static/images/krwa-wordmark.svg
+      PORTAL_HERO_URL: /static/images/krwa-cargo-port.webp
+      PORTAL_SOCIAL_IMAGE_URL: "${PORTAL_SOCIAL_IMAGE_URL:-/static/images/krwa-cargo-port-social.jpg}"
+      PORTAL_DOWNLOAD_BASE: /download
+      PORTAL_COMMUNITY_URL: /community.json
+      PORTAL_WORLD_ADMIN_URL: /admin/offline-worlds
     volumes:
       - ./auth-data:/data
+      - ./portal-brand:/frontend-override/static/images:ro
+      - ./portal-brand/favicon.svg:/frontend-override/favicon.svg:ro
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/health/ready"]
       interval: 10s

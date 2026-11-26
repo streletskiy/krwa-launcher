@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>KRWA</title>
+  <rect x="12" y="12" width="232" height="232" rx="52" fill="#123640"/>
+  <path fill="#ffd27d" d="m60 87 68 36v78l-68-36z"/>
+  <path fill="#36a3a2" d="m196 87-68 36v78l68-36z"/>
+  <path fill="#b9ebe0" d="m60 87 68-36 68 36-68 36z"/>
+  <path fill="#e7a554" d="m60 143 22 12v11l23 12v11l-45-24z"/>
+  <path fill="#196875" d="m196 141-23 12v11l-23 12v13l46-24z"/>
+</svg>

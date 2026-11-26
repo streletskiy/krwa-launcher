@@ -26,6 +26,12 @@ npm start
 
 Адреса публичных сервисов и параметры приложения задаются в [`distromanager.js`](../launcher-src/app/assets/js/distromanager.js), [`ipcconstants.js`](../launcher-src/app/assets/js/ipcconstants.js), [`package.json`](../launcher-src/package.json) и [`electron-builder.yml`](../launcher-src/electron-builder.yml).
 
+## Обновление игрового портала
+
+Сервис `auth` использует [KRWA MC Portal](https://github.com/streletskiy/krwa-mc-portal) из GHCR. Сохраните резервную копию всего `auth-data` при остановленном сервисе. Укажите выбранный тег или digest в `PORTAL_IMAGE`, выполните `docker compose pull auth` и `docker compose up -d --no-deps auth`. Проверьте `/health/ready`, вход в лаунчере и загрузку скина. Для отката сохраните прежний digest вместе с копией данных.
+
+Файлы из `portal-brand/` задают иллюстрацию, логотипы и иконку сайта. Адреса каталога серверов, загрузок и администрирования офлайн-миров задаёт сервис `auth` в Compose.
+
 ## Сборка и публикация
 
 Чтобы собрать лаунчер для текущей платформы, выполните в `launcher-src` следующие команды.
