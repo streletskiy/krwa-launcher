@@ -69,7 +69,8 @@ class TransactionTest(unittest.TestCase):
         self.job.joinpath("area.json").write_text(json.dumps(self.fixture.meta))
         with store.db() as conn:
             conn.execute(
-                "INSERT INTO access VALUES(?,?,'allowed',0,-1,0)", (self.uid, "QA")
+                "INSERT INTO access(uid,name,state,updated,cx,cz) VALUES(?,?,'allowed',0,-1,0)",
+                (self.uid, "QA"),
             )
             conn.execute(
                 "INSERT INTO trips(id,uid,state,version,updated) VALUES(?,?,'ready','qa',0)",
@@ -98,6 +99,98 @@ class TransactionTest(unittest.TestCase):
         return self.client.put(
             "/api/offline-worlds/trips/" + self.tid, content=data, headers=self.headers
         )
+
+    def test_whole_world_transfer_and_dimension_review(self):
+        import zipfile
+        from whole import DIMENSIONS, export_whole
+
+        api = "/api/offline-worlds/trips/" + self.tid
+        for prefix in list(DIMENSIONS.values())[1:]:
+            path = self.root / prefix / self.fixture.rel
+            path.parent.mkdir(parents=True)
+            path.write_bytes(self.fixture.initial)
+        base = self.job / "base.zip"
+        base.unlink()
+        meta = export_whole(self.root, self.uid, "QA", base)
+        (self.job / "area.json").write_text(json.dumps(meta))
+        with self.store.db() as con:
+            con.execute("UPDATE access SET scope='world' WHERE uid=?", (self.uid,))
+        self.assertEqual(
+            self.client.post(
+                "/api/offline-worlds/trips", json={"version": "qa"}
+            ).status_code,
+            409,
+        )
+        files, parts = [], []
+        with zipfile.ZipFile(base) as archive:
+            for i, item in enumerate(meta["files"]):
+                name = item["path"]
+                data = self.client.get(api + "/files/" + str(i)).content
+                self.assertEqual(hashlib.sha256(data).hexdigest(), item["sha256"])
+                self.assertEqual(data, archive.read(name))
+                if name != "level.dat":
+                    data = self.fixture.edit(data, {0: "minecraft:stone"})
+                files.append(
+                    {
+                        "path": name,
+                        "bytes": len(data),
+                        "parts": [hashlib.sha256(data).hexdigest()],
+                    }
+                )
+                parts.append(data)
+        route = api + "/transfer"
+        batch = self.client.post(route, json={"files": files}).json()
+        target = route + "/" + batch["key"]
+        self.assertEqual(
+            self.client.put(target + "/0", content=b"bad").status_code, 422
+        )
+        for i in batch["missing"]:
+            self.assertEqual(
+                self.client.put(target + "/" + str(i), content=parts[i]).status_code,
+                200,
+            )
+        self.assertFalse(
+            self.client.post(route, json={"files": files}).json()["missing"]
+        )
+        self.assertEqual(
+            self.client.post(target + "/finish").json()["state"], "submitted"
+        )
+        self.assertTrue(
+            self.client.post(route, json={"files": files}).json()["complete"]
+        )
+        nether = self.root / "DIM-1" / self.fixture.rel
+        nether.write_bytes(
+            self.fixture.edit(self.fixture.initial, {0: "minecraft:bricks"})
+        )
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "review")
+        changes = json.loads((self.job / "changes.json").read_text(encoding="utf-8"))
+        self.assertEqual(
+            {c["dimension"]: c["mode"] for c in changes},
+            {
+                "minecraft:overworld": "auto",
+                "minecraft:the_nether": "conflict",
+                "minecraft:the_end": "auto",
+            },
+        )
+        admin = "/api/offline-worlds/admin/trips/" + self.tid
+        img = self.client.get(
+            admin + "/map?x=-1&z=0&y=0&dimension=minecraft:the_nether"
+        ).json()
+        self.assertEqual(
+            [img["palette"][layer[0]] for layer in img["layers"]],
+            ["minecraft:air", "minecraft:bricks", "minecraft:stone"],
+        )
+        self.assertEqual(
+            self.client.post(
+                admin + "/accept", json={"fingerprint": self.state()["review"]}
+            ).status_code,
+            200,
+        )
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "done")
+        self.client.post("/api/offline-worlds/admin/access/" + self.uid + "/denied")
+        self.assertEqual(self.client.get(api + "/files/0").status_code, 403)
 
     def test_apply_and_repeat(self):
         self.assertEqual(self.send().status_code, 200)

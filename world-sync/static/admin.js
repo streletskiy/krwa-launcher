@@ -14,6 +14,12 @@ const labels = {
     closed: 'Закрыто',
     failed: 'Ошибка',
 }
+const dimensions = {
+    'minecraft:overworld': 'Обычный мир',
+    'minecraft:the_nether': 'Нижний мир',
+    'minecraft:the_end': 'Край',
+}
+const dimensionOf = (change) => change.dimension || 'minecraft:overworld'
 let current, tile, limit, pendingAction
 function node(tag, text, cls) {
     const n = document.createElement(tag)
@@ -68,12 +74,14 @@ async function refresh() {
                 node(
                     'small',
                     labels[u.state] +
-                        (u.cx == null
-                            ? ' · участок не указан'
-                            : ' · центр X ' +
-                              (u.cx * 16 + 8) +
-                              ', Z ' +
-                              (u.cz * 16 + 8)),
+                        (u.scope === 'world'
+                            ? ' · весь мир, три измерения'
+                            : u.cx == null
+                              ? ' · участок не указан'
+                              : ' · центр X ' +
+                                (u.cx * 16 + 8) +
+                                ', Z ' +
+                                (u.cz * 16 + 8)),
                 ),
             )
             const allowed = u.state === 'allowed'
@@ -163,6 +171,20 @@ async function openTrip(id, name) {
             )
             counts.set(key, entry)
         }
+    const full = current.area.scope === 'world'
+    el('dimension').hidden = !full
+    map.classList.toggle('whole-world', full)
+    if (full) {
+        el('coordinates').textContent =
+            'Весь мир · ' +
+            current.changes.length +
+            ' изменений. ' +
+            current.trip.detail
+        el('dimension').value =
+            current.changes.find((c) => c.pos)?.dimension ||
+            'minecraft:overworld'
+        drawWorldTiles()
+    }
     if (cx !== undefined)
         for (let z = cz - radius; z <= cz + radius; z++)
             for (let x = cx - radius; x <= cx + radius; x++) {
@@ -202,9 +224,47 @@ async function openTrip(id, name) {
         }
     }
     const first = current.changes.find((c) => c.pos)
-    if (first) await drawSlice(first.pos)
+    if (first) await drawSlice(first.pos, dimensionOf(first))
     render()
     el('review').scrollIntoView({ block: 'start' })
+}
+function drawWorldTiles() {
+    const map = el('map'),
+        dimension = el('dimension').value
+    map.replaceChildren()
+    const counts = new Map()
+    for (const c of current.changes.filter(
+        (c) => c.pos && dimensionOf(c) === dimension,
+    )) {
+        const key = Math.floor(c.pos[0] / 16) + ',' + Math.floor(c.pos[2] / 16)
+        const entry = counts.get(key) || { count: 0, rank: 0, pos: c.pos }
+        entry.count++
+        entry.rank = Math.max(
+            entry.rank,
+            { auto: 1, conflict: 2, manual: 3 }[c.mode],
+        )
+        counts.set(key, entry)
+    }
+    for (const [key, entry] of counts) {
+        const b = button(key + ' · ' + entry.count, async () => {
+            tile = key
+            limit = 30
+            render()
+            await drawSlice(entry.pos, dimension)
+        })
+        b.title = 'Чанк ' + key + ' · ' + entry.count + ' изменений'
+        b.dataset.tile = key
+        b.className = ['', 'auto', 'conflict', 'manual'][entry.rank]
+        map.append(b)
+    }
+}
+el('dimension').onchange = () => {
+    sliceRequest++
+    tile = null
+    limit = 30
+    el('slices').hidden = true
+    drawWorldTiles()
+    render()
 }
 let sliceRequest = 0
 function materialColor(id) {
@@ -221,19 +281,28 @@ function materialColor(id) {
     for (const ch of id) hash = (hash * 31 + ch.charCodeAt(0)) | 0
     return 'hsl(' + Math.abs(hash % 360) + ' 36% 52%)'
 }
-async function drawSlice(pos) {
+async function drawSlice(pos, dimension = 'minecraft:overworld') {
     const seq = ++sliceRequest,
         id = current.trip.id
     const [x, y, z] = pos,
         cx = Math.floor(x / 16),
         cz = Math.floor(z / 16)
     const image = await request(
-        '/trips/' + id + '/map?x=' + cx + '&z=' + cz + '&y=' + y,
+        '/trips/' +
+            id +
+            '/map?x=' +
+            cx +
+            '&z=' +
+            cz +
+            '&y=' +
+            y +
+            '&dimension=' +
+            encodeURIComponent(dimension),
     )
     if (seq !== sliceRequest || id !== current.trip.id) return
     el('slices').hidden = false
     el('slice-heading').textContent =
-        'Горизонтальный срез · Y ' + y + ' · чанк ' + cx + ', ' + cz
+        dimensions[dimension] + ' · Y ' + y + ' · чанк ' + cx + ', ' + cz
     const describe = (i) => {
         const values = image.layers.map((grid) =>
             image.palette[grid[i]].replace('minecraft:', ''),
@@ -308,6 +377,9 @@ async function drawSlice(pos) {
 function render() {
     const visible = current.changes.filter(
         (c) =>
+            (!c.pos ||
+                current.area.scope !== 'world' ||
+                dimensionOf(c) === el('dimension').value) &&
             (!el('filter').value || el('filter').value === c.mode) &&
             (!tile ||
                 (c.pos &&
@@ -329,7 +401,8 @@ function render() {
                 node(
                     'strong',
                     (c.pos
-                        ? 'X ' +
+                        ? dimensions[dimensionOf(c)] +
+                          ' · X ' +
                           c.pos[0] +
                           ' · Y ' +
                           c.pos[1] +
@@ -354,7 +427,11 @@ function render() {
                 states.append(col)
             }
             if (c.pos)
-                row.append(button('Показать на карте', () => drawSlice(c.pos)))
+                row.append(
+                    button('Показать на карте', () =>
+                        drawSlice(c.pos, dimensionOf(c)),
+                    ),
+                )
             row.append(states)
             return row
         }),
@@ -410,15 +487,22 @@ el('refresh').onclick = () =>
         await refresh()
         if (current) await openTrip(current.trip.id, current.name)
     })
+el('grant-scope').onchange = () => {
+    const full = el('grant-scope').value === 'world'
+    el('grant-x').disabled = el('grant-z').disabled = full
+    el('world-note').hidden = !full
+}
 el('grant').onsubmit = (e) => {
     e.preventDefault()
     run(async () => {
-        const x = el('grant-x').value,
-            z = el('grant-z').value
+        const scope = el('grant-scope').value,
+            x = scope === 'parcel' && el('grant-x').value,
+            z = scope === 'parcel' && el('grant-z').value
         if (Boolean(x) !== Boolean(z))
             throw Error('Укажите обе координаты участка.')
         await request('/grant', {
             name: el('grant-name').value.trim(),
+            scope,
             ...(x ? { x: Number(x), z: Number(z) } : {}),
         })
         el('grant-name').value = ''

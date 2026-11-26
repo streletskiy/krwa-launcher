@@ -33,6 +33,10 @@ def init():
         CREATE UNIQUE INDEX IF NOT EXISTS one_trip ON trips(uid) WHERE state NOT IN ('done','closed','failed');
         CREATE TABLE IF NOT EXISTS audit (at INTEGER, actor TEXT, event TEXT, target TEXT);
         """)
+        if "scope" not in {r[1] for r in con.execute("PRAGMA table_info(access)")}:
+            con.execute(
+                "ALTER TABLE access ADD COLUMN scope TEXT NOT NULL DEFAULT 'parcel'"
+            )
 
 
 def audit(con, actor, event, target):

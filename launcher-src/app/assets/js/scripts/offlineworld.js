@@ -13,7 +13,7 @@
     let busy = false
     let generation = 0
     const statusText = {
-        preparing: 'Сервер готовит копию участка вокруг места выхода.',
+        preparing: 'Сервер сохраняет мир и готовит снимок поездки.',
         submitted:
             'Изменения приняты. Когда основной сервер будет свободен, они будут проверены.',
         approved:
@@ -134,8 +134,15 @@
             throw Error(
                 'Не удалось подготовить точную версию сборки. Обновите профиль и повторите.',
             )
-        message.textContent = 'Скачиваем и проверяем участок…'
-        await c.download(trip, launch)
+        message.textContent = 'Скачиваем и проверяем снимок…'
+        await c.download(trip, launch, (done, total) => {
+            message.textContent =
+                'Скачиваем мир · ' +
+                Math.floor(done / 1048576) +
+                ' / ' +
+                Math.ceil(total / 1048576) +
+                ' МиБ'
+        })
         await show(false)
     }
     async function show(online = true) {
@@ -146,7 +153,9 @@
         actions.replaceChildren()
         if (local?.stage === 'ready') {
             message.textContent =
-                'Готово к полёту · участок 80 × 80 блоков. Одиночная игра доступна без сети.'
+                local.area?.scope === 'world'
+                    ? 'Готово к полёту · обычный мир, Нижний мир и Край.'
+                    : 'Готово к полёту · участок 80 × 80 блоков. Одиночная игра доступна без сети.'
             add('Играть офлайн', () => launchLocal(c, local))
         } else
             message.textContent =
@@ -163,7 +172,9 @@
                     await c.authenticate()
                     if (local.stage !== 'sent') {
                         message.textContent = 'Отправляем сохранение…'
-                        await c.send(local)
+                        await c.send(local, (text) => {
+                            message.textContent = text
+                        })
                     }
                     await show()
                 },
@@ -227,7 +238,9 @@
                     (t
                         ? statusText[t.state] + ' ' + (t.detail || '') + ' '
                         : '') +
-                    'Перед поездкой выйдите из игры на разрешённом участке обычного мира (80 × 80 блоков).'
+                    (data.scope === 'world'
+                        ? 'Доступен весь мир, включая Нижний мир и Край. Перед загрузкой выйдите с сервера.'
+                        : 'Перед поездкой выйдите из игры на разрешённом участке обычного мира (80 × 80 блоков).')
                 add('Скачать для офлайна', async () => {
                     idle()
                     const distro =
@@ -235,6 +248,7 @@
                     const server = distro.getServerById(PROFILE)
                     let trip = await c.api('/trips', 'POST', {
                         version: server.rawServer.version,
+                        protocol: 2,
                     })
                     const end = Date.now() + 240000
                     while (

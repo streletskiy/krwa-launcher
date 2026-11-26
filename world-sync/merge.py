@@ -1,5 +1,6 @@
 """Plan a three-way merge. Never transplant uploaded chunks, tags or entities."""
 
+import contextlib
 import gzip
 import hashlib
 import zipfile
@@ -158,10 +159,22 @@ def projected_inventory(items):
     )
 
 
-def plan(root, uid, meta, base_path, upload_path, live_path=None):
+def plan(root, uid, meta, base_path, upload_path, live_path=None, staging=None):
+    if meta.get("scope") == "world":
+        return plan_whole(root, uid, base_path, upload_path, live_path, staging)
     allowed = supported_files(meta)
-    base = read_package(base_path, allowed)
-    offline = read_package(upload_path, allowed)
+    return plan_records(
+        root,
+        uid,
+        meta,
+        read_package(base_path, allowed),
+        read_package(upload_path, allowed),
+        live_path,
+    )
+
+
+def plan_records(root, uid, meta, base, offline, live_path=None):
+    prefix = meta.get("prefix", "")
     originals, replacements, changes = {}, defaultdict(dict), []
 
     def add(kind, pos, a, b, c, mode):
@@ -220,9 +233,12 @@ def plan(root, uid, meta, base_path, upload_path, live_path=None):
             else:
                 player[field] = c
             player_dirty = True
-    if str(after_player.get("Dimension", "")) != "minecraft:overworld" or any(
-        abs(float(after_player["Pos"][axis]) - (meta[key] * 16 + 8)) > 40.1
-        for axis, key in ((0, "cx"), (2, "cz"))
+    if meta.get("scope") != "world" and (
+        str(after_player.get("Dimension", "")) != "minecraft:overworld"
+        or any(
+            abs(float(after_player["Pos"][axis]) - (meta[key] * 16 + 8)) > 40.1
+            for axis, key in ((0, "cx"), (2, "cz"))
+        )
     ):
         add(
             "граница поездки",
@@ -240,7 +256,7 @@ def plan(root, uid, meta, base_path, upload_path, live_path=None):
         }
 
     for cx, cz in meta["chunks"]:
-        rel = region_name(cx, cz)
+        rel = prefix + region_name(cx, cz)
         if rel not in originals:
             originals[rel] = read_region(root, rel)
         records = [
@@ -371,12 +387,14 @@ def plan(root, uid, meta, base_path, upload_path, live_path=None):
             encode(player)
         )
     if live_path:
-        with zipfile.ZipFile(
-            live_path, "w", compression=zipfile.ZIP_DEFLATED
+        with (
+            contextlib.nullcontext(live_path)
+            if isinstance(live_path, zipfile.ZipFile)
+            else zipfile.ZipFile(live_path, "w", compression=zipfile.ZIP_DEFLATED)
         ) as archive:
             groups = defaultdict(dict)
             for x, z in meta["chunks"]:
-                rel = region_name(x, z)
+                rel = prefix + region_name(x, z)
                 payload = record(originals[rel], x, z)
                 if payload is not None:
                     groups[rel][index(x, z)] = payload
@@ -385,11 +403,64 @@ def plan(root, uid, meta, base_path, upload_path, live_path=None):
     return changes, writes
 
 
-def map_slice(paths, cx, cz, y):
+def plan_whole(root, uid, base_path, upload_path, live_path, staging):
+    from transfer import region_location, slots
+
+    with contextlib.ExitStack() as stack:
+        before = stack.enter_context(zipfile.ZipFile(base_path))
+        after = stack.enter_context(zipfile.ZipFile(upload_path))
+        preview = (
+            stack.enter_context(
+                zipfile.ZipFile(live_path, "w", compression=zipfile.ZIP_DEFLATED)
+            )
+            if live_path
+            else None
+        )
+        original = {"level.dat": before.read("level.dat")}
+        meta = {"scope": "world", "chunks": []}
+        changes, writes = plan_records(
+            root, uid, meta, original, {"level.dat": after.read("level.dat")}
+        )
+        for rel in sorted(set(after.namelist()) - {"level.dat"}):
+            dimension, prefix, rx, rz = region_location(rel)
+            data = after.read(rel)
+            coords = list(slots(data, rx, rz))
+            base = before.read(rel) if rel in before.NameToInfo else b""
+            edits, replacements = plan_records(
+                root,
+                uid,
+                {**meta, "chunks": coords, "prefix": prefix},
+                {**original, rel: base},
+                {**original, rel: data},
+                preview,
+            )
+            for change in edits:
+                change["dimension"] = dimension
+                if (
+                    change["kind"] == "chunk"
+                    and record(base, change["pos"][0] // 16, change["pos"][2] // 16)
+                    is None
+                ):
+                    change["before"] = "не был сгенерирован при скачивании"
+            changes.extend(edits)
+            if len(changes) > MAX_EDITS:
+                raise ValueError("Слишком много изменений за одну поездку.")
+            for name, payload in replacements.items():
+                if staging is None:
+                    writes[name] = payload
+                else:
+                    target = staging / name
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(payload)
+                    writes[name] = target
+        return changes, writes
+
+
+def map_slice(paths, cx, cz, y, prefix=""):
     images = []
     for path in paths:
         with zipfile.ZipFile(path) as archive:
-            rel = region_name(cx, cz)
+            rel = prefix + region_name(cx, cz)
             packet = (
                 record(archive.read(rel), cx, cz) if rel in archive.namelist() else None
             )

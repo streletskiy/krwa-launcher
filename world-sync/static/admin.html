@@ -26,6 +26,9 @@
                             maxlength="16"
                             autocomplete="off"
                     /></label>
+                    <label>Разрешённая территория
+                        <select id="grant-scope"><option value="parcel">Участок 80 × 80</option><option value="world">Весь мир · три измерения</option></select>
+                    </label>
                     <label
                         >X
                         <input
@@ -42,6 +45,7 @@
                     /></label>
                     <button>Разрешить доступ</button>
                 </form>
+                <p id="world-note" hidden>Игрок получит зерно мира, сохранённые территории, постройки и содержимое контейнеров во всех трёх измерениях.</p>
                 <div id="users"></div>
             </section>
             <section>
@@ -54,6 +58,7 @@
                 <div class="layout">
                     <div>
                         <h3>Карта изменений</h3>
+                        <select id="dimension" aria-label="Измерение" hidden><option value="minecraft:overworld">Обычный мир</option><option value="minecraft:the_nether">Нижний мир</option><option value="minecraft:the_end">Край</option></select>
                         <div id="map"></div>
                         <small
                             >Север ↑ · один квадрат — чанк 16 × 16 блоков</small
@@ -73,7 +78,7 @@
                                 <option value="auto">
                                     Совместимые
                                 </option></select
-                            ><button id="all">Весь участок</button>
+                            ><button id="all">Все чанки</button>
                         </div>
                         <div id="slices" hidden>
                             <div id="slice-heading"></div>

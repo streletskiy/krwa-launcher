@@ -28,6 +28,12 @@ for (const artwork of ['krwa-cargo-port.webp', 'krwa-wordmark.svg', 'SealCircle.
 }
 assert.ok(entries.includes('/node_modules/html-to-text/package.json'), 'Packaged launcher is missing the HTML-to-text dependency')
 
+for (const name of ['offlineworld.js', 'wholeworld.js', 'scripts/offlineworld.js']) {
+    const entry = path.join('app', 'assets', 'js', name)
+    assert.ok(asar.extractFile(archivePath, entry).equals(fs.readFileSync(path.join(__dirname, '..', entry))),
+        'Packaged offline world module differs from source: ' + name)
+}
+
 const packageJson = JSON.parse(asar.extractFile(archivePath, 'package.json').toString('utf8'))
 assert.equal(packageJson.version, expectedVersion, 'Packaged launcher version does not match the release version')
 assert.equal(packageJson.desktopName, 'ru.krwa.launcher', 'Packaged launcher is missing its Linux desktop identity')

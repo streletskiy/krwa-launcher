@@ -133,6 +133,16 @@ small,
     background: #26362d;
     border-radius: 4px;
 }
+#map.whole-world {
+    grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+    max-height: 360px;
+    overflow-y: auto;
+}
+#map.whole-world button {
+    aspect-ratio: auto;
+    min-height: 38px;
+    overflow-wrap: anywhere;
+}
 #map .auto {
     background: #2b654f;
 }

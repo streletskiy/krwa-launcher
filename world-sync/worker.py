@@ -5,6 +5,7 @@ import importlib.util
 import json
 import logging
 import os
+import tempfile
 import threading
 import time
 import zipfile
@@ -13,6 +14,7 @@ from pathlib import Path
 import portalocker
 from merge import plan
 from parcel import export_world
+from whole import export_whole
 from store import HOME, audit, db, digest, set_state, write_file, write_json
 
 log = logging.getLogger("world-sync")
@@ -108,8 +110,14 @@ def snapshot(trip, access, craft, job):
         # can change between reads, while other parts of the server keep saving.
         for candidate in (first, second, first):
             candidate.unlink(missing_ok=True)
-            meta = export_world(WORLD, trip["uid"], access["name"], candidate, center)
-            current = contents(candidate)
+            if access["scope"] == "world":
+                meta = export_whole(WORLD, trip["uid"], access["name"], candidate)
+                current = meta["files"]
+            else:
+                meta = export_world(
+                    WORLD, trip["uid"], access["name"], candidate, center
+                )
+                current = contents(candidate)
             if current == previous:
                 os.replace(candidate, job / "base.zip")
                 write_json(job / "area.json", meta)
@@ -176,7 +184,7 @@ def process(trip, craft):
     job = HOME / tid
     with db() as con:
         access = con.execute(
-            "SELECT name,state,cx,cz FROM access WHERE uid=?", (uid,)
+            "SELECT name,state,cx,cz,scope FROM access WHERE uid=?", (uid,)
         ).fetchone()
     if not access or access["state"] != "allowed":
         set_state(tid, "closed", "Доступ отозван.")
@@ -200,7 +208,10 @@ def process(trip, craft):
     craft.wait(False)
     write_json(MAINT, {"id": tid, "writing": False, "phase": "stopped"})
     try:
-        with session_lock():
+        with (
+            session_lock(),
+            tempfile.TemporaryDirectory(dir=job, prefix="merge-") as staging,
+        ):
             meta = json.loads((job / "area.json").read_text())
             changes, writes = plan(
                 WORLD,
@@ -209,6 +220,7 @@ def process(trip, craft):
                 job / "base.zip",
                 job / "upload.zip",
                 job / "live.next",
+                staging=Path(staging),
             )
             os.replace(job / "live.next", job / "live.zip")
             fingerprint = digest(
@@ -237,7 +249,10 @@ def process(trip, craft):
             write_json(MAINT, {"id": tid, "writing": True})
             try:
                 for rel, data in writes.items():
-                    write_file(WORLD / rel, data)
+                    write_file(
+                        WORLD / rel,
+                        data.read_bytes() if isinstance(data, Path) else data,
+                    )
                 with db() as con:
                     con.execute(
                         "UPDATE trips SET state='done',detail='',review=?,updated=? WHERE id=?",

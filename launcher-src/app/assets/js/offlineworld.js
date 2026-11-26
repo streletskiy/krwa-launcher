@@ -4,6 +4,7 @@ const path = require('node:path')
 const crypto = require('node:crypto')
 const got = require('got')
 const { withSaveLock } = require('./triplock')
+const wholeWorld = require('./wholeworld')
 const AdmZip = require('adm-zip')
 
 const PROFILE = 'krwa-aeronautics-1.21.1'
@@ -153,9 +154,37 @@ class OfflineWorld {
             ...(json ? { json } : {}),
         })
     }
-    async download(trip, launch) {
+    async download(trip, launch, progress) {
         const name = folderName(trip.id)
         const area = await this.api('/trips/' + trip.id + '/area')
+        if (area.scope === 'world') {
+            await fs.mkdir(this.saves, { recursive: true })
+            const stage = path.join(
+                path.dirname(this.saves),
+                '.krwa-trip-' + uuid(trip.id),
+            )
+            await fs.mkdir(stage, { recursive: true })
+            if ((await fs.lstat(stage)).isSymbolicLink())
+                throw Error('Ссылка в папке загрузки.')
+            const index = await wholeWorld.download(
+                this,
+                API,
+                trip,
+                area,
+                stage,
+                progress,
+            )
+            await atomicJson(
+                path.join(this.home, uuid(trip.id) + '.chunks.json'),
+                index,
+            )
+            const summary = {
+                scope: 'world',
+                bytes: area.bytes,
+                dimensions: area.dimensions,
+            }
+            return this.install(trip, launch, summary, stage, name)
+        }
         if (
             !Array.isArray(area.chunks) ||
             area.chunks.length > 25 ||
@@ -203,42 +232,43 @@ class OfflineWorld {
                 await fs.mkdir(path.dirname(target), { recursive: true })
                 await fs.writeFile(target, entry.getData(), { flag: 'wx' })
             }
-            const info = {
-                id: trip.id,
-                version: trip.version,
-                area,
-                stage: 'ready',
-                launch,
-            }
-            // A crash between rename and pointer persistence can be recovered
-            // from the manifest bundled in the newly installed directory.
-            await atomicJson(path.join(stage, 'krwa-trip.json'), info)
-            const final = path.join(this.saves, name)
-            try {
-                await fs.rename(stage, final)
-            } catch (err) {
-                if (!['EEXIST', 'ENOTEMPTY', 'EPERM'].includes(err.code))
-                    throw err
-                const old = JSON.parse(
-                    await fs.readFile(
-                        await safeFile(
-                            final,
-                            'krwa-trip.json',
-                            16 * 1024 * 1024,
-                        ),
-                        'utf8',
-                    ),
-                )
-                if (old.id !== trip.id) throw err
-            }
-            await atomicJson(this.stateFile, info)
-            return info
+            return await this.install(trip, launch, area, stage, name)
         } finally {
             await fs.rm(stage, { recursive: true, force: true })
         }
     }
-    async send(info) {
+    async install(trip, launch, area, stage, name) {
+        const info = {
+            id: trip.id,
+            version: trip.version,
+            area,
+            stage: 'ready',
+            launch,
+        }
+        // A crash between rename and pointer persistence can be recovered
+        // from the manifest bundled in the newly installed directory.
+        await atomicJson(path.join(stage, 'krwa-trip.json'), info)
+        const final = path.join(this.saves, name)
+        try {
+            await fs.rename(stage, final)
+        } catch (err) {
+            if (!['EEXIST', 'ENOTEMPTY', 'EPERM'].includes(err.code)) throw err
+            const old = JSON.parse(
+                await fs.readFile(
+                    await safeFile(final, 'krwa-trip.json', 16 * 1024 * 1024),
+                    'utf8',
+                ),
+            )
+            if (old.id !== trip.id) throw err
+            await fs.rm(stage, { recursive: true, force: true })
+        }
+        await atomicJson(this.stateFile, info)
+        return info
+    }
+    async send(info, progress) {
         const save = path.join(this.saves, folderName(info.id))
+        if (info.area.scope === 'world')
+            return wholeWorld.send(this, info, save, atomicJson, progress)
         const pending = path.join(this.home, info.id + '.zip')
         if (info.stage === 'ready') {
             const bytes = await withSaveLock(this.java, save, async () => {
