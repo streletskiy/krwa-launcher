@@ -93,7 +93,13 @@ def export_whole(root, uid, name, target):
     level["Data"]["Player"] = nbtlib.Compound(player)
     level["Data"]["LevelName"] = nbtlib.String("KRWA · " + name)
     level["Data"]["allowCommands"] = nbtlib.Byte(0)
-    files = list(dimension_files(root, dims.values()))
+    from vehicles import current_files
+
+    files = sorted(
+        dict(
+            [*dimension_files(root, dims.values()), *current_files(root, dims)]
+        ).items()
+    )
     size = sum(path.stat().st_size for _, path in files)
     if shutil.disk_usage(target.parent).free < size + 2 * 1024**3:
         raise ValueError("Недостаточно места для полного снимка.")

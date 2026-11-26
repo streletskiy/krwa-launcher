@@ -159,7 +159,9 @@ def projected_inventory(items):
     )
 
 
-def conflict_key(kind, pos, dimension=None):
+def conflict_key(kind, pos, dimension=None, object_id=None):
+    if object_id is not None:
+        return f"{kind}|{object_id}"
     return (
         f"{dimension or 'minecraft:overworld'}|{kind}|{','.join(map(str, pos or []))}"
     )
@@ -167,14 +169,13 @@ def conflict_key(kind, pos, dimension=None):
 
 def selected(meta, change):
     choices = meta.get("choices")
+    key = conflict_key(
+        change["kind"], change["pos"], meta.get("dimension"), change.get("object")
+    )
     return (
         choices is None
         or change["mode"] == "auto"
-        or (
-            change["mode"] == "conflict"
-            and conflict_key(change["kind"], change["pos"], meta.get("dimension"))
-            in choices
-        )
+        or (change["mode"] == "conflict" and key in choices)
     )
 
 
@@ -442,7 +443,44 @@ def plan_whole(root, uid, meta, base_path, upload_path, live_path, staging):
         changes, writes = plan_records(
             root, uid, meta, original, {"level.dat": after.read("level.dat")}
         )
-        for rel in sorted(set(after.namelist()) - {"level.dat"}):
+        from vehicles import REMOVED, location, current_files, plan_entities
+        from assemblies import plan as plan_assemblies
+
+        rest = set(after.namelist()) - {"level.dat"}
+        dims = meta.get("dimensions", ())
+        transport = {rel for rel in rest if location(rel.removeprefix(REMOVED), dims)}
+        if transport:
+            deleted = {
+                n.removeprefix(REMOVED) for n in transport if n.startswith(REMOVED)
+            }
+            if not deleted.issubset(before.NameToInfo):
+                raise ValueError("Удаляемый файл отсутствует в исходном снимке.")
+            edits = {n for n in transport if not n.startswith(REMOVED)}
+            live_transport = dict(current_files(root, dims))
+            try:
+                vehicle_changes, vehicle_writes = plan_entities(
+                    root, meta, before, after, live_transport, edits, deleted
+                )
+            except (ValueError, KeyError, TypeError, IndexError, OverflowError) as err:
+                vehicle_changes = [
+                    dict(
+                        kind="Транспорт",
+                        pos=None,
+                        mode="manual",
+                        before="Исходный снимок",
+                        live="Сервер",
+                        after=str(err)[:200],
+                    )
+                ]
+                vehicle_writes = {}
+            changes.extend(vehicle_changes)
+            writes.update(vehicle_writes)
+            assembly_changes, assembly_writes = plan_assemblies(
+                meta, before, after, live_transport, edits, deleted
+            )
+            changes.extend(assembly_changes)
+            writes.update(assembly_writes)
+        for rel in sorted(rest - transport):
             if rel in progress_paths(uid):
                 if rel not in before.NameToInfo:
                     raise ValueError("Файл прогресса отсутствует в исходном снимке.")

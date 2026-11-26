@@ -10,6 +10,7 @@ import zipfile
 from anvil import chunk, level_data, record
 from whole import DIMENSIONS, REGION, dimension_prefix
 from progress import progress_paths
+from vehicles import location, REMOVED
 
 PART = 4 * 1024**2
 MAX_TOTAL = 2 * 1024**3
@@ -56,7 +57,11 @@ def manifest(files, uid=None, dimensions=None):
         if not isinstance(name, str) or name in paths:
             raise ValueError("Повторяющийся файл.")
         paths.add(name)
-        if name != "level.dat" and name not in progress_paths(uid):
+        logical = name.removeprefix(REMOVED)
+        vehicle = location(logical, dimensions or DIMENSIONS)
+        if name.startswith(REMOVED) and (not vehicle or size != 1):
+            raise ValueError("Недопустимая запись удаления.")
+        if name != "level.dat" and name not in progress_paths(uid) and not vehicle:
             region_location(name, dimensions)
         maximum = (
             PART
@@ -79,6 +84,8 @@ def manifest(files, uid=None, dimensions=None):
             if not isinstance(value, str) or not HASH.fullmatch(value):
                 raise ValueError("Некорректная контрольная сумма.")
             parts.append((value, min(PART, size - n * PART)))
+    if any(n.removeprefix(REMOVED) in paths for n in paths if n.startswith(REMOVED)):
+        raise ValueError("Один файл указан для записи и удаления.")
     if "level.dat" not in paths:
         raise ValueError("В посылке отсутствует персонаж.")
     key = hashlib.sha256(
@@ -110,7 +117,9 @@ def assemble(directory, files, output, uid=None, dimensions=None):
                 if str(player.get("Dimension")) not in (dimensions or DIMENSIONS):
                     raise ValueError("Измерение игрока отсутствует в снимке.")
                 continue
-            if name in progress_paths(uid):
+            if name in progress_paths(uid) or location(
+                name.removeprefix(REMOVED), dimensions or DIMENSIONS
+            ):
                 continue
             _, _, rx, rz = region_location(name, dimensions)
             for x, z in slots(data, rx, rz):

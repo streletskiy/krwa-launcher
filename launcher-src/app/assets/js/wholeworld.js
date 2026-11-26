@@ -11,6 +11,7 @@ const region = /^region\/r\.-?\d{1,7}\.-?\d{1,7}\.mca$/
 const entry = /^(?:region|poi|entities)\/(?:r\.-?\d{1,7}\.-?\d{1,7}\.mca|c\.-?\d{1,8}\.-?\d{1,8}\.mcc)$/
 const ancillary = /^(?:sublevels\/r\.-?\d+\.-?\d+\.slvlr|data\/(?:map_\d+|idcounts|raids(?:_end)?|random_sequences|aeronautics_unloaded_balloons|create_aeronautics_automated_logistics_(?:runtime|ship_body_directory)|sable_sub_level_force_load_tickets)\.dat|mfix_stronghold_cache_v2\.nbt)$/
 const serverConfig = /^serverconfig\/openpartiesandclaims-(?:default-player|expired-claim|server-claim|wilderness)-config\.toml$/
+const vehicleFile = /^(?:entities\/r\.-?\d{1,7}\.-?\d{1,7}\.mca|sublevels\/r\.-?\d{1,7}\.-?\d{1,7}(?:\.slvlr|\.\d{1,5}\.slvls|(?:\.r|\.\d{1,5}\.s)\/\d{1,4}\.slvl)|data\/sable_sub_level_(?:occupancy|force_load_tickets)\.dat)$/
 const vanilla = { 'minecraft:overworld': '', 'minecraft:the_nether': 'DIM-1/', 'minecraft:the_end': 'DIM1/' }
 function prefixes(dimensions = Object.keys(vanilla)) {
     return dimensions.map(key => {
@@ -90,7 +91,7 @@ async function download(client, api, trip, area, stage, progress) {
     let total = 0
     for (const file of files) {
         if (
-            (typeof file.path !== 'string' || (file.path !== 'level.dat' && !personal.includes(file.path) && !matches(file.path, entry) && !matches(file.path, ancillary) && !serverConfig.test(file.path))) ||
+            (typeof file.path !== 'string' || (file.path !== 'level.dat' && !personal.includes(file.path) && !matches(file.path, entry) && !matches(file.path, ancillary) && !matches(file.path, vehicleFile) && !serverConfig.test(file.path))) ||
             names.has(file.path) ||
             !Number.isSafeInteger(file.bytes) ||
             file.bytes < 0 ||
@@ -102,7 +103,7 @@ async function download(client, api, trip, area, stage, progress) {
     }
     if (!names.has('level.dat') || total !== area.bytes)
         throw Error('Неполный снимок.')
-    const index = { dimensions: area.dimensions }
+    const index = { dimensions: area.dimensions, vehicles: {} }
     let received = 0
     for (const [i, file] of files.entries()) {
         const target = path.join(stage, file.path)
@@ -164,6 +165,7 @@ async function download(client, api, trip, area, stage, progress) {
         }
         if (file.path.endsWith('.mcc') && file.path.includes('region/'))
             index[file.path] = file.sha256
+        if (matches(file.path, vehicleFile)) index.vehicles[file.path] = file.sha256
         if (personal.includes(file.path)) index[file.path] = file.sha256
         if (matches(file.path, region)) {
             const bytes = await fs.readFile(
@@ -180,6 +182,40 @@ async function download(client, api, trip, area, stage, progress) {
         progress?.(received, total)
     }
     return index
+}
+
+async function vehicleChanges(save, base, add) {
+    if (!base.vehicles) return
+    const missing = new Set(Object.keys(base.vehicles))
+    async function scan(prefix, group) {
+        const name = prefix + group
+        const dir = path.join(save, name)
+        let items
+        try {
+            if (await fs.realpath(dir) !== path.join(await fs.realpath(save), name)) throw Error('Ссылка в файлах транспорта.')
+            items = await fs.readdir(dir, {withFileTypes:true})
+        } catch (e) {
+            if (e.code === 'ENOENT') return
+            throw e
+        }
+        for (const item of items) {
+            const rel = group + '/' + item.name
+            if (group === 'sublevels' && item.isDirectory() && /^r\.-?\d+\.-?\d+(?:\.r|\.\d+\.s)$/.test(item.name)) {
+                await scan(prefix, rel)
+                continue
+            }
+            if (!vehicleFile.test(rel)) continue
+            const file = prefix + rel
+            missing.delete(file)
+            const data = await fs.readFile(await regular(save, file, maximumRegion))
+            if (!data.length) {
+                if (Object.hasOwn(base.vehicles,file)) await add('removed/'+file,Buffer.from('1'))
+            } else if (hash(data) !== base.vehicles[file]) await add(file,data)
+        }
+    }
+    for (const prefix of prefixes(base.dimensions))
+        for (const group of ['entities','sublevels','data']) await scan(prefix,group)
+    for (const file of missing) await add('removed/' + file,Buffer.from('1'))
 }
 
 async function prepareTransfer(client, save, id, target, progress) {
@@ -210,6 +246,7 @@ async function prepareTransfer(client, save, id, target, progress) {
                 'level.dat',
                 await fs.readFile(await regular(save, 'level.dat', partSize)),
             )
+            await vehicleChanges(save, base, add)
             const names = []
             for (const name of playerProgress(client.uid)) {
                 if (!base[name]) continue

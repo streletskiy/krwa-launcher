@@ -255,6 +255,9 @@ def process(trip, craft):
             write_json(MAINT, {"id": tid, "writing": True})
             try:
                 for rel, data in writes.items():
+                    if data is None:
+                        (WORLD / rel).unlink(missing_ok=True)
+                        continue
                     (WORLD / rel).parent.mkdir(parents=True, exist_ok=True)
                     write_file(
                         WORLD / rel,

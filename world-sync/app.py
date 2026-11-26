@@ -340,7 +340,8 @@ async def upload_part(
 ):
     with db() as con:
         stage, files = pending(con, trip, uid, key)
-    parts = transfer.manifest(files, uid)[1]
+    dimensions = json.loads((stage.parent / "area.json").read_text())["dimensions"]
+    parts = transfer.manifest(files, uid, dimensions)[1]
     if not 0 <= index < len(parts):
         raise HTTPException(404)
     h, size = parts[index]
@@ -585,7 +586,9 @@ def review(trip: uuid.UUID, actor=Depends(admin)):
 
     changes = load("changes.json", [])
     for c in changes:
-        c["key"] = conflict_key(c["kind"], c.get("pos"), c.get("dimension"))
+        c["key"] = conflict_key(
+            c["kind"], c.get("pos"), c.get("dimension"), c.get("object")
+        )
     return {
         "trip": public(row),
         "area": load("area.json", {}),
@@ -664,7 +667,9 @@ def decide_trip(trip: uuid.UUID, decision: str, body: Decision, actor=Depends(ad
             changes = json.loads(file.read_text(encoding="utf-8"))
             if decision == "merge":
                 possible = {
-                    conflict_key(c["kind"], c.get("pos"), c.get("dimension"))
+                    conflict_key(
+                        c["kind"], c.get("pos"), c.get("dimension"), c.get("object")
+                    )
                     for c in changes
                     if c["mode"] == "conflict"
                 }
