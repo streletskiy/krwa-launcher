@@ -88,7 +88,11 @@ def export_whole(root, uid, name, target):
     dims = dimensions(root, level)
     if str(player.get("Dimension")) not in dims:
         raise ValueError("Измерение игрока отсутствует в снимке.")
-    for key in ("RootVehicle", "ShoulderEntityLeft", "ShoulderEntityRight"):
+    if player.get("RootVehicle"):
+        raise ValueError(
+            "Выйдите из транспорта на сервере и сохраните персонажа перед подготовкой поездки."
+        )
+    for key in ("ShoulderEntityLeft", "ShoulderEntityRight"):
         player.pop(key, None)
     level["Data"]["Player"] = nbtlib.Compound(player)
     level["Data"]["LevelName"] = nbtlib.String("KRWA · " + name)

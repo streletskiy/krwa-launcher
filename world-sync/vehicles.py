@@ -6,7 +6,17 @@ import re
 from collections import defaultdict
 
 import nbtlib
-from anvil import VERSION, chunk, compressed, index, record, replace_records
+from anvil import (
+    VERSION,
+    chunk,
+    compressed,
+    decode,
+    inflate,
+    index,
+    record,
+    region_name,
+    replace_records,
+)
 
 CARTS = {
     "minecraft:" + k
@@ -191,7 +201,20 @@ def safe(entry, previous):
     )
 
 
-def plan_entities(root, meta, before, after, live_paths, edits, deleted):
+def riding_ids(root):
+    reserved = set()
+    for path in (root / "playerdata").glob("*.dat"):
+        player = decode(inflate(path.read_bytes(), 31))
+        entity = player.get("RootVehicle", {}).get("Entity")
+        stack = [entity] if entity else []
+        while stack:
+            entity = stack.pop()
+            reserved.add(entity_id(entity))
+            stack.extend(entity.get("Passengers", ()))
+    return reserved
+
+
+def plan_entities(root, meta, before, after, live_paths, edits, deleted, rider=None):
     from merge import selected, text_tag
 
     dims = meta["dimensions"]
@@ -199,7 +222,7 @@ def plan_entities(root, meta, before, after, live_paths, edits, deleted):
         n for n in before.namelist() if location(n, dims) and "/entities/" in "/" + n
     }
     delta = {n for n in edits if "/entities/" in "/" + n}
-    if not delta and not (base_names & deleted):
+    if not rider and not delta and not (base_names & deleted):
         return [], {}
     old, old_occupied = entities(base_names, before.read, dims)
     new, new_occupied = entities(
@@ -207,7 +230,35 @@ def plan_entities(root, meta, before, after, live_paths, edits, deleted):
         lambda n: after.read(n) if n in delta else before.read(n),
         dims,
     )
+    if rider:
+        from whole import dimension_prefix
+
+        dim, mount = rider
+        item = mount["Entity"]
+        key = entity_id(item)
+        if (
+            dim not in dims
+            or not key
+            or key in new_occupied
+            or str(item.get("id")) not in CARTS
+            or entity_id({"UUID": mount.get("Attach")}) != key
+            or item.get("Passengers")
+        ):
+            raise ValueError(
+                "Сохраните поездку после выхода из транспорта для переноса этой группы сущностей."
+            )
+        x, _, z = item["Pos"]
+        cx, cz = math.floor(x) // 16, math.floor(z) // 16
+        new[key] = (
+            dim,
+            dimension_prefix(dim) + region_name(cx, cz, "entities"),
+            cx,
+            cz,
+            item,
+        )
+        new_occupied.add(key)
     live, occupied = entities(live_paths, lambda n: live_paths[n].read_bytes(), dims)
+    mounted_on_server = riding_ids(root)
     changes, pending = [], defaultdict(dict)
     sources = {}
 
@@ -238,7 +289,8 @@ def plan_entities(root, meta, before, after, live_paths, edits, deleted):
         if view(a) == view(c) or view(b) == view(c):
             continue
         valid = (
-            safe(c, a)
+            key not in mounted_on_server
+            and safe(c, a)
             and safe(c, b)
             and not any(
                 entry and (entry[-1].get("Passengers") or entry[-1].get("LootTable"))

@@ -440,8 +440,15 @@ def plan_whole(root, uid, meta, base_path, upload_path, live_path, staging):
         )
         original = {"level.dat": before.read("level.dat")}
         meta = {**meta, "chunks": []}
+        incoming_level = after.read("level.dat")
+        incoming_player = level_data(incoming_level)["Data"]["Player"]
+        rider = (
+            (str(incoming_player.get("Dimension")), incoming_player["RootVehicle"])
+            if incoming_player.get("RootVehicle")
+            else None
+        )
         changes, writes = plan_records(
-            root, uid, meta, original, {"level.dat": after.read("level.dat")}
+            root, uid, meta, original, {"level.dat": incoming_level}
         )
         from vehicles import REMOVED, location, current_files, plan_entities
         from assemblies import plan as plan_assemblies
@@ -449,7 +456,7 @@ def plan_whole(root, uid, meta, base_path, upload_path, live_path, staging):
         rest = set(after.namelist()) - {"level.dat"}
         dims = meta.get("dimensions", ())
         transport = {rel for rel in rest if location(rel.removeprefix(REMOVED), dims)}
-        if transport:
+        if transport or rider:
             deleted = {
                 n.removeprefix(REMOVED) for n in transport if n.startswith(REMOVED)
             }
@@ -459,7 +466,7 @@ def plan_whole(root, uid, meta, base_path, upload_path, live_path, staging):
             live_transport = dict(current_files(root, dims))
             try:
                 vehicle_changes, vehicle_writes = plan_entities(
-                    root, meta, before, after, live_transport, edits, deleted
+                    root, meta, before, after, live_transport, edits, deleted, rider
                 )
             except (ValueError, KeyError, TypeError, IndexError, OverflowError) as err:
                 vehicle_changes = [

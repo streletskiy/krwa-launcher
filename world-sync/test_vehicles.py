@@ -102,6 +102,34 @@ class VehicleTest(unittest.TestCase):
             found, _ = entities(writes, writes.__getitem__, dims)
             self.assertEqual(sorted(v[0] for v in found.values()), sorted(dims))
 
+    def test_boat_saved_with_rider_is_returned_once(self):
+        dim = "minecraft:overworld"
+        boat = entity("boat", 8, 2)
+        mount = nbt.Compound({"Entity": boat, "Attach": boat["UUID"]})
+        player = nbt.File({"RootVehicle": mount})
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            args = (
+                root,
+                {"dimensions": [dim]},
+                Files(),
+                Files(),
+                {},
+                set(),
+                set(),
+                (dim, mount),
+            )
+            changes, writes = plan_entities(*args)
+            self.assertEqual(changes[0]["mode"], "auto")
+            self.assertEqual(len(entities(writes, writes.__getitem__, [dim])[0]), 1)
+            (root / "playerdata").mkdir()
+            (root / "playerdata" / "existing.dat").write_bytes(
+                gzip.compress(encode(player))
+            )
+            changes, writes = plan_entities(*args)
+            self.assertEqual(changes[0]["mode"], "manual")
+            self.assertFalse(writes)
+
     def test_sable_requires_intact_storage_and_explicit_choice(self):
         dim = "minecraft:overworld"
         holding = "sublevels/r.0.0.slvlr"
