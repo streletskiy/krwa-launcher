@@ -38,6 +38,11 @@ def init():
                 "ALTER TABLE access ADD COLUMN scope TEXT NOT NULL DEFAULT 'parcel'"
             )
 
+        if "skip_new" not in {r[1] for r in con.execute("PRAGMA table_info(trips)")}:
+            con.execute(
+                "ALTER TABLE trips ADD COLUMN skip_new INTEGER NOT NULL DEFAULT 0"
+            )
+
 
 def audit(con, actor, event, target):
     con.execute(

@@ -82,6 +82,7 @@
                         </div>
                         <div id="slices" hidden>
                             <div id="slice-heading"></div>
+                            <label>Высота среза Y <input id="slice-y" type="number" min="-64" max="319" step="1"></label>
                             <div id="slice-images"></div>
                             <small id="under-pointer"></small>
                         </div>
@@ -92,6 +93,7 @@
                 <div id="exports"></div>
                 <div class="actions">
                     <button id="accept">Применить версию игрока</button
+                    ><button id="accept-existing" hidden>Применить изменения в освоенном мире и у персонажа</button
                     ><button id="revise">Вернуть игроку на доработку</button
                     ><button id="keep">Оставить мир сервера</button>
                 </div>

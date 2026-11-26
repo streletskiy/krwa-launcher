@@ -207,6 +207,13 @@ async function openTrip(id, name) {
         current.trip.state !== 'review' ||
         !current.trip.review ||
         current.changes.some((c) => c.mode === 'manual')
+    const manual = current.changes.filter((c) => c.mode === 'manual')
+    el('accept-existing').hidden =
+        current.trip.state !== 'review' ||
+        !current.trip.review ||
+        !manual.length ||
+        manual.length === current.changes.length ||
+        manual.some((c) => c.kind !== 'new_chunk')
     el('revise').hidden =
         current.trip.state !== 'review' || !current.trip.review
     el('keep').hidden = ['done', 'closed'].includes(current.trip.state)
@@ -301,6 +308,15 @@ async function drawSlice(pos, dimension = 'minecraft:overworld') {
     )
     if (seq !== sliceRequest || id !== current.trip.id) return
     el('slices').hidden = false
+    const elevation = el('slice-y')
+    elevation.value = y
+    elevation.onchange = () =>
+        run(async () => {
+            const height = elevation.valueAsNumber
+            if (!Number.isInteger(height) || height < -64 || height > 319)
+                throw Error('Выберите высоту от −64 до 319.')
+            await drawSlice([x, height, z], dimension)
+        })
     el('slice-heading').textContent =
         dimensions[dimension] + ' · Y ' + y + ' · чанк ' + cx + ', ' + cz
     const describe = (i) => {
@@ -442,6 +458,7 @@ function render() {
 }
 for (const [id, decision] of [
     ['accept', 'accept'],
+    ['accept-existing', 'accept-existing'],
     ['keep', 'keep'],
     ['revise', 'revise'],
 ]) {
@@ -449,9 +466,11 @@ for (const [id, decision] of [
         confirmAction(
             decision === 'accept'
                 ? 'Применить показанные изменения игрока после повторной сверки сервера?'
-                : decision === 'revise'
-                  ? 'Вернуть эту же локальную копию игроку для исправления?'
-                  : 'Закрыть поездку и сохранить текущий мир сервера?',
+                : decision === 'accept-existing'
+                  ? 'Применить показанные правки персонажа и освоенных чанков, включая выбранную версию конфликтов? Новая территория останется в архиве для ручного переноса.'
+                  : decision === 'revise'
+                    ? 'Вернуть эту же локальную копию игроку для исправления?'
+                    : 'Закрыть поездку и сохранить текущий мир сервера?',
             async () => {
                 await request('/trips/' + current.trip.id + '/' + decision, {
                     fingerprint: current.trip.review,

@@ -12,7 +12,7 @@ import zipfile
 from pathlib import Path
 
 import portalocker
-from merge import plan
+from merge import can_skip_new, plan
 from parcel import export_world
 from whole import export_whole
 from store import HOME, audit, db, digest, set_state, write_file, write_json
@@ -229,10 +229,9 @@ def process(trip, craft):
             write_json(job / "changes.json", changes)
             unsupported = any(c["mode"] == "manual" for c in changes)
             conflicts = any(c["mode"] == "conflict" for c in changes)
-            if unsupported or (
-                conflicts
-                and (trip["state"] != "approved" or fingerprint != trip["review"])
-            ):
+            approved = trip["state"] == "approved" and fingerprint == trip["review"]
+            skip_new = approved and trip["skip_new"] and can_skip_new(changes)
+            if (unsupported and not skip_new) or (conflicts and not approved):
                 set_state(
                     tid, "review", "Требуется решение администратора.", fingerprint
                 )
@@ -255,8 +254,15 @@ def process(trip, craft):
                     )
                 with db() as con:
                     con.execute(
-                        "UPDATE trips SET state='done',detail='',review=?,updated=? WHERE id=?",
-                        (fingerprint, int(time.time()), tid),
+                        "UPDATE trips SET state='done',detail=?,review=?,updated=? WHERE id=?",
+                        (
+                            "Новые чанки оставлены в архиве для ручного переноса."
+                            if skip_new
+                            else "",
+                            fingerprint,
+                            int(time.time()),
+                            tid,
+                        ),
                     )
                     audit(con, "worker", "applied", tid)
             except Exception:

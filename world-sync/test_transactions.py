@@ -192,6 +192,50 @@ class TransactionTest(unittest.TestCase):
         self.client.post("/api/offline-worlds/admin/access/" + self.uid + "/denied")
         self.assertEqual(self.client.get(api + "/files/0").status_code, 403)
 
+    def test_admin_can_keep_new_terrain_and_apply_known_edits(self):
+        import zipfile
+        from whole import export_whole
+
+        base = self.job / "base.zip"
+        base.unlink()
+        meta = export_whole(self.root, self.uid, "QA", base)
+        (self.job / "area.json").write_text(json.dumps(meta))
+        with (
+            zipfile.ZipFile(base) as original,
+            zipfile.ZipFile(self.job / "upload.zip", "w") as out,
+        ):
+            out.writestr("level.dat", original.read("level.dat"))
+            edited = self.fixture.edit(self.fixture.initial, {0: "minecraft:bricks"})
+            out.writestr(self.fixture.rel, edited)
+            out.writestr("DIM1/" + self.fixture.rel, edited)
+        self.store.set_state(self.tid, "submitted")
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "review")
+        api = "/api/offline-worlds/admin/trips/" + self.tid
+        decision = {"fingerprint": self.state()["review"]}
+        self.assertEqual(
+            self.client.post(api + "/accept", json=decision).status_code, 409
+        )
+        self.assertEqual(
+            self.client.post(api + "/accept-existing", json=decision).status_code, 200
+        )
+        self.fixture.file.write_bytes(
+            self.fixture.edit(self.fixture.initial, {0: "minecraft:stone"})
+        )
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "review")
+        self.assertEqual(
+            self.client.post(
+                api + "/accept-existing", json={"fingerprint": self.state()["review"]}
+            ).status_code,
+            200,
+        )
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "done")
+        self.assertFalse((self.root / "DIM1" / self.fixture.rel).exists())
+        self.assertNotEqual(self.fixture.file.read_bytes(), self.fixture.initial)
+        self.assertIn("архиве", self.state()["detail"])
+
     def test_apply_and_repeat(self):
         self.assertEqual(self.send().status_code, 200)
         self.worker.process(self.state(), self.game)

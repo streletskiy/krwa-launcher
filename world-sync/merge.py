@@ -441,6 +441,7 @@ def plan_whole(root, uid, base_path, upload_path, live_path, staging):
                     and record(base, change["pos"][0] // 16, change["pos"][2] // 16)
                     is None
                 ):
+                    change["kind"] = "new_chunk"
                     change["before"] = "не был сгенерирован при скачивании"
             changes.extend(edits)
             if len(changes) > MAX_EDITS:
@@ -454,6 +455,15 @@ def plan_whole(root, uid, base_path, upload_path, live_path, staging):
                     target.write_bytes(payload)
                     writes[name] = target
         return changes, writes
+
+
+def can_skip_new(changes):
+    manual = [c for c in changes if c["mode"] == "manual"]
+    return (
+        bool(manual)
+        and len(manual) < len(changes)
+        and all(c["kind"] == "new_chunk" for c in manual)
+    )
 
 
 def map_slice(paths, cx, cz, y, prefix=""):

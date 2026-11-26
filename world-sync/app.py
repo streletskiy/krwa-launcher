@@ -22,7 +22,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from starlette.responses import Response, StreamingResponse
-from merge import map_slice
+from merge import can_skip_new, map_slice
 import worker
 import transfer
 from whole import DIMENSIONS
@@ -647,15 +647,14 @@ def decide_trip(trip: uuid.UUID, decision: str, body: Decision, actor=Depends(ad
             raise HTTPException(409)
         if row["review"] != body.fingerprint:
             raise HTTPException(409, "Сравнение изменилось. Обновите страницу.")
-        if decision == "accept":
-            changes = HOME / trip.hex / "changes.json"
-            if (
-                row["state"] != "review"
-                or not changes.exists()
-                or any(
-                    c["mode"] == "manual"
-                    for c in json.loads(changes.read_text(encoding="utf-8"))
-                )
+        skip_new = decision == "accept-existing"
+        if decision == "accept" or skip_new:
+            file = HOME / trip.hex / "changes.json"
+            if row["state"] != "review" or not file.exists():
+                raise HTTPException(409)
+            changes = json.loads(file.read_text(encoding="utf-8"))
+            if (skip_new and not can_skip_new(changes)) or (
+                not skip_new and any(c["mode"] == "manual" for c in changes)
             ):
                 raise HTTPException(409, "Эти изменения требуют ручного переноса.")
             check_access(con, row["uid"])
@@ -675,8 +674,8 @@ def decide_trip(trip: uuid.UUID, decision: str, body: Decision, actor=Depends(ad
         else:
             raise HTTPException(400)
         con.execute(
-            "UPDATE trips SET state=?,updated=? WHERE id=?",
-            (state, int(time.time()), trip.hex),
+            "UPDATE trips SET state=?,skip_new=?,updated=? WHERE id=?",
+            (state, int(skip_new), int(time.time()), trip.hex),
         )
         audit(con, actor, decision, trip.hex)
     return {"ok": True}
