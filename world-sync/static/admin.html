@@ -15,6 +15,7 @@
     </div>
     <p id="loading" role="status">Загружаем офлайн-поездки…</p>
     <p id="status" role="alert"></p>
+    <p id="connection-note" class="muted" role="status" hidden>Связь прервалась. Обновим статус после подключения.</p>
     <section id="auth-state" class="notice" hidden>
         <h1 id="auth-title">Войдите как администратор</h1>
         <a id="login-link" class="action primary" target="_top" href="/login">Войти на портал</a>
@@ -48,6 +49,11 @@
                 <div class="title-line"><h1 id="review-title" tabindex="-1"></h1><span id="trip-state" class="badge"></span></div>
                 <p class="trip-meta"><span id="coordinates"></span><span id="trip-date"></span></p>
                 <p id="selection-note" class="muted" role="status" hidden></p><p id="trip-detail" class="muted" hidden></p>
+                <section id="trip-progress" class="panel activity" hidden>
+                    <strong id="activity-title" role="status"></strong>
+                    <p id="activity-detail" class="muted"></p>
+                    <progress id="activity-bar" aria-labelledby="activity-title"></progress>
+                </section>
             </header>
             <div class="review-grid">
                 <section class="changes-area" aria-labelledby="changes-heading">

@@ -130,6 +130,69 @@ class TripMergeTest(unittest.TestCase):
             rendered, [[AIR, AIR], [AIR, "minecraft:bricks"], ["minecraft:stone", AIR]]
         )
 
+    def test_tower_loot_and_inventory_move_together(self):
+        from anvil import level_data
+        from merge import conflict_key, entity_state, reviewed_container
+
+        old = nbtlib.parse_nbt(
+            '{id:"quark:variant_chest",x:-16,y:0,z:0,LootTable:"test:tower",LootTableSeed:42L}'
+        )
+        new = nbtlib.parse_nbt(
+            '{id:"quark:variant_chest",x:-16,y:0,z:0,Items:[{Slot:2b,id:"minecraft:paper",count:1}]}'
+        )
+        hive = nbtlib.parse_nbt('{id:"minecraft:beehive",bees:[]}')
+        hive2 = nbtlib.parse_nbt(
+            '{id:"minecraft:beehive",bees:[{ticks_in_hive:10}],flower_pos:[I;1,2,3]}'
+        )
+        self.assertEqual(entity_state(hive), entity_state(hive2))
+        self.assertFalse(reviewed_container(old, new, new))
+        forged = nbtlib.parse_nbt(new.snbt())
+        forged["Items"][0]["components"] = nbtlib.parse_nbt(
+            '{"minecraft:custom_data":{x:1}}'
+        )
+        self.assertFalse(reviewed_container(old, old, forged))
+
+        def with_chest(entity):
+            tag = chunk(record(self.initial, -1, 0))
+            tag["block_entities"].append(entity)
+            return replace_records(self.initial, {index(-1, 0): compressed(tag)})
+
+        self.file.write_bytes(with_chest(old))
+        self.base = self.root / "tower-base.zip"
+        self.meta = export_world(self.root, self.uid, "QA", self.base)
+        with (
+            zipfile.ZipFile(self.base) as src,
+            zipfile.ZipFile(self.upload, "w") as out,
+        ):
+            player = level_data(src.read("level.dat"))
+            player["Data"]["Player"]["Inventory"].append(
+                nbtlib.parse_nbt('{Slot:0b,id:"minecraft:oak_log",count:1}')
+            )
+            out.writestr("level.dat", gzip.compress(encode(player)))
+            out.writestr(self.rel, with_chest(new))
+
+        changes, _ = plan(self.root, self.uid, self.meta, self.base, self.upload)
+        self.assertEqual(
+            [(i["mode"], i["group"]) for i in changes], [("conflict", "loot")] * 2
+        )
+        keys = {conflict_key(c["kind"], c["pos"]) for c in changes}
+        for choices in (set(), {next(iter(keys))}):
+            _, writes = plan(
+                self.root,
+                self.uid,
+                {**self.meta, "choices": choices},
+                self.base,
+                self.upload,
+            )
+            self.assertEqual(writes, {})
+        _, writes = plan(
+            self.root, self.uid, {**self.meta, "choices": keys}, self.base, self.upload
+        )
+        self.assertEqual(len(writes), 2)
+        self.assertEqual(
+            chunk(record(writes[self.rel], -1, 0))["block_entities"][0], new
+        )
+
     def test_conflict_and_unsupported_edits(self):
         self.upload_edits({0: "minecraft:stone", 2: "minecraft:command_block"})
         self.file.write_bytes(self.edit(self.initial, {0: "minecraft:bricks"}))

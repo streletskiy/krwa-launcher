@@ -188,3 +188,7 @@ dialog::backdrop { background: #090a0dba; }
 }
 
 @media (max-height: 660px) { #plan { position: static; } }
+
+.activity { margin-top: 12px; padding: 14px 16px; }
+.activity p { margin: 4px 0; }
+.activity progress { display: block; width: 100%; height: 8px; margin-top: 10px; accent-color: var(--accent); }

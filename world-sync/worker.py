@@ -176,7 +176,33 @@ def recover(craft):
     MAINT.unlink()
 
 
+_activity = None
+
+
+def activity(tid, state):
+    snapshot = _activity
+    if state in ("submitted", "approved") and snapshot and snapshot[0] == tid:
+        return snapshot[1]
+    return None
+
+
 def process(trip, craft):
+    global _activity
+
+    def report(phase, completed=None, total=None):
+        global _activity
+        _activity = (
+            trip["id"],
+            {"phase": phase, "completed": completed, "total": total},
+        )
+
+    try:
+        return _process(trip, craft, report)
+    finally:
+        _activity = None
+
+
+def _process(trip, craft, report):
     tid, uid = trip["id"], trip["uid"]
     job = HOME / tid
     with db() as con:
@@ -199,6 +225,7 @@ def process(trip, craft):
         return
     if stats.get("running") is not True or str(stats.get("online")) != "0":
         return
+    report("stopping")
     write_json(MAINT, {"id": tid, "writing": False, "phase": "stopping"})
     # Never signal stop twice on a timeout. Recovery verifies observed state.
     craft.stop()
@@ -213,6 +240,7 @@ def process(trip, craft):
             selection = trip["selection"] if trip["state"] == "approved" else None
             if selection is not None:
                 meta["choices"] = set(json.loads(selection))
+            report("player")
             changes, writes = plan(
                 WORLD,
                 uid,
@@ -221,6 +249,7 @@ def process(trip, craft):
                 job / "upload.zip",
                 job / "live.next",
                 staging=Path(staging),
+                progress=report,
             )
             # A pre-full-world upload may have a personal advancement file recovered
             # from a device backup. Bind that administrative import to the exact upload.
@@ -243,6 +272,7 @@ def process(trip, craft):
                         changes.append(change)
                         if selected(meta, change):
                             writes.update(updates)
+            report("finalizing")
             os.replace(job / "live.next", job / "live.zip")
             fingerprint = digest(
                 json.dumps(changes, ensure_ascii=False, sort_keys=True).encode()
@@ -264,6 +294,7 @@ def process(trip, craft):
                 return
             # A revocation and an apply are serialized by the same mutex. Recovery
             # only starts the server after all old files or all new files exist.
+            report("applying")
             backup = job / "rollback"
             backup.mkdir(exist_ok=True)
             existed = {rel: (WORLD / rel).exists() for rel in writes}

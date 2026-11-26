@@ -524,7 +524,23 @@ def dashboard(actor=Depends(admin), profile: str | None = None, inbox: bool = Fa
             dict(x) for x in con.execute(users_sql + " ORDER BY updated DESC", args)
         ]
         trips = [dict(x) for x in con.execute(trips_sql, args)]
+    for trip in trips:
+        trip["activity"] = worker.activity(trip["id"], trip["state"])
     return {"users": users, "trips": trips}
+
+
+@app.get(API + "/admin/activity")
+def trip_activity(trip: uuid.UUID | None = None, actor=Depends(admin)):
+    fields = "SELECT t.id,t.state,t.updated,t.review,a.name FROM trips t JOIN access a USING(uid)"
+    with db() as con:
+        rows = (
+            con.execute(fields + " WHERE t.id=?", (trip.hex,))
+            if trip
+            else con.execute(fields + " ORDER BY t.rowid DESC LIMIT 100")
+        )
+        return [
+            dict(row, activity=worker.activity(row["id"], row["state"])) for row in rows
+        ]
 
 
 class Grant(BaseModel):
@@ -601,7 +617,7 @@ def review(trip: uuid.UUID, actor=Depends(admin)):
             c["kind"], c.get("pos"), c.get("dimension"), c.get("object")
         )
     return {
-        "trip": public(row),
+        "trip": dict(public(row), activity=worker.activity(trip.hex, row["state"])),
         "area": load("area.json", {}),
         "changes": changes,
     }
@@ -688,6 +704,17 @@ def decide_trip(trip: uuid.UUID, decision: str, body: Decision, actor=Depends(ad
                     set(body.player)
                 ):
                     raise HTTPException(422, "Неизвестный конфликт.")
+                loot = {
+                    conflict_key(c["kind"], c.get("pos"), c.get("dimension"))
+                    for c in changes
+                    if c.get("group") == "loot" and c["mode"] == "conflict"
+                }
+                selected_loot = loot.intersection(body.player)
+                if selected_loot and selected_loot != loot:
+                    raise HTTPException(
+                        422,
+                        "Инвентарь и содержимое контейнеров нужно переносить вместе.",
+                    )
                 if not any(c["mode"] == "auto" for c in changes) and not body.player:
                     raise HTTPException(409, "Выберите правки для переноса.")
                 selection = json.dumps(sorted(body.player))

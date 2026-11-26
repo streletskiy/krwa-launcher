@@ -200,7 +200,16 @@ async function refresh() {
     el('users').replaceChildren(
         ...(names.length ? names : [node('p', 'Запросов доступа пока нет.', 'empty')]),
     )
-    const trips = [...data.trips].sort(
+    renderQueue(data.trips)
+    return data
+}
+let queueSignature = ''
+function renderQueue(items) {
+    const signature = JSON.stringify(items.map((t) => [t.id, t.state, t.name, t.updated, t.activity]))
+    if (signature === queueSignature) return
+    queueSignature = signature
+    const focused = el('trips').contains(document.activeElement) ? document.activeElement.href : null
+    const trips = [...items].sort(
         (a, b) => Number(b.state === 'review') - Number(a.state === 'review') || b.updated - a.updated,
     )
     const awaiting = trips.filter((t) => t.state === 'review').length
@@ -209,7 +218,7 @@ async function refresh() {
     const rows = trips.map((t) => {
         const link = tripLink(t.id)
         link.setAttribute('aria-label', 'Открыть поездку ' + t.name)
-        return dataRow(t.name, t.state, dateFormat.format(t.updated * 1000), [link], 'trip-row')
+        return dataRow(t.name, t.state, activityText(t) || dateFormat.format(t.updated * 1000), [link], 'trip-row')
     })
     el('trips').replaceChildren(
         ...(rows.length
@@ -222,7 +231,35 @@ async function refresh() {
                   ),
               ]),
     )
-    return data
+    if (focused) [...el('trips').querySelectorAll('a')].find((a) => a.href === focused)?.focus({ preventScroll: true })
+}
+const stages = {
+    stopping: 'Сохраняем и останавливаем игровой сервер',
+    player: 'Сравниваем данные игрока',
+    transport: 'Сверяем транспорт и механизмы',
+    files: 'Сравниваем файлы мира',
+    finalizing: 'Готовим результат сравнения',
+    applying: 'Создаём резервную копию и применяем правки',
+}
+function activityText(t) {
+    const a = t.activity
+    if (a) return (stages[a.phase] || 'Обрабатываем поездку') +
+        (a.total > 0 ? ' · ' + a.completed + ' из ' + a.total : '')
+    if (t.state === 'submitted') return 'Сохранение получено · в очереди на сравнение'
+    if (t.state === 'approved') return 'Решение принято · в очереди на применение'
+    return ''
+}
+function showActivity(t) {
+    const title = activityText(t)
+    el('trip-progress').hidden = !title
+    if (!title) return
+    if (el('activity-title').textContent !== title) el('activity-title').textContent = title
+    const a = t.activity, bar = el('activity-bar')
+    el('activity-detail').textContent = a ? 'Статус обновляется автоматически.' :
+        'Обработка начнётся, когда игровой сервер освободится.'
+    bar.hidden = !a
+    if (a?.total > 0) { bar.max = a.total; bar.value = a.completed }
+    else bar.removeAttribute('value')
 }
 async function openTrip(id, name) {
     const seq = ++tripRequest
@@ -279,6 +316,8 @@ async function openTrip(id, name) {
     el('trip-detail').textContent = data.trip.detail || ''
     el('trip-detail').hidden =
         !data.trip.detail || data.trip.detail === 'Требуется решение администратора.'
+    showActivity(data.trip)
+    document.querySelector('.changes-area').hidden = ['submitted', 'approved'].includes(data.trip.state)
     const reviewing = data.trip.state === 'review' && Boolean(data.trip.review)
     el('merge-plan').hidden = !reviewing
     el('plan-jump').hidden = !reviewing
@@ -546,9 +585,17 @@ function changeCard(c, i) {
             radio.checked = (key === 'player') === playerChoices.has(c.key)
             radio.setAttribute('aria-describedby', radio.id + '-value')
             header.htmlFor = radio.id
+            if (c.group === 'loot') radio.dataset.lootChoice = key
             radio.onchange = () => {
-                if (key === 'player') playerChoices.add(c.key)
-                else playerChoices.delete(c.key)
+                const linked = c.group ? current.changes.filter((other) => other.mode === 'conflict' && other.group === c.group) : [c]
+                for (const change of linked) {
+                    if (key === 'player') playerChoices.add(change.key)
+                    else playerChoices.delete(change.key)
+                }
+                if (c.group) {
+                    for (const input of el('comparison').querySelectorAll('input[data-loot-choice]'))
+                        input.checked = input.dataset.lootChoice === key
+                }
                 updateMerge()
             }
             header.append(radio)
@@ -560,6 +607,7 @@ function changeCard(c, i) {
         group.append(card)
     }
     row.append(group)
+    if (c.group === 'loot') row.append(node('p', 'Инвентарь и содержимое контейнеров переносятся вместе, чтобы предметы не дублировались.', 'muted'))
     const foot = node('div', undefined, 'change-foot')
     const baseline = node('div', undefined, 'baseline')
     baseline.append(node('span', 'До поездки'), valueNode(c.before))
@@ -812,3 +860,27 @@ async function loadPage() {
 }
 el('refresh').onclick = () => run(loadPage)
 run(loadPage)
+let polling = false
+async function poll() {
+    if (polling || document.hidden || !el('auth-state').hidden || el('refresh').disabled ||
+        sending || pendingAction || (!current && !el('access').hidden)) return
+    if (current && ['done', 'closed', 'failed'].includes(current.trip.state)) return
+    polling = true
+    const seq = tripRequest, id = current?.trip.id
+    try {
+        const trips = await request('/activity' + (id ? '?trip=' + encodeURIComponent(id) : ''))
+        if (seq !== tripRequest || el('refresh').disabled || pendingAction || sending) return
+        el('connection-note').hidden = true
+        if (!id) renderQueue(trips)
+        else if (trips[0]) {
+            const t = trips[0]
+            if (t.state !== current.trip.state || t.review !== current.trip.review || t.updated !== current.trip.updated)
+                await openTrip(id, t.name)
+            else showActivity(t)
+        }
+    } catch {
+        el('connection-note').hidden = !el('auth-state').hidden
+    } finally { polling = false }
+}
+setInterval(poll, 4000)
+document.addEventListener('visibilitychange', poll)
