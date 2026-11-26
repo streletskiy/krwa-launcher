@@ -555,7 +555,19 @@ run(async () => {
         await openTrip(trip, owner?.name || 'Поездка')
     } else if (player && /^[a-f0-9]{32}$/i.test(player)) {
         const row = el('player-' + player)
-        row?.scrollIntoView({block: 'center'})
-        row?.querySelector('button')?.focus({preventScroll: true})
+        if (row) {
+            row.scrollIntoView({block: 'center'})
+            row.querySelector('button')?.focus({preventScroll: true})
+        } else {
+            const field = el('grant-name')
+            field.focus()
+            const response = await fetch('/api/v1/admin/minecraft-profiles/' + player)
+            if (response.ok) {
+                const {data: profile} = await response.json()
+                if (!field.value && profile?.uuid?.replaceAll('-', '').toLowerCase() === player.toLowerCase() && /^[a-zA-Z0-9_]{1,16}$/.test(profile.name)) {
+                    field.value = profile.name
+                }
+            }
+        }
     }
 })
