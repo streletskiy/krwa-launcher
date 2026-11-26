@@ -71,7 +71,11 @@ test('Steam Deck first run creates shortcuts and artwork and repeat runs preserv
             return true
         }
     }
-    assert.equal((await installLinuxIntegration(options)).steamAdded, true)
+    const first = await installLinuxIntegration(options)
+    assert.equal(first.steamAdded, true)
+    assert.match(fs.readFileSync(first.executablePath, 'utf8'), /^#!.*bash/)
+    assert.equal(fs.readFileSync(path.join(path.dirname(first.executablePath), 'payload', 'KRWA-Launcher.AppImage'), 'utf8'), 'appimage')
+    assert.ok(!fs.readFileSync(first.desktopFile, 'utf8').includes('APPIMAGE_EXTRACT_AND_RUN'))
     assert.ok(fs.existsSync(path.join(homeDirectory, 'Desktop', 'KRWA Launcher.desktop')))
     assert.deepEqual(fs.readdirSync(grid).sort(), ['2396744523.jpg', '2396744523_hero.jpg', '2396744523_logo.png', '2396744523p.jpg'])
     const cover = path.join(grid, '2396744523p.jpg')

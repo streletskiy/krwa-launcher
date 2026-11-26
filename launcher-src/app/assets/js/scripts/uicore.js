@@ -46,6 +46,20 @@ function runStartupUpdate(allowPrerelease) {
         ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', allowPrerelease)
     })
 }
+let deckStatusTimer
+function deckUpdateStatus(message, progress, hideAfter) {
+    clearTimeout(deckStatusTimer)
+    const panel = document.getElementById('deckUpdateStatus')
+    panel.hidden = !message
+    if (!message) return
+    const bar = document.getElementById('deckUpdateBar')
+    document.getElementById('deckUpdateLabel').textContent = Lang.native(message)
+    bar.hidden = progress === undefined
+    if (Number.isFinite(progress)) bar.value = Math.max(0, Math.min(100, progress))
+    else bar.removeAttribute('value')
+    document.getElementById('deckUpdatePercent').textContent = Number.isFinite(progress) ? Math.round(bar.value) + '%' : ''
+    if (hideAfter) deckStatusTimer = setTimeout(() => { panel.hidden = true }, hideAfter)
+}
 if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
@@ -70,11 +84,16 @@ if(!isDev){
                 resolveStartupUpdate?.()
                 resolveStartupUpdate = null
                 break
+            case 'deck-download':
+                deckUpdateStatus('Обновляем лаунчер', info.percent)
+                break
             case 'checking-for-update':
+                if (info?.background) deckUpdateStatus('Проверяем обновления лаунчера…', null, 12000)
                 loggerAutoUpdater.info('Checking for update..')
                 settingsUpdateButtonStatus(Lang.queryJS('uicore.autoUpdate.checkingForUpdateButton'), true)
                 break
             case 'update-available':
+                if (info?.background) deckUpdateStatus('Обновляем лаунчер', null)
                 loggerAutoUpdater.info('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
@@ -85,6 +104,7 @@ if(!isDev){
                 populateSettingsUpdateInformation(info)
                 break
             case 'update-on-exit':
+                deckUpdateStatus('Обновление установится при выходе из лаунчера', undefined, 9000)
                 settingsUpdateButtonStatus(Lang.native('Обновление установится при выходе из лаунчера'), true)
                 break
             case 'update-downloaded':
@@ -97,6 +117,7 @@ if(!isDev){
                 showUpdateUI(info)
                 break
             case 'update-not-available':
+                deckUpdateStatus()
                 loggerAutoUpdater.info('No new update found.')
                 settingsUpdateButtonStatus(Lang.queryJS('uicore.autoUpdate.checkForUpdatesButton'))
                 break
@@ -106,6 +127,7 @@ if(!isDev){
                 }, 1800000)
                 break
             case 'realerror':
+                deckUpdateStatus()
                 if(info != null && info.code != null){
                     if(info.code === 'ERR_UPDATER_INVALID_RELEASE_FEED'){
                         loggerAutoUpdater.info('No suitable releases found.')

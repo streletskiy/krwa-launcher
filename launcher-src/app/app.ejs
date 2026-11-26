@@ -67,6 +67,9 @@
         <%- include('landing') %>
     </div>
     <%- include('overlay') %>
+    <aside id="deckUpdateStatus" hidden aria-label="<%= native('Обновление лаунчера') %>">
+        <span id="deckUpdateLabel" role="status"></span><progress id="deckUpdateBar" max="100" aria-label="<%= native('Обновление лаунчера') %>"></progress><span id="deckUpdatePercent"></span>
+    </aside>
     <div id="gamepadHints" hidden>
         <span><%= native('LT / RT — по кнопкам') %></span>
         <span><%= native('Стик / крестовина — выбор') %></span>

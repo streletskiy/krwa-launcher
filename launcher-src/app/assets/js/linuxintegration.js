@@ -77,7 +77,8 @@ function keepMatchingFile(destination, content, mode) {
         throw error
     }
     try {
-        if(!fs.fstatSync(descriptor).isFile() || fs.readFileSync(descriptor, 'utf8') !== content) return false
+        const stat = fs.fstatSync(descriptor)
+        if(!stat.isFile() || stat.size !== Buffer.byteLength(content) || fs.readFileSync(descriptor, 'utf8') !== content) return false
         if(mode === 0o755) fs.fchmodSync(descriptor, mode)
         return true
     } finally {
@@ -158,7 +159,9 @@ async function installLinuxIntegration(options = {}) {
     const icon = fs.readFileSync(iconSource)
 
     const installDirectory = path.join(homeDirectory, '.local', 'opt', 'krwa-launcher')
-    const installedAppImage = path.join(installDirectory, 'KRWA-Launcher.AppImage')
+    const legacyEntry = path.join(installDirectory, 'KRWA-Launcher.AppImage')
+    const deckEntry = options.steamDeck && appImageSource
+    const installedAppImage = deckEntry ? path.join(installDirectory, 'payload', 'KRWA-Launcher.AppImage') : legacyEntry
     const versionFile = path.join(installDirectory, 'version')
     let executablePath = packagedExecutable
     let installedAppImageCopy = false
@@ -197,7 +200,15 @@ async function installLinuxIntegration(options = {}) {
     if(!installedIcon?.equals(icon)) {
         replaceFile(iconPath, temporary => fs.writeFileSync(temporary, icon, { mode: 0o644 }))
     }
-    const entry = desktopEntry(executablePath, iconPath, Boolean(appImageSource))
+    if (deckEntry) {
+        const script = fs.readFileSync(path.join(__dirname, 'steamdeck-launch.sh'), 'utf8').replaceAll('\r\n', '\n')
+        // Old Steam shortcuts point directly at this path, sometimes with extract-and-run forced.
+        // Keep their AppID, artwork and controller configuration while moving the updater payload.
+        atomicWrite(legacyEntry, script, 0o755)
+        if (process.env.APPIMAGE === legacyEntry) process.env.APPIMAGE = installedAppImage
+        executablePath = legacyEntry
+    }
+    const entry = desktopEntry(executablePath, iconPath, Boolean(appImageSource && !deckEntry))
     atomicWrite(desktopFile, entry, 0o644)
     if (options.steamDeck) {
         const desktop = desktopDirectory(homeDirectory, options.configHome || path.join(homeDirectory, '.config'))

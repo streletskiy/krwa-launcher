@@ -60,3 +60,9 @@
 .native-captcha-image button { width:36px; height:36px; border:1px solid var(--line); background:#1c4652; border-radius:8px; color:white; cursor:pointer; }
 @media(max-width:950px) { .native-account-aside { padding:24px; width:28%; min-width:220px; gap:20px; } .native-account-main { padding:24px; } .native-account-logo { margin-top:10px; } .native-account-aside h2 { font-size:23px; } .native-tabs { margin-bottom:20px; } .native-fields { gap:12px; } .native-skin-layout { gap:16px; } }
 @media(prefers-reduced-motion:reduce) { #nativeAccountContainer * { scroll-behavior:auto; } }
+
+#deckUpdateStatus { position:fixed; z-index:20; top:32px; left:12px; max-width:calc(100vw - 130px); display:grid; grid-template-columns:1fr auto; align-items:center; gap:4px 8px; padding:7px 12px; border-radius:8px; background:#142a30; color:#f1eeea; font-size:13px; pointer-events:none; }
+#deckUpdateStatus[hidden], #deckUpdateBar[hidden] { display:none; }
+#deckUpdateLabel { grid-column:1 / -1; }
+#deckUpdateBar { width:100%; min-width:90px; height:6px; accent-color:#e4c487; }
+#deckUpdatePercent:empty { display:none; }

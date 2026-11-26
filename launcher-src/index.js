@@ -105,7 +105,7 @@ function initAutoUpdater(event, data) {
         autoUpdater.autoDownload = false
     }
     autoUpdater.on('update-available', (info) => {
-        event.sender.send('autoUpdateNotification', 'update-available', info)
+        event.sender.send('autoUpdateNotification', 'update-available', { ...info, background: updateOnExit })
     })
     autoUpdater.on('update-downloaded', (info) => {
         event.sender.send('autoUpdateNotification', updateOnExit ? 'update-on-exit' : 'update-downloaded', info)
@@ -114,10 +114,15 @@ function initAutoUpdater(event, data) {
         event.sender.send('autoUpdateNotification', 'update-not-available', info)
     })
     autoUpdater.on('checking-for-update', () => {
-        event.sender.send('autoUpdateNotification', 'checking-for-update')
+        event.sender.send('autoUpdateNotification', 'checking-for-update', { background: updateOnExit })
     })
     autoUpdater.on('error', (err) => {
         event.sender.send('autoUpdateNotification', 'realerror', err)
+    })
+    if (updateOnExit) autoUpdater.on('download-progress', info => {
+        if (!event.sender.isDestroyed()) event.sender.send('autoUpdateNotification', 'deck-download', {
+            percent: info.percent, transferred: info.transferred, total: info.total
+        })
     })
     if (updateOnExit) autoUpdater.checkForUpdates().catch(err => console.warn('Update check failed:', err.message))
 }
@@ -337,9 +342,14 @@ function createWindow() {
     win.loadURL(pathToFileURL(path.join(__dirname, 'app', 'app.ejs')).toString())
     if (steamDeck.gamingMode) win.maximize()
 
-    /*win.once('ready-to-show', () => {
+    win.once('ready-to-show', () => {
+        const startup = process.env.KRWA_STARTUP_DIR
+        if (steamDeck.detected && startup && /^krwa-start\.[a-zA-Z0-9]{8}$/.test(path.basename(startup))) {
+            try { fs.writeFileSync(path.join(startup, 'ready'), '', { flag: 'wx', mode: 0o600 }) }
+            catch (err) { if (err.code !== 'EEXIST') console.warn('Unable to signal launcher readiness:', err.code) }
+        }
         win.show()
-    })*/
+    })
 
     win.removeMenu()
 
