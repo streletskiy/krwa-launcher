@@ -107,22 +107,40 @@ def index(cx, cz):
     return cx % 32 + 32 * (cz % 32)
 
 
-def record(region, cx, cz):
+def record_bounds(region, slot):
     if not region:
         return None
     if len(region) < 8192:
         raise ValueError("Неполный заголовок региона.")
-    off = 4 * index(cx, cz)
+    off = 4 * slot
     start = int.from_bytes(region[off : off + 3], "big") * SECTOR
     count = region[off + 3]
     if not start and not count:
         return None
-    if start < 8192 or not count or start + count * SECTOR > len(region):
+    # Minecraft can leave the final allocated sector physically unpadded.
+    allocated = ((len(region) + SECTOR - 1) // SECTOR) * SECTOR
+    if (
+        start < 8192
+        or not count
+        or start + count * SECTOR > allocated
+        or start + 5 > len(region)
+    ):
         raise ValueError("Повреждённое смещение чанка.")
     size = int.from_bytes(region[start : start + 4], "big")
-    if size < 2 or size + 4 > count * SECTOR:
+    end = start + 4 + size
+    if not size or size + 4 > count * SECTOR or end > len(region):
+        raise ValueError("Неполные данные чанка.")
+    return start, count, end
+
+
+def record(region, cx, cz):
+    bounds = record_bounds(region, index(cx, cz))
+    if bounds is None:
+        return None
+    start, _, end = bounds
+    if end - start < 6:
         raise ValueError("Внешние или повреждённые чанки не поддерживаются.")
-    return region[start + 4 : start + 4 + size]
+    return region[start + 4 : end]
 
 
 def chunk(tagged):
@@ -158,13 +176,13 @@ def replace_records(region, replacements):
                 raise ValueError("Чанк требует внешнего хранилища.")
             physical += bytes(sectors * SECTOR - len(physical))
         else:
-            start = int.from_bytes(header[off : off + 3], "big") * SECTOR
-            sectors = header[off + 3]
-            if not start and not sectors:
+            bounds = record_bounds(old, slot)
+            if bounds is None:
                 continue
-            if start < 8192 or not sectors or start + sectors * SECTOR > len(old):
-                raise ValueError("Повреждённый регион.")
-            physical = old[start : start + sectors * SECTOR]
+            start, sectors, _ = bounds
+            physical = old[start : start + sectors * SECTOR].ljust(
+                sectors * SECTOR, b"\0"
+            )
         header[off : off + 3] = (2 + len(body) // SECTOR).to_bytes(3, "big")
         header[off + 3] = sectors
         body.extend(physical)

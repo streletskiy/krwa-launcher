@@ -26,6 +26,25 @@ from merge import map_slice, plan
 from parcel import export_world, player_file
 
 
+class RegionPaddingTest(unittest.TestCase):
+    def test_partial_final_sector_requires_every_payload_byte(self):
+        from transfer import slots
+
+        first = b"\x03first"
+        last = b"\x03last"
+        padded = replace_records(b"", {0: first, 1: last})
+        short = padded[: 3 * 4096 + 4 + len(last)]
+        self.assertEqual(list(slots(short, 0, 0)), [(0, 0), (1, 0)])
+        self.assertEqual(record(short, 1, 0), last)
+        updated = replace_records(short, {0: b"\x03new"})
+        self.assertEqual(len(updated) % 4096, 0)
+        self.assertEqual(record(updated, 1, 0), last)
+        with self.assertRaises(ValueError):
+            record(short[:-1], 1, 0)
+        with self.assertRaises(ValueError):
+            replace_records(short[:-1], {0: first})
+
+
 class TripMergeTest(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()

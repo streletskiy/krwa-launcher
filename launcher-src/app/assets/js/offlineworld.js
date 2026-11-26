@@ -66,6 +66,8 @@ async function clipRegion(root, name, slots) {
         const header = Buffer.alloc(8192)
         if ((await handle.read(header, 0, 8192, 0)).bytesRead !== 8192)
             throw Error('Неполный регион.')
+        const { size } = await handle.stat()
+        const allocated = Math.ceil(size / 4096) * 4096
         const next = Buffer.alloc(8192)
         const parts = [next]
         let end = 2
@@ -73,13 +75,11 @@ async function clipRegion(root, name, slots) {
             const start = header.readUIntBE(slot * 4, 3),
                 count = header[slot * 4 + 3]
             if (!start && !count) continue
-            if (start < 2 || !count) throw Error('Повреждён заголовок региона.')
+            if (start < 2 || !count || (start + count) * 4096 > allocated) throw Error('Повреждён заголовок региона.')
             const data = Buffer.alloc(count * 4096)
-            if (
-                (await handle.read(data, 0, data.length, start * 4096))
-                    .bytesRead !== data.length
-            )
-                throw Error('Неполный чанк.')
+            const { bytesRead } = await handle.read(data, 0, data.length, start * 4096)
+            const length = data.readUInt32BE(0)
+            if (bytesRead < 5 || !length || length + 4 > bytesRead) throw Error('Неполный чанк.')
             next.writeUIntBE(end, slot * 4, 3)
             next[slot * 4 + 3] = count
             header.copy(next, 4096 + slot * 4, 4096 + slot * 4, 4100 + slot * 4)

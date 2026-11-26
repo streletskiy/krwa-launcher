@@ -39,7 +39,7 @@ def region_location(name, dimensions=None):
 
 
 def slots(data, rx, rz):
-    if len(data) < 8192 or len(data) % 4096:
+    if len(data) < 8192:
         raise ValueError("Неполный файл региона.")
     for i in range(1024):
         if data[4 * i : 4 * i + 4] != bytes(4):

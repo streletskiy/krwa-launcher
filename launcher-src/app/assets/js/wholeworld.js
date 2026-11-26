@@ -39,31 +39,32 @@ async function regular(root, name, maximum) {
     return file
 }
 
-function records(bytes) {
+function records(bytes, name) {
     // Minecraft creates zero-length region files before their first chunk save.
     if (bytes.length === 0) return new Map()
-    if (bytes.length < 8192 || bytes.length % 4096)
-        throw Error('Повреждён регион.')
+    if (bytes.length < 8192) throw Error('Неполный заголовок региона: ' + name)
+    // An open Anvil region may end after its last record, before sector padding.
+    const allocated = Math.ceil(bytes.length / 4096) * 4096
     const slots = new Map()
     for (let slot = 0; slot < 1024; slot++) {
         const pos = bytes.readUIntBE(4 * slot, 3) * 4096,
             sectors = bytes[4 * slot + 3]
         if (!pos && !sectors) continue
-        if (pos < 8192 || !sectors || pos + sectors * 4096 > bytes.length)
-            throw Error('Некорректный заголовок региона.')
+        if (pos < 8192 || !sectors || pos + sectors * 4096 > allocated || pos + 5 > bytes.length)
+            throw Error('Некорректное смещение чанка: ' + name)
         const length = bytes.readUInt32BE(pos)
-        if (!length || length + 4 > sectors * 4096)
-            throw Error('Неполный чанк.')
+        if (!length || length + 4 > sectors * 4096 || pos + 4 + length > bytes.length)
+            throw Error('Неполные данные чанка: ' + name)
         slots.set(slot, bytes.subarray(pos, pos + 4 + length))
     }
     return slots
 }
 
-function delta(bytes, original) {
+function delta(bytes, original, name) {
     const header = Buffer.alloc(8192),
         output = [header]
     let sectors = 2
-    for (const [slot, data] of records(bytes)) {
+    for (const [slot, data] of records(bytes, name)) {
         if (original?.[slot] === hash(data)) continue
         if (data[4] & 128)
             throw Error(
@@ -172,7 +173,7 @@ async function download(client, api, trip, area, stage, progress) {
                 await regular(stage, file.path, maximumRegion),
             )
             index[file.path] = Object.fromEntries(
-                Array.from(records(bytes), ([slot, data]) => [
+                Array.from(records(bytes, file.path), ([slot, data]) => [
                     slot,
                     hash(data),
                 ]),
@@ -284,7 +285,7 @@ async function prepareTransfer(client, save, id, target, progress) {
                 const bytes = await fs.readFile(
                     await regular(save, name, maximumRegion),
                 )
-                const changed = delta(bytes, base[name])
+                const changed = delta(bytes, base[name], name)
                 if (changed) await add(name, changed)
                 progress?.(
                     'Сравнение регионов · ' + (i + 1) + ' / ' + names.length,
