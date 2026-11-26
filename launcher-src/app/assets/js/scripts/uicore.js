@@ -84,6 +84,9 @@ if(!isDev){
                 
                 populateSettingsUpdateInformation(info)
                 break
+            case 'update-on-exit':
+                settingsUpdateButtonStatus(Lang.native('Обновление установится при выходе из лаунчера'), true)
+                break
             case 'update-downloaded':
                 loggerAutoUpdater.info('Update ' + info.version + ' ready to be installed.')
                 settingsUpdateButtonStatus(Lang.queryJS('uicore.autoUpdate.installNowButton'), false, () => {

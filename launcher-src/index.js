@@ -16,6 +16,9 @@ const StartupUpdate                     = require('./app/assets/js/startupupdate
 const { installLinuxIntegration }        = require('./app/assets/js/linuxintegration')
 const { detectSteamDeck }                = require('./app/assets/js/steamdeck')
 const steamDeck                          = detectSteamDeck()
+// Steam owns the game process. Restarting the AppImage behind its back leaves
+// Gamescope showing the library while the replacement window runs in the background.
+const updateOnExit = steamDeck.detected && (steamDeck.gamingMode || Boolean(process.env.SteamGameId || process.env.SteamAppId))
 let updaterInitialized = false
 let startupUpdate
 
@@ -85,7 +88,7 @@ ipcMain.handle('installLinuxIntegration', async event => {
 function initAutoUpdater(event, data) {
     if (updaterInitialized) return
     updaterInitialized = true
-    autoUpdater.autoInstallOnAppQuit = false
+    autoUpdater.autoInstallOnAppQuit = updateOnExit
 
     if(data){
         autoUpdater.allowPrerelease = true
@@ -105,7 +108,7 @@ function initAutoUpdater(event, data) {
         event.sender.send('autoUpdateNotification', 'update-available', info)
     })
     autoUpdater.on('update-downloaded', (info) => {
-        event.sender.send('autoUpdateNotification', 'update-downloaded', info)
+        event.sender.send('autoUpdateNotification', updateOnExit ? 'update-on-exit' : 'update-downloaded', info)
     })
     autoUpdater.on('update-not-available', (info) => {
         event.sender.send('autoUpdateNotification', 'update-not-available', info)
@@ -115,7 +118,8 @@ function initAutoUpdater(event, data) {
     })
     autoUpdater.on('error', (err) => {
         event.sender.send('autoUpdateNotification', 'realerror', err)
-    }) 
+    })
+    if (updateOnExit) autoUpdater.checkForUpdates().catch(err => console.warn('Update check failed:', err.message))
 }
 
 // Open channel to listen for update actions.
@@ -126,13 +130,13 @@ ipcMain.on('autoUpdateAction', (event, arg, data) => {
             console.log('Initializing auto updater.')
             initAutoUpdater(event, data)
             event.sender.send('autoUpdateNotification', 'ready')
-            if (!startupUpdate && process.platform !== 'darwin') {
+            if (updateOnExit || process.platform === 'darwin') {
+                event.sender.send('autoUpdateNotification', 'startup-complete')
+            } else if (!startupUpdate) {
                 startupUpdate = new StartupUpdate(autoUpdater, (kind, info) => {
                     if (!event.sender.isDestroyed()) event.sender.send('autoUpdateNotification', kind, info)
                 })
                 startupUpdate.start()
-            } else if (process.platform === 'darwin') {
-                event.sender.send('autoUpdateNotification', 'startup-complete')
             } else if (!startupUpdate.active) {
                 event.sender.send('autoUpdateNotification', 'startup-complete')
             }
@@ -156,7 +160,7 @@ ipcMain.on('autoUpdateAction', (event, arg, data) => {
             }
             break
         case 'installUpdateNow':
-            autoUpdater.quitAndInstall(true, true)
+            autoUpdater.quitAndInstall(true, !updateOnExit)
             break
         default:
             console.log('Unknown argument', arg)

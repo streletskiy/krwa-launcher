@@ -758,5 +758,9 @@
   "Офлайн-поездки доступны с разрешения администратора.": {
     "en_US": "Offline trips require permission from an administrator.",
     "pl_PL": "Wyprawy offline wymagają zgody administratora."
+  },
+  "Обновление установится при выходе из лаунчера": {
+    "en_US": "The update will install when you exit the launcher",
+    "pl_PL": "Aktualizacja zainstaluje się po zamknięciu launchera"
   }
 }
