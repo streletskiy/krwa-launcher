@@ -762,5 +762,9 @@
   "Обновление установится при выходе из лаунчера": {
     "en_US": "The update will install when you exit the launcher",
     "pl_PL": "Aktualizacja zainstaluje się po zamknięciu launchera"
+  },
+  "Сервер получил поездку. Когда онлайн-мир освободится, он автоматически перенесёт совместимые правки и позицию игрока.": {
+    "en_US": "The server received your trip. When the online world is empty, it will automatically apply compatible changes and your saved position.",
+    "pl_PL": "Serwer otrzymał zapis wyprawy. Gdy świat online będzie pusty, automatycznie przeniesie zgodne zmiany i zapisaną pozycję gracza."
   }
 }
