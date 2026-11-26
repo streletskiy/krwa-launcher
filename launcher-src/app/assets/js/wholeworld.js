@@ -23,6 +23,8 @@ async function regular(root, name, maximum) {
 }
 
 function records(bytes) {
+    // Minecraft creates zero-length region files before their first chunk save.
+    if (bytes.length === 0) return new Map()
     if (bytes.length < 8192 || bytes.length % 4096)
         throw Error('Повреждён регион.')
     const slots = new Map()
