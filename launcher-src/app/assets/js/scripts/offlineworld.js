@@ -13,6 +13,7 @@
     const meter = document.getElementById('trip-progress')
     let returnFocus = opener
     let localMenu = false
+    let localIdentity = null
     let busy = false
     let generation = 0
     const statusText = {
@@ -52,7 +53,7 @@
         }
     }
     function client() {
-        const user = ConfigManager.getSelectedAccount()
+        const user = ConfigManager.getSelectedAccount() || (localMenu && localIdentity)
         if (!user || ConfigManager.getSelectedServer() !== PROFILE)
             throw Error(
                 'Выберите профиль KRWA Aeronautics и войдите в аккаунт.',
@@ -179,10 +180,22 @@
     }
     async function show(online = true) {
         const view = ++generation
+        if (localMenu && !ConfigManager.getSelectedAccount() && !localIdentity) {
+            const profiles = await require('./assets/js/offlineworld').localProfiles(ConfigManager)
+            if (generation !== view) return
+            if (profiles.length > 1) {
+                actions.replaceChildren()
+                message.textContent = Lang.native('Выберите локальный профиль')
+                for (const profile of profiles) add(profile.displayName, async () => { localIdentity = profile; await show(false) })
+                return
+            }
+            // Vanilla UUID for OfflinePlayer:Player. This identity never enters the online account store.
+            localIdentity = profiles[0] || { uuid: 'a01e3843e5213998958af459800e4d11', displayName: 'Player', type: 'mojang' }
+        }
         if (localMenu && ConfigManager.getSelectedServer() !== PROFILE) {
             actions.replaceChildren()
             message.textContent = Lang.native('Доступна одиночная игра с установленной сборкой.')
-            add('Одиночная игра', () => launchLocal({ account: ConfigManager.getSelectedAccount() }))
+            add('Одиночная игра', () => launchLocal({ account: ConfigManager.getSelectedAccount() || localIdentity }))
             return
         }
         const c = client(),
@@ -200,7 +213,7 @@
                 local?.stage === 'sending'
                     ? 'Отправка не завершена. Копия сохранена.'
                     : 'Для поездки нужен доступ и снимок сервера.'
-        if (local && ['ready', 'sending', 'sent'].includes(local.stage))
+        if (ConfigManager.getSelectedAccount() && local && ['ready', 'sending', 'sent'].includes(local.stage))
             add(
                 local.stage === 'ready'
                     ? 'Синхронизировать'
@@ -227,7 +240,7 @@
             if (!local && localMenu) message.textContent = Lang.native('Доступна одиночная игра с установленной сборкой.')
             if (!navigator.onLine && local?.stage === 'ready')
                 message.textContent = Lang.native('Мир сохранён на устройстве. Играйте без интернета. Отправка станет доступна после подключения.')
-            if (localMenu) {
+            if (localMenu && ConfigManager.getSelectedAccount()) {
                 add('Проверить подключение', async () => {
                     if (await validateSelectedAccount()) {
                         localMenu = false
@@ -238,7 +251,7 @@
                     closePanel()
                     document.getElementById('settingsAddMojangAccount').click()
                 }, true)
-            } else add('Проверить статус', () => show(), true)
+            } else if (ConfigManager.getSelectedAccount()) add('Проверить статус', () => show(), true)
             return
         }
         try {
@@ -343,7 +356,7 @@
         if (panel.hidden || busy) return
         show().catch((e) => { message.textContent = e.message }).finally(focusAction)
     }
-    window.addEventListener('online', () => { localMenu = false; validateSelectedAccount(); refreshPanel() })
+    window.addEventListener('online', () => { localMenu = !ConfigManager.getSelectedAccount(); validateSelectedAccount(); refreshPanel() })
     window.addEventListener('offline', refreshPanel)
     function closePanel() {
         generation++
@@ -352,13 +365,15 @@
     }
     function openPanel(offline) {
         localMenu = offline
-        returnFocus = offline ? document.getElementById('launch_button') : opener
+        localIdentity = null
+        returnFocus = offline ? document.getElementById(ConfigManager.getSelectedAccount() ? 'launch_button' : 'login-local') : opener
         if (proc) return
         panel.hidden = false
         close.focus()
         actions.replaceChildren()
         refreshPanel()
     }
+    document.getElementById('login-local').onclick = () => openPanel(true)
     opener.onclick = () => openPanel(false)
     window.addEventListener('krwa-offline-play', () => openPanel(true))
     close.onclick = closePanel

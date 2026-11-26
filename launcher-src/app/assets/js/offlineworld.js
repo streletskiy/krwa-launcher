@@ -267,6 +267,7 @@ class OfflineWorld {
             version: trip.version,
             area,
             stage: 'ready',
+            playerName: this.account.displayName,
             launch,
         }
         // A crash between rename and pointer persistence can be recovered
@@ -333,6 +334,22 @@ class OfflineWorld {
         return result
     }
 }
+async function localProfiles(config) {
+    const home = path.join(config.getLauncherDirectory(), 'offline-worlds')
+    const game = path.join(config.getInstanceDirectory(), PROFILE)
+    const cache = await fs.readFile(path.join(game, 'usercache.json'), 'utf8')
+        .then(JSON.parse).catch(() => [])
+    const profiles = []
+    for (const dir of await fs.readdir(home, { withFileTypes: true }).catch(() => [])) {
+        if (!dir.isDirectory() || !idPattern.test(dir.name)) continue
+        const local = new OfflineWorld(config, { uuid: dir.name })
+        const trip = await local.local().catch(() => null)
+        if (!trip?.launch || !idPattern.test(trip.id)) continue
+        const known = Array.isArray(cache) && cache.find(p => String(p.uuid).replace(/-/g, '') === dir.name)
+        profiles.push({ uuid: dir.name, displayName: trip.playerName || known?.name || 'Player', type: 'mojang' })
+    }
+    return profiles
+}
 function prepared(config) {
     const a = config.getSelectedAccount()
     if (!a || config.getSelectedServer() !== PROFILE) return false
@@ -356,4 +373,5 @@ module.exports = {
     clipRegion,
     atomicJson,
     prepared,
+    localProfiles,
 }

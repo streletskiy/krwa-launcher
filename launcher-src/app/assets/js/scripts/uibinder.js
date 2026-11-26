@@ -93,7 +93,7 @@ async function showMainUI(data){
         setTimeout(() => {
             $('#loadingContainer').fadeOut(500, () => {
                 $('#loadSpinnerImage').removeClass('rotating')
-                if (isLoggedIn && (!navigator.onLine || window.krwaSessionUnavailable)) window.dispatchEvent(new Event('krwa-offline-play'))
+                if (!navigator.onLine || (isLoggedIn && window.krwaSessionUnavailable)) window.dispatchEvent(new Event('krwa-offline-play'))
                 else refreshSteamDeckOffer()
             })
         }, 250)

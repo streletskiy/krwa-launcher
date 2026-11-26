@@ -39,6 +39,7 @@
     "jquery": "^3.8.0",
     "lodash.merge": "^4.6.2",
     "prismarine-nbt": "2.8.0",
+    "qrcode": "1.5.4",
     "safe-regex2": "^5.1.2",
     "semver": "^7.8.5",
     "skinview-utils": "0.7.1",

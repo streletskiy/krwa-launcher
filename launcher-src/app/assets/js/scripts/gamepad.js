@@ -18,6 +18,8 @@
     function controls() {
         const menu = document.getElementById('launcherLanguageMenu')
         const loading = document.getElementById('loadingContainer')
+        const pairing = document.getElementById('deviceDialog')
+        if (pairing?.open) return Array.from(pairing.querySelectorAll(focusable)).filter(isVisible)
         if (isOverlayVisible()) {
             return Array.from(document.querySelectorAll(`#overlayContainer :is(${focusable})`)).filter(isVisible)
         }
@@ -59,7 +61,7 @@
             return
         }
         const selector = isOverlayVisible() ? '.overlayKeybindEsc' :
-            '#trip-close, #settingsNavDone, #nativeAccountBack, #loginCancelButton, #loginOptionCancelButton'
+            '#device-close, #trip-close, #settingsNavDone, #nativeAccountBack, #loginCancelButton, #loginOptionCancelButton'
         elements.find(el => el.matches(selector))?.click()
     }
 

@@ -46,6 +46,12 @@
                     <!--<div class="spinningCircle" id="loginSpinner"></div>-->
                 </div>
             </button>
+            <div class="local-login-options">
+                <button type="button" id="login-qr" class="settingsActionButton" aria-label="<%= native('Войти по QR-коду') %>" title="<%= native('Войти по QR-коду') %>">
+                    <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h4v4h-3M14 21v-3M21 13v2"/></svg>
+                </button>
+            <button type="button" class="settingsActionButton" id="login-local"><%= native("Играть без входа") %></button>
+            </div>
             <div id="loginDisclaimer">
                 <span class="loginSpanDim" id="loginRegisterSpan">
                     <a href="<%- lang('login.loginNeedAccountLink') %>"><%- lang('login.loginNeedAccountText') %></a>
@@ -55,5 +61,14 @@
             </div>
         </form>
     </div>
+    <dialog id="deviceDialog" aria-labelledby="device-title">
+        <h2 id="device-title"><%= native('Войти по QR-коду') %></h2>
+        <p id="device-message" role="status"></p>
+        <canvas id="device-qr" width="180" height="180" hidden></canvas>
+        <strong id="device-code"></strong>
+        <div><button type="button" id="device-retry" class="settingsActionButton" hidden><%= native('Повторить') %></button>
+        <button type="button" id="device-close" class="settingsActionButton"><%= native('Назад') %></button></div>
+    </dialog>
     <script src="./assets/js/scripts/login.js"></script>
+    <script src="./assets/js/scripts/device-login.js"></script>
 </div>

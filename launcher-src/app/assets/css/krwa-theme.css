@@ -324,3 +324,11 @@ body[data-steam-deck] #loginRememberOption { height: 44px; }
 #trip-progress { width: 100%; height: 10px; accent-color: var(--color-accent, #99bd86); }
 #trip-progress[hidden] { display: none; }
 #settingsNavItemsContent #trip-open { margin: 4px 0; min-height: 40px; }
+
+.local-login-options { display:flex; gap:8px; align-items:center; justify-content:center; margin:8px 0; }
+.local-login-options button { min-height:44px; }
+#login-qr { min-width:44px; padding:8px; display:grid; place-items:center; }
+#deviceDialog { max-width:min(360px, 85vw); padding:22px; background:#25272e; color:#f4f4f5; border:1px solid #525560; border-radius:12px; text-align:center; }
+#deviceDialog::backdrop { background:#08090bc9; }
+#device-code { display:block; font-size:22px; letter-spacing:4px; margin:8px 0; }
+#device-qr { width:180px; height:180px; }

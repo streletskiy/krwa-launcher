@@ -574,5 +574,41 @@
   "Войти снова": {
     "en_US": "Sign in again",
     "pl_PL": "Zaloguj ponownie"
+  },
+  "Играть без входа": {
+    "en_US": "Play offline",
+    "pl_PL": "Graj bez logowania"
+  },
+  "Выберите локальный профиль": {
+    "en_US": "Choose a local profile",
+    "pl_PL": "Wybierz profil lokalny"
+  },
+  "Войти по QR-коду": {
+    "en_US": "Sign in with QR code",
+    "pl_PL": "Zaloguj się kodem QR"
+  },
+  "Сканируйте код телефоном и подтвердите вход.": {
+    "en_US": "Scan with your phone and confirm sign-in.",
+    "pl_PL": "Zeskanuj kod telefonem i zatwierdź logowanie."
+  },
+  "Создаём код…": {
+    "en_US": "Creating a code…",
+    "pl_PL": "Tworzenie kodu…"
+  },
+  "Код истёк. Запросите новый.": {
+    "en_US": "Code expired. Request a new one.",
+    "pl_PL": "Kod wygasł. Poproś o nowy."
+  },
+  "Вход отклонён на телефоне.": {
+    "en_US": "Sign-in was declined on your phone.",
+    "pl_PL": "Logowanie odrzucono na telefonie."
+  },
+  "Не удалось связаться с порталом.": {
+    "en_US": "Could not reach the portal.",
+    "pl_PL": "Nie udało się połączyć z portalem."
+  },
+  "Повторить": {
+    "en_US": "Try again",
+    "pl_PL": "Spróbuj ponownie"
   }
 }
