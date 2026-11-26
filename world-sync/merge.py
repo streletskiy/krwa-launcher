@@ -161,7 +161,7 @@ def projected_inventory(items):
 
 def plan(root, uid, meta, base_path, upload_path, live_path=None, staging=None):
     if meta.get("scope") == "world":
-        return plan_whole(root, uid, base_path, upload_path, live_path, staging)
+        return plan_whole(root, uid, meta, base_path, upload_path, live_path, staging)
     allowed = supported_files(meta)
     return plan_records(
         root,
@@ -403,7 +403,8 @@ def plan_records(root, uid, meta, base, offline, live_path=None):
     return changes, writes
 
 
-def plan_whole(root, uid, base_path, upload_path, live_path, staging):
+def plan_whole(root, uid, meta, base_path, upload_path, live_path, staging):
+    from progress import plan_progress, progress_paths
     from transfer import region_location, slots
 
     with contextlib.ExitStack() as stack:
@@ -417,12 +418,21 @@ def plan_whole(root, uid, base_path, upload_path, live_path, staging):
             else None
         )
         original = {"level.dat": before.read("level.dat")}
-        meta = {"scope": "world", "chunks": []}
+        meta = {**meta, "chunks": []}
         changes, writes = plan_records(
             root, uid, meta, original, {"level.dat": after.read("level.dat")}
         )
         for rel in sorted(set(after.namelist()) - {"level.dat"}):
-            dimension, prefix, rx, rz = region_location(rel)
+            if rel in progress_paths(uid):
+                if rel not in before.NameToInfo:
+                    raise ValueError("Файл прогресса отсутствует в исходном снимке.")
+                edits, updates = plan_progress(
+                    root, uid, meta.get("team"), rel, before.read(rel), after.read(rel)
+                )
+                changes.extend(edits)
+                writes.update(updates)
+                continue
+            dimension, prefix, rx, rz = region_location(rel, meta.get("dimensions"))
             data = after.read(rel)
             coords = list(slots(data, rx, rz))
             base = before.read(rel) if rel in before.NameToInfo else b""

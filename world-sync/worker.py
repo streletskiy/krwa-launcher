@@ -13,7 +13,6 @@ from pathlib import Path
 
 import portalocker
 from merge import can_skip_new, plan
-from parcel import export_world
 from whole import export_whole
 from store import HOME, audit, db, digest, set_state, write_file, write_json
 
@@ -103,21 +102,14 @@ def snapshot(trip, access, craft, job):
     craft.command("save-all flush")
     wait_feedback(logfile, offset, ("Saved the game", "Saved the world"), 90)
     first, second = job / "base.next", job / "verification.next"
-    center = (access["cx"], access["cz"])
     previous = None
     try:
         # Successive captures must agree on every exported byte. A busy parcel
         # can change between reads, while other parts of the server keep saving.
         for candidate in (first, second, first):
             candidate.unlink(missing_ok=True)
-            if access["scope"] == "world":
-                meta = export_whole(WORLD, trip["uid"], access["name"], candidate)
-                current = meta["files"]
-            else:
-                meta = export_world(
-                    WORLD, trip["uid"], access["name"], candidate, center
-                )
-                current = contents(candidate)
+            meta = export_whole(WORLD, trip["uid"], access["name"], candidate)
+            current = meta["files"]
             if current == previous:
                 os.replace(candidate, job / "base.zip")
                 write_json(job / "area.json", meta)
@@ -146,8 +138,12 @@ def restore_files(job):
     manifest = job / "rollback" / "files.json"
     if not manifest.exists():
         return
-    for rel in json.loads(manifest.read_text()):
-        write_file(WORLD / rel, (job / "rollback" / rel).read_bytes())
+    entries = json.loads(manifest.read_text())
+    for rel in entries:
+        if isinstance(entries, dict) and not entries[rel]:
+            (WORLD / rel).unlink(missing_ok=True)
+        else:
+            write_file(WORLD / rel, (job / "rollback" / rel).read_bytes())
 
 
 def recover(craft):
@@ -240,14 +236,18 @@ def process(trip, craft):
             # only starts the server after all old files or all new files exist.
             backup = job / "rollback"
             backup.mkdir(exist_ok=True)
+            existed = {rel: (WORLD / rel).exists() for rel in writes}
             for rel in writes:
+                if not existed[rel]:
+                    continue
                 saved = backup / rel
                 saved.parent.mkdir(parents=True, exist_ok=True)
                 write_file(saved, (WORLD / rel).read_bytes())
-            write_json(backup / "files.json", list(writes))
+            write_json(backup / "files.json", existed)
             write_json(MAINT, {"id": tid, "writing": True})
             try:
                 for rel, data in writes.items():
+                    (WORLD / rel).parent.mkdir(parents=True, exist_ok=True)
                     write_file(
                         WORLD / rel,
                         data.read_bytes() if isinstance(data, Path) else data,

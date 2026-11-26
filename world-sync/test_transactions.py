@@ -105,7 +105,10 @@ class TransactionTest(unittest.TestCase):
         from whole import DIMENSIONS, export_whole
 
         api = "/api/offline-worlds/trips/" + self.tid
-        for prefix in list(DIMENSIONS.values())[1:]:
+        for prefix in [
+            *list(DIMENSIONS.values())[1:],
+            "dimensions/example/moon/orbit/",
+        ]:
             path = self.root / prefix / self.fixture.rel
             path.parent.mkdir(parents=True)
             path.write_bytes(self.fixture.initial)
@@ -128,7 +131,26 @@ class TransactionTest(unittest.TestCase):
                 data = self.client.get(api + "/files/" + str(i)).content
                 self.assertEqual(hashlib.sha256(data).hexdigest(), item["sha256"])
                 self.assertEqual(data, archive.read(name))
-                if name != "level.dat":
+                if name.startswith("advancements/"):
+                    data = json.dumps(
+                        {
+                            "DataVersion": 3955,
+                            "qa:explore": {
+                                "criteria": {"visit": "2026-11-26 10:00:00 +0000"},
+                                "done": True,
+                            },
+                        }
+                    ).encode()
+                if name.startswith("ftbquests/"):
+                    from progress import parse_snbt, encode_tag
+                    import nbtlib
+
+                    quest = parse_snbt(data)
+                    quest["completed"] = nbtlib.Compound(
+                        {"1122334455667788": nbtlib.Long(42)}
+                    )
+                    data = encode_tag(quest)
+                if name.endswith(".mca"):
                     data = self.fixture.edit(data, {0: "minecraft:stone"})
                 files.append(
                     {
@@ -166,11 +188,12 @@ class TransactionTest(unittest.TestCase):
         self.assertEqual(self.state()["state"], "review")
         changes = json.loads((self.job / "changes.json").read_text(encoding="utf-8"))
         self.assertEqual(
-            {c["dimension"]: c["mode"] for c in changes},
+            {c["dimension"]: c["mode"] for c in changes if "dimension" in c},
             {
                 "minecraft:overworld": "auto",
                 "minecraft:the_nether": "conflict",
                 "minecraft:the_end": "auto",
+                "example:moon/orbit": "auto",
             },
         )
         admin = "/api/offline-worlds/admin/trips/" + self.tid
@@ -189,6 +212,16 @@ class TransactionTest(unittest.TestCase):
         )
         self.worker.process(self.state(), self.game)
         self.assertEqual(self.state()["state"], "done")
+        from progress import progress_paths, parse_snbt
+
+        adv, quests = progress_paths(self.uid)
+        self.assertTrue(json.loads((self.root / adv).read_text())["qa:explore"]["done"])
+        self.assertEqual(
+            parse_snbt((self.root / quests).read_bytes())["completed"][
+                "1122334455667788"
+            ],
+            42,
+        )
         self.client.post("/api/offline-worlds/admin/access/" + self.uid + "/denied")
         self.assertEqual(self.client.get(api + "/files/0").status_code, 403)
 

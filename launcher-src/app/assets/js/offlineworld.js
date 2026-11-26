@@ -115,6 +115,30 @@ class OfflineWorld {
             throw e
         }
     }
+    async independentCopy(info) {
+        const name = folderName(info.id)
+        const target = 'KRWA-Local-' + uuid(info.id)
+        const src = path.join(this.saves, name)
+        const dest = path.join(this.saves, target)
+        try {
+            await fs.access(path.join(dest, 'level.dat'))
+            return target
+        } catch (e) {
+            if (e.code !== 'ENOENT') throw e
+        }
+        const temp = await fs.mkdtemp(path.join(this.saves, '.local-copy-'))
+        try {
+            await require('./triplock').withSaveLock(this.java, src, async () => {
+                await fs.cp(src, temp, { recursive: true,
+                    mode: require('node:fs').constants.COPYFILE_FICLONE,
+                    filter: async p => path.basename(p) !== 'session.lock' && !(await fs.lstat(p)).isSymbolicLink() })
+            })
+            await fs.rename(temp, dest)
+        } finally {
+            await fs.rm(temp, { recursive: true, force: true })
+        }
+        return target
+    }
     async call(route, options = {}) {
         const data = await got(API + route, {
             timeout: { request: 90000 },

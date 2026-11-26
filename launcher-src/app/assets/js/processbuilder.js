@@ -364,10 +364,18 @@ class ProcessBuilder {
      * profile's enabled set and remove only files managed by an earlier sync.
      */
     syncNeoForgeMods(mods) {
+        if (this.offlineWorld && this.server.rawServer.id === 'krwa-aeronautics-1.21.1' &&
+            !mods.some(mod => path.basename(mod.getPath()).startsWith('krwa-server-rules-'))) {
+            const file = 'krwa-server-rules-1.0.1.jar'
+            const resources = process.resourcesPath && path.join(process.resourcesPath, 'libraries', file)
+            const rules = resources && fs.existsSync(resources) ? resources : path.resolve(__dirname, '../../../libraries', file)
+            mods = [...mods, { getPath: () => rules }]
+        }
         syncNeoForgeMods(this.gameDir, mods, logger)
     }
 
     _processAutoConnectArg(args){
+        if(this.offlineWorld === true) return // Standalone single-player title screen.
         if(this.offlineWorld){
             args.push('--quickPlaySingleplayer', this.offlineWorld)
             return

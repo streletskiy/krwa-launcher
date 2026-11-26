@@ -7,9 +7,25 @@ const { withSaveLock } = require('./triplock')
 
 const partSize = 4 * 1024 * 1024
 const maximumRegion = 256 * 1024 * 1024
-const region = /^(?:(?:DIM-1|DIM1)\/)?region\/r\.-?\d{1,7}\.-?\d{1,7}\.mca$/
-const entry =
-    /^(?:(?:DIM-1|DIM1)\/)?(?:region|poi|entities)\/(?:r\.-?\d{1,7}\.-?\d{1,7}\.mca|c\.-?\d{1,8}\.-?\d{1,8}\.mcc)$/
+const region = /^region\/r\.-?\d{1,7}\.-?\d{1,7}\.mca$/
+const entry = /^(?:region|poi|entities)\/(?:r\.-?\d{1,7}\.-?\d{1,7}\.mca|c\.-?\d{1,8}\.-?\d{1,8}\.mcc)$/
+const ancillary = /^(?:sublevels\/r\.-?\d+\.-?\d+\.slvlr|data\/(?:map_\d+|idcounts|raids(?:_end)?|random_sequences|aeronautics_unloaded_balloons|create_aeronautics_automated_logistics_(?:runtime|ship_body_directory)|sable_sub_level_force_load_tickets)\.dat|mfix_stronghold_cache_v2\.nbt)$/
+const serverConfig = /^serverconfig\/openpartiesandclaims-(?:default-player|expired-claim|server-claim|wilderness)-config\.toml$/
+const vanilla = { 'minecraft:overworld': '', 'minecraft:the_nether': 'DIM-1/', 'minecraft:the_end': 'DIM1/' }
+function prefixes(dimensions = Object.keys(vanilla)) {
+    return dimensions.map(key => {
+        if (Object.hasOwn(vanilla, key)) return vanilla[key]
+        const [namespace, location, extra] = typeof key === 'string' ? key.split(':') : []
+        if (!namespace || !location || extra !== undefined || !/^[a-z0-9_-][a-z0-9_.-]*$/.test(namespace) ||
+            namespace.endsWith('.') || location.split('/').some(s => !/^[a-z0-9_.-]+$/.test(s) || s.endsWith('.')))
+            throw Error('Некорректное измерение.')
+        return 'dimensions/' + key.replace(':', '/') + '/'
+    })
+}
+function playerProgress(uid) {
+    const id = uid.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5')
+    return ['advancements/' + id + '.json', 'ftbquests/' + id + '.snbt']
+}
 const hash = (data) => crypto.createHash('sha256').update(data).digest('hex')
 
 async function regular(root, name, maximum) {
@@ -64,6 +80,9 @@ function delta(bytes, original) {
 }
 
 async function download(client, api, trip, area, stage, progress) {
+    const dirs = prefixes(area.dimensions)
+    const personal = playerProgress(client.uid)
+    const matches = (file, pattern) => dirs.some(prefix => file.startsWith(prefix) && pattern.test(file.slice(prefix.length)))
     const files = area.files
     if (!Array.isArray(files) || !files.length || files.length > 100000)
         throw Error('Некорректное описание мира.')
@@ -71,7 +90,7 @@ async function download(client, api, trip, area, stage, progress) {
     let total = 0
     for (const file of files) {
         if (
-            (file.path !== 'level.dat' && !entry.test(file.path)) ||
+            (typeof file.path !== 'string' || (file.path !== 'level.dat' && !personal.includes(file.path) && !matches(file.path, entry) && !matches(file.path, ancillary) && !serverConfig.test(file.path))) ||
             names.has(file.path) ||
             !Number.isSafeInteger(file.bytes) ||
             file.bytes < 0 ||
@@ -83,7 +102,7 @@ async function download(client, api, trip, area, stage, progress) {
     }
     if (!names.has('level.dat') || total !== area.bytes)
         throw Error('Неполный снимок.')
-    const index = {}
+    const index = { dimensions: area.dimensions }
     let received = 0
     for (const [i, file] of files.entries()) {
         const target = path.join(stage, file.path)
@@ -129,6 +148,7 @@ async function download(client, api, trip, area, stage, progress) {
                             throw Error('Размер файла изменился.')
                         h.update(b)
                         await f.writeFile(b)
+                        progress?.(received + n, total)
                     }
                 } finally {
                     stream.destroy()
@@ -144,7 +164,8 @@ async function download(client, api, trip, area, stage, progress) {
         }
         if (file.path.endsWith('.mcc') && file.path.includes('region/'))
             index[file.path] = file.sha256
-        if (region.test(file.path)) {
+        if (personal.includes(file.path)) index[file.path] = file.sha256
+        if (matches(file.path, region)) {
             const bytes = await fs.readFile(
                 await regular(stage, file.path, maximumRegion),
             )
@@ -190,7 +211,12 @@ async function prepareTransfer(client, save, id, target, progress) {
                 await fs.readFile(await regular(save, 'level.dat', partSize)),
             )
             const names = []
-            for (const prefix of ['', 'DIM-1/', 'DIM1/']) {
+            for (const name of playerProgress(client.uid)) {
+                if (!base[name]) continue
+                const data = await fs.readFile(await regular(save, name, 16 * 1024 ** 2))
+                if (hash(data) !== base[name]) await add(name, data)
+            }
+            for (const prefix of prefixes(base.dimensions)) {
                 const dir = path.join(save, prefix, 'region')
                 let list
                 try {
@@ -201,9 +227,9 @@ async function prepareTransfer(client, save, id, target, progress) {
                 }
                 for (const name of list) {
                     const rel = prefix + 'region/' + name
-                    if (region.test(rel)) names.push(rel)
+                    if (region.test('region/' + name)) names.push(rel)
                     if (
-                        entry.test(rel) &&
+                        entry.test('region/' + name) &&
                         name.endsWith('.mcc') &&
                         base[rel] !==
                             hash(

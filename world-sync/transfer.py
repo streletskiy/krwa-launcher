@@ -8,21 +8,30 @@ import shutil
 import zipfile
 
 from anvil import chunk, level_data, record
-from whole import DIMENSIONS, REGION
+from whole import DIMENSIONS, REGION, dimension_prefix
+from progress import progress_paths
 
 PART = 4 * 1024**2
 MAX_TOTAL = 2 * 1024**3
 HASH = re.compile(r"[0-9a-f]{64}")
-TERRAIN = re.compile(r"(?:(DIM-1|DIM1)/)?region/(r\.-?\d{1,7}\.-?\d{1,7}\.mca)")
 
 
-def region_location(name):
-    match = TERRAIN.fullmatch(name)
-    if not match:
+def region_location(name, dimensions=None):
+    prefix, sep, filename = name.rpartition("region/")
+    match = REGION.fullmatch(filename)
+    if not sep or not match:
         raise ValueError("Неизвестный регион или измерение.")
-    prefix = (match[1] + "/") if match[1] else ""
-    dimension = next(key for key, value in DIMENSIONS.items() if value == prefix)
-    rx, rz = map(int, REGION.fullmatch(match[2]).groups())
+    dimension = next((k for k, v in DIMENSIONS.items() if v == prefix), None)
+    if dimension is None:
+        parts = prefix.rstrip("/").split("/")
+        if len(parts) < 3 or parts[0] != "dimensions":
+            raise ValueError("Неизвестное измерение.")
+        dimension = parts[1] + ":" + "/".join(parts[2:])
+        if dimension_prefix(dimension) != prefix:
+            raise ValueError("Некорректный путь измерения.")
+    if dimensions is not None and dimension not in dimensions:
+        raise ValueError("Измерение отсутствует в снимке.")
+    rx, rz = map(int, match.groups())
     if abs(rx) > 58594 or abs(rz) > 58594:
         raise ValueError("Регион за пределами карты.")
     return dimension, prefix, rx, rz
@@ -36,7 +45,7 @@ def slots(data, rx, rz):
             yield rx * 32 + i % 32, rz * 32 + i // 32
 
 
-def manifest(files):
+def manifest(files, uid=None, dimensions=None):
     if not isinstance(files, list) or not 1 <= len(files) <= 8192:
         raise ValueError("Некорректный список файлов.")
     paths, parts, total = set(), [], 0
@@ -47,9 +56,13 @@ def manifest(files):
         if not isinstance(name, str) or name in paths:
             raise ValueError("Повторяющийся файл.")
         paths.add(name)
-        if name != "level.dat":
-            region_location(name)
-        maximum = PART if name == "level.dat" else 256 * 1024**2
+        if name != "level.dat" and name not in progress_paths(uid):
+            region_location(name, dimensions)
+        maximum = (
+            PART
+            if name == "level.dat"
+            else (16 * 1024**2 if name in progress_paths(uid) else 256 * 1024**2)
+        )
         if (
             type(size) is not int
             or not 0 < size <= maximum
@@ -74,7 +87,7 @@ def manifest(files):
     return key, parts, total
 
 
-def assemble(directory, files, output):
+def assemble(directory, files, output, uid=None, dimensions=None):
     with zipfile.ZipFile(
         output, "x", allowZip64=True, compression=zipfile.ZIP_DEFLATED, compresslevel=1
     ) as archive:
@@ -94,12 +107,12 @@ def assemble(directory, files, output):
                     math.isfinite(float(n)) and abs(float(n)) <= 30000000 for n in pos
                 ):
                     raise ValueError("Некорректная позиция игрока.")
-                if str(player.get("Dimension")) not in DIMENSIONS:
-                    raise ValueError(
-                        "Завершите поездку в одном из трёх основных измерений."
-                    )
+                if str(player.get("Dimension")) not in (dimensions or DIMENSIONS):
+                    raise ValueError("Измерение игрока отсутствует в снимке.")
                 continue
-            _, _, rx, rz = region_location(name)
+            if name in progress_paths(uid):
+                continue
+            _, _, rx, rz = region_location(name, dimensions)
             for x, z in slots(data, rx, rz):
                 t = chunk(record(data, x, z))
                 if (int(t["xPos"]), int(t["zPos"]), int(t["DataVersion"])) != (

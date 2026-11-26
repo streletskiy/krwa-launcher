@@ -518,5 +518,61 @@
   "Увеличить минимум памяти": {
     "en_US": "Increase minimum memory",
     "pl_PL": "Zwiększ minimum pamięci"
+  },
+  "Поддерживаемые блоки, предметы, опыт, достижения и прогресс квестов возвращаются на сервер. Спорные изменения проверяет администратор.": {
+    "en_US": "Supported blocks, items, XP, advancements and quest progress sync to the server. An admin reviews conflicting changes.",
+    "pl_PL": "Obsługiwane bloki, przedmioty, doświadczenie, postępy i zadania wracają na serwer. Administrator sprawdza konflikty."
+  },
+  "Одиночная игра": {
+    "en_US": "Singleplayer",
+    "pl_PL": "Gra jednoosobowa"
+  },
+  "Запустить мир после загрузки?": {
+    "en_US": "Start the world after downloading?",
+    "pl_PL": "Uruchomić świat po pobraniu?"
+  },
+  "Только подготовить": {
+    "en_US": "Download only",
+    "pl_PL": "Tylko pobierz"
+  },
+  "Подготовить и играть": {
+    "en_US": "Download and play",
+    "pl_PL": "Pobierz i graj"
+  },
+  "Мир со всеми измерениями готов к игре.": {
+    "en_US": "The world and its dimensions are ready to play.",
+    "pl_PL": "Świat ze wszystkimi wymiarami jest gotowy do gry."
+  },
+  "Доступен весь мир со всеми измерениями. Перед загрузкой выйдите с сервера.": {
+    "en_US": "The entire world is available with all dimensions. Leave the server before downloading.",
+    "pl_PL": "Dostępny jest cały świat ze wszystkimi wymiarami. Przed pobraniem opuść serwer."
+  },
+  "Файлы игры отсутствуют. Подключитесь к сети и подготовьте сборку.": {
+    "en_US": "Game files are missing. Connect to the network and prepare the profile.",
+    "pl_PL": "Brak plików gry. Połącz się z siecią i przygotuj profil."
+  },
+  "Доступна одиночная игра с установленной сборкой.": {
+    "en_US": "You can play singleplayer using the installed profile.",
+    "pl_PL": "Możesz grać samodzielnie na zainstalowanym profilu."
+  },
+  "Играть в отдельной копии": {
+    "en_US": "Play a separate copy",
+    "pl_PL": "Graj na osobnej kopii"
+  },
+  "Отправленная поездка сохранена. Отдельная копия доступна для одиночной игры.": {
+    "en_US": "Your submitted trip is saved. You can play a separate singleplayer copy.",
+    "pl_PL": "Wysłana wyprawa została zapisana. Możesz grać na osobnej kopii."
+  },
+  "Проверить подключение": {
+    "en_US": "Retry connection",
+    "pl_PL": "Sprawdź połączenie"
+  },
+  "Сервер входа недоступен или требуется повторный вход.": {
+    "en_US": "Sign-in is unavailable or your account needs to sign in again.",
+    "pl_PL": "Logowanie jest niedostępne lub musisz zalogować się ponownie."
+  },
+  "Войти снова": {
+    "en_US": "Sign in again",
+    "pl_PL": "Zaloguj ponownie"
   }
 }

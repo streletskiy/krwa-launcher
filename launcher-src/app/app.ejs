@@ -56,6 +56,14 @@
         <%- include('waiting') %>
         <%- include('loginOptions') %>
         <%- include('settings') %>
+    <section id="trip-panel" class="krwa-trip-panel" role="dialog" aria-modal="true" hidden aria-labelledby="trip-title">
+        <h2 id="trip-title"><%= native('Офлайн-мир') %></h2>
+        <p id="trip-status" role="status" aria-live="polite"></p>
+        <progress id="trip-progress" hidden aria-labelledby="trip-status"></progress>
+        <div id="trip-actions"></div>
+        <details><summary><%= native('Что переносится на сервер') %></summary><p class="trip-scope"><%= native('Поддерживаемые блоки, предметы, опыт, достижения и прогресс квестов возвращаются на сервер. Спорные изменения проверяет администратор.') %></p></details>
+        <button type="button" id="trip-close" class="settingsActionButton"><%= native('Назад') %></button>
+    </section>
         <%- include('landing') %>
     </div>
     <%- include('overlay') %>

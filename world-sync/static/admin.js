@@ -182,6 +182,7 @@ async function openTrip(id, name) {
     el('dimensions').hidden = !full
     map.classList.toggle('whole-world', full)
     if (full) {
+        dimensionControls(current.area.dimensions || Object.keys(dimensions))
         el('coordinates').textContent =
             'Весь мир · ' +
             current.changes.length +
@@ -273,13 +274,16 @@ function drawWorldTiles() {
         map.append(b)
     }
 }
-for (const [value, label] of Object.entries(dimensions)) {
-    const control = button(label, () => {
-        selectedDimension = value
-        changeDimension()
-    })
-    control.dataset.dimension = value
-    el('dimensions').append(control)
+function dimensionControls(values) {
+    el('dimensions').replaceChildren()
+    for (const value of values) {
+        const control = button(dimensions[value] || value, () => {
+            selectedDimension = value
+            changeDimension()
+        })
+        control.dataset.dimension = value
+        el('dimensions').append(control)
+    }
 }
 function changeDimension() {
     sliceRequest++
@@ -334,7 +338,7 @@ async function drawSlice(pos, dimension = 'minecraft:overworld') {
             await drawSlice([x, height, z], dimension)
         })
     el('slice-heading').textContent =
-        dimensions[dimension] + ' · Y ' + y + ' · чанк ' + cx + ', ' + cz
+        (dimensions[dimension] || dimension) + ' · Y ' + y + ' · чанк ' + cx + ', ' + cz
     const describe = (i) => {
         const values = image.layers.map((grid) =>
             image.palette[grid[i]].replace('minecraft:', ''),
@@ -433,7 +437,7 @@ function render() {
                 node(
                     'strong',
                     (c.pos
-                        ? dimensions[dimensionOf(c)] +
+                        ? (dimensions[dimensionOf(c)] || dimensionOf(c)) +
                           ' · X ' +
                           c.pos[0] +
                           ' · Y ' +
@@ -522,25 +526,10 @@ el('refresh').onclick = () =>
         await refresh()
         if (current) await openTrip(current.trip.id, current.name)
     })
-el('grant-scope').onchange = () => {
-    const full = el('grant-scope').value === 'world'
-    el('grant-x').disabled = el('grant-z').disabled = full
-    el('grant-x').closest('label').hidden = el('grant-z').closest('label').hidden = full
-    el('world-note').hidden = !full
-}
 el('grant').onsubmit = (e) => {
     e.preventDefault()
     run(async () => {
-        const scope = el('grant-scope').value,
-            x = scope === 'parcel' && el('grant-x').value,
-            z = scope === 'parcel' && el('grant-z').value
-        if (Boolean(x) !== Boolean(z))
-            throw Error('Укажите обе координаты участка.')
-        await request('/grant', {
-            name: el('grant-name').value.trim(),
-            scope,
-            ...(x ? { x: Number(x), z: Number(z) } : {}),
-        })
+        await request('/grant', { name: el('grant-name').value.trim(), scope: 'world' })
         el('grant-name').value = ''
         await refresh()
     })

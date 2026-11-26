@@ -51,8 +51,8 @@ function onDistroLoad(data){
 }
 
 // Ensure Distribution is downloaded and cached.
-const localFirst = require('./offlineworld').prepared(ConfigManager) || !globalThis.navigator.onLine
-;(localFirst ? DistroAPI.getDistributionLocalLoadOnly() : DistroAPI.getDistribution())
+DistroAPI.getDistributionLocalLoadOnly()
+    .catch(() => DistroAPI.getDistribution())
     .then(heliosDistro => {
         logger.info('Loaded distribution index.')
 

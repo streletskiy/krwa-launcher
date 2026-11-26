@@ -212,6 +212,10 @@ document.getElementById('launch_button').addEventListener('click', async e => {
     if(document.getElementById('landingContainer').dataset.launching === 'true'){
         return
     }
+    if (!navigator.onLine || window.krwaSessionUnavailable) {
+        window.dispatchEvent(new Event('krwa-offline-play'))
+        return
+    }
     toggleLaunchArea(true)
     setLaunchIndeterminate(Lang.queryJS('landing.dlAsync.loadingServerInfo'))
     loggerLanding.info('Launching game..')

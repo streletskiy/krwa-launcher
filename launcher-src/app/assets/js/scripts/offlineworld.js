@@ -10,6 +10,9 @@
     const actions = document.getElementById('trip-actions')
     const opener = document.getElementById('trip-open')
     const close = document.getElementById('trip-close')
+    const meter = document.getElementById('trip-progress')
+    let returnFocus = opener
+    let localMenu = false
     let busy = false
     let generation = 0
     const statusText = {
@@ -42,6 +45,7 @@
         } catch (e) {
             message.textContent = e.message
         } finally {
+            meter.hidden = true
             busy = false
             for (const b of actions.children) b.disabled = b.dataset.network === 'true' && !navigator.onLine
             focusAction()
@@ -63,24 +67,36 @@
         )
             throw Error('Сначала закройте Minecraft.')
     }
-    async function launchLocal(c, local) {
+    async function launchLocal(c, local = null, independent = false) {
         idle()
-        if (local.stage !== 'ready')
-            throw Error('Эта поездка уже передаётся на сервер.')
+        if (local && !independent && local.stage !== 'ready') throw Error(Lang.native('Эта поездка уже передаётся на сервер.'))
         const distro = await DistroAPI.getDistributionLocalLoadOnly()
-        const server = distro.getServerById(PROFILE)
-        if (server.rawServer.version !== local.version)
-            throw Error(
-                'Установленная сборка изменилась. Сохранение доступно для отправки.',
-            )
-        const game = new ProcessBuilder(
-            server,
-            local.launch.versionData,
-            local.launch.modLoaderData,
-            { ...c.account, accessToken: 'offline' },
-            remote.app.getVersion(),
-            folderName(local.id),
-        )
+        const server = distro.getServerById(ConfigManager.getSelectedServer())
+        let launch = local?.launch
+        if (local && server.rawServer.version !== local.version) throw Error(Lang.native('Установленная сборка изменилась. Сохранение доступно для отправки.'))
+        const fs = require('node:fs/promises')
+        const path = require('node:path')
+        try {
+            await fs.access(ConfigManager.getJavaExecutable(server.rawServer.id))
+            if (local) await fs.access(path.join(c.saves, folderName(local.id), 'level.dat'))
+            if (!launch) {
+                const version = server.rawServer.minecraftVersion
+                const dir = path.join(ConfigManager.getCommonDirectory(), 'versions', version)
+                await fs.access(path.join(dir, version + '.jar'))
+                const versionData = JSON.parse(await fs.readFile(path.join(dir, version + '.json'), 'utf8'))
+                const processor = new DistributionIndexProcessor(ConfigManager.getCommonDirectory(), distro, server.rawServer.id)
+                launch = { versionData, modLoaderData: await processor.loadModLoaderVersionJson() }
+            }
+        } catch {
+            throw Error(Lang.native('Файлы игры отсутствуют. Подключитесь к сети и подготовьте сборку.'))
+        }
+        const world = local ? folderName(local.id) : true
+        let target = world
+        if (independent) {
+            target = await c.independentCopy(local)
+        }
+        const game = new ProcessBuilder(server, launch.versionData, launch.modLoaderData,
+            { ...c.account, accessToken: 'offline' }, remote.app.getVersion(), target)
         proc = game.build()
         toggleLaunchArea(true)
         message.textContent = 'Запускается локальный мир…'
@@ -101,7 +117,9 @@
         child.stderr?.resume()
         closePanel()
     }
-    async function prepare(c, trip) {
+    async function prepare(c, trip, playNow) {
+        meter.hidden = false
+        meter.removeAttribute('value')
         message.textContent = 'Проверяем Java, моды и файлы игры…'
         const server = (await DistroAPI.getDistribution()).getServerById(
             PROFILE,
@@ -139,6 +157,8 @@
             )
         message.textContent = 'Скачиваем и проверяем снимок…'
         await c.download(trip, launch, (done, total) => {
+            meter.max = total || 1
+            meter.value = done
             message.textContent =
                 'Скачиваем мир · ' +
                 Math.floor(done / 1048576) +
@@ -146,10 +166,25 @@
                 Math.ceil(total / 1048576) +
                 ' МиБ'
         })
-        await show(false)
+        meter.hidden = true
+        if (playNow && !panel.hidden) await launchLocal(c, await c.local())
+        else await show(false)
+    }
+    function prepareChoice(start) {
+        actions.replaceChildren()
+        message.textContent = Lang.native('Запустить мир после загрузки?')
+        add('Только подготовить', () => start(false), true)
+        add('Подготовить и играть', () => start(true), true)
+        actions.firstElementChild?.focus()
     }
     async function show(online = true) {
         const view = ++generation
+        if (localMenu && ConfigManager.getSelectedServer() !== PROFILE) {
+            actions.replaceChildren()
+            message.textContent = Lang.native('Доступна одиночная игра с установленной сборкой.')
+            add('Одиночная игра', () => launchLocal({ account: ConfigManager.getSelectedAccount() }))
+            return
+        }
         const c = client(),
             local = await c.local()
         if (view !== generation) return
@@ -157,7 +192,7 @@
         if (local?.stage === 'ready') {
             message.textContent =
                 local.area?.scope === 'world'
-                    ? 'Готово к полёту · обычный мир, Нижний мир и Край.'
+                    ? Lang.native('Мир со всеми измерениями готов к игре.')
                     : 'Готово к полёту · участок 80 × 80 блоков. Одиночная игра доступна без сети.'
             add('Играть офлайн', () => launchLocal(c, local))
         } else
@@ -183,10 +218,27 @@
                 },
                 true,
             )
-        if (!online || !navigator.onLine) {
+        if (localMenu || !online || !navigator.onLine) {
+            if (local && local.stage !== 'ready') {
+                add('Играть в отдельной копии', () => launchLocal(c, local, true))
+                message.textContent = Lang.native('Отправленная поездка сохранена. Отдельная копия доступна для одиночной игры.')
+            }
+            add('Одиночная игра', () => launchLocal(c))
+            if (!local && localMenu) message.textContent = Lang.native('Доступна одиночная игра с установленной сборкой.')
             if (!navigator.onLine && local?.stage === 'ready')
                 message.textContent = Lang.native('Мир сохранён на устройстве. Играйте без интернета. Отправка станет доступна после подключения.')
-            add('Проверить статус', () => show())
+            if (localMenu) {
+                add('Проверить подключение', async () => {
+                    if (await validateSelectedAccount()) {
+                        localMenu = false
+                        await show()
+                    } else message.textContent = Lang.native('Сервер входа недоступен или требуется повторный вход.')
+                }, true)
+                if (window.krwaSessionUnavailable) add('Войти снова', () => {
+                    closePanel()
+                    document.getElementById('settingsAddMojangAccount').click()
+                }, true)
+            } else add('Проверить статус', () => show(), true)
             return
         }
         try {
@@ -232,7 +284,7 @@
                     actions.replaceChildren()
                     message.textContent =
                         'Снимок готов. Скачайте его до отключения интернета.'
-                    add('Скачать для офлайна', () => prepare(c, t))
+                    add('Скачать для офлайна', () => prepareChoice(play => prepare(c, t, play)), true)
                 } else if (t.state !== 'ready') {
                     actions.replaceChildren()
                     message.textContent =
@@ -244,17 +296,17 @@
                     (t
                         ? statusText[t.state] + ' ' + (t.detail || '') + ' '
                         : '') +
-                    (data.scope === 'world'
-                        ? 'Доступен весь мир, включая Нижний мир и Край. Перед загрузкой выйдите с сервера.'
-                        : 'Перед поездкой выйдите из игры на разрешённом участке обычного мира (80 × 80 блоков).')
-                add('Скачать для офлайна', async () => {
+                    Lang.native('Доступен весь мир со всеми измерениями. Перед загрузкой выйдите с сервера.')
+                add('Скачать для офлайна', () => prepareChoice(async play => {
+                    meter.hidden = false
+                    meter.removeAttribute('value')
                     idle()
                     const distro =
                         await DistroAPI.refreshDistributionOrFallback()
                     const server = distro.getServerById(PROFILE)
                     let trip = await c.api('/trips', 'POST', {
                         version: server.rawServer.version,
-                        protocol: 2,
+                        protocol: 3,
                     })
                     const end = Date.now() + 240000
                     while (
@@ -269,39 +321,46 @@
                         trip = (await c.api('/me')).trip
                     }
                     if (trip?.state === 'ready' && !panel.hidden)
-                        await prepare(c, trip)
+                        await prepare(c, trip, play)
                     else if (!panel.hidden) await show()
-                })
+                }), true)
             }
         } catch (e) {
             if (view !== generation) return
             if (local?.stage !== 'ready') message.textContent = e.message
+            add('Одиночная игра', () => launchLocal(c))
         }
-        if (view === generation) add('Обновить статус', () => show())
+        if (view === generation && local && local.stage !== 'ready') add('Играть в отдельной копии', () => launchLocal(c, local, true))
+        if (view === generation && ![...actions.children].some(b => b.textContent === Lang.native('Одиночная игра'))) add('Одиночная игра', () => launchLocal(c))
+        if (view === generation) add('Обновить статус', () => show(), true)
     }
     function focusAction() {
         if (panel.hidden || busy) return
-        if (document.activeElement === close || document.activeElement === document.body)
+        if (document.activeElement === close || !panel.contains(document.activeElement))
             actions.querySelector('button:not(:disabled)')?.focus()
     }
     function refreshPanel() {
         if (panel.hidden || busy) return
         show().catch((e) => { message.textContent = e.message }).finally(focusAction)
     }
-    window.addEventListener('online', refreshPanel)
+    window.addEventListener('online', () => { localMenu = false; validateSelectedAccount(); refreshPanel() })
     window.addEventListener('offline', refreshPanel)
     function closePanel() {
         generation++
         panel.hidden = true
-        opener.focus()
+        returnFocus.focus()
     }
-    opener.onclick = () => {
+    function openPanel(offline) {
+        localMenu = offline
+        returnFocus = offline ? document.getElementById('launch_button') : opener
         if (proc) return
         panel.hidden = false
         close.focus()
         actions.replaceChildren()
         refreshPanel()
     }
+    opener.onclick = () => openPanel(false)
+    window.addEventListener('krwa-offline-play', () => openPanel(true))
     close.onclick = closePanel
     panel.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {

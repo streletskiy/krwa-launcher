@@ -25,7 +25,7 @@ from starlette.responses import Response, StreamingResponse
 from merge import can_skip_new, map_slice
 import worker
 import transfer
-from whole import DIMENSIONS
+from whole import DIMENSIONS, dimension_prefix
 from parcel import MAX_UPLOAD, get_player, validate_upload
 from store import HOME, audit, db, init, public
 
@@ -161,7 +161,7 @@ def me(uid=Depends(player)):
         ).fetchone()
     return {
         "access": a[0] if a else "none",
-        "scope": a[1] if a else "parcel",
+        "scope": "world",
         "trip": public(t),
     }
 
@@ -187,10 +187,9 @@ async def request_access(uid=Depends(player)):
     if result.status_code != 200:
         raise HTTPException(503, "Профиль временно недоступен.")
     with db() as con:
-        cx, cz = player_center(uid)
         con.execute(
-            "INSERT OR IGNORE INTO access(uid,name,state,updated,cx,cz) VALUES(?,?, 'pending',?,?,?)",
-            (uid, result.json()["name"], int(time.time()), cx, cz),
+            "INSERT OR IGNORE INTO access(uid,name,state,updated,scope) VALUES(?,?, 'pending',?,'world')",
+            (uid, result.json()["name"], int(time.time())),
         )
         audit(con, uid, "requested", uid)
     return me(uid)
@@ -206,11 +205,7 @@ def start(body: Start, uid=Depends(player)):
     with db() as con:
         con.execute("BEGIN IMMEDIATE")
         check_access(con, uid)
-        if (
-            con.execute("SELECT scope FROM access WHERE uid=?", (uid,)).fetchone()[0]
-            == "world"
-            and body.protocol < 2
-        ):
+        if body.protocol < 3:
             raise HTTPException(409, "Обновите лаунчер для загрузки полного мира.")
         existing = con.execute(
             "SELECT * FROM trips WHERE uid=? AND state NOT IN ('closed','done','failed')",
@@ -297,13 +292,14 @@ class Transfer(BaseModel):
 
 @app.post(API + "/trips/{trip}/transfer")
 def begin_transfer(trip: uuid.UUID, body: Transfer, uid=Depends(player)):
-    try:
-        key, parts, total = transfer.manifest(body.files)
-    except ValueError as exc:
-        raise HTTPException(422, str(exc)) from exc
     with db() as con:
         con.execute("BEGIN IMMEDIATE")
         row, folder = whole_trip(con, trip.hex, uid)
+        dimensions = json.loads((folder / "area.json").read_text())["dimensions"]
+        try:
+            key, parts, total = transfer.manifest(body.files, uid, dimensions)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
         if row["state"] != "ready":
             if row["digest"] == key:
                 return {"key": key, "complete": True}
@@ -340,7 +336,7 @@ async def upload_part(
 ):
     with db() as con:
         stage, files = pending(con, trip, uid, key)
-    parts = transfer.manifest(files)[1]
+    parts = transfer.manifest(files, uid)[1]
     if not 0 <= index < len(parts):
         raise HTTPException(404)
     h, size = parts[index]
@@ -380,7 +376,10 @@ async def finish_transfer(trip: uuid.UUID, key: str, uid=Depends(player)):
     temp = folder / (uuid.uuid4().hex + ".zip.part")
     try:
         try:
-            await asyncio.to_thread(transfer.assemble, stage, files, temp)
+            dimensions = json.loads((folder / "area.json").read_text())["dimensions"]
+            await asyncio.to_thread(
+                transfer.assemble, stage, files, temp, uid, dimensions
+            )
         except (ValueError, KeyError, OSError, TypeError) as exc:
             raise HTTPException(
                 422, "Отправка неполна или содержит повреждённые чанки."
@@ -489,16 +488,16 @@ def dashboard(actor=Depends(admin), profile: str | None = None, inbox: bool = Fa
         trips_sql += " ORDER BY t.rowid DESC"
         if not profile and not inbox:
             trips_sql += " LIMIT 100"
-        users = [dict(x) for x in con.execute(users_sql + " ORDER BY updated DESC", args)]
+        users = [
+            dict(x) for x in con.execute(users_sql + " ORDER BY updated DESC", args)
+        ]
         trips = [dict(x) for x in con.execute(trips_sql, args)]
     return {"users": users, "trips": trips}
 
 
 class Grant(BaseModel):
     name: str
-    scope: Literal["parcel", "world"] = "parcel"
-    x: int | None = None
-    z: int | None = None
+    scope: Literal["world"] = "world"
 
 
 @app.post(API + "/admin/grant")
@@ -513,20 +512,7 @@ async def grant(body: Grant, actor=Depends(admin)):
         raise HTTPException(404, "Такой профиль KRWA не найден.")
     profile = response.json()[0]
     uid = uuid.UUID(profile["id"]).hex
-    if (body.x is None) != (body.z is None):
-        raise HTTPException(400, "Укажите X и Z.")
-    if body.scope == "world":
-        cx, cz = None, None
-    elif body.x is None:
-        cx, cz = player_center(uid)
-    else:
-        if max(abs(body.x), abs(body.z)) > 29999900:
-            raise HTTPException(400, "Координаты вне мира.")
-        cx, cz = body.x // 16, body.z // 16
-    if cx is None and body.scope == "parcel":
-        raise HTTPException(
-            400, "Введите координаты разрешённого участка в обычном мире."
-        )
+    cx, cz = None, None
     with worker.MUTEX, db() as con:
         con.execute("BEGIN IMMEDIATE")
         active = con.execute(
@@ -549,16 +535,6 @@ def decide_access(profile: uuid.UUID, decision: str, actor=Depends(admin)):
         raise HTTPException(400)
     uid = profile.hex
     with worker.MUTEX, db() as con:
-        if decision == "allowed":
-            parcel = con.execute(
-                "SELECT cx,cz,scope FROM access WHERE uid=?", (uid,)
-            ).fetchone()
-            if not parcel or (
-                parcel[2] == "parcel" and (parcel[0] is None or parcel[1] is None)
-            ):
-                raise HTTPException(
-                    400, "Укажите ник и координаты участка в форме выдачи доступа."
-                )
         if not con.execute(
             "UPDATE access SET state=?,updated=? WHERE uid=?",
             (decision, int(time.time()), uid),
@@ -607,7 +583,7 @@ def preview_map(
     if not (folder / "live.zip").is_file() or not -64 <= y <= 319:
         raise HTTPException(404)
     meta = json.loads((folder / "area.json").read_text())
-    if dimension not in DIMENSIONS:
+    if dimension not in meta.get("dimensions", DIMENSIONS):
         raise HTTPException(404)
     if meta.get("scope") == "world":
         changes = json.loads((folder / "changes.json").read_text(encoding="utf-8"))
@@ -626,7 +602,7 @@ def preview_map(
         x,
         z,
         y,
-        DIMENSIONS[dimension],
+        dimension_prefix(dimension),
     )
 
 
