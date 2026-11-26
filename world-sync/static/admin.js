@@ -28,6 +28,7 @@ const kinds = {
     chunk: 'Данные чанка',
     new_chunk: 'Новый чанк',
     Inventory: 'Инвентарь',
+    player_position: 'Позиция игрока',
     EnderItems: 'Эндер-сундук',
     XpLevel: 'Уровень опыта',
     XpP: 'Прогресс уровня',

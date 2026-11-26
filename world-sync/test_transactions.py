@@ -308,6 +308,69 @@ class TransactionTest(unittest.TestCase):
         self.assertNotEqual(self.fixture.file.read_bytes(), self.fixture.initial)
         self.assertIn("архиве", self.state()["detail"])
 
+    def test_automatic_return_uses_offline_position_and_keeps_overlapping_online_blocks(
+        self,
+    ):
+        import gzip
+        import zipfile
+        import nbtlib
+        from anvil import blocks, chunk, encode, level_data, record, sections
+        from whole import export_whole
+        from parcel import get_player, player_file
+
+        nether = self.root / "DIM-1" / self.fixture.rel
+        nether.parent.mkdir(parents=True)
+        nether.write_bytes(self.fixture.initial)
+        base = self.job / "base.zip"
+        base.unlink()
+        meta = export_whole(self.root, self.uid, "QA", base)
+        meta["mergePolicy"] = "automatic"
+        self.store.write_json(self.job / "area.json", meta)
+        with (
+            zipfile.ZipFile(base) as src,
+            zipfile.ZipFile(self.job / "upload.zip", "w") as out,
+        ):
+            level = level_data(src.read("level.dat"))
+            dest = level["Data"]["Player"]
+            dest["Dimension"] = nbtlib.String("minecraft:the_nether")
+            dest["Pos"] = nbtlib.List[nbtlib.Double]([-6.25, 4, 3.5])
+            dest["Rotation"] = nbtlib.List[nbtlib.Float]([43, -12])
+            out.writestr("level.dat", gzip.compress(encode(level)))
+            out.writestr(
+                self.fixture.rel,
+                self.fixture.edit(
+                    self.fixture.initial, {0: "minecraft:stone", 1: "minecraft:bricks"}
+                ),
+            )
+        online = get_player(self.root, self.uid)
+        online["Pos"] = nbtlib.List[nbtlib.Double]([-12, 3, 5])
+        online["FallDistance"] = nbtlib.Float(8)
+        player_file(self.root, self.uid).write_bytes(gzip.compress(encode(online)))
+        self.fixture.file.write_bytes(
+            self.fixture.edit(self.fixture.initial, {0: "minecraft:dirt"})
+        )
+        self.store.set_state(self.tid, "submitted")
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "done")
+        returned = get_player(self.root, self.uid)
+        for key in ("Dimension", "Pos", "Rotation"):
+            self.assertEqual(returned[key], dest[key])
+        self.assertEqual(float(returned["FallDistance"]), 0)
+        terrain = blocks(
+            sections(chunk(record(self.fixture.file.read_bytes(), -1, 0)))[0]
+        )
+        self.assertEqual(terrain[:2], ["minecraft:dirt", "minecraft:bricks"])
+        self.assertEqual(
+            len(
+                [
+                    c
+                    for c in json.loads((self.job / "changes.json").read_text("utf8"))
+                    if c["kind"] == "player_position"
+                ]
+            ),
+            1,
+        )
+
     def test_auto_merge_keeps_live_conflict(self):
         self.fixture.upload_edits({0: "minecraft:stone", 1: "minecraft:bricks"})
         data = self.fixture.upload.read_bytes()

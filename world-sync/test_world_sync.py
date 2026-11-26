@@ -193,6 +193,34 @@ class TripMergeTest(unittest.TestCase):
             chunk(record(writes[self.rel], -1, 0))["block_entities"][0], new
         )
 
+        auto, writes = plan(
+            self.root,
+            self.uid,
+            {**self.meta, "mergePolicy": "automatic", "choices": set()},
+            self.base,
+            self.upload,
+        )
+        self.assertEqual([c["mode"] for c in auto], ["auto", "auto"])
+        self.assertEqual(len(writes), 2)
+
+    def test_return_requires_a_saved_destination_and_finite_coordinates(self):
+        from merge import return_position
+        from parcel import get_player
+
+        original = get_player(self.root, self.uid)
+        live = get_player(self.root, self.uid)
+        incoming = get_player(self.root, self.uid)
+        meta = {"dimensions": ["minecraft:overworld", "minecraft:the_end"]}
+        incoming["Dimension"] = nbtlib.String("minecraft:the_end")
+        self.assertEqual(
+            return_position(self.root, meta, original, live, incoming)["mode"], "manual"
+        )
+        self.assertEqual(live, original)
+        incoming["Pos"][0] = nbtlib.Double(float("nan"))
+        with self.assertRaises(ValueError):
+            return_position(self.root, meta, original, live, incoming)
+        self.assertEqual(live, original)
+
     def test_conflict_and_unsupported_edits(self):
         self.upload_edits({0: "minecraft:stone", 2: "minecraft:command_block"})
         self.file.write_bytes(self.edit(self.initial, {0: "minecraft:bricks"}))

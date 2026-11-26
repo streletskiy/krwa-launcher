@@ -3,6 +3,7 @@
 import contextlib
 import gzip
 import hashlib
+import math
 import re
 import zipfile
 from collections import defaultdict
@@ -320,14 +321,23 @@ def plan(
             if c["kind"] in {"Inventory", "container"} or c.get("review_loot")
         ]
         unsupported = any(c["mode"] == "manual" for c in group)
+        compatible = meta.get("mergePolicy") == "automatic" and all(
+            c["mode"] == "auto" for c in group
+        )
         keys = set()
         for change in group:
             change["group"] = "loot"
-            change["mode"] = "manual" if unsupported else "conflict"
+            change["mode"] = (
+                "manual" if unsupported else "auto" if compatible else "conflict"
+            )
             keys.add(
                 conflict_key(change["kind"], change["pos"], change.get("dimension"))
             )
-        if "choices" in meta and (unsupported or not keys.issubset(meta["choices"])):
+        if (
+            not compatible
+            and "choices" in meta
+            and (unsupported or not keys.issubset(meta["choices"]))
+        ):
             # An inventory gain and its source must be excluded together, even
             # when the underlying inventory was otherwise eligible for auto merge.
             _, writes = compare({**meta, "keep_items": True})
@@ -352,6 +362,82 @@ def _plan(
     )
 
 
+def return_position(root, meta, original, live, incoming):
+    from whole import dimension_prefix
+
+    def coordinates(player):
+        dimension = player.get("Dimension")
+        pos = player.get("Pos")
+        rotation = player.get("Rotation")
+        if (
+            not isinstance(dimension, nbtlib.String)
+            or not isinstance(pos, nbtlib.List[nbtlib.Double])
+            or len(pos) != 3
+        ):
+            raise ValueError("Некорректная позиция игрока.")
+        if rotation is not None and (
+            not isinstance(rotation, nbtlib.List[nbtlib.Float]) or len(rotation) != 2
+        ):
+            raise ValueError("Некорректный поворот игрока.")
+        if not all(
+            math.isfinite(float(n))
+            for n in [*pos, *(rotation if rotation is not None else [])]
+        ):
+            raise ValueError("Некорректные координаты игрока.")
+        return (
+            str(dimension),
+            tuple(map(float, pos)),
+            tuple(map(float, rotation)) if rotation is not None else (),
+        )
+
+    before, online, destination = map(coordinates, (original, live, incoming))
+    if online == destination:
+        return None
+    dim, (x, y, z), rotation = destination
+    valid = (
+        dim in meta["dimensions"]
+        and abs(x) < 29999984
+        and abs(z) < 29999984
+        and -2048 <= y < 2048
+        and (not rotation or abs(rotation[1]) <= 90)
+        and not live.get("RootVehicle")
+        and not incoming.get("RootVehicle")
+    )
+    if valid:
+        cx, cz = math.floor(x) // 16, math.floor(z) // 16
+        rel = dimension_prefix(dim) + region_name(cx, cz)
+        raw = record(read_region(root, rel), cx, cz)
+        valid = raw is not None and str(chunk(raw).get("Status")) in {
+            "full",
+            "minecraft:full",
+        }
+    if valid:
+        for field in ("Dimension", "Pos", "Rotation"):
+            if field in incoming:
+                live[field] = incoming[field]
+        live["Motion"] = nbtlib.List[nbtlib.Double]([0, 0, 0])
+        live["FallDistance"] = nbtlib.Float(0)
+
+    def label(value):
+        dim, xyz, angles = value
+        return (
+            dim
+            + " · "
+            + " ".join(f"{n:.2f}" for n in xyz)
+            + (" · " + " / ".join(f"{n:.1f}°" for n in angles) if angles else "")
+        )
+
+    return dict(
+        kind="player_position",
+        pos=None,
+        mode="auto" if valid else "manual",
+        before=label(before),
+        live=label(online),
+        after=label(destination),
+        revision=hashlib.sha256(repr((online, destination)).encode()).hexdigest(),
+    )
+
+
 def plan_records(root, uid, meta, base, offline, live_path=None):
     prefix = meta.get("prefix", "")
     originals, replacements, changes = {}, defaultdict(dict), []
@@ -367,6 +453,11 @@ def plan_records(root, uid, meta, base, offline, live_path=None):
     if text_tag(before_player.get("UUID")) != text_tag(after_player.get("UUID")):
         raise ValueError("Персонаж в сохранении не совпадает с исходным снимком.")
     player_dirty = False
+    if meta.get("return_player"):
+        position = return_position(root, meta, before_player, player, after_player)
+        if position:
+            changes.append(position)
+            player_dirty = position["mode"] == "auto"
     for field in FIELDS:
         a, b, c = (p.get(field) for p in (before_player, player, after_player))
         if text_tag(a) == text_tag(c):
@@ -378,7 +469,7 @@ def plan_records(root, uid, meta, base, offline, live_path=None):
             valid = inventory_safe(a, c, field == "EnderItems")
             if not valid:
                 valid = inventory_safe(a, c, field == "EnderItems", reviewed=True)
-                needs_review = valid
+                needs_review = valid and meta.get("mergePolicy") != "automatic"
         elif valid:
             number = float(c)
             valid = 0 <= number <= (1 if field == "XpP" else 2147483647)
@@ -521,7 +612,9 @@ def plan_records(root, uid, meta, base, offline, live_path=None):
                         original,
                         original,
                         projected_inventory(new["Items"]),
-                        "conflict",
+                        "auto"
+                        if meta.get("mergePolicy") == "automatic"
+                        else "conflict",
                     )
                     changes[-1]["review_loot"] = True
                     changes[-1]["revision"] = hashlib.sha256(
@@ -670,7 +763,11 @@ def plan_whole(
             else None
         )
         changes, writes = plan_records(
-            root, uid, meta, original, {"level.dat": incoming_level}
+            root,
+            uid,
+            {**meta, "return_player": meta.get("mergePolicy") == "automatic"},
+            original,
+            {"level.dat": incoming_level},
         )
         from vehicles import REMOVED, location, current_files, plan_entities
         from assemblies import plan as plan_assemblies

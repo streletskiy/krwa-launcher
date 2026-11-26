@@ -113,6 +113,7 @@ def snapshot(trip, access, craft, job):
             current = meta["files"]
             if current == previous:
                 os.replace(candidate, job / "base.zip")
+                meta["mergePolicy"] = "automatic"
                 write_json(job / "area.json", meta)
                 set_state(trip["id"], "ready")
                 return
@@ -238,6 +239,11 @@ def _process(trip, craft, report):
         ):
             meta = json.loads((job / "area.json").read_text())
             selection = trip["selection"] if trip["state"] == "approved" else None
+            automatic = (
+                trip["state"] == "submitted" and meta.get("mergePolicy") == "automatic"
+            )
+            if automatic:
+                meta["choices"] = set()
             if selection is not None:
                 meta["choices"] = set(json.loads(selection))
             report("player")
@@ -283,7 +289,21 @@ def _process(trip, craft, report):
             approved = trip["state"] == "approved" and fingerprint == trip["review"]
             skip_new = approved and trip["skip_new"] and can_skip_new(changes)
             selective = selection is not None and approved
-            if (
+            # Terrain conflicts retain the online block. Unrecognized block ticks stay
+            # in the archive. A contested inventory or transport still needs a decision.
+            auto_finish = (
+                automatic
+                and (not changes or any(c["mode"] == "auto" for c in changes))
+                and all(
+                    c["mode"] == "auto"
+                    or (
+                        c["kind"] in {"block", "block_entity"}
+                        and not c.get("review_loot")
+                    )
+                    for c in changes
+                )
+            )
+            if not auto_finish and (
                 (selection is not None and not approved)
                 or (unsupported and not skip_new and not selective)
                 or (conflicts and not approved)
@@ -322,6 +342,8 @@ def _process(trip, craft, report):
                         (
                             f"Применено совместимых изменений: {sum(c['mode'] == 'auto' for c in changes)}, выбранных конфликтов: {len(meta['choices'])}. Остальные изменения сохранены в архиве."
                             if selective
+                            else f"Автоматически применено: {sum(c['mode'] == 'auto' for c in changes)}. Сохранено в архиве без переноса: {sum(c['mode'] != 'auto' for c in changes)}."
+                            if auto_finish
                             else "Новые чанки оставлены в архиве для ручного переноса."
                             if skip_new
                             else "",
