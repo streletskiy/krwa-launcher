@@ -75,7 +75,7 @@ services:
       - ./repository:/repository:ro
 
   auth:
-    image: "${PORTAL_IMAGE:-ghcr.io/streletskiy/krwa-mc-portal:sha-27c628fba85a23b902a2f68092bfe6dc93955426}"
+    image: "${PORTAL_IMAGE:-ghcr.io/streletskiy/krwa-mc-portal:sha-e63c316a26f582f6e2d11b0c4610e7380e23dada}"
     restart: always
     environment:
       ASTER__SERVER__HOST: 0.0.0.0
