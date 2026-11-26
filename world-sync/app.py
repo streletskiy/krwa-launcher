@@ -472,17 +472,25 @@ def assets(name: str):
 
 
 @app.get(API + "/admin")
-def dashboard(actor=Depends(admin)):
+def dashboard(actor=Depends(admin), profile: str | None = None, inbox: bool = False):
     with db() as con:
-        users = [
-            dict(x) for x in con.execute("SELECT * FROM access ORDER BY updated DESC")
-        ]
-        trips = [
-            dict(x)
-            for x in con.execute(
-                "SELECT t.*,a.name FROM trips t JOIN access a USING(uid) ORDER BY t.rowid DESC LIMIT 100"
-            )
-        ]
+        if profile is not None and not re.fullmatch(r"[a-fA-F0-9]{32}", profile):
+            raise HTTPException(400, "Invalid profile")
+        users_sql = "SELECT * FROM access"
+        trips_sql = "SELECT t.*,a.name FROM trips t JOIN access a USING(uid)"
+        args = ()
+        if profile:
+            users_sql += " WHERE uid=?"
+            trips_sql += " WHERE t.uid=?"
+            args = (profile.lower(),)
+        elif inbox:
+            users_sql += " WHERE state='pending'"
+            trips_sql += " WHERE t.state='review'"
+        trips_sql += " ORDER BY t.rowid DESC"
+        if not profile and not inbox:
+            trips_sql += " LIMIT 100"
+        users = [dict(x) for x in con.execute(users_sql + " ORDER BY updated DESC", args)]
+        trips = [dict(x) for x in con.execute(trips_sql, args)]
     return {"users": users, "trips": trips}
 
 

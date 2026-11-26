@@ -1,6 +1,6 @@
 {
     const { findInDirection, readGamepad } = require('./assets/js/gamepad')
-    const focusable = 'button, a[href], input:not([type="hidden"]), select, textarea, [tabindex]'
+    const focusable = 'button, a[href], input:not([type="hidden"]), select, textarea, summary, [tabindex]'
     const textField = 'input:not([readonly]):is([type="text"], [type="password"], [type="email"], [type="search"], [type="number"], [type="url"], [type="tel"], :not([type])), textarea:not([readonly])'
     const hints = document.getElementById('gamepadHints')
     const deck = Boolean(document.body.dataset.steamDeck)
@@ -24,7 +24,7 @@
         if (loading.checkVisibility()) return []
         if (!menu.hidden) return Array.from(menu.querySelectorAll('button')).filter(isVisible)
         const trip = document.getElementById('trip-panel')
-        if (trip && !trip.hidden) return Array.from(trip.querySelectorAll('button')).filter(isVisible)
+        if (trip && !trip.hidden) return Array.from(trip.querySelectorAll(focusable)).filter(isVisible)
         const view = getCurrentView()
         if (!view) return []
         const selector = `${view} :is(${focusable}), #launcherLanguageButton`
@@ -110,7 +110,11 @@
             if (state.back && !previous.back) back(elements)
             else if (state.keyboard && !previous.keyboard) activate(elements, true)
             else if (state.select && !previous.select) activate(elements)
-            else if (state.tab && state.tab !== previous.tab) {
+            else if (state.cycle && state.cycle !== previous.cycle && elements.length) {
+                const current = elements.indexOf(document.activeElement)
+                const start = current < 0 && state.cycle < 0 ? 0 : current
+                focusControl(elements[(start + state.cycle + elements.length) % elements.length])
+            } else if (state.tab && state.tab !== previous.tab) {
                 if (getCurrentView() === VIEWS.settings && !isOverlayVisible()) {
                     const tabs = elements.filter(el => el.matches('.settingsNavItem'))
                     const selected = tabs.findIndex(el => el.hasAttribute('selected'))

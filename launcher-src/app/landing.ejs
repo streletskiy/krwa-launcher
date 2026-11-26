@@ -99,11 +99,11 @@
             </div>
         </div>
     </div>
-    <section id="trip-panel" class="krwa-trip-panel" hidden aria-labelledby="trip-title">
+    <section id="trip-panel" class="krwa-trip-panel" role="dialog" aria-modal="true" hidden aria-labelledby="trip-title">
         <h2 id="trip-title"><%= native('Офлайн-мир') %></h2>
         <p id="trip-status" role="status" aria-live="polite"></p>
-        <p class="trip-scope"><%= native('Переносятся поддерживаемые блоки, предметы и опыт. Квесты, мобы и движущиеся машины остаются в локальной копии.') %></p>
         <div id="trip-actions"></div>
+        <details><summary><%= native('Что переносится на сервер') %></summary><p class="trip-scope"><%= native('Переносятся поддерживаемые блоки, предметы и опыт. Квесты, мобы и движущиеся машины остаются в локальной копии.') %></p></details>
         <button type="button" id="trip-close" class="settingsActionButton"><%= native('Назад') %></button>
     </section>
     <script src="./assets/js/scripts/landing.js"></script>

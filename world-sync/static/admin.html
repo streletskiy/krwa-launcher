@@ -15,6 +15,8 @@
             </nav>
             <h1>Офлайн-миры</h1>
             <p role="status" id="status"></p>
+            <section id="auth-state" hidden><h2 id="auth-title">Войдите как администратор</h2><a id="login-link" href="/login">Войти</a></section>
+            <div id="workspace" hidden>
             <section>
                 <h2>Доступ игроков</h2>
                 <form id="grant">
@@ -43,9 +45,9 @@
                             type="number"
                             placeholder="из сохранения"
                     /></label>
-                    <button>Разрешить доступ</button>
+
+                <p id="world-note" hidden>Игрок получит зерно мира, сохранённые территории, постройки и содержимое контейнеров во всех трёх измерениях.</p><button>Разрешить доступ</button>
                 </form>
-                <p id="world-note" hidden>Игрок получит зерно мира, сохранённые территории, постройки и содержимое контейнеров во всех трёх измерениях.</p>
                 <div id="users"></div>
             </section>
             <section>
@@ -55,10 +57,11 @@
             <section id="review" hidden>
                 <h2 id="review-title">Сравнение</h2>
                 <p id="coordinates"></p>
+                <div id="dimensions" role="group" aria-label="Измерение" hidden></div>
                 <div class="layout">
                     <div>
                         <h3>Карта изменений</h3>
-                        <select id="dimension" aria-label="Измерение" hidden><option value="minecraft:overworld">Обычный мир</option><option value="minecraft:the_nether">Нижний мир</option><option value="minecraft:the_end">Край</option></select>
+                        
                         <div id="map"></div>
                         <small
                             >Север ↑ · один квадрат — чанк 16 × 16 блоков</small
@@ -103,6 +106,7 @@
                     ><button id="cancel">Отмена</button>
                 </div>
             </section>
+            </div>
         </main>
     </body>
 </html>

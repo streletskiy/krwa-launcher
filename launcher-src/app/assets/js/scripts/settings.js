@@ -20,6 +20,7 @@ function bindSettingsSelect(){
             closeSettingsSelect(e.target)
             e.target.nextElementSibling.toggleAttribute('hidden')
             e.target.classList.toggle('select-arrow-active')
+            e.target.setAttribute('aria-expanded', String(!e.target.nextElementSibling.hidden))
         }
     }
 }
@@ -31,6 +32,7 @@ function closeSettingsSelect(el){
 
         if(!(selectedDiv === el)) {
             selectedDiv.classList.remove('select-arrow-active')
+            selectedDiv.setAttribute('aria-expanded', 'false')
             optionsDiv.setAttribute('hidden', '')
         }
     }
@@ -1042,8 +1044,9 @@ function setShadersOptions(arr, selected){
     const cont = document.getElementById('settingsShadersOptions')
     cont.innerHTML = ''
     for(let opt of arr) {
-        const d = document.createElement('DIV')
-        d.innerHTML = opt.name
+        const d = document.createElement('button')
+        d.type = 'button'
+        d.textContent = opt.name
         d.setAttribute('value', opt.fullName)
         if(opt.fullName === selected) {
             d.setAttribute('selected', '')
@@ -1282,6 +1285,27 @@ function bindRangeSlider(){
 
         // Set the initial slider value.
         const value = v.getAttribute('value')
+        if (!v.parentElement.querySelector('.memory-steps')) {
+            const steps = document.createElement('span')
+            steps.className = 'memory-steps'
+            for (const direction of [-1, 1]) {
+                const button = document.createElement('button')
+                button.type = 'button'
+                button.textContent = direction < 0 ? '−' : '+'
+                const maximum = v.id === 'settingsMaxRAMRange'
+                const label = direction < 0
+                    ? (maximum ? 'Уменьшить максимум памяти' : 'Уменьшить минимум памяти')
+                    : (maximum ? 'Увеличить максимум памяти' : 'Увеличить минимум памяти')
+                button.setAttribute('aria-label', Lang.native(label))
+                button.onclick = () => {
+                    const meta = calculateRangeSliderMeta(v)
+                    const value = Math.max(meta.min, Math.min(meta.max, Number(v.getAttribute('value')) + direction * meta.step))
+                    updateRangedSlider(v, value, (value - meta.min) / meta.step * meta.inc)
+                }
+                steps.append(button)
+            }
+            v.parentElement.append(steps)
+        }
         const sliderMeta = calculateRangeSliderMeta(v)
 
         updateRangedSlider(v, value, ((value-sliderMeta.min)/sliderMeta.step)*sliderMeta.inc)

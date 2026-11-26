@@ -23,12 +23,14 @@
         closed: 'Поездка закрыта. Локальная копия сохранена.',
         failed: 'Сервер не смог обработать поездку.',
     }
-    function add(label, job) {
+    function add(label, job, needsNetwork = false) {
         const button = document.createElement('button')
         button.type = 'button'
         button.className = 'settingsActionButton'
         button.textContent = Lang.native(label)
         button.onclick = () => execute(job)
+        button.dataset.network = String(needsNetwork)
+        button.disabled = busy || (needsNetwork && !navigator.onLine)
         actions.append(button)
     }
     async function execute(job) {
@@ -41,7 +43,8 @@
             message.textContent = e.message
         } finally {
             busy = false
-            for (const b of actions.children) b.disabled = false
+            for (const b of actions.children) b.disabled = b.dataset.network === 'true' && !navigator.onLine
+            focusAction()
         }
     }
     function client() {
@@ -178,8 +181,11 @@
                     }
                     await show()
                 },
+                true,
             )
         if (!online || !navigator.onLine) {
+            if (!navigator.onLine && local?.stage === 'ready')
+                message.textContent = Lang.native('Мир сохранён на устройстве. Играйте без интернета. Отправка станет доступна после подключения.')
             add('Проверить статус', () => show())
             return
         }
@@ -273,6 +279,17 @@
         }
         if (view === generation) add('Обновить статус', () => show())
     }
+    function focusAction() {
+        if (panel.hidden || busy) return
+        if (document.activeElement === close || document.activeElement === document.body)
+            actions.querySelector('button:not(:disabled)')?.focus()
+    }
+    function refreshPanel() {
+        if (panel.hidden || busy) return
+        show().catch((e) => { message.textContent = e.message }).finally(focusAction)
+    }
+    window.addEventListener('online', refreshPanel)
+    window.addEventListener('offline', refreshPanel)
     function closePanel() {
         generation++
         panel.hidden = true
@@ -282,12 +299,21 @@
         if (proc) return
         panel.hidden = false
         close.focus()
-        show().catch((e) => {
-            message.textContent = e.message
-        })
+        actions.replaceChildren()
+        refreshPanel()
     }
     close.onclick = closePanel
     panel.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            const items = [...panel.querySelectorAll('button:not(:disabled), summary')]
+            if (e.shiftKey && document.activeElement === items[0]) {
+                e.preventDefault()
+                items.at(-1)?.focus()
+            } else if (!e.shiftKey && document.activeElement === items.at(-1)) {
+                e.preventDefault()
+                items[0]?.focus()
+            }
+        }
         if (e.key === 'Escape') {
             e.preventDefault()
             closePanel()

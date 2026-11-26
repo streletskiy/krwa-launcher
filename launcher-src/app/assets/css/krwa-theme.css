@@ -295,3 +295,28 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 #trip-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
 .krwa-trip-panel button { min-height: 44px; padding: 8px 14px; cursor: pointer; }
 .krwa-trip-panel button:focus-visible { outline: 3px solid #ffe4a4; }
+
+.krwa-trip-panel { inset: 14% auto auto 50%; transform: translateX(-50%); width: min(540px, 85vw); box-sizing: border-box; }
+.krwa-trip-panel h2 { padding-right: 86px; }
+#trip-close { position: absolute; top: 16px; right: 16px; }
+#trip-actions { display: grid; }
+#trip-actions button { min-height: 48px; text-align: left; }
+#trip-actions button:first-child { background: #f7d99c; color: #242820; font-weight: 700; }
+#trip-actions button:disabled { opacity: .5; }
+.krwa-trip-panel details { border-top: 1px solid var(--line); }
+.krwa-trip-panel summary { min-height: 44px; align-content: center; cursor: pointer; }
+.memory-steps { display: inline-flex; gap: 8px; margin-top: 6px; }
+.memory-steps button { min-width: 46px; min-height: 44px; background: #25434c; border: 1px solid #91a9a4; border-radius: 8px; color: #fff0cf; font-size: 20px; }
+#settingsShadersOptions button, #settingsShadersSelected { display: flex; width: 100%; align-items: center; min-height: 40px; padding: 6px 12px; text-align: left; color: inherit; background: #18343e; border: 0; cursor: pointer; }
+#settingsShadersOptions button:hover, #settingsShadersOptions button:focus-visible { background: #314f58; }
+body[data-steam-deck] #trip-open { min-height: 50px; border: 1px solid #9db8a8; font-weight: 650; }
+body[data-steam-deck] .krwa-ready { display: none; }
+body[data-steam-deck] :is(#avatarContainer,#avatarOverlay) { min-width: 44px; min-height: 44px; }
+body[data-steam-deck] #server_selection_button { min-height: 44px; }
+body[data-steam-deck] :is(#settingsContainer,#loginContainer,#loginOptionsContainer,#nativeAccountContainer,#overlayContainer) :is(button,input:not([type=checkbox]),textarea) { min-height: 44px; min-width: 44px; box-sizing: border-box; }
+body[data-steam-deck] :is(#settingsContainer,#loginContainer) a[href]:not(:empty) { display: inline-flex; align-items: center; min-height: 44px; }
+body[data-steam-deck] #settingsContainer a[href]:empty { display: none; }
+body[data-steam-deck] .toggleSwitch { height: 44px; width: 48px; }
+body[data-steam-deck] .toggleSwitchSlider { top: 12px; bottom: 12px; }
+body[data-steam-deck] #loginPasswordToggle, body[data-steam-deck] #loginRememberOption { width: 44px; }
+body[data-steam-deck] #loginRememberOption { height: 44px; }

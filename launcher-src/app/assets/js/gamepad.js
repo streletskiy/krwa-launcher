@@ -13,8 +13,9 @@ function readGamepad(pad) {
     const back = pressed(1)
     const keyboard = pressed(2)
     const tab = Number(pressed(5)) - Number(pressed(4))
+    const cycle = Number(pressed(7)) - Number(pressed(6))
     const scroll = Math.abs(rightY) > DEAD_ZONE ? rightY : 0
-    return { direction, select, back, keyboard, tab, scroll, engaged: Boolean(direction || select || back || keyboard || tab || scroll) }
+    return { direction, select, back, keyboard, tab, cycle, scroll, engaged: Boolean(direction || select || back || keyboard || tab || cycle || scroll) }
 }
 
 function findInDirection(current, elements, direction) {

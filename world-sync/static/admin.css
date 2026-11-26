@@ -30,8 +30,8 @@
 }
 body {
     margin: 0;
-    background: #111917;
-    color: #eef3ed;
+    background: #18191d;
+    color: #edeef1;
     font:
         16px/1.5 system-ui,
         sans-serif;
@@ -55,13 +55,13 @@ nav,
     justify-content: space-between;
 }
 a {
-    color: #9fe0c0;
+    color: #cbd2ff;
 }
 input {
     font: inherit;
     color: inherit;
-    background: #18251e;
-    border: 1px solid #53675c;
+    background: #23242a;
+    border: 1px solid #4c4e58;
     border-radius: 6px;
     padding: 8px;
     max-width: 100%;
@@ -73,8 +73,8 @@ button,
 select {
     font: inherit;
     color: inherit;
-    background: #25342e;
-    border: 1px solid #53675c;
+    background: #2b2c33;
+    border: 1px solid #4c4e58;
     border-radius: 8px;
     min-height: 42px;
     padding: 7px 13px;
@@ -97,18 +97,18 @@ h3 {
     margin: 0 0 12px;
 }
 section {
-    border-top: 1px solid #39483e;
+    border-top: 1px solid #42434b;
     padding: 22px 0;
 }
 .row,
 .change {
     padding: 10px 0;
-    border-bottom: 1px solid #34463a;
+    border-bottom: 1px solid #383a42;
 }
 .row small,
 small,
 #coordinates {
-    color: #b4c8b9;
+    color: #b7b9c3;
 }
 .row .heading {
     flex: 1;
@@ -130,7 +130,7 @@ small,
     min-width: 0;
     padding: 0;
     aspect-ratio: 1;
-    background: #26362d;
+    background: #292b32;
     border-radius: 4px;
 }
 #map.whole-world {
@@ -162,7 +162,7 @@ small,
 }
 .states div {
     padding: 7px;
-    background: #1f2c25;
+    background: #24262b;
     border-radius: 5px;
     overflow-wrap: anywhere;
     white-space: pre-wrap;
@@ -172,7 +172,7 @@ small,
 }
 .states b {
     display: block;
-    color: #a6c4ac;
+    color: #babdca;
     font: 12px/1.5 system-ui;
 }
 .actions,
@@ -203,4 +203,19 @@ button[hidden],
     #map {
         max-width: 210px;
     }
+}
+
+[hidden] { display: none !important; }
+#grant { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 700px; }
+#grant label { display: grid; gap: 4px; font-size: 14px; align-content: end; }
+#grant input, #grant select, #grant button, #dimensions button, #login-link { min-height: 44px; }
+#grant input, #grant select { width: 100%; }
+#grant button { justify-self: start; grid-column: 1 / -1; }
+#world-note { grid-column: 1 / -1; margin: 0; color: #c1c3ce; }
+#dimensions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 20px; }
+#dimensions [aria-pressed=true], #grant button, #login-link { color: #181920; background: #d3d5ee; border-color: transparent; font-weight: 650; }
+#login-link { display: inline-flex; align-items: center; padding: 0 18px; border-radius: 8px; text-decoration: none; }
+@media (max-width: 600px) {
+    #grant label:nth-child(-n+2), #grant button { grid-column: 1 / -1; }
+    #grant button { width: 100%; }
 }

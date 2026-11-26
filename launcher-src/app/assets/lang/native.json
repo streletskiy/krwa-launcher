@@ -490,5 +490,33 @@
   "правила": {
     "en_US": "rules",
     "pl_PL": "regulamin"
+  },
+  "LT / RT — по кнопкам": {
+    "en_US": "LT / RT — previous / next",
+    "pl_PL": "LT / RT — wstecz / dalej"
+  },
+  "Что переносится на сервер": {
+    "en_US": "What syncs to the server",
+    "pl_PL": "Co jest wysyłane na serwer"
+  },
+  "Мир сохранён на устройстве. Играйте без интернета. Отправка станет доступна после подключения.": {
+    "en_US": "Your world is on this device. Play offline and sync when connected.",
+    "pl_PL": "Świat jest na urządzeniu. Graj offline i synchronizuj po połączeniu."
+  },
+  "Уменьшить максимум памяти": {
+    "en_US": "Decrease maximum memory",
+    "pl_PL": "Zmniejsz maksimum pamięci"
+  },
+  "Уменьшить минимум памяти": {
+    "en_US": "Decrease minimum memory",
+    "pl_PL": "Zmniejsz minimum pamięci"
+  },
+  "Увеличить максимум памяти": {
+    "en_US": "Increase maximum memory",
+    "pl_PL": "Zwiększ maksimum pamięci"
+  },
+  "Увеличить минимум памяти": {
+    "en_US": "Increase minimum memory",
+    "pl_PL": "Zwiększ minimum pamięci"
   }
 }

@@ -21,6 +21,7 @@ const dimensions = {
 }
 const dimensionOf = (change) => change.dimension || 'minecraft:overworld'
 let current, tile, limit, pendingAction
+let selectedDimension = 'minecraft:overworld'
 function node(tag, text, cls) {
     const n = document.createElement(tag)
     if (text !== undefined) n.textContent = text
@@ -41,10 +42,12 @@ async function request(path = '', body) {
         credentials: 'same-origin',
         body: body ? JSON.stringify(body) : undefined,
     })
-    if (res.status === 401) {
-        const a = node('a', 'Войти на сайт KRWA')
-        a.href = '/login?returnTo=%2Fadmin%2Foffline-worlds'
-        el('users').replaceChildren(a)
+    if (res.status === 401 || res.status === 403) {
+        el('workspace').hidden = true
+        el('auth-state').hidden = false
+        el('auth-title').textContent = res.status === 401 ? 'Войдите как администратор' : 'Требуются права администратора'
+        el('login-link').hidden = res.status !== 401
+        el('login-link').href = '/login?returnTo=' + encodeURIComponent(location.pathname + location.search)
     }
     const result = await res.json()
     if (!res.ok) throw Error(result.detail || 'Не удалось выполнить запрос.')
@@ -66,9 +69,12 @@ function confirmAction(message, action) {
 }
 async function refresh() {
     const data = await request()
+    el('auth-state').hidden = true
+    el('workspace').hidden = false
     el('users').replaceChildren(
         ...data.users.map((u) => {
             const row = node('div', undefined, 'row')
+            row.id = 'player-' + u.uid
             row.append(
                 node('strong', u.name, 'heading'),
                 node(
@@ -130,6 +136,7 @@ async function refresh() {
         }),
     )
     if (!data.trips.length) el('trips').textContent = 'Поездок пока нет.'
+    return data
 }
 async function openTrip(id, name) {
     current = await request('/trips/' + id)
@@ -172,7 +179,7 @@ async function openTrip(id, name) {
             counts.set(key, entry)
         }
     const full = current.area.scope === 'world'
-    el('dimension').hidden = !full
+    el('dimensions').hidden = !full
     map.classList.toggle('whole-world', full)
     if (full) {
         el('coordinates').textContent =
@@ -180,7 +187,7 @@ async function openTrip(id, name) {
             current.changes.length +
             ' изменений. ' +
             current.trip.detail
-        el('dimension').value =
+        selectedDimension =
             current.changes.find((c) => c.pos)?.dimension ||
             'minecraft:overworld'
         drawWorldTiles()
@@ -236,8 +243,9 @@ async function openTrip(id, name) {
     el('review').scrollIntoView({ block: 'start' })
 }
 function drawWorldTiles() {
+    for (const control of el('dimensions').children) control.setAttribute('aria-pressed', String(control.dataset.dimension === selectedDimension))
     const map = el('map'),
-        dimension = el('dimension').value
+        dimension = selectedDimension
     map.replaceChildren()
     const counts = new Map()
     for (const c of current.changes.filter(
@@ -265,7 +273,15 @@ function drawWorldTiles() {
         map.append(b)
     }
 }
-el('dimension').onchange = () => {
+for (const [value, label] of Object.entries(dimensions)) {
+    const control = button(label, () => {
+        selectedDimension = value
+        changeDimension()
+    })
+    control.dataset.dimension = value
+    el('dimensions').append(control)
+}
+function changeDimension() {
     sliceRequest++
     tile = null
     limit = 30
@@ -395,7 +411,7 @@ function render() {
         (c) =>
             (!c.pos ||
                 current.area.scope !== 'world' ||
-                dimensionOf(c) === el('dimension').value) &&
+                dimensionOf(c) === selectedDimension) &&
             (!el('filter').value || el('filter').value === c.mode) &&
             (!tile ||
                 (c.pos &&
@@ -509,6 +525,7 @@ el('refresh').onclick = () =>
 el('grant-scope').onchange = () => {
     const full = el('grant-scope').value === 'world'
     el('grant-x').disabled = el('grant-z').disabled = full
+    el('grant-x').closest('label').hidden = el('grant-z').closest('label').hidden = full
     el('world-note').hidden = !full
 }
 el('grant').onsubmit = (e) => {
@@ -528,4 +545,17 @@ el('grant').onsubmit = (e) => {
         await refresh()
     })
 }
-run(refresh)
+run(async () => {
+    const data = await refresh()
+    const query = new URLSearchParams(location.search)
+    const trip = query.get('trip'), player = query.get('player')
+    if (trip && /^[a-f0-9]{32}$/i.test(trip)) {
+        const recent = data.trips.find(t => t.id === trip)
+        const owner = recent || data.users.find(u => u.uid === player)
+        await openTrip(trip, owner?.name || 'Поездка')
+    } else if (player && /^[a-f0-9]{32}$/i.test(player)) {
+        const row = el('player-' + player)
+        row?.scrollIntoView({block: 'center'})
+        row?.querySelector('button')?.focus({preventScroll: true})
+    }
+})

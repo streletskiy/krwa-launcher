@@ -43,9 +43,9 @@ test('filters stick drift, prefers the D-pad, and reads the standard button layo
     const buttons = Array.from({ length: 16 }, () => ({ pressed: false }))
     assert.equal(readGamepad({ buttons, axes: [0.35, -0.2] }).engaged, false)
     assert.equal(readGamepad({ buttons, axes: [0.55, -0.8] }).direction, 'up')
-    for (const index of [0, 2, 5, 14]) buttons[index].pressed = true
+    for (const index of [0, 2, 5, 7, 14]) buttons[index].pressed = true
     assert.deepEqual(readGamepad({ buttons, axes: [0.2, -1, 0, 0.8] }), {
-        direction: 'left', select: true, back: false, keyboard: true, tab: 1, scroll: 0.8, engaged: true
+        direction: 'left', select: true, back: false, keyboard: true, tab: 1, cycle: 1, scroll: 0.8, engaged: true
     })
 })
 
