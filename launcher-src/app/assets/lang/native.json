@@ -610,5 +610,153 @@
   "Повторить": {
     "en_US": "Try again",
     "pl_PL": "Spróbuj ponownie"
+  },
+  "Офлайн-поездки": {
+    "en_US": "Offline trips",
+    "pl_PL": "Wyprawy offline"
+  },
+  "Игра без интернета": {
+    "en_US": "Play without internet",
+    "pl_PL": "Gra bez internetu"
+  },
+  "Игра на устройстве": {
+    "en_US": "Play on this device",
+    "pl_PL": "Gra na tym urządzeniu"
+  },
+  "Открыть Minecraft": {
+    "en_US": "Open Minecraft",
+    "pl_PL": "Otwórz Minecraft"
+  },
+  "Продолжить поездку": {
+    "en_US": "Continue trip",
+    "pl_PL": "Kontynuuj wyprawę"
+  },
+  "Главное меню игры. Выберите свой мир или создайте новый на устройстве.": {
+    "en_US": "Open the main menu to choose or create a world on this device.",
+    "pl_PL": "W menu głównym wybierz własny świat lub utwórz nowy na tym urządzeniu."
+  },
+  "Откроется скачанный мир сервера. Прогресс можно отправить при подключении.": {
+    "en_US": "Open the downloaded server world. Send your progress when you reconnect.",
+    "pl_PL": "Otwórz pobrany świat serwera. Po połączeniu możesz wysłać postępy."
+  },
+  "Открыть личную копию": {
+    "en_US": "Open personal copy",
+    "pl_PL": "Otwórz osobistą kopię"
+  },
+  "Отдельное сохранение для одиночной игры. Дальнейшие изменения останутся на устройстве.": {
+    "en_US": "A separate single-player save. Future changes stay on this device.",
+    "pl_PL": "Osobny zapis gry jednoosobowej. Dalsze zmiany pozostaną na urządzeniu."
+  },
+  "Сервер готовит снимок мира для скачивания.": {
+    "en_US": "The server is preparing the world for download.",
+    "pl_PL": "Serwer przygotowuje świat do pobrania."
+  },
+  "Поездка отправлена. Сервер проверит изменения.": {
+    "en_US": "Trip sent. The server will check your changes.",
+    "pl_PL": "Wyprawa wysłana. Serwer sprawdzi zmiany."
+  },
+  "Изменения одобрены. Ждём записи в мир сервера.": {
+    "en_US": "Changes approved. Waiting for the server to apply them.",
+    "pl_PL": "Zmiany zatwierdzone. Czekamy na zapis w świecie serwera."
+  },
+  "Изменения на проверке у администратора. Поездка сохранена на устройстве.": {
+    "en_US": "An administrator is reviewing your changes. The trip is saved on this device.",
+    "pl_PL": "Administrator sprawdza zmiany. Wyprawa jest zapisana na urządzeniu."
+  },
+  "Изменения поездки применены на сервере.": {
+    "en_US": "Your trip changes have been applied on the server.",
+    "pl_PL": "Zmiany z wyprawy zapisano na serwerze."
+  },
+  "Поездка закрыта. Скачанный мир доступен для личной игры.": {
+    "en_US": "Trip closed. You can play a personal copy of the downloaded world.",
+    "pl_PL": "Wyprawa zakończona. Możesz grać na osobistej kopii pobranego świata."
+  },
+  "Сервер не смог обработать поездку. Скачанный мир сохранён.": {
+    "en_US": "The server could not process this trip. Your downloaded world is saved.",
+    "pl_PL": "Serwer nie mógł przetworzyć wyprawy. Pobrany świat jest zapisany."
+  },
+  "Открываем сохранение…": {
+    "en_US": "Opening saved world…",
+    "pl_PL": "Otwieranie zapisanego świata…"
+  },
+  "Открываем меню Minecraft…": {
+    "en_US": "Opening the Minecraft menu…",
+    "pl_PL": "Otwieranie menu Minecraft…"
+  },
+  "Поездка сохранена. Изменения можно отправить на сервер.": {
+    "en_US": "Trip saved. You can now send your changes.",
+    "pl_PL": "Wyprawa zapisana. Możesz wysłać zmiany na serwer."
+  },
+  "Игра закрыта.": {
+    "en_US": "Game closed.",
+    "pl_PL": "Gra zamknięta."
+  },
+  "Можно открыть установленную сборку Minecraft.": {
+    "en_US": "You can open your installed Minecraft instance.",
+    "pl_PL": "Możesz otworzyć zainstalowaną wersję Minecraft."
+  },
+  "Поездка скачана и готова к игре.": {
+    "en_US": "Your downloaded trip is ready to play.",
+    "pl_PL": "Pobrana wyprawa jest gotowa do gry."
+  },
+  "Отправка прервалась. Продолжите её, когда появится связь.": {
+    "en_US": "Upload interrupted. Resume when you reconnect.",
+    "pl_PL": "Wysyłanie przerwane. Wznów je po połączeniu."
+  },
+  "Поездка отправлена. Проверим результат при подключении.": {
+    "en_US": "Trip sent. We’ll check the result when you reconnect.",
+    "pl_PL": "Wyprawa wysłana. Sprawdzimy wynik po połączeniu."
+  },
+  "На устройстве есть сохранение закрытой поездки.": {
+    "en_US": "A closed trip is saved on this device.",
+    "pl_PL": "Na urządzeniu zapisano zakończoną wyprawę."
+  },
+  "Скачанной поездки на устройстве нет. Одиночная игра доступна.": {
+    "en_US": "No trip is downloaded on this device. Single-player is available.",
+    "pl_PL": "Na urządzeniu nie ma pobranej wyprawy. Możesz zagrać w trybie jednoosobowym."
+  },
+  "Нет связи с сервером входа.": {
+    "en_US": "Cannot reach the sign-in server.",
+    "pl_PL": "Brak połączenia z serwerem logowania."
+  },
+  "Отправить изменения": {
+    "en_US": "Send changes",
+    "pl_PL": "Wyślij zmiany"
+  },
+  "Продолжить отправку": {
+    "en_US": "Resume upload",
+    "pl_PL": "Wznów wysyłanie"
+  },
+  "Отправляем сохранение…": {
+    "en_US": "Uploading your save…",
+    "pl_PL": "Wysyłanie zapisu…"
+  },
+  "Для новой поездки выйдите с сервера и скачайте мир со всеми измерениями.": {
+    "en_US": "To start a new trip, leave the server and download the world with all dimensions.",
+    "pl_PL": "Aby rozpocząć nową wyprawę, opuść serwer i pobierz świat ze wszystkimi wymiarami."
+  },
+  "Не удалось проверить статус поездки.": {
+    "en_US": "Could not check the trip status.",
+    "pl_PL": "Nie udało się sprawdzić stanu wyprawy."
+  },
+  "Повторить проверку": {
+    "en_US": "Check again",
+    "pl_PL": "Sprawdź ponownie"
+  },
+  "Проверяем сохранения на устройстве…": {
+    "en_US": "Checking saves on this device…",
+    "pl_PL": "Sprawdzanie zapisów na urządzeniu…"
+  },
+  "Запрос отправлен. Решение появится здесь.": {
+    "en_US": "Request sent. Check here for the decision.",
+    "pl_PL": "Prośba wysłana. Decyzja pojawi się tutaj."
+  },
+  "Администратор закрыл доступ.": {
+    "en_US": "The administrator closed access.",
+    "pl_PL": "Administrator cofnął dostęp."
+  },
+  "Офлайн-поездки доступны с разрешения администратора.": {
+    "en_US": "Offline trips require permission from an administrator.",
+    "pl_PL": "Wyprawy offline wymagają zgody administratora."
   }
 }

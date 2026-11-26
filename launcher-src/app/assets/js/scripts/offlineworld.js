@@ -16,26 +16,51 @@
     let localIdentity = null
     let busy = false
     let generation = 0
+    const title = document.getElementById('trip-title')
+    const cleaning = new Map()
     const statusText = {
-        preparing: 'Сервер сохраняет мир и готовит снимок поездки.',
-        submitted:
-            'Изменения приняты. Когда основной сервер будет свободен, они будут проверены.',
-        approved:
-            'Администратор одобрил изменения. Сервер повторно сверит участок перед записью.',
-        review: 'Есть конфликт. Администратор увидит карту и сравнение версий.',
-        done: 'Синхронизировано. Можно вернуться на сервер.',
-        closed: 'Поездка закрыта. Локальная копия сохранена.',
-        failed: 'Сервер не смог обработать поездку.',
+        preparing: 'Сервер готовит снимок мира для скачивания.',
+        submitted: 'Поездка отправлена. Сервер проверит изменения.',
+        approved: 'Изменения одобрены. Ждём записи в мир сервера.',
+        review: 'Изменения на проверке у администратора. Поездка сохранена на устройстве.',
+        done: 'Изменения поездки применены на сервере.',
+        closed: 'Поездка закрыта. Скачанный мир доступен для личной игры.',
+        failed: 'Сервер не смог обработать поездку. Скачанный мир сохранён.',
     }
-    function add(label, job, needsNetwork = false) {
+    function add(label, job, needsNetwork = false, hint = '') {
         const button = document.createElement('button')
         button.type = 'button'
         button.className = 'settingsActionButton'
         button.textContent = Lang.native(label)
+        if (hint) {
+            const description = document.createElement('small')
+            description.textContent = Lang.native(hint)
+            button.append(description)
+        }
         button.onclick = () => execute(job)
         button.dataset.network = String(needsNetwork)
         button.disabled = busy || (needsNetwork && !navigator.onLine)
         actions.append(button)
+    }
+    function solo(c) {
+        add('Открыть Minecraft', () => launchLocal(c), false,
+            'Главное меню игры. Выберите свой мир или создайте новый на устройстве.')
+    }
+    function localWorld(c, local) {
+        if (local?.stage === 'ready') {
+            add('Продолжить поездку', () => launchLocal(c, local), false,
+                'Откроется скачанный мир сервера. Прогресс можно отправить при подключении.')
+        } else if (local) {
+            add('Открыть личную копию', () => launchLocal(c, local, true), false,
+                'Отдельное сохранение для одиночной игры. Дальнейшие изменения останутся на устройстве.')
+        }
+    }
+    function reconcile(c, trip, ids) {
+        if (!cleaning.has(c.uid)) {
+            const task = c.reconcileApplied(trip, ids).finally(() => cleaning.delete(c.uid))
+            cleaning.set(c.uid, task)
+        }
+        return cleaning.get(c.uid)
     }
     async function execute(job) {
         if (busy) return
@@ -53,7 +78,7 @@
         }
     }
     function client() {
-        const user = ConfigManager.getSelectedAccount() || (localMenu && localIdentity)
+        const user = ConfigManager.getSelectedAccount() || ((localMenu || !navigator.onLine) && localIdentity)
         if (!user || ConfigManager.getSelectedServer() !== PROFILE)
             throw Error(
                 'Выберите профиль KRWA Aeronautics и войдите в аккаунт.',
@@ -100,7 +125,7 @@
             { ...c.account, accessToken: 'offline' }, remote.app.getVersion(), target)
         proc = game.build()
         toggleLaunchArea(true)
-        message.textContent = 'Запускается локальный мир…'
+        message.textContent = Lang.native(local ? 'Открываем сохранение…' : 'Открываем меню Minecraft…')
         const child = proc
         child.once('error', () => {
             proc = null
@@ -112,7 +137,7 @@
             toggleLaunchArea(false)
             message.textContent = code
                 ? 'Игра завершилась с ошибкой. Локальное сохранение осталось на устройстве.'
-                : 'Игра закрыта. Сохранение готово к отправке.'
+                : Lang.native(local && !independent ? 'Поездка сохранена. Изменения можно отправить на сервер.' : 'Игра закрыта.')
         })
         child.stdout?.resume()
         child.stderr?.resume()
@@ -180,7 +205,9 @@
     }
     async function show(online = true) {
         const view = ++generation
-        if (localMenu && !ConfigManager.getSelectedAccount() && !localIdentity) {
+        const localOnly = localMenu || !navigator.onLine
+        title.textContent = Lang.native(!navigator.onLine ? 'Игра без интернета' : localMenu ? 'Игра на устройстве' : 'Офлайн-поездки')
+        if (localOnly && !ConfigManager.getSelectedAccount() && !localIdentity) {
             const profiles = await require('./assets/js/offlineworld').localProfiles(ConfigManager)
             if (generation !== view) return
             if (profiles.length > 1) {
@@ -192,55 +219,31 @@
             // Vanilla UUID for OfflinePlayer:Player. This identity never enters the online account store.
             localIdentity = profiles[0] || { uuid: 'a01e3843e5213998958af459800e4d11', displayName: 'Player', type: 'mojang' }
         }
-        if (localMenu && ConfigManager.getSelectedServer() !== PROFILE) {
+        if (localOnly && ConfigManager.getSelectedServer() !== PROFILE) {
             actions.replaceChildren()
-            message.textContent = Lang.native('Доступна одиночная игра с установленной сборкой.')
-            add('Одиночная игра', () => launchLocal({ account: ConfigManager.getSelectedAccount() || localIdentity }))
+            message.textContent = Lang.native('Можно открыть установленную сборку Minecraft.')
+            solo({ account: ConfigManager.getSelectedAccount() || localIdentity })
             return
         }
-        const c = client(),
-            local = await c.local()
+        const c = client()
+        let local = await c.local()
         if (view !== generation) return
         actions.replaceChildren()
-        if (local?.stage === 'ready') {
-            message.textContent =
-                local.area?.scope === 'world'
-                    ? Lang.native('Мир со всеми измерениями готов к игре.')
-                    : 'Готово к полёту · участок 80 × 80 блоков. Одиночная игра доступна без сети.'
-            add('Играть офлайн', () => launchLocal(c, local))
-        } else
-            message.textContent =
-                local?.stage === 'sending'
-                    ? 'Отправка не завершена. Копия сохранена.'
-                    : 'Для поездки нужен доступ и снимок сервера.'
-        if (ConfigManager.getSelectedAccount() && local && ['ready', 'sending', 'sent'].includes(local.stage))
-            add(
-                local.stage === 'ready'
-                    ? 'Синхронизировать'
-                    : 'Проверить отправку',
-                async () => {
-                    idle()
-                    await c.authenticate()
-                    if (local.stage !== 'sent') {
-                        message.textContent = 'Отправляем сохранение…'
-                        await c.send(local, (text) => {
-                            message.textContent = text
-                        })
-                    }
-                    await show()
-                },
-                true,
-            )
-        if (localMenu || !online || !navigator.onLine) {
-            if (local && local.stage !== 'ready') {
-                add('Играть в отдельной копии', () => launchLocal(c, local, true))
-                message.textContent = Lang.native('Отправленная поездка сохранена. Отдельная копия доступна для одиночной игры.')
+        function localOptions() {
+            localWorld(c, local)
+            solo(c)
+            const messages = {
+                ready: 'Поездка скачана и готова к игре.',
+                sending: 'Отправка прервалась. Продолжите её, когда появится связь.',
+                sent: 'Поездка отправлена. Проверим результат при подключении.',
+                archived: 'На устройстве есть сохранение закрытой поездки.',
             }
-            add('Одиночная игра', () => launchLocal(c))
-            if (!local && localMenu) message.textContent = Lang.native('Доступна одиночная игра с установленной сборкой.')
-            if (!navigator.onLine && local?.stage === 'ready')
-                message.textContent = Lang.native('Мир сохранён на устройстве. Играйте без интернета. Отправка станет доступна после подключения.')
-            if (localMenu && ConfigManager.getSelectedAccount()) {
+            message.textContent = Lang.native(messages[local?.stage] || 'Скачанной поездки на устройстве нет. Одиночная игра доступна.')
+        }
+        if (localOnly) {
+            localOptions()
+            if (navigator.onLine && localMenu && ConfigManager.getSelectedAccount()) {
+                if (window.krwaSessionUnavailable) message.textContent = Lang.native('Нет связи с сервером входа.') + ' ' + message.textContent
                 add('Проверить подключение', async () => {
                     if (await validateSelectedAccount()) {
                         localMenu = false
@@ -251,7 +254,32 @@
                     closePanel()
                     document.getElementById('settingsAddMojangAccount').click()
                 }, true)
-            } else if (ConfigManager.getSelectedAccount()) add('Проверить статус', () => show(), true)
+            }
+            return
+        }
+        if (local?.stage === 'ready') {
+            localWorld(c, local)
+            message.textContent = Lang.native('Поездка скачана и готова к игре.')
+        }
+        if (local && ['ready', 'sending', 'sent'].includes(local.stage)) {
+            add(local.stage === 'ready' ? 'Отправить изменения' : local.stage === 'sending' ? 'Продолжить отправку' : 'Проверить статус',
+                async () => {
+                    idle()
+                    if (local.stage !== 'sent') {
+                        await c.authenticate()
+                        message.textContent = Lang.native('Отправляем сохранение…')
+                        await c.send(local, text => { message.textContent = text })
+                    }
+                    await show()
+                }, true)
+        }
+        if (!online) {
+            if (local?.stage !== 'ready') {
+                localWorld(c, local)
+                message.textContent = Lang.native(local?.stage === 'sent' ? 'Поездка отправлена. Проверим результат при подключении.' : 'Проверяем сохранения на устройстве…')
+            }
+            solo(c)
+            add('Обновить статус', () => show(), true)
             return
         }
         try {
@@ -259,21 +287,22 @@
             const data = await c.api('/me')
             if (view !== generation || panel.hidden) return
             const t = data.trip
-            if (
-                local?.id === t?.id &&
-                ['done', 'closed', 'failed'].includes(t?.state) &&
-                local.stage !== 'archived'
-            ) {
+            await reconcile(c, t)
+            if (view !== generation || panel.hidden) return
+            local = await c.local()
+            if (view !== generation || panel.hidden) return
+            if (local && local.id === t?.id && ['done', 'closed', 'failed'].includes(t.state) && local.stage !== 'archived') {
                 local.stage = 'archived'
                 await atomicJson(c.stateFile, local)
             }
             if (data.access !== 'allowed') {
-                if (!local) actions.replaceChildren()
-                message.textContent = {
+                actions.replaceChildren()
+                if (local?.stage === 'ready') localWorld(c, local)
+                message.textContent = Lang.native({
                     pending: 'Запрос отправлен. Решение появится здесь.',
                     denied: 'Администратор закрыл доступ.',
                     none: 'Офлайн-поездки доступны с разрешения администратора.',
-                }[data.access]
+                }[data.access] || 'Офлайн-поездки доступны с разрешения администратора.')
                 if (data.access === 'none')
                     add('Запросить доступ', async () => {
                         await c.api('/request', 'POST', {})
@@ -301,15 +330,15 @@
                 } else if (t.state !== 'ready') {
                     actions.replaceChildren()
                     message.textContent =
-                        statusText[t.state] + ' ' + (t.detail || '')
+                        Lang.native(statusText[t.state]) + ' ' + (t.detail || '')
                 }
             } else {
                 actions.replaceChildren()
                 message.textContent =
                     (t
-                        ? statusText[t.state] + ' ' + (t.detail || '') + ' '
+                        ? Lang.native(statusText[t.state]) + ' ' + (t.detail || '') + ' '
                         : '') +
-                    Lang.native('Доступен весь мир со всеми измерениями. Перед загрузкой выйдите с сервера.')
+                    Lang.native('Для новой поездки выйдите с сервера и скачайте мир со всеми измерениями.')
                 add('Скачать для офлайна', () => prepareChoice(async play => {
                     meter.hidden = false
                     meter.removeAttribute('value')
@@ -327,7 +356,7 @@
                         Date.now() < end &&
                         !panel.hidden
                     ) {
-                        message.textContent = statusText.preparing
+                        message.textContent = Lang.native(statusText.preparing)
                         await new Promise((resolve) =>
                             setTimeout(resolve, 3000),
                         )
@@ -340,12 +369,16 @@
             }
         } catch (e) {
             if (view !== generation) return
-            if (local?.stage !== 'ready') message.textContent = e.message
-            add('Одиночная игра', () => launchLocal(c))
+            actions.replaceChildren()
+            localOptions()
+            message.textContent = Lang.native('Не удалось проверить статус поездки.') + ' ' + message.textContent
+            add('Повторить проверку', () => show(), true)
+            return
         }
-        if (view === generation && local && local.stage !== 'ready') add('Играть в отдельной копии', () => launchLocal(c, local, true))
-        if (view === generation && ![...actions.children].some(b => b.textContent === Lang.native('Одиночная игра'))) add('Одиночная игра', () => launchLocal(c))
-        if (view === generation) add('Обновить статус', () => show(), true)
+        if (view !== generation) return
+        if (local && local.stage !== 'ready') localWorld(c, local)
+        solo(c)
+        add('Обновить статус', () => show(), true)
     }
     function focusAction() {
         if (panel.hidden || busy) return
@@ -356,7 +389,22 @@
         if (panel.hidden || busy) return
         show().catch((e) => { message.textContent = e.message }).finally(focusAction)
     }
-    window.addEventListener('online', () => { localMenu = !ConfigManager.getSelectedAccount(); validateSelectedAccount(); refreshPanel() })
+    window.addEventListener('krwa-account-validated', async () => {
+        const account = ConfigManager.getSelectedAccount()
+        if (proc || !account || ConfigManager.getSelectedServer() !== PROFILE) return
+        const c = new OfflineWorld(ConfigManager, account)
+        try {
+            if (!panel.hidden) return
+            const ids = await c.submittedIds()
+            if (!ids.length) return
+            await c.authenticate()
+            await reconcile(c, null, ids)
+        } catch { /* Retry after the next connection or when the player opens trips. */ }
+    })
+    window.addEventListener('online', async () => {
+        localMenu = !(await validateSelectedAccount())
+        refreshPanel()
+    })
     window.addEventListener('offline', refreshPanel)
     function closePanel() {
         generation++
@@ -369,6 +417,7 @@
         returnFocus = offline ? document.getElementById(ConfigManager.getSelectedAccount() ? 'launch_button' : 'login-local') : opener
         if (proc) return
         panel.hidden = false
+        message.textContent = Lang.native('Проверяем сохранения на устройстве…')
         close.focus()
         actions.replaceChildren()
         refreshPanel()

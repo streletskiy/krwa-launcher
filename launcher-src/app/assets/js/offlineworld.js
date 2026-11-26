@@ -108,12 +108,95 @@ class OfflineWorld {
     async local() {
         try {
             const info = JSON.parse(await fs.readFile(this.stateFile, 'utf8'))
-            uuid(info.id)
+            await fs.access(path.join(this.saves, folderName(info.id), 'level.dat'))
             return info
         } catch (e) {
             if (e.code === 'ENOENT') return null
             throw e
         }
+    }
+    async submittedIds() {
+        const entries = await fs.readdir(this.home).catch(e => {
+            if (e.code === 'ENOENT') return []
+            throw e
+        })
+        return [...new Set(entries.flatMap(name => {
+            const match = /^([a-f0-9]{32})\.(out|zip)$/.exec(name)
+            return match ? [match[1]] : []
+        }))]
+    }
+    async reconcileApplied(latest, ids) {
+        for (const id of ids || await this.submittedIds()) {
+            try {
+                const receipt = latest?.id === id ? latest : await this.api('/trips/' + id + '/receipt')
+                if (receipt?.state === 'done' && receipt.id === id && uuid(receipt.uid) === this.uid)
+                    await this.retireApplied(id)
+            } catch {
+                // A missing receipt, a running game or a disconnected disk can be retried on the next refresh.
+            }
+        }
+    }
+    async retireApplied(id) {
+        const save = path.join(this.saves, folderName(id))
+        const retired = path.join(path.dirname(this.saves), '.krwa-applied-' + id)
+        const out = path.join(this.home, id + '.out')
+        const zip = path.join(this.home, id + '.zip')
+        const stat = async file => fs.lstat(file).catch(e => {
+            if (e.code === 'ENOENT') return null
+            throw e
+        })
+        const ownedDirectory = async dir => {
+            const info = await stat(dir)
+            if (!info) return false
+            if (!info.isDirectory()) throw Error('Некорректная папка поездки.')
+            const marker = await safeFile(dir, 'krwa-trip.json', 16 * 1024 * 1024)
+            if (JSON.parse(await fs.readFile(marker, 'utf8')).id !== id) throw Error('Сохранение другой поездки.')
+            return true
+        }
+        const packet = await stat(out)
+        const archive = await stat(zip)
+        if (!(packet || archive) || (packet && !packet.isDirectory()) || (archive && !archive.isFile())) return
+        if (await ownedDirectory(save)) {
+            const target = await withSaveLock(this.java, save, async () => {
+                if (await ownedDirectory(retired)) throw Error('Идёт очистка поездки.')
+                const level = await fs.readFile(await safeFile(save, 'level.dat', 4 * 1024 * 1024))
+                const hash = data => crypto.createHash('sha256').update(data).digest('hex')
+                let sentHash, sentTime
+                if (packet) {
+                    const manifest = await safeFile(out, 'manifest.json', 32 * 1024 * 1024)
+                    const files = JSON.parse(await fs.readFile(manifest, 'utf8'))
+                    const world = files.find(item => item.path === 'level.dat')
+                    sentHash = world?.parts?.length === 1 ? world.parts[0] : null
+                    sentTime = (await fs.stat(manifest)).mtimeMs
+                } else {
+                    if (archive.size > LIMIT) throw Error('Некорректный архив поездки.')
+                    const bytes = new AdmZip(await fs.readFile(zip)).readFile('level.dat')
+                    sentHash = bytes && hash(bytes)
+                    sentTime = archive.mtimeMs
+                }
+                // Files changed outside the launcher after upload belong to the player.
+                async function changedAfterUpload(dir) {
+                    for (const item of await fs.readdir(dir, { withFileTypes: true })) {
+                        if (item.name === 'session.lock') continue
+                        const file = path.join(dir, item.name)
+                        if (item.isSymbolicLink() || (await fs.lstat(file)).mtimeMs > sentTime) return true
+                        if (item.isDirectory() && await changedAfterUpload(file)) return true
+                    }
+                    return false
+                }
+                const changed = sentHash !== hash(level) || await changedAfterUpload(save)
+                const target = changed ? path.join(this.saves, 'KRWA-Local-' + id + '-' + crypto.randomUUID()) : retired
+                // Windows refuses to move a directory containing an open session.lock.
+                // The same OS rule protects the final rename if Minecraft reopens the world.
+                if (process.platform !== 'win32') await fs.rename(save, target)
+                return target
+            })
+            if (process.platform === 'win32') await fs.rename(save, target)
+        }
+        if (await ownedDirectory(retired)) await fs.rm(retired, { recursive: true })
+        await fs.rm(path.join(this.home, id + '.chunks.json'), { force: true })
+        if (archive) await fs.unlink(zip)
+        if (packet) await fs.rm(out, { recursive: true })
     }
     async independentCopy(info) {
         const name = folderName(info.id)
@@ -359,7 +442,8 @@ function prepared(config) {
             require('node:fs').readFileSync(current.stateFile, 'utf8'),
         )
         return (
-            ['ready', 'sending'].includes(data.stage) && idPattern.test(data.id)
+            ['ready', 'sending'].includes(data.stage) && idPattern.test(data.id) &&
+            require('node:fs').existsSync(path.join(current.saves, folderName(data.id), 'level.dat'))
         )
     } catch {
         return false

@@ -1,77 +1,91 @@
 <!doctype html>
 <html lang="ru">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Офлайн-миры · KRWA</title>
-        <link rel="stylesheet" href="/api/offline-worlds/assets/admin.css" />
-        <script defer src="/api/offline-worlds/assets/admin.js"></script>
-    </head>
-    <body>
-        <main>
-            <nav>
-                <h1>Офлайн-миры</h1><button id="refresh">Обновить</button>
-            </nav>
-            <p role="status" id="status"></p>
-            <section id="auth-state" hidden><h2 id="auth-title">Войдите как администратор</h2><a target="_top" id="login-link" href="/login">Войти</a></section>
-            <div id="workspace" hidden>
-            <section>
-                <h2>Доступ игроков</h2>
-                <form id="grant">
-                    <label
-                        >Игровой ник
-                        <input
-                            id="grant-name"
-                            required
-                            maxlength="16"
-                            autocomplete="off"
-                    /></label>
-                    <p id="world-note">Игрок получит весь мир со всеми сохранёнными измерениями.</p><button>Разрешить доступ</button>
-                </form>
-                <div id="users"></div>
-            </section>
-            <section>
-                <h2>Поездки</h2>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Офлайн-миры · KRWA</title>
+    <link rel="stylesheet" href="/api/offline-worlds/assets/admin.css">
+    <script defer src="/api/offline-worlds/assets/admin.js"></script>
+</head>
+<body>
+<main>
+    <div class="page-tools">
+        <a id="back" class="back" href="/admin/worlds" target="_top" hidden>← Все поездки</a>
+        <button id="refresh" class="quiet" type="button">Обновить</button>
+    </div>
+    <p id="loading" role="status">Загружаем офлайн-поездки…</p>
+    <p id="status" role="alert"></p>
+    <section id="auth-state" class="notice" hidden>
+        <h1 id="auth-title">Войдите как администратор</h1>
+        <a id="login-link" class="action primary" target="_top" href="/login">Войти на портал</a>
+    </section>
+    <div id="workspace" hidden>
+        <section id="overview">
+            <h1>Офлайн-миры</h1>
+            <div class="section-nav" role="group" aria-label="Раздел">
+                <button id="trips-tab" aria-pressed="true" aria-controls="queue">Поездки</button>
+                <button id="access-tab" aria-pressed="false" aria-controls="access">Доступ игроков <span id="pending-count" class="count" hidden></span></button>
+            </div>
+            <section id="queue" class="panel">
+                <div class="panel-heading"><h2>Очередь поездок</h2><span id="queue-summary" class="badge"></span></div>
                 <div id="trips"></div>
             </section>
-            <section id="review" hidden>
-                <h2 id="review-title">Сравнение</h2>
-                <p id="coordinates"></p>
-                <p id="merge-summary"></p>
-                <div class="actions">
-                    <button id="merge">Автослияние</button><button id="accept">Принять все конфликты игрока</button
-                    ><button id="accept-existing" hidden>Применить всё, кроме новых чанков</button
-                    ><button id="revise">Вернуть игроку на доработку</button
-                    ><button id="keep">Оставить мир сервера</button>
-                </div>
-                <div id="confirm" hidden>
-                    <p id="question"></p>
-                    <button id="confirm-action">Подтвердить</button
-                    ><button id="cancel">Отмена</button>
-                </div>
-                <div id="dimensions" role="group" aria-label="Измерение" hidden></div>
-                <details id="map-tools"><summary>Карта и срезы по координатам</summary><div id="map"></div>
-                    <div id="slices" hidden><div id="slice-heading"></div><label>Высота Y <input id="slice-y" type="number" min="-64" max="319"></label><div id="slice-images"></div></div>
-                </details>
-                <div><div>
-                        <h3>Изменения</h3>
-                        <div class="toolbar">
-                            <select id="filter" aria-label="Тип изменений">
-                                <option value="">Все изменения</option>
-                                <option value="conflict">Конфликты</option>
-                                <option value="manual">Ручной перенос</option>
-                                <option value="auto">
-                                    Совместимые
-                                </option></select
-                            ><button id="all">Все чанки</button>
-                        </div>
-                        <div id="comparison"></div>
-                        <button id="more" hidden>Показать ещё</button>
+            <section id="access" hidden>
+                <section class="panel">
+                    <div class="panel-heading"><h2>Выдать доступ</h2></div>
+                    <form id="grant">
+                        <label for="grant-name">Игровой ник</label>
+                        <div class="form-line"><input id="grant-name" required minlength="1" maxlength="16" pattern="[a-zA-Z0-9_]{1,16}" autocomplete="off" placeholder="Например, RiverFox"><button class="primary">Разрешить доступ</button></div>
+                        <p id="world-note" class="muted">Игрок сможет скачать весь мир со всеми сохранёнными измерениями.</p>
+                    </form>
+                </section>
+                <section class="panel"><div class="panel-heading"><h2>Доступ игроков</h2></div><div id="users"></div></section>
+            </section>
+        </section>
+
+        <section id="review" hidden>
+            <header class="trip-heading">
+                <div class="title-line"><h1 id="review-title" tabindex="-1"></h1><span id="trip-state" class="badge"></span></div>
+                <p class="trip-meta"><span id="coordinates"></span><span id="trip-date"></span></p>
+                <p id="selection-note" class="muted" role="status" hidden></p><p id="trip-detail" class="muted" hidden></p>
+            </header>
+            <div class="review-grid">
+                <section class="changes-area" aria-labelledby="changes-heading">
+                    <div class="panel-heading"><h2 id="changes-heading">Изменения</h2><a id="plan-jump" href="#plan" hidden>К плану слияния ↓</a></div>
+                    <div id="filters" class="filters" role="group" aria-label="Тип изменений"></div>
+                    <div id="tile-scope" class="tile-scope" hidden><span id="tile-name"></span><button id="all" type="button">Все чанки</button></div>
+                    <div id="comparison"></div><button id="more" hidden>Показать ещё</button>
+                </section>
+                <aside id="plan" tabindex="-1">
+                    <section class="panel plan-card" id="merge-plan">
+                        <div class="panel-heading"><h2>План слияния</h2></div>
+                        <dl id="merge-summary" class="plan-lines"></dl>
+                        <div class="plan-bottom"><p id="plan-total" aria-live="polite" aria-atomic="true"></p><button class="primary" id="merge">Проверить и применить</button><small id="plan-note"></small></div>
+                    </section>
+                    <details id="other-actions" class="drawer"><summary>Другие действия</summary>
+                        <div class="stack"><button id="accept">Взять все версии игрока</button><button id="accept-existing">Применить без новых чанков</button><button id="revise">Вернуть игроку на доработку</button><button id="keep">Закрыть с версией сервера</button></div>
+                    </details>
+                    <details id="archives" class="drawer"><summary>Архивы поездки</summary><div id="exports" class="stack"></div></details>
+                </aside>
+            </div>
+            <details id="map-tools" class="drawer map-panel"><summary>Карта и срезы по координатам</summary>
+                <div class="map-body">
+                    <div id="dimensions" role="group" aria-label="Измерение карты" hidden></div>
+                    <div id="map"></div>
+                    <div id="slices" hidden>
+                        <div class="slice-toolbar"><h3 id="slice-heading"></h3><label>Высота Y <input id="slice-y" type="number" min="-64" max="319"></label></div>
+                        <div id="slice-images"></div><p id="under-pointer" class="muted"></p>
                     </div>
                 </div>
-                <details><summary>Архивы для ручного переноса</summary><div id="exports"></div></details>
-            </section>
-            </div>
-        </main>
-    </body>
+            </details>
+        </section>
+    </div>
+    <dialog id="confirm" aria-labelledby="confirm-title" aria-describedby="question">
+        <form method="dialog" class="dialog-body">
+            <h2 id="confirm-title">Подтвердите действие</h2><p id="question"></p><dl id="confirm-plan" class="plan-lines" hidden></dl>
+            <div class="dialog-actions"><button id="cancel" type="button" autofocus>Отмена</button><button id="confirm-action" class="primary" type="button">Подтвердить</button></div>
+        </form>
+    </dialog>
+</main>
+</body>
 </html>

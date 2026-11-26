@@ -287,7 +287,6 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .launcherLanguageOption:hover, .launcherLanguageOption:focus-visible { background: #ffffff12; }
 .launcherLanguageOption[aria-checked='true'] { color: #ffe4a4; background: #e7b86036; }
 #launch_button:disabled { cursor: default; }
-#trip-open { margin-top: 8px; min-height: 36px; width: 100%; }
 .krwa-trip-panel { position: absolute; z-index: 20; inset: 12% max(8%, calc((100% - 600px)/2)) auto; padding: 24px; max-height: 70%; overflow: auto; border: 1px solid var(--line); border-radius: 16px; background: #12343f; color: #edf3ef; box-shadow: 0 0 0 100vmax #08171dc9; }
 .krwa-trip-panel[hidden] { display: none; }
 .krwa-trip-panel h2 { margin: 0 0 12px; }
@@ -302,6 +301,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 #trip-actions { display: grid; }
 #trip-actions button { min-height: 48px; text-align: left; }
 #trip-actions button:first-child { background: #f7d99c; color: #242820; font-weight: 700; }
+#trip-actions button small { display: block; margin-top: 3px; font-size: 13px; font-weight: 400; line-height: 1.4; letter-spacing: normal; color: inherit; }
 #trip-actions button:disabled { opacity: .5; }
 .krwa-trip-panel details { border-top: 1px solid var(--line); }
 .krwa-trip-panel summary { min-height: 44px; align-content: center; cursor: pointer; }
@@ -309,7 +309,6 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .memory-steps button { min-width: 46px; min-height: 44px; background: #25434c; border: 1px solid #91a9a4; border-radius: 8px; color: #fff0cf; font-size: 20px; }
 #settingsShadersOptions button, #settingsShadersSelected { display: flex; width: 100%; align-items: center; min-height: 40px; padding: 6px 12px; text-align: left; color: inherit; background: #18343e; border: 0; cursor: pointer; }
 #settingsShadersOptions button:hover, #settingsShadersOptions button:focus-visible { background: #314f58; }
-body[data-steam-deck] #trip-open { min-height: 50px; border: 1px solid #9db8a8; font-weight: 650; }
 body[data-steam-deck] .krwa-ready { display: none; }
 body[data-steam-deck] :is(#avatarContainer,#avatarOverlay) { min-width: 44px; min-height: 44px; }
 body[data-steam-deck] #server_selection_button { min-height: 44px; }
@@ -323,7 +322,6 @@ body[data-steam-deck] #loginRememberOption { height: 44px; }
 
 #trip-progress { width: 100%; height: 10px; accent-color: var(--color-accent, #99bd86); }
 #trip-progress[hidden] { display: none; }
-#settingsNavItemsContent #trip-open { margin: 4px 0; min-height: 40px; }
 
 .local-login-options { display:flex; gap:8px; align-items:center; justify-content:center; margin:8px 0; }
 .local-login-options button { min-height:44px; }

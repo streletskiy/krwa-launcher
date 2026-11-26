@@ -328,6 +328,7 @@ async function validateSelectedAccount(){
     if (ConfigManager.getSelectedAccount()?.uuid !== account.uuid) return false
     window.krwaSessionUnavailable = !usable
     if (!usable && getCurrentView() === VIEWS.landing) window.dispatchEvent(new Event('krwa-offline-play'))
+    if (usable) window.dispatchEvent(new Event('krwa-account-validated'))
     return usable
 }
 

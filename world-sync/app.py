@@ -170,6 +170,17 @@ def me(uid=Depends(player)):
     }
 
 
+@app.get(API + "/trips/{trip}/receipt")
+def trip_receipt(trip: uuid.UUID, uid=Depends(player)):
+    with db() as con:
+        row = con.execute(
+            "SELECT id, uid, state FROM trips WHERE id=? AND uid=?", (trip.hex, uid)
+        ).fetchone()
+    if not row:
+        raise HTTPException(404, "Поездка не найдена.")
+    return dict(row)
+
+
 def player_center(uid):
     try:
         p = get_player(worker.WORLD, uid)
