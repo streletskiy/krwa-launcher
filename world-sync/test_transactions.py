@@ -100,6 +100,45 @@ class TransactionTest(unittest.TestCase):
             "/api/offline-worlds/trips/" + self.tid, content=data, headers=self.headers
         )
 
+    def test_legacy_recovery_waits_for_a_decision(self):
+        self.send()
+        trip = self.state()
+        saved = self.job / ("recovered-advancements." + trip["digest"] + ".json")
+        saved.write_text(
+            json.dumps(
+                {
+                    "DataVersion": 3955,
+                    "example:ride": {
+                        "criteria": {"boat": "2026-01-01 10:00:00 +0000"},
+                        "done": True,
+                    },
+                }
+            )
+        )
+        self.worker.process(trip, self.game)
+        self.assertEqual(self.state()["state"], "review")
+        api = "/api/offline-worlds/admin/trips/" + self.tid
+        entry = next(
+            c
+            for c in self.client.get(api).json()["changes"]
+            if c["kind"] == "Достижения из копии поездки"
+        )
+        self.assertEqual(entry["mode"], "conflict")
+        accepted = self.client.post(
+            api + "/merge",
+            json={"fingerprint": self.state()["review"], "player": [entry["key"]]},
+        )
+        self.assertEqual(accepted.status_code, 200)
+        self.worker.process(self.state(), self.game)
+        self.assertEqual(self.state()["state"], "done")
+        from progress import progress_paths
+
+        self.assertTrue(
+            json.loads((self.root / progress_paths(self.uid)[0]).read_text())[
+                "example:ride"
+            ]["done"]
+        )
+
     def test_whole_world_transfer_and_dimension_review(self):
         import zipfile
         from whole import DIMENSIONS, export_whole
@@ -300,9 +339,7 @@ class TransactionTest(unittest.TestCase):
         from anvil import blocks, chunk, record, sections
 
         live = blocks(sections(chunk(record(self.fixture.file.read_bytes(), -1, 0)))[0])
-        self.assertEqual(
-            live[:2], ["minecraft:dirt", "minecraft:bricks"]
-        )
+        self.assertEqual(live[:2], ["minecraft:dirt", "minecraft:bricks"])
 
     def test_apply_and_repeat(self):
         self.assertEqual(self.send().status_code, 200)

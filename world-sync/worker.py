@@ -12,7 +12,8 @@ import zipfile
 from pathlib import Path
 
 import portalocker
-from merge import can_skip_new, plan
+from merge import can_skip_new, plan, selected
+from progress import plan_progress, progress_paths, read_file
 from whole import export_whole
 from store import HOME, audit, db, digest, set_state, write_file, write_json
 
@@ -221,6 +222,27 @@ def process(trip, craft):
                 job / "live.next",
                 staging=Path(staging),
             )
+            # A pre-full-world upload may have a personal advancement file recovered
+            # from a device backup. Bind that administrative import to the exact upload.
+            if meta.get("scope") != "world" and trip["digest"]:
+                recovered = read_file(
+                    job, f"recovered-advancements.{trip['digest']}.json", None
+                )
+                if recovered:
+                    rel = progress_paths(uid)[0]
+                    additions, updates = plan_progress(
+                        WORLD, uid, None, rel, b'{"DataVersion":3955}', recovered
+                    )
+                    for change in additions:
+                        change.update(
+                            kind="Достижения из копии поездки",
+                            mode="conflict",
+                            before="Старый формат поездки",
+                            revision=digest(updates[rel]),
+                        )
+                        changes.append(change)
+                        if selected(meta, change):
+                            writes.update(updates)
             os.replace(job / "live.next", job / "live.zip")
             fingerprint = digest(
                 json.dumps(changes, ensure_ascii=False, sort_keys=True).encode()
